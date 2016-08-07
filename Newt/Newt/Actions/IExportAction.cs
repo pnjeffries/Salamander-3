@@ -1,0 +1,27 @@
+﻿using FreeBuild.Base;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Newt.Actions
+{
+    /// <summary>
+    /// An interface for Salamander actions which provide file export functionality.
+    /// You can implement this interface yourself, but it's probably better to inherit from ExportActionBase,
+    /// which will provide the basic implementation for you.
+    /// </summary>
+    public interface IExportAction : IAction
+    {
+        /// <summary>
+        /// The filepath that is to be written to
+        /// </summary>
+        string FilePath { get; set; }
+
+        /// <summary>
+        /// The document to be written to a file
+        /// </summary>
+        Document Document { get; set; }
+    }
+}

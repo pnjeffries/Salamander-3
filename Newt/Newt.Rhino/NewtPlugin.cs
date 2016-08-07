@@ -9,7 +9,6 @@
     /// "Show All Files" to see it in the "Solution Explorer" window).</para>
     ///</summary>
     public class NewtPlugin : Rhino.PlugIns.PlugIn
-
     {
         public NewtPlugin()
         {

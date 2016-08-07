@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{55D9743E-6F9B-4B89-B3DE-18B03C4CFE61}</ProjectGuid>
+    <ProjectGuid>{73C76479-4F9D-48E1-A4FE-203821FB800C}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Newt</RootNamespace>
-    <AssemblyName>Newt</AssemblyName>
+    <RootNamespace>Newt.UI</RootNamespace>
+    <AssemblyName>Newt.UI</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -16,7 +16,7 @@
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
+    <OutputPath>..\Newt\bin\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -30,6 +30,8 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -40,33 +42,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Actions\ActionAttribute.cs" />
-    <Compile Include="Actions\ActionBase.cs" />
-    <Compile Include="Actions\ActionInputAttribute.cs" />
-    <Compile Include="Actions\ActionManager.cs" />
-    <Compile Include="Actions\ActionOutputAttribute.cs" />
-    <Compile Include="Actions\ActionParameterAttribute.cs" />
-    <Compile Include="Actions\ExecutionInfo.cs" />
-    <Compile Include="Actions\ExportActionAttribute.cs" />
-    <Compile Include="Actions\IAction.cs" />
-    <Compile Include="Actions\IContextualAction.cs" />
-    <Compile Include="Actions\IExportAction.cs" />
-    <Compile Include="Actions\IImportAction.cs" />
-    <Compile Include="Actions\ImportActionAttribute.cs" />
-    <Compile Include="Core\Core.cs" />
-    <Compile Include="Core\IHost.cs" />
-    <Compile Include="Core\GUIController.cs" />
-    <Compile Include="Core\InputController.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="WPFGUIController.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\FreeBuild\FreeBuild\FreeBuild_Foundation\FreeBuild.csproj">
       <Project>{7635522c-178f-4db5-9106-ff8dfd4b833b}</Project>
       <Name>FreeBuild</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Undo\" />
+    <ProjectReference Include="..\NEWT\Newt.csproj">
+      <Project>{55d9743e-6f9b-4b89-b3de-18b03c4cfe61}</Project>
+      <Name>Newt</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
