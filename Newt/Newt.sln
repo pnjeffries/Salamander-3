@@ -5,7 +5,7 @@ VisualStudioVersion = 14.0.23107.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Newt", "NEWT\Newt.csproj", "{55D9743E-6F9B-4B89-B3DE-18B03C4CFE61}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FreeBuild", "..\..\FreeBuild\FreeBuild\FreeBuild_Foundation\FreeBuild.csproj", "{7635522C-178F-4DB5-9106-FF8DFD4B833B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FreeBuild", "..\..\FreeBuild\FreeBuild\FreeBuild\FreeBuild.csproj", "{7635522C-178F-4DB5-9106-FF8DFD4B833B}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Newt.RhinoCommon", "Newt.RhinoCommon\Newt.RhinoCommon.csproj", "{EB529CBA-2AF1-4952-B0E8-8BAA1FE9FDE5}"
 EndProject
@@ -18,6 +18,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Newt.TestPlugin", "Newt.TestPlugin\Newt.TestPlugin.csproj", "{AEB92DAD-98FE-4709-A0C5-D115E4FB2B18}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Newt.TestPluginGH", "TestPluginGH\Newt.TestPluginGH.csproj", "{6172F272-9DBD-427C-B858-186634C6FFED}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FreeBuild.Excel", "..\..\FreeBuild\FreeBuild\FreeBuild.Excel\FreeBuild.Excel.csproj", "{A86503CF-0FA6-434C-A546-93D12D1AD45C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -91,6 +93,14 @@ Global
 		{6172F272-9DBD-427C-B858-186634C6FFED}.Debug64|Any CPU.Build.0 = Debug64|Any CPU
 		{6172F272-9DBD-427C-B858-186634C6FFED}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6172F272-9DBD-427C-B858-186634C6FFED}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A86503CF-0FA6-434C-A546-93D12D1AD45C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A86503CF-0FA6-434C-A546-93D12D1AD45C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A86503CF-0FA6-434C-A546-93D12D1AD45C}.Debug32|Any CPU.ActiveCfg = Debug|Any CPU
+		{A86503CF-0FA6-434C-A546-93D12D1AD45C}.Debug32|Any CPU.Build.0 = Debug|Any CPU
+		{A86503CF-0FA6-434C-A546-93D12D1AD45C}.Debug64|Any CPU.ActiveCfg = Debug|Any CPU
+		{A86503CF-0FA6-434C-A546-93D12D1AD45C}.Debug64|Any CPU.Build.0 = Debug|Any CPU
+		{A86503CF-0FA6-434C-A546-93D12D1AD45C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A86503CF-0FA6-434C-A546-93D12D1AD45C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

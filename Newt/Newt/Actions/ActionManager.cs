@@ -151,7 +151,7 @@ namespace Newt.Actions
             else if (string.IsNullOrWhiteSpace(commandName)) action = LastCommand;
             else
             {
-                Core.PrintLine("Salamander command '" + commandName + "' is not loaded or is not available within this host environment.");
+                Core.PrintLine("Newt command '" + commandName + "' is not loaded or is not available within this host environment.");
             }
             return ExecuteAction(action, context);
         }
@@ -191,7 +191,7 @@ namespace Newt.Actions
                 }
                 catch (Exception ex)
                 {
-                    Core.PrintLine("Error: Salamander action '" + commandName + "' failed to complete.");
+                    Core.PrintLine("Error: Newt action '" + commandName + "' failed to complete.");
                     Core.PrintLine(ex.Message);
                     Core.PrintLine(ex.StackTrace);
                 }

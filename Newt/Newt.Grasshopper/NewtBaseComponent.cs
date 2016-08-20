@@ -15,6 +15,8 @@ namespace Newt.Grasshopper
     public abstract class NewtBaseComponent : GH_Component
     {
 
+        #region Properties
+
         /// <summary>
         /// The name of the Salamander command executed by this component
         /// </summary>
@@ -36,6 +38,26 @@ namespace Newt.Grasshopper
         private ExecutionInfo LastExecutionInfo { get; set; }
 
         /// <summary>
+        /// Provides an Icon for the component.
+        /// </summary>
+        protected override Bitmap Internal_Icon_24x24
+        {
+            get
+            {
+                var actionAtt = ActionAttribute.ExtractFrom(ActionType);
+                if (!string.IsNullOrWhiteSpace(actionAtt.IconURI))
+                {
+                    return IconResourceHelper.BitmapFromURI(actionAtt.IconURI);
+                }
+                return base.Internal_Icon_24x24;
+            }
+        }
+
+        #endregion
+
+        #region Constructors
+
+        /// <summary>
         /// Initializes a new instance of the SalamanderBaseComponent class.
         /// </summary>
         public NewtBaseComponent(string commandName, string name, string nickname, string description,
@@ -52,6 +74,11 @@ namespace Newt.Grasshopper
             SubCategory = subCategory;
             PostConstructor();
         }
+
+        #endregion
+
+
+        #region Methods
 
         /// <summary>
         /// Registers all the input parameters for this component.
@@ -262,7 +289,8 @@ namespace Newt.Grasshopper
         ///  DesignLink.Types.Line</remarks>
         protected virtual object Convert(object obj, Type toType)
         {
-            //TODO
+            return Conversion.Instance.Convert(obj, toType);
+            /*
             //From RhinoCommon:
             if (toType.IsAssignableFrom(typeof(Curve)))
             {
@@ -274,6 +302,7 @@ namespace Newt.Grasshopper
                 if (obj is Vector) return FBtoRC.Convert((Vector)obj);
             }
             return obj;
+            */
         }
 
         protected virtual Type GetEquivalentType(Type type)
@@ -283,21 +312,7 @@ namespace Newt.Grasshopper
             return type;
         }
 
-        /// <summary>
-        /// Provides an Icon for the component.
-        /// </summary>
-        protected override Bitmap Internal_Icon_24x24
-        {
-            get
-            {
-                var actionAtt = ActionAttribute.ExtractFrom(ActionType);
-                if (!string.IsNullOrWhiteSpace(actionAtt.IconURI))
-                {
-                    return IconResourceHelper.BitmapFromURI(actionAtt.IconURI);
-                    //System.Drawing.Bitmap.FromStream(stream);
-                }
-                return base.Internal_Icon_24x24;
-            }
-        }
+        #endregion
+
     }
 }

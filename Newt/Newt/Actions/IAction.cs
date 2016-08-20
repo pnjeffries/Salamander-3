@@ -70,7 +70,7 @@ namespace Newt.Actions
     /// <summary>
     /// Extension methods for the IAction interface
     /// </summary>
-    public static class IActionExtension
+    public static class IActionExtensions
     {
         /// <summary>
         /// Retrieve the action attributes for this action

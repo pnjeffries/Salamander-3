@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Threading;
 using Rhino;
 
 namespace Newt.RhinoCommon
@@ -96,9 +97,32 @@ namespace Newt.RhinoCommon
             return true;
         }
 
+        /// <summary>
+        /// The timer that is used to defer refreshes
+        /// </summary>
+        private DispatcherTimer _RefreshTimer = null;
+
+        /// <summary>
+        /// Refresh the Rhino viewports.
+        /// The actual refresh is delayed by a fraction of a second to
+        /// prevent multiple refreshes in quick succession.
+        /// </summary>
         public void Refresh()
         {
-            throw new NotImplementedException();
+            if (_RefreshTimer == null)
+            {
+                _RefreshTimer = new DispatcherTimer();
+                _RefreshTimer.Interval = new TimeSpan(10000);
+                _RefreshTimer.Tick += RefreshTimer_Tick;
+            }
+            _RefreshTimer.Stop();
+            _RefreshTimer.Start();
+        }
+
+        private void RefreshTimer_Tick(object sender, EventArgs e)
+        {
+            _RefreshTimer.Stop();
+            Rhino.RhinoDoc.ActiveDoc.Views.Redraw();
         }
 
         #endregion

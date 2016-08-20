@@ -26,7 +26,8 @@ namespace Newt
         /// <param name="filter">The file type filter string</param>
         /// <param name="defaultValue">The default value for the filepath</param>
         /// <returns>The filepath if one is selected, else null</returns>
-        public string EnterSaveFilePath(string prompt = "Enter save file location", string filter = null, string defaultValue = null)
+        public string EnterSaveFilePath(string prompt = "Enter save file location", 
+            string filter = null, string defaultValue = null)
         {
             return Core.Instance.Host.GUI.ShowSaveFileDialog(prompt, filter, defaultValue);
         }
@@ -38,7 +39,8 @@ namespace Newt
         /// <param name="filter">The file type filter string</param>
         /// <param name="defaultValue">The default value for the filepath</param>
         /// <returns>The filepath if one is selected, else null</returns>
-        public string EnterOpenFilePath(string prompt = "Select file to open", string filter = null, string defaultValue = null)
+        public string EnterOpenFilePath(string prompt = "Select file to open", 
+            string filter = null, string defaultValue = null)
         {
             return Core.Instance.Host.GUI.ShowOpenFileDialog(prompt, filter, defaultValue);
         }
@@ -79,9 +81,13 @@ namespace Newt
         /// </summary>
         /// <param name="startPointPrompt">The prompt to be displayed when entering the first point</param>
         /// <param name="endPointPrompt">The prompt to be displayed when entering the second point</param>
-        /// <param name="startPoint">A point which will be taken as the start of the line.  If non-null, the first point will not be asked for.</param>
+        /// <param name="startPoint">A point which will be taken as the start of the line.  
+        /// If non-null, the first point will not be asked for.</param>
         /// <returns></returns>
-        public abstract Line EnterLine(string startPointPrompt = "Enter start of line", string endPointPrompt = "Enter end of line", Vector? startPoint = null);
+        public abstract Line EnterLine(string startPointPrompt = "Enter start of line", 
+            string endPointPrompt = "Enter end of line", Vector? startPoint = null);
+
+        
 
         /// <summary>
         /// Prompt the user to enter data of the specified type.
@@ -90,8 +96,11 @@ namespace Newt
         /// </summary>
         /// <param name="inputType">The type of data to be entered</param>
         /// <param name="value">Input: The default value.  Output: The selected value./param>
-
-        public virtual bool EnterInput(Type inputType, ref object value, PropertyInfo property = null, IAction action = null)
+        /// <param name="property">Optional.  The property being populated.</param>
+        /// <param name="action">Optional.  The action the input parameters of which are currently 
+        /// being populated.</param>
+        public virtual bool EnterInput(Type inputType, ref object value, PropertyInfo property = null, 
+            IAction action = null)
         {
             string description = null;
             ActionInputAttribute inputAttributes = ActionInputAttribute.ExtractFrom(property);
@@ -112,10 +121,11 @@ namespace Newt
                 else if (inputType == typeof(Vector)) //FreeBuild Vector
                     value = EnterPoint("Enter " + description);
                 else if (inputType == typeof(Line)) //FreeBuild Line
-                    value = EnterLine("Enter start point of " + description, "Enter end point of " + description);
+                    value = EnterLine("Enter start point of " + description,
+                        "Enter end point of " + description);
                 else return false; //Input not recognised
             }
-            catch
+            catch (OperationCanceledException)
             {
                 return false;
             }

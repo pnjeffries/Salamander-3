@@ -56,13 +56,22 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="NewtCommand.cs" />
+    <Compile Include="NewtCommandCommand.cs" />
     <Compile Include="NewtPlugin.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\..\FreeBuild\FreeBuild\FreeBuild\FreeBuild.csproj">
+      <Project>{7635522c-178f-4db5-9106-ff8dfd4b833b}</Project>
+      <Name>FreeBuild</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Newt.RhinoCommon\Newt.RhinoCommon.csproj">
       <Project>{eb529cba-2af1-4952-b0e8-8baa1fe9fde5}</Project>
       <Name>Newt.RhinoCommon</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\NEWT\Newt.csproj">
+      <Project>{55d9743e-6f9b-4b89-b3de-18b03c4cfe61}</Project>
+      <Name>Newt</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -47,9 +47,46 @@ namespace Newt
         public ActionManager Actions { get; }
 
         /// <summary>
+        /// Private backing field for the ActiveDocument property
+        /// </summary>
+        private ModelDocument _ActiveDocument;
+
+        /// <summary>
         /// The currently active open document
         /// </summary>
-        public ModelDocument ActiveDocument { get; set; }
+        public ModelDocument ActiveDocument
+        {
+            get
+            {
+                if (_ActiveDocument == null) _ActiveDocument = new ModelDocument();
+                return _ActiveDocument;
+            }
+            set
+            {
+                _ActiveDocument = value;
+                NotifyPropertyChanged("ActiveDocument");
+            }
+        }
+
+        private ModelDocumentCollection _OpenDocuments = null;
+
+        /// <summary>
+        /// The full collection of all currently loaded model documents
+        /// </summary>
+        public ModelDocumentCollection OpenDocuments
+        {
+            get
+            {
+                if (_OpenDocuments == null)
+                {
+                    //Lazy initialisation:
+                    _OpenDocuments = new ObservableCollection<DesignDocument>();
+                    //Register event handler:
+                    _OpenDocuments.CollectionChanged += new NotifyCollectionChangedEventHandler(OnOpenDesignsChanged);
+                }
+                return _OpenDocuments;
+            }
+        }
 
         #endregion
 
@@ -92,6 +129,17 @@ namespace Newt
         }
 
         /// <summary>
+        /// Open a new, blank, design document and set it as the active design
+        /// </summary>
+        /// <returns></returns>
+        public ModelDocument NewDocument(bool silent = false)
+        {
+            ModelDocument result = new ModelDocument();
+            ActiveDocument = result;
+            return result;
+        }
+
+        /// <summary>
         /// Load all plugin assemblies
         /// </summary>
         private void LoadPlugins()
@@ -125,6 +173,17 @@ namespace Newt
                     }
                 }
             }
+        }
+
+        /// <summary>
+        /// Execute the action with the given command name
+        /// </summary>
+        /// <param name="commandName">The command name to execute</param>
+        /// <returns>The executed action if one with that command name is loaded and could be run
+        /// successfully, else null.</returns>
+        public IAction Execute(string commandName)
+        {
+            return Actions.ExecuteAction(commandName);
         }
 
         /// <summary>

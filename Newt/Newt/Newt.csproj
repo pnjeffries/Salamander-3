@@ -46,6 +46,7 @@
     <Compile Include="Actions\ActionManager.cs" />
     <Compile Include="Actions\ActionOutputAttribute.cs" />
     <Compile Include="Actions\ActionParameterAttribute.cs" />
+    <Compile Include="Actions\ModelActionBase.cs" />
     <Compile Include="Actions\ExecutionInfo.cs" />
     <Compile Include="Actions\ExportActionAttribute.cs" />
     <Compile Include="Actions\IAction.cs" />
@@ -57,10 +58,11 @@
     <Compile Include="Core\IHost.cs" />
     <Compile Include="Core\GUIController.cs" />
     <Compile Include="Core\InputController.cs" />
+    <Compile Include="Events\DocumentOpenedEventArgs.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\FreeBuild\FreeBuild\FreeBuild_Foundation\FreeBuild.csproj">
+    <ProjectReference Include="..\..\..\FreeBuild\FreeBuild\FreeBuild\FreeBuild.csproj">
       <Project>{7635522c-178f-4db5-9106-ff8dfd4b833b}</Project>
       <Name>FreeBuild</Name>
     </ProjectReference>

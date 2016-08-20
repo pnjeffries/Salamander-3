@@ -41,13 +41,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CalculateGeometricPropertiesAction.cs" />
+    <Compile Include="DrawLinearElementAction.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\FreeBuild\FreeBuild\FreeBuild_Foundation\FreeBuild.csproj">
+    <ProjectReference Include="..\..\..\FreeBuild\FreeBuild\FreeBuild\FreeBuild.csproj">
       <Project>{7635522c-178f-4db5-9106-ff8dfd4b833b}</Project>
       <Name>FreeBuild</Name>
       <Private>False</Private>
