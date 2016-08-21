@@ -58,6 +58,9 @@
     <Compile Include="Core\IHost.cs" />
     <Compile Include="Core\GUIController.cs" />
     <Compile Include="Core\InputController.cs" />
+    <Compile Include="Display\DisplayLayer.cs" />
+    <Compile Include="Display\DisplayLayerBase.cs" />
+    <Compile Include="Display\IAvatar.cs" />
     <Compile Include="Events\DocumentOpenedEventArgs.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

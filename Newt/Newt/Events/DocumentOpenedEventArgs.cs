@@ -7,7 +7,10 @@ using System.Threading.Tasks;
 
 namespace Newt.Events
 {
-    class DocumentOpenedEventArgs : EventArgs
+    /// <summary>
+    /// Event arguments for when a document 
+    /// </summary>
+    public class DocumentOpenedEventArgs : EventArgs
     {
         /// <summary>
         /// The design document that has been opened

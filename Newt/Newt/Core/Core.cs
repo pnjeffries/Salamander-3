@@ -1,6 +1,7 @@
 ﻿using FreeBuild.Base;
 using FreeBuild.Model;
 using Newt.Actions;
+using Newt.Events;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -19,6 +20,15 @@ namespace Newt
     /// </summary>
     public class Core : NotifyPropertyChangedBase
     {
+        #region Events
+
+        /// <summary>
+        /// The currently active model document has changed
+        /// </summary>
+        public EventHandler<DocumentOpenedEventArgs> ActiveModelChanged;
+
+        #endregion
+
         #region Properties
 
         /// <summary>
@@ -58,16 +68,20 @@ namespace Newt
         {
             get
             {
-                if (_ActiveDocument == null) _ActiveDocument = new ModelDocument();
+                if (_ActiveDocument == null) ActiveDocument = new ModelDocument();
                 return _ActiveDocument;
             }
             set
             {
                 _ActiveDocument = value;
                 NotifyPropertyChanged("ActiveDocument");
+                RaiseEvent(ActiveModelChanged, new DocumentOpenedEventArgs(_ActiveDocument));
             }
         }
 
+        /// <summary>
+        /// Private backing field for the OpenDocuments property
+        /// </summary>
         private ModelDocumentCollection _OpenDocuments = null;
 
         /// <summary>
@@ -80,9 +94,7 @@ namespace Newt
                 if (_OpenDocuments == null)
                 {
                     //Lazy initialisation:
-                    _OpenDocuments = new ObservableCollection<DesignDocument>();
-                    //Register event handler:
-                    _OpenDocuments.CollectionChanged += new NotifyCollectionChangedEventHandler(OnOpenDesignsChanged);
+                    _OpenDocuments = new ModelDocumentCollection();
                 }
                 return _OpenDocuments;
             }
