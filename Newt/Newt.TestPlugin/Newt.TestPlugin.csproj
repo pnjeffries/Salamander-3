@@ -41,6 +41,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CalculateGeometricPropertiesAction.cs" />
+    <Compile Include="CreateRectangularSectionAction.cs" />
     <Compile Include="DrawLinearElementAction.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

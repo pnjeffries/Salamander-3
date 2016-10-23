@@ -21,8 +21,6 @@ namespace Newt.TestPluginGH
             :base("GeometricProperties",
                  "Geometric Properties",
                  "Geo",
-                 "Calculate the geometric properties of a section",
-                 "Newt",
                  "Test")
         {
 

@@ -74,6 +74,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\..\FreeBuild\FreeBuild\FreeBuild.Rhino\FreeBuild.Rhino.csproj">
+      <Project>{2595e792-7880-484b-877d-9873aac7d946}</Project>
+      <Name>FreeBuild.Rhino</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\..\FreeBuild\FreeBuild\FreeBuild\FreeBuild.csproj">
       <Project>{7635522c-178f-4db5-9106-ff8dfd4b833b}</Project>
       <Name>FreeBuild</Name>

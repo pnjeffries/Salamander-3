@@ -8,7 +8,7 @@
     <ProjectGuid>{31EF1C91-653D-406D-A253-F39547C8F45A}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Newt.RhinoPlugin</RootNamespace>
+    <RootNamespace>Newt.Rhino</RootNamespace>
     <AssemblyName>Newt.Rhino</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
@@ -61,6 +61,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\..\FreeBuild\FreeBuild\FreeBuild.Rhino\FreeBuild.Rhino.csproj">
+      <Project>{2595e792-7880-484b-877d-9873aac7d946}</Project>
+      <Name>FreeBuild.Rhino</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\..\FreeBuild\FreeBuild\FreeBuild\FreeBuild.csproj">
       <Project>{7635522c-178f-4db5-9106-ff8dfd4b833b}</Project>
       <Name>FreeBuild</Name>

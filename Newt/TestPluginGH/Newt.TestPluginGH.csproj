@@ -65,6 +65,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CalculateGeometricPropertiesComponent.cs" />
+    <Compile Include="CreateRectangularSectionComponent.cs" />
+    <Compile Include="DrawLinearElementComponent.cs" />
     <Compile Include="TestPluginGHInfo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

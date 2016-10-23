@@ -3,7 +3,7 @@ using Rhino;
 using Rhino.Commands;
 using Newt.RhinoCommon;
 
-namespace Newt.RhinoPlugin
+namespace Newt.Rhino
 {
     [System.Runtime.InteropServices.Guid("c59b62e4-9b41-4539-b002-559c75d4914a")]
     public class NewtCommandCommand : Command

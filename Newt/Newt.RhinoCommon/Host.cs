@@ -5,6 +5,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Threading;
 using Rhino;
+using Newt.Rhino;
+using Newt.Events;
 
 namespace Newt.RhinoCommon
 {
@@ -53,6 +55,12 @@ namespace Newt.RhinoCommon
         /// </summary>
         InputController IHost.Input { get { return Input; } }
 
+        /// <summary>
+        /// The manager which maintains links between Rhino object 'handles'
+        /// and model objects
+        /// </summary>
+        public HandlesManager Handles { get; private set; }
+
 
         #endregion
 
@@ -63,8 +71,7 @@ namespace Newt.RhinoCommon
         /// </summary>
         private Host()
         {
-            GUI = new RhinoGUIController();
-            Input = new RhinoInputController();
+            
         }
 
         #endregion
@@ -87,8 +94,17 @@ namespace Newt.RhinoCommon
             if (!Core.IsInitialised())
             {
                 Core.Initialise(Instance);
+                Instance.Initialise();
             }
             return true;
+        }
+
+        public void Initialise()
+        {
+            GUI = new RhinoGUIController();
+            Input = new RhinoInputController();
+            Handles = new HandlesManager();
+            Core.Instance.Layers.Layers.Add(Handles); //TEST
         }
 
         public bool Print(string message)
@@ -122,7 +138,7 @@ namespace Newt.RhinoCommon
         private void RefreshTimer_Tick(object sender, EventArgs e)
         {
             _RefreshTimer.Stop();
-            Rhino.RhinoDoc.ActiveDoc.Views.Redraw();
+            RhinoDoc.ActiveDoc.Views.Redraw();
         }
 
         #endregion

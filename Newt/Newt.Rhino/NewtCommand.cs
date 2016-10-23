@@ -7,7 +7,7 @@ using Rhino.Input;
 using Rhino.Input.Custom;
 using Newt.RhinoCommon;
 
-namespace Newt.RhinoPlugin
+namespace Newt.Rhino
 {
     [System.Runtime.InteropServices.Guid("68f6b39d-75cc-465e-addd-f3bf2a40d969")]
     public class NewtCommand : Command

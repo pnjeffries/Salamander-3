@@ -69,11 +69,11 @@ namespace Newt.Display
 
         /// <summary>
         /// Should be overridden.
-        /// Sets up this display layer to display properties of objects in the specified model document.
+        /// Sets up this display layer to display properties of objects in the specified model.
         /// When overriding, extract any objects to be displayed and call Register() to add them to the tracked objects
         /// </summary>
         /// <param name="doc"></param>
-        public abstract void InitialiseToDesign(ModelDocument doc);
+        public abstract void InitialiseToModel(Model model);
 
         /// <summary>
         /// Called whenever a new object is added to the design.

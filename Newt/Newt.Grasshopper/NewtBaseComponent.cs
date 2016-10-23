@@ -1,4 +1,7 @@
-﻿using FreeBuild.Geometry;
+﻿using FreeBuild.Actions;
+using FreeBuild.Extensions;
+using FreeBuild.Geometry;
+using FreeBuild.Rhino;
 using Grasshopper.Kernel;
 using Newt.Actions;
 using Newt.RhinoCommon;
@@ -14,11 +17,19 @@ namespace Newt.Grasshopper
 {
     public abstract class NewtBaseComponent : GH_Component
     {
+        #region Constants
+
+        /// <summary>
+        /// The name of the tab on which components are, by default, to be placed
+        /// </summary>
+        public const string CategoryName = "Newt";
+
+        #endregion
 
         #region Properties
 
         /// <summary>
-        /// The name of the Salamander command executed by this component
+        /// The name of the command executed by this component
         /// </summary>
         public string CommandName { get; private set; }
 
@@ -57,19 +68,49 @@ namespace Newt.Grasshopper
 
         #region Constructors
 
+        ///// <summary>
+        ///// Constructor.  Call this from the default constructor of all subclasses, passing in the required information.
+        ///// </summary>
+        ///// <param name="commandName">The command name of the action that this component invokes</param>
+        ///// <param name="name">The name of this component.  Keep it simple, single words are best.</param>
+        ///// <param name="nickname">The abbreviation of this component.  Keep it short, 1-5 characters are best</param>
+        ///// <param name="description">The description of this component.  Be succinct but clear.  You can supply whole sentances.</param>
+        ///// <param name="category">The category of this component.  Controls which tab components will end up in.</param>
+        ///// <param name="subCategory">The subcategory for this component.  Controls which group the component will be in.</param>
+        //protected NewtBaseComponent(string commandName, string name, string nickname, string description,
+        //    string subCategory, string category = CategoryName)
+        //  : base()
+        //{
+        //    CommandName = commandName;
+        //    Host.EnsureInitialisation();
+        //    ActionType = Core.Instance.Actions.GetActionDefinition(CommandName);
+        //    Name = name;
+        //    NickName = nickname;
+        //    Description = description;
+        //    Category = category;
+        //    SubCategory = subCategory;
+        //    PostConstructor();
+        //}
+
         /// <summary>
-        /// Initializes a new instance of the SalamanderBaseComponent class.
+        /// Constructor.  Call this from the default constructor of all subclasses, passing in the required information.
         /// </summary>
-        public NewtBaseComponent(string commandName, string name, string nickname, string description,
-            string category, string subCategory)
+        /// <param name="commandName">The command name of the action that this component invokes</param>
+        /// <param name="name">The name of this component.  Keep it simple, single words are best.</param>
+        /// <param name="nickname">The abbreviation of this component.  Keep it short, 1-5 characters are best</param>
+        /// <param name="category">The category of this component.  Controls which tab components will end up in.</param>
+        /// <param name="subCategory">The subcategory for this component.  Controls which group the component will be in.</param>
+        protected NewtBaseComponent(string commandName, string name, string nickname,
+            string subCategory, string category = CategoryName)
           : base()
         {
             CommandName = commandName;
             Host.EnsureInitialisation();
             ActionType = Core.Instance.Actions.GetActionDefinition(CommandName);
+            var attributes = ActionAttribute.ExtractFrom(ActionType);
             Name = name;
             NickName = nickname;
-            Description = description;
+            Description = attributes.Description.CapitaliseFirst();
             Category = category;
             SubCategory = subCategory;
             PostConstructor();
@@ -83,7 +124,7 @@ namespace Newt.Grasshopper
         /// <summary>
         /// Registers all the input parameters for this component.
         /// </summary>
-        protected override void RegisterInputParams(GH_Component.GH_InputParamManager pManager)
+        protected override void RegisterInputParams(GH_InputParamManager pManager)
         {
             NicknameConverter nC = new NicknameConverter();
             IList<PropertyInfo> inputs = ActionBase.ExtractInputParameters(ActionType);
@@ -100,11 +141,11 @@ namespace Newt.Grasshopper
                     {
                         pManager.AddNumberParameter(name, nickname, description, GH_ParamAccess.item);
                     }
-                    if (inputType == typeof(Vector))
+                    else if (inputType == typeof(Vector))
                     {
                         pManager.AddPointParameter(name, nickname, description, GH_ParamAccess.item);
                     }
-                    if (inputType == typeof(Line))
+                    else if (inputType == typeof(Line))
                     {
                         pManager.AddLineParameter(name, nickname, description, GH_ParamAccess.item);
                     }
@@ -308,7 +349,8 @@ namespace Newt.Grasshopper
         protected virtual Type GetEquivalentType(Type type)
         {
             //TODO
-            if (typeof(Curve).IsAssignableFrom(type)) return typeof(RC.Curve);
+            if (typeof(Line).IsAssignableFrom(type)) return typeof(RC.Line);
+            else if (typeof(Curve).IsAssignableFrom(type)) return typeof(RC.Curve);
             return type;
         }
 

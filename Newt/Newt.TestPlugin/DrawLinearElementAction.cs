@@ -1,20 +1,20 @@
-﻿using FreeBuild.Geometry;
+﻿using FreeBuild.Actions;
+using FreeBuild.Geometry;
 using FreeBuild.Model;
 using Newt.Actions;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Newt.TestPlugin
 {
-    [ActionAttribute("DrawLinearElement",
-        "Create a new 1D Element between two points, creating new nodes as necessary.")]
+    [ActionAttribute(
+        "DrawLinearElement",
+        "Create a new linear element between two points.")]
     public class DrawLinearElementAction : ModelActionBase
     {
         [ActionInput(1, "the set-out geometry of the new element")]
         public Line Line { get; set; }
+
+        [ActionInput(2, "the section property of the new element")]
+        public SectionProperty Section { get; set; }
 
         [ActionOutput(1, "the created element")]
         public LinearElement Element { get; set; }
@@ -23,8 +23,8 @@ namespace Newt.TestPlugin
         {
             if (Line.Length > 0)
             {
-                Element = new LinearElement(Line);
-                Model.Add(Element);
+                Element = Model.Create.LinearElement(Line, exInfo);
+                Element.Property = Section;
                 return true;
             }
             return false;

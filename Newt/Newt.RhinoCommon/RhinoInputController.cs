@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Rhino.Input;
 using FreeBuild.Geometry;
+using FreeBuild.Rhino;
 using Rhino.Commands;
 using RC = Rhino.Geometry;
 

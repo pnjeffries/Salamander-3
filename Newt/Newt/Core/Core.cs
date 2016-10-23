@@ -1,6 +1,7 @@
 ﻿using FreeBuild.Base;
 using FreeBuild.Model;
 using Newt.Actions;
+using Newt.Display;
 using Newt.Events;
 using System;
 using System.Collections.Generic;
@@ -16,7 +17,8 @@ namespace Newt
     /// The core manager class.
     /// Deals with general file and data handline and overall top-level
     /// applicaton management.
-    /// Implemented as a singleton - call Core.Instance to access the current
+    /// Implemented as a singleton - call Core.Instance to access the active
+    /// core instance
     /// </summary>
     public class Core : NotifyPropertyChangedBase
     {
@@ -57,6 +59,11 @@ namespace Newt
         public ActionManager Actions { get; }
 
         /// <summary>
+        /// The display layer manager class.
+        /// </summary>
+        public DisplayLayerManager Layers { get; }
+
+        /// <summary>
         /// Private backing field for the ActiveDocument property
         /// </summary>
         private ModelDocument _ActiveDocument;
@@ -75,6 +82,7 @@ namespace Newt
             {
                 _ActiveDocument = value;
                 NotifyPropertyChanged("ActiveDocument");
+                Layers.RegisterModel(_ActiveDocument.Model);
                 RaiseEvent(ActiveModelChanged, new DocumentOpenedEventArgs(_ActiveDocument));
             }
         }
@@ -112,6 +120,7 @@ namespace Newt
         {
             Host = host;
             Actions = new ActionManager();
+            Layers = new DisplayLayerManager();
         }
 
         #endregion
@@ -175,8 +184,7 @@ namespace Newt
                             //Load Actions:
                             Actions.LoadPlugin(pluginAss);
                             //Load Layers:
-                            //TODO - something like:
-                            //Layers.LoadPlugin(pluginAss);
+                            Layers.LoadPlugin(pluginAss);
                         }
                         else
                         {
