@@ -42,18 +42,29 @@ namespace Newt.Display
             Type[] types = pluginAss.GetTypes();
             foreach (Type type in types)
             {
-                if (typeof(DisplayLayer).IsAssignableFrom(type) && !type.IsAbstract)
-                {
-                    if (!Layers.ContainsType(type))
-                    {
-                        DisplayLayer dLayer = (DisplayLayer)Activator.CreateInstance(type);
-                        Layers.Add(dLayer);
-                        result = true;
-                    }
-                }
+                if (LoadLayer(type)) result = true;
             }
             Layers.Sort();
             return result;
+        }
+
+        /// <summary>
+        /// Load the specified layer type into the layer table.
+        /// </summary>
+        /// <param name="layerType">The type of layer to load.  Must derive from DisplayLayer.</param>
+        /// <returns></returns>
+        public bool LoadLayer(Type layerType)
+        {
+            if (typeof(DisplayLayer).IsAssignableFrom(layerType) && !layerType.IsAbstract)
+            {
+                if (!Layers.ContainsType(layerType))
+                {
+                    DisplayLayer dLayer = (DisplayLayer)Activator.CreateInstance(layerType);
+                    Layers.Add(dLayer);
+                    return true;
+                }
+            }
+            return false;
         }
 
         /// <summary>
@@ -66,7 +77,7 @@ namespace Newt.Display
             {
                 layer.InitialiseToModel(model);
             }
-            model.PropertyChanged += HandleModelObjectPropertyChanged;
+            model.ObjectPropertyChanged += HandleModelObjectPropertyChanged;
             model.ObjectAdded += HandleModelObjectAdded;
         }
 

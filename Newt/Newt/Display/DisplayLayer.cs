@@ -159,7 +159,7 @@ namespace Newt.Display
         /// <param name="key"></param>
         public void InvalidateRepresentation(T key)
         {
-            _Avatars[key] = null;
+            _Avatars[key] = InitialRepresentation(key);
         }
 
         /// <summary>
@@ -168,7 +168,19 @@ namespace Newt.Display
         /// <param name="key"></param>
         public void Register(T key)
         {
-            _Avatars[key] = null;
+            _Avatars[key] = InitialRepresentation(key);
+        }
+
+        /// <summary>
+        /// Returns the representation of the specified object that will be initially created
+        /// when the object is first registered.  Usually this will be null and the full representation
+        /// will only be created as required.
+        /// </summary>
+        /// <param name="key"></param>
+        /// <returns></returns>
+        public virtual IList<IAvatar> InitialRepresentation(T key)
+        {
+            return null;
         }
 
         /// <summary>
@@ -300,6 +312,21 @@ namespace Newt.Display
             {
                 T added = (T)(object)e.Added; //As above - necessary?
                 Register(added);
+            }
+        }
+
+        /// <summary>
+        /// Sets up this display layer to display properties of objects in the specified model.
+        /// When overriding, extract any objects to be displayed and call Register() to add them to the tracked objects.
+        /// The default implementation scans through all ModelObjects in the model and will register any of the correct type.
+        /// This should be overridden if more sophisticated behaviour is required.
+        /// </summary>
+        /// <param name="doc"></param>
+        public override void InitialiseToModel(Model model)
+        {
+            foreach (object obj in model.Everything)
+            {
+                if (obj is T) Register((T)obj);
             }
         }
 

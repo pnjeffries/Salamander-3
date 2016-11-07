@@ -1,4 +1,5 @@
-﻿using FreeBuild.Geometry;
+﻿using FreeBuild.Base;
+using FreeBuild.Geometry;
 using Newt.Actions;
 using System;
 using System.Collections.Generic;
@@ -26,7 +27,7 @@ namespace Newt
         /// <param name="filter">The file type filter string</param>
         /// <param name="defaultValue">The default value for the filepath</param>
         /// <returns>The filepath if one is selected, else null</returns>
-        public string EnterSaveFilePath(string prompt = "Enter save file location", 
+        public FilePath EnterSaveFilePath(string prompt = "Enter save file location", 
             string filter = null, string defaultValue = null)
         {
             return Core.Instance.Host.GUI.ShowSaveFileDialog(prompt, filter, defaultValue);
@@ -39,7 +40,7 @@ namespace Newt
         /// <param name="filter">The file type filter string</param>
         /// <param name="defaultValue">The default value for the filepath</param>
         /// <returns>The filepath if one is selected, else null</returns>
-        public string EnterOpenFilePath(string prompt = "Select file to open", 
+        public FilePath EnterOpenFilePath(string prompt = "Select file to open", 
             string filter = null, string defaultValue = null)
         {
             return Core.Instance.Host.GUI.ShowOpenFileDialog(prompt, filter, defaultValue);
@@ -118,6 +119,19 @@ namespace Newt
                     value = EnterInteger("Enter " + description, (int)value);
                 else if (inputType == typeof(string)) //String
                     value = EnterString("Enter " + description, (string)value);
+                else if (inputType == typeof(FilePath)) //FilePath
+                {
+                    string filter = "All Files  (*.*)|*.*";
+                    bool open = false;
+                    if (inputAttributes != null && inputAttributes is ActionFilePathInputAttribute)
+                    {
+                        ActionFilePathInputAttribute filePathAttribute = (ActionFilePathInputAttribute)inputAttributes;
+                        filter = filePathAttribute.Filter;
+                        open = filePathAttribute.Open;
+                    }
+                    if (open) value = EnterOpenFilePath("Select " + description, filter, (FilePath)value);
+                    else value = EnterSaveFilePath("Select " + description, filter, (FilePath)value);
+                }
                 else if (inputType == typeof(Vector)) //FreeBuild Vector
                     value = EnterPoint("Enter " + description);
                 else if (inputType == typeof(Line)) //FreeBuild Line

@@ -1,4 +1,5 @@
 ﻿using FreeBuild.Base;
+using FreeBuild.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,11 +18,11 @@ namespace Newt.Actions
         /// <summary>
         /// The filepath that is to be written to
         /// </summary>
-        string FilePath { get; set; }
+        FilePath FilePath { get; set; }
 
         /// <summary>
         /// The document to be written to a file
         /// </summary>
-        Document Document { get; set; }
+        ModelDocument Document { get; set; }
     }
 }

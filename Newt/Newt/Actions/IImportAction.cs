@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FreeBuild.Base;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -14,6 +15,6 @@ namespace Newt.Actions
         /// <summary>
         /// The filepath that is to be read from
         /// </summary>
-        string FilePath { get; set; }
+        FilePath FilePath { get; set; }
     }
 }

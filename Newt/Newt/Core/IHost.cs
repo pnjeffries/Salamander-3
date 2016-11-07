@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newt.Display;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,13 +20,18 @@ namespace Newt
 
         /// <summary>
         /// Get the GUI controller that this host provides.
-        /// </summary>
+        /// </summary
         GUIController GUI { get; }
 
         /// <summary>
         /// Get the input controller class that this host provides.
         /// </summary>
         InputController Input { get; }
+
+        /// <summary>
+        /// Get the application avatar factory
+        /// </summary>
+        IAvatarFactory AvatarFactory { get; }
 
         #endregion
 

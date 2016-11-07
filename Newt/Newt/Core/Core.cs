@@ -64,6 +64,11 @@ namespace Newt
         public DisplayLayerManager Layers { get; }
 
         /// <summary>
+        /// The controller for UI operations
+        /// </summary>
+        public GUIController UI { get { return Host.GUI; } }
+
+        /// <summary>
         /// Private backing field for the ActiveDocument property
         /// </summary>
         private ModelDocument _ActiveDocument;
@@ -157,6 +162,42 @@ namespace Newt
         {
             ModelDocument result = new ModelDocument();
             ActiveDocument = result;
+            return result;
+        }
+
+        /// <summary>
+        /// Open a design document from a file selected via a file dialog
+        /// </summary>
+        /// <param name="background">If true, the opened design will not be added to the set of currently open designs or made active</param>
+        /// <returns>The opened design document, or null if one was not opened.</returns>
+        public ModelDocument OpenDocument(bool background = false)
+        {
+            string filters = Actions.GetImportFilters();
+            string filePath = UI.ShowOpenFileDialog("Select File To Open", filters);
+            if (!string.IsNullOrEmpty(filePath)) return OpenDocument(filePath, background);
+            else return null;
+        }
+
+        /// <summary>
+        /// Open a design document from a file
+        /// </summary>
+        /// <param name="filePath">The filepath to open</param>
+        /// <param name="background">If true, the opened design will not be added to the set of currently open designs or made active</param>
+        /// <returns></returns>
+        public ModelDocument OpenDocument(string filePath, bool background = false)
+        {
+            ModelDocument result = null;
+            if (File.Exists(filePath))
+            {
+                string extension = Path.GetExtension(filePath);
+                IImportAction importer = Actions.GetImporterFor(extension);
+                if (importer != null)
+                {
+                    importer.FilePath = filePath;
+                    Actions.ExecuteAction(importer, null, !background);
+                    if (importer is IImportDocumentAction) result = ((IImportDocumentAction)importer).Document;
+                }
+            }
             return result;
         }
 

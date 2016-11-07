@@ -58,26 +58,6 @@ namespace Newt.Rhino
             RhinoApp.Idle += HandlesIdle;
         }
 
-        public override void InitialiseToModel(Model model)
-        {
-            throw new NotImplementedException();
-        }
-
-        public override void OnObjectAdded(Model model, ModelObjectAddedEventArgs e)
-        {
-            throw new NotImplementedException();
-        }
-
-        public override void InvalidateOnUpdate(object modified, PropertyChangedEventArgs e)
-        {
-            throw new NotImplementedException();
-        }
-
-        public override bool Draw(RenderingParameters parameters)
-        {
-            throw new NotImplementedException();
-        }
-
         #endregion
 
         #region EventHandlers
@@ -127,11 +107,39 @@ namespace Newt.Rhino
             IList<IAvatar> result = new List<IAvatar>();
             if (source is LinearElement)
             {
-                //TEMP!
-                LinearElement element = (LinearElement)source;
-                RhinoOutput.BakeCurve(element.Geometry);
+                GenerateRepresentations((LinearElement)source);   
             }
             return result;
+        }
+
+        public override IList<IAvatar> InitialRepresentation(ModelObject key)
+        {
+            return GenerateRepresentations(key);
+        }
+
+        protected void GenerateRepresentations(LinearElement element)
+        {
+            if (!Links.ContainsFirst(element.GUID))
+            {
+                if (!element.IsDeleted)
+                {
+                    Guid curveID = RhinoOutput.BakeCurve(element.Geometry);
+                    Links.Add(element.GUID, curveID);
+                }
+            }
+            else
+            {
+                Guid curveID = Links.GetSecond(element.GUID);
+                if (element.IsDeleted)
+                {
+                    RhinoOutput.DeleteObject(curveID);
+                    Links.Remove(element.GUID);
+                }
+                else
+                {
+                    RhinoOutput.ReplaceCurve(curveID, element.Geometry);
+                }
+            }
         }
 
         #endregion

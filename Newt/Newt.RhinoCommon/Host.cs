@@ -7,6 +7,7 @@ using System.Windows.Threading;
 using Rhino;
 using Newt.Rhino;
 using Newt.Events;
+using Newt.Display;
 
 namespace Newt.RhinoCommon
 {
@@ -61,6 +62,20 @@ namespace Newt.RhinoCommon
         /// </summary>
         public HandlesManager Handles { get; private set; }
 
+        /// <summary>
+        /// The factory class which generates display avatars
+        /// </summary>
+        public RhinoAvatarFactory AvatarFactory { get; private set; }
+
+        /// <summary>
+        /// IHost AvatarFactory implementation
+        /// </summary>
+        IAvatarFactory IHost.AvatarFactory { get { return AvatarFactory; } }
+
+        /// <summary>
+        /// The display conduit used to draw in the Rhino viewport
+        /// </summary>
+        public SalamanderDisplayConduit DisplayConduit { get; private set; }
 
         #endregion
 
@@ -103,8 +118,11 @@ namespace Newt.RhinoCommon
         {
             GUI = new RhinoGUIController();
             Input = new RhinoInputController();
+            AvatarFactory = new RhinoAvatarFactory();
             Handles = new HandlesManager();
             Core.Instance.Layers.Layers.Add(Handles); //TEST
+            DisplayConduit = new SalamanderDisplayConduit();
+            DisplayConduit.Enabled = true;
         }
 
         public bool Print(string message)
