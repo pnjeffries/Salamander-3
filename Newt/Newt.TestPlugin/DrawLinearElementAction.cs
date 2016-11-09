@@ -23,7 +23,7 @@ namespace Newt.TestPlugin
         {
             if (Line.Length > 0)
             {
-                Section = new SectionProperty(new CircularHollowProfile(1.0, 0.1));//new SymmetricIProfile(1, 0.5,0.1,0.05,0.1));
+                Section = new SectionProperty(new SymmetricIProfile(1, 0.5, 0.1, 0.05, 0.1));//new CircularHollowProfile(1.0, 0.1));//
                 Element = Model.Create.LinearElement(Line, exInfo);
                 Element.Property = Section;
                 return true;

@@ -56,9 +56,9 @@ namespace Newt.TestPlugin
             {
                 SectionProperty sp = (SectionProperty)modified;
                 ElementCollection els = sp.Elements();
-                foreach (LinearElement el1D in els)
+                foreach (LinearElement lEl in els)
                 {
-                    InvalidateRepresentation(el1D);
+                    InvalidateRepresentation(lEl);
                 }
             }
             else

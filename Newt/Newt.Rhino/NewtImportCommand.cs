@@ -28,7 +28,7 @@ namespace Newt.Rhino
         protected override Result RunCommand(RhinoDoc doc, RunMode mode)
         {
             Host.EnsureInitialisation();
-            Core.Instance.OpenDocument(false);
+            Core.Instance.ActiveDocument = Core.Instance.OpenDocument(false);
             return Result.Success;
         }
     }
