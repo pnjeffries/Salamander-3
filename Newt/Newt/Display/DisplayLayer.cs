@@ -9,7 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Newt.Display
+namespace Salamander.Display
 {
     /// <summary>
     /// Base class for display layers that contain representations of data objects

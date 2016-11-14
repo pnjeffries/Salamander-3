@@ -3,8 +3,8 @@ using FreeBuild.Extensions;
 using FreeBuild.Geometry;
 using FreeBuild.Rhino;
 using Grasshopper.Kernel;
-using Newt.Actions;
-using Newt.RhinoCommon;
+using Salamander.Actions;
+using Salamander.RhinoCommon;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -13,7 +13,7 @@ using System.Reflection;
 using System.Text;
 using RC = Rhino.Geometry;
 
-namespace Newt.Grasshopper
+namespace Salamander.Grasshopper
 {
     public abstract class NewtBaseComponent : GH_Component
     {

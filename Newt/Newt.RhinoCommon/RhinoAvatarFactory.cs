@@ -1,11 +1,11 @@
-﻿using Newt.Display;
+﻿using Salamander.Display;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Newt.Rhino
+namespace Salamander.Rhino
 {
     public class RhinoAvatarFactory : IAvatarFactory
     {

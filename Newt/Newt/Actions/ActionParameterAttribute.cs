@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Newt.Actions
+namespace Salamander.Actions
 {
     /// <summary>
     /// Base class for Action Parameter attributes.  Used to annotate action input and output

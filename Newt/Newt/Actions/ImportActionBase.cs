@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Newt.Actions
+namespace Salamander.Actions
 {
     /// <summary>
     /// Base class for actions which import a design from a file

@@ -1,5 +1,5 @@
 ﻿using FreeBuild.Model;
-using Newt.Display;
+using Salamander.Display;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.ComponentModel;
 
-namespace Newt.TestPlugin
+namespace Salamander.TestPlugin
 {
     /// <summary>
     /// A DisplayLayer which draws 3D section profile representations over 1D Elements

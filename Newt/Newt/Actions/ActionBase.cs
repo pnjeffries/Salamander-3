@@ -6,7 +6,7 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Newt.Actions
+namespace Salamander.Actions
 {
     /// <summary>
     /// A base class for actions.  This provides some built-in functionality for the sake of convenience,

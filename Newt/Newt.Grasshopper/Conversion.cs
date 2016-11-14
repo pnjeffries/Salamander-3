@@ -1,5 +1,5 @@
 ﻿using FreeBuild.Conversion;
-using Newt.RhinoCommon;
+using Salamander.RhinoCommon;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using FreeBuild.Rhino;
 
-namespace Newt.Grasshopper
+namespace Salamander.Grasshopper
 {
     /// <summary>
     /// Manager class dealing with type conversion.

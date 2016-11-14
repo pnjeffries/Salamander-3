@@ -3,9 +3,9 @@ using System.Collections.Generic;
 
 using Grasshopper.Kernel;
 using Rhino.Geometry;
-using Newt.Grasshopper;
+using Salamander.Grasshopper;
 
-namespace Newt.TestPluginGH
+namespace Salamander.TestPluginGH
 {
     public class CalculateGeometricPropertiesComponent : NewtBaseComponent
     {

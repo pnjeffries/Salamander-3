@@ -5,14 +5,17 @@ using System.Text;
 using System.Threading.Tasks;
 using Rhino;
 using FreeBuild.Model;
-using Newt.Events;
+using Salamander.Events;
 using FreeBuild.Base;
-using Newt.Display;
+using FreeBuild.Geometry;
+using Salamander.Display;
 using FreeBuild.Events;
 using FreeBuild.Rendering;
 using System.ComponentModel;
+using RC = Rhino.Geometry;
+using FreeBuild.Rhino;
 
-namespace Newt.Rhino
+namespace Salamander.Rhino
 {
     public class HandlesManager : DisplayLayer<ModelObject>
     {
@@ -58,6 +61,21 @@ namespace Newt.Rhino
             RhinoApp.Idle += HandlesIdle;
         }
 
+        /// <summary>
+        /// Get the FreeBuild model object linked to the specified Rhino handle ID
+        /// </summary>
+        /// <param name="rhinoID"></param>
+        /// <returns></returns>
+        protected ModelObject LinkedModelObject(Guid rhinoID)
+        {
+            if (Links.ContainsSecond(rhinoID))
+            {
+                Guid objID = Links.GetFirst(rhinoID);
+                return Core.Instance.ActiveDocument?.Model?.GetObject(objID);
+            }
+            else return null;
+        }
+
         #endregion
 
         #region EventHandlers
@@ -74,6 +92,23 @@ namespace Newt.Rhino
 
         private void HandlesReplaceRhinoObject(object sender, RhinoReplaceObjectEventArgs e)
         {
+            if (!RhinoOutput.Writing)
+            {
+                ModelObject mObj = LinkedModelObject(e.ObjectId);
+                if (mObj != null)
+                {
+                    if (mObj is LinearElement)
+                    {
+                        RC.GeometryBase geometry = e.NewRhinoObject.Geometry;
+                        if (geometry is RC.Curve)
+                        {
+                            Curve crv = RCtoFB.Convert((RC.Curve)geometry);
+                            if (crv != null)
+                                ((LinearElement)mObj).ReplaceGeometry(crv);
+                        }
+                    }
+                }
+            }
             //throw new NotImplementedException();
         }
 
@@ -84,22 +119,37 @@ namespace Newt.Rhino
 
         private void HandlesDeselectObjects(object sender, RhinoObjectSelectionEventArgs e)
         {
-            ///throw new NotImplementedException();
+            if (!RhinoOutput.Writing)
+            {
+                foreach (RhinoObject rObj in e.RhinoObjects)
+                {
+                    Core.Instance.Selected.Deselect(LinkedModelObject(rObj.Id));
+                }
+            }
         }
 
         private void HandlesSelectObjects(object sender, RhinoObjectSelectionEventArgs e)
         {
-            //throw new NotImplementedException();
+            if (!RhinoOutput.Writing)
+            {
+                foreach (RhinoObject rObj in e.RhinoObjects)
+                {
+                    Core.Instance.Selected.Select(LinkedModelObject(rObj.Id));
+                }
+            }
         }
 
         private void HandlesUndeleteRhinoObject(object sender, RhinoObjectEventArgs e)
         {
-            //throw new NotImplementedException();
+            LinkedModelObject(e.ObjectId)?.Undelete();
         }
 
         private void HandlesDeleteRhinoObject(object sender, RhinoObjectEventArgs e)
         {
-            //throw new NotImplementedException();
+            if (!RhinoOutput.Writing)
+            {
+                LinkedModelObject(e.ObjectId)?.Delete();
+            }
         }
 
         public override IList<IAvatar> GenerateRepresentations(ModelObject source)
@@ -133,7 +183,7 @@ namespace Newt.Rhino
                 if (element.IsDeleted)
                 {
                     RhinoOutput.DeleteObject(curveID);
-                    Links.Remove(element.GUID);
+                    //Links.Remove(element.GUID);
                 }
                 else
                 {

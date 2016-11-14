@@ -5,12 +5,12 @@ using System.Text;
 using System.Threading.Tasks;
 using FreeBuild.Rendering;
 using FreeBuild.Rhino;
-using Newt.Display;
+using Salamander.Display;
 using RC = Rhino.Geometry;
 using FreeBuild.Meshing;
 using FreeBuild.Model;
 
-namespace Newt.Rhino
+namespace Salamander.Rhino
 {
     public class RhinoMeshAvatar : RhinoAvatar, IMeshAvatar
     {

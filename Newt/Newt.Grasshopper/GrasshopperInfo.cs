@@ -2,7 +2,7 @@
 using System.Drawing;
 using Grasshopper.Kernel;
 
-namespace Newt.Grasshopper
+namespace Salamander.Grasshopper
 {
     public class GrasshopperInfo : GH_AssemblyInfo
   {

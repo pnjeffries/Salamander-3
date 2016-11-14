@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Newt.Actions
+namespace Salamander.Actions
 {
     /// <summary>
     /// Attributes of an action input parameter property that is a FilePath.

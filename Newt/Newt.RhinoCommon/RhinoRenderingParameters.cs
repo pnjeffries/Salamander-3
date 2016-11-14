@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 using RC = Rhino.Geometry;
 
 
-namespace Newt.Rhino
+namespace Salamander.Rhino
 {
     public class RhinoRenderingParameters : RenderingParameters
     {

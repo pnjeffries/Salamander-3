@@ -1,4 +1,4 @@
-﻿using Newt.Actions;
+﻿using Salamander.Actions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,7 +9,7 @@ using FreeBuild.Base;
 using FreeBuild.Robot;
 using FreeBuild.Model;
 
-namespace Newt.RobotIOPlugin
+namespace Salamander.RobotIOPlugin
 {
     [Action("OpenRobot")]
     [ImportAction(Extensions = new string[] { ".rtd" }, Filter = "Robot File (*.rtd) | *.rtd")]

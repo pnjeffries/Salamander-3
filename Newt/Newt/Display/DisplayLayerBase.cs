@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Newt.Display
+namespace Salamander.Display
 {
     /// <summary>
     /// Abstract base class for display layers

@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Newt.Actions
+namespace Salamander.Actions
 {
     /// <summary>
     /// A base class for actions which act on a Model.

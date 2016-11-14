@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Newt.Display
+namespace Salamander.Display
 {
     /// <summary>
     /// An interface which describes object capable of producing avatars of different types

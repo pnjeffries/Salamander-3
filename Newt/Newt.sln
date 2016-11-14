@@ -3,13 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.23107.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Newt", "NEWT\Newt.csproj", "{55D9743E-6F9B-4B89-B3DE-18B03C4CFE61}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Salamander", "NEWT\Salamander.csproj", "{55D9743E-6F9B-4B89-B3DE-18B03C4CFE61}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FreeBuild", "..\..\FreeBuild\FreeBuild\FreeBuild\FreeBuild.csproj", "{7635522C-178F-4DB5-9106-FF8DFD4B833B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Newt.RhinoCommon", "Newt.RhinoCommon\Newt.RhinoCommon.csproj", "{EB529CBA-2AF1-4952-B0E8-8BAA1FE9FDE5}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Salamander.RhinoCommon", "Newt.RhinoCommon\Salamander.RhinoCommon.csproj", "{EB529CBA-2AF1-4952-B0E8-8BAA1FE9FDE5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Newt.Rhino", "Newt.Rhino\Newt.Rhino.csproj", "{31EF1C91-653D-406D-A253-F39547C8F45A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Salamander.Rhino", "Newt.Rhino\Salamander.Rhino.csproj", "{31EF1C91-653D-406D-A253-F39547C8F45A}"
 	ProjectSection(ProjectDependencies) = postProject
 		{6172F272-9DBD-427C-B858-186634C6FFED} = {6172F272-9DBD-427C-B858-186634C6FFED}
 		{73C76479-4F9D-48E1-A4FE-203821FB800C} = {73C76479-4F9D-48E1-A4FE-203821FB800C}
@@ -17,13 +17,13 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Newt.Rhino", "Newt.Rhino\Ne
 		{AEB92DAD-98FE-4709-A0C5-D115E4FB2B18} = {AEB92DAD-98FE-4709-A0C5-D115E4FB2B18}
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Newt.UI", "Newt.UI\Newt.UI.csproj", "{73C76479-4F9D-48E1-A4FE-203821FB800C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Salamander.UI", "Newt.UI\Salamander.UI.csproj", "{73C76479-4F9D-48E1-A4FE-203821FB800C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Newt.Grasshopper", "Newt.Grasshopper\Newt.Grasshopper.csproj", "{77A7C389-8C84-411C-88AE-6E61340B1B00}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Salamander.Grasshopper", "Newt.Grasshopper\Salamander.Grasshopper.csproj", "{77A7C389-8C84-411C-88AE-6E61340B1B00}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Newt.TestPlugin", "Newt.TestPlugin\Newt.TestPlugin.csproj", "{AEB92DAD-98FE-4709-A0C5-D115E4FB2B18}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Salamander.TestPlugin", "Newt.TestPlugin\Salamander.TestPlugin.csproj", "{AEB92DAD-98FE-4709-A0C5-D115E4FB2B18}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Newt.TestPluginGH", "TestPluginGH\Newt.TestPluginGH.csproj", "{6172F272-9DBD-427C-B858-186634C6FFED}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Salamander.TestPluginGH", "TestPluginGH\Salamander.TestPluginGH.csproj", "{6172F272-9DBD-427C-B858-186634C6FFED}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FreeBuild.Excel", "..\..\FreeBuild\FreeBuild\FreeBuild.Excel\FreeBuild.Excel.csproj", "{A86503CF-0FA6-434C-A546-93D12D1AD45C}"
 EndProject
@@ -33,7 +33,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Freebuild.WPF", "..\..\Free
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FreeBuild.Robot", "..\..\FreeBuild\FreeBuild\FreeBuild.Robot\FreeBuild.Robot.csproj", "{827A1CE7-6EDA-431E-BD5A-665AA7918439}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Newt.RobotIOPlugin", "Newt.RobotIOPlugin\Newt.RobotIOPlugin.csproj", "{AA3A00FC-FC95-4BB5-B129-563B48F6DDBC}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Salamander.RobotIOPlugin", "Newt.RobotIOPlugin\Salamander.RobotIOPlugin.csproj", "{AA3A00FC-FC95-4BB5-B129-563B48F6DDBC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

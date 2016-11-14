@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Newt.Grasshopper
+namespace Salamander.Grasshopper
 {
     /// <summary>
     /// Class that can be used to extract a unique nickname from a parameter name

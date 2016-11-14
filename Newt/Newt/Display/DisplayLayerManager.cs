@@ -10,7 +10,7 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Newt.Display
+namespace Salamander.Display
 {
     /// <summary>
     /// Manager class for display layers.

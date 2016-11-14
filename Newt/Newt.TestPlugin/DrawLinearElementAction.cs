@@ -1,9 +1,9 @@
 ﻿using FreeBuild.Actions;
 using FreeBuild.Geometry;
 using FreeBuild.Model;
-using Newt.Actions;
+using Salamander.Actions;
 
-namespace Newt.TestPlugin
+namespace Salamander.TestPlugin
 {
     [ActionAttribute(
         "DrawLinearElement",
@@ -23,7 +23,9 @@ namespace Newt.TestPlugin
         {
             if (Line.Length > 0)
             {
-                Section = new SectionProperty(new SymmetricIProfile(1, 0.5, 0.1, 0.05, 0.1));//new CircularHollowProfile(1.0, 0.1));//
+                Section = new SectionProperty(new SymmetricIProfile(1, 0.5, 0.1, 0.05, 0.1));
+                //Section = new SectionProperty(new CircularHollowProfile(1.0, 0.1));
+                //Section = new SectionProperty(new RectangularHollowProfile(1, 0.5, 0.1, 0.08));
                 Element = Model.Create.LinearElement(Line, exInfo);
                 Element.Property = Section;
                 return true;

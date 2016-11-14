@@ -1,6 +1,6 @@
 ﻿using Rhino.PlugIns;
 
-namespace Newt.RhinoPlugin
+namespace Salamander.RhinoPlugin
 {
     ///<summary>
     /// <para>Every RhinoCommon .rhp assembly must have one and only one PlugIn-derived
@@ -10,15 +10,15 @@ namespace Newt.RhinoPlugin
     /// attributes in AssemblyInfo.cs (you might need to click "Project" ->
     /// "Show All Files" to see it in the "Solution Explorer" window).</para>
     ///</summary>
-    public class NewtPlugin : PlugIn
+    public class SalamanderPlugin : PlugIn
     {
-        public NewtPlugin()
+        public SalamanderPlugin()
         {
             Instance = this;
         }
 
         ///<summary>Gets the only instance of the NewtPlugin plug-in.</summary>
-        public static NewtPlugin Instance
+        public static SalamanderPlugin Instance
         {
             get; private set;
         }

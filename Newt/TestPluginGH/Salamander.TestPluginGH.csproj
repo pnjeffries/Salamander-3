@@ -8,8 +8,8 @@
     <ProjectGuid>{6172F272-9DBD-427C-B858-186634C6FFED}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Newt.TestPluginGH</RootNamespace>
-    <AssemblyName>Newt.TestPluginGH</AssemblyName>
+    <RootNamespace>Salamander.TestPluginGH</RootNamespace>
+    <AssemblyName>Salamander.TestPluginGH</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <IsWebBootstrapper>false</IsWebBootstrapper>
@@ -71,9 +71,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Newt.Grasshopper\Newt.Grasshopper.csproj">
+    <ProjectReference Include="..\Newt.Grasshopper\Salamander.Grasshopper.csproj">
       <Project>{77a7c389-8c84-411c-88ae-6e61340b1b00}</Project>
-      <Name>Newt.Grasshopper</Name>
+      <Name>Salamander.Grasshopper</Name>
       <Private>False</Private>
     </ProjectReference>
   </ItemGroup>

@@ -5,14 +5,14 @@ using Rhino.Commands;
 using Rhino.Geometry;
 using Rhino.Input;
 using Rhino.Input.Custom;
-using Newt.RhinoCommon;
+using Salamander.RhinoCommon;
 
-namespace Newt.Rhino
+namespace Salamander.Rhino
 {
     [System.Runtime.InteropServices.Guid("68f6b39d-75cc-465e-addd-f3bf2a40d969")]
-    public class NewtCommand : Command
+    public class SalamanderCommand : Command
     {
-        public NewtCommand()
+        public SalamanderCommand()
         {
             // Rhino only creates one instance of each command class defined in a
             // plug-in, so it is safe to store a refence in a static property.
@@ -20,7 +20,7 @@ namespace Newt.Rhino
         }
 
         ///<summary>The only instance of this command.</summary>
-        public static NewtCommand Instance
+        public static SalamanderCommand Instance
         {
             get; private set;
         }
@@ -28,7 +28,7 @@ namespace Newt.Rhino
         ///<returns>The command name as it appears on the Rhino command line.</returns>
         public override string EnglishName
         {
-            get { return "Newt"; }
+            get { return "Salamander3"; }
         }
 
         protected override Result RunCommand(RhinoDoc doc, RunMode mode)

@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Resources;
 
-namespace Newt.Grasshopper
+namespace Salamander.Grasshopper
 {
     public static class IconResourceHelper
     {

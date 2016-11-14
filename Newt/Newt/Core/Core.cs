@@ -1,8 +1,8 @@
 ﻿using FreeBuild.Base;
 using FreeBuild.Model;
-using Newt.Actions;
-using Newt.Display;
-using Newt.Events;
+using Salamander.Actions;
+using Salamander.Display;
+using Salamander.Events;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -11,7 +11,7 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Newt
+namespace Salamander
 {
     /// <summary>
     /// The core manager class.
@@ -112,6 +112,11 @@ namespace Newt
                 return _OpenDocuments;
             }
         }
+
+        /// <summary>
+        /// The set of currently user-selected objects
+        /// </summary>
+        public SelectionSet Selected { get; } = new SelectionSet();
 
         #endregion
 
@@ -221,7 +226,7 @@ namespace Newt
                         Assembly pluginAss = Assembly.LoadFrom(filePath);
                         if (pluginAss != null)
                         {
-                            PrintLine("Loading Newt plugin '" + filePath + "'...");
+                            PrintLine("Loading Salamander plugin '" + filePath + "'...");
                             //Load Actions:
                             Actions.LoadPlugin(pluginAss);
                             //Load Layers:

@@ -5,11 +5,11 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Threading;
 using Rhino;
-using Newt.Rhino;
-using Newt.Events;
-using Newt.Display;
+using Salamander.Rhino;
+using Salamander.Events;
+using Salamander.Display;
 
-namespace Newt.RhinoCommon
+namespace Salamander.RhinoCommon
 {
     /// <summary>
     /// The Rhino application host
@@ -123,6 +123,8 @@ namespace Newt.RhinoCommon
             Core.Instance.Layers.Layers.Add(Handles); //TEST
             DisplayConduit = new SalamanderDisplayConduit();
             DisplayConduit.Enabled = true;
+
+            GUI.CreateHostDockPanel(); //TEMP?
         }
 
         public bool Print(string message)

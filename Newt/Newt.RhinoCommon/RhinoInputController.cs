@@ -10,7 +10,7 @@ using FreeBuild.Rhino;
 using Rhino.Commands;
 using RC = Rhino.Geometry;
 
-namespace Newt.RhinoCommon
+namespace Salamander.RhinoCommon
 {
     /// <summary>
     /// The Rhino input controlle

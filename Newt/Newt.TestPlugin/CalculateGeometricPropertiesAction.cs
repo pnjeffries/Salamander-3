@@ -1,13 +1,13 @@
 ﻿using FreeBuild.Actions;
 using FreeBuild.Geometry;
-using Newt.Actions;
+using Salamander.Actions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Newt.TestPlugin
+namespace Salamander.TestPlugin
 {
     [Action("GeometricProperties",
         "Calculate the geometric properties of a profile")]

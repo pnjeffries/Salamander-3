@@ -8,8 +8,8 @@
     <ProjectGuid>{77A7C389-8C84-411C-88AE-6E61340B1B00}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Newt.Grasshopper</RootNamespace>
-    <AssemblyName>Newt.Grasshopper</AssemblyName>
+    <RootNamespace>Salamander.Grasshopper</RootNamespace>
+    <AssemblyName>Salamander.Grasshopper</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <IsWebBootstrapper>false</IsWebBootstrapper>
@@ -82,14 +82,14 @@
       <Project>{7635522c-178f-4db5-9106-ff8dfd4b833b}</Project>
       <Name>FreeBuild</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Newt.RhinoCommon\Newt.RhinoCommon.csproj">
+    <ProjectReference Include="..\Newt.RhinoCommon\Salamander.RhinoCommon.csproj">
       <Project>{eb529cba-2af1-4952-b0e8-8baa1fe9fde5}</Project>
-      <Name>Newt.RhinoCommon</Name>
+      <Name>Salamander.RhinoCommon</Name>
       <Private>False</Private>
     </ProjectReference>
-    <ProjectReference Include="..\NEWT\Newt.csproj">
+    <ProjectReference Include="..\NEWT\Salamander.csproj">
       <Project>{55d9743e-6f9b-4b89-b3de-18b03c4cfe61}</Project>
-      <Name>Newt</Name>
+      <Name>Salamander</Name>
       <Private>True</Private>
     </ProjectReference>
   </ItemGroup>

@@ -56,9 +56,9 @@
       <Name>FreeBuild</Name>
       <Private>False</Private>
     </ProjectReference>
-    <ProjectReference Include="..\NEWT\Newt.csproj">
+    <ProjectReference Include="..\NEWT\Salamander.csproj">
       <Project>{55d9743e-6f9b-4b89-b3de-18b03c4cfe61}</Project>
-      <Name>Newt</Name>
+      <Name>Salamander</Name>
       <Private>False</Private>
     </ProjectReference>
   </ItemGroup>

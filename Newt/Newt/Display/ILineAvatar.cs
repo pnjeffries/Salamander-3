@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Newt.Display
+namespace Salamander.Display
 {
     public interface ILineAvatar
     {

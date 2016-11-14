@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Newt
+namespace Salamander
 {
     /// <summary>
     /// Abstract base class for GUI Controller classes.

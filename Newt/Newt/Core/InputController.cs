@@ -1,6 +1,6 @@
 ﻿using FreeBuild.Base;
 using FreeBuild.Geometry;
-using Newt.Actions;
+using Salamander.Actions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,7 +8,7 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Newt
+namespace Salamander
 {
     /// <summary>
     /// Abstract base class for Input Controllers.

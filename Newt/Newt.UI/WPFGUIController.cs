@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Newt.UI
+namespace Salamander.UI
 {
     /// <summary>
     /// GUI controller for WPF UI Elements

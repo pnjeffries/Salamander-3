@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Newt.Display
+namespace Salamander.Display
 {
     /// <summary>
     /// An avatar type that represents data as a 3D mesh of vertices and faces.

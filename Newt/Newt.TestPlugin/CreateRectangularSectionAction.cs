@@ -1,4 +1,4 @@
-﻿using Newt.Actions;
+﻿using Salamander.Actions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using FreeBuild.Actions;
 using FreeBuild.Model;
 
-namespace Newt.TestPlugin
+namespace Salamander.TestPlugin
 {
     [Action(
         "CreateRectangularSection",

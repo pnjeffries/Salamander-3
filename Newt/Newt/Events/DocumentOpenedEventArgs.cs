@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Newt.Events
+namespace Salamander.Events
 {
     /// <summary>
     /// Event arguments for when a document 

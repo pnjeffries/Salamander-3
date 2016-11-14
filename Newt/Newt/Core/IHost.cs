@@ -1,11 +1,11 @@
-﻿using Newt.Display;
+﻿using Salamander.Display;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Newt
+namespace Salamander
 {
     /// <summary>
     /// Interface for application hosts.
