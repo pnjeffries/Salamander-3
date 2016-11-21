@@ -109,12 +109,11 @@ namespace Salamander.Rhino
                     }
                 }
             }
-            //throw new NotImplementedException();
         }
 
         private void HandlesDeselectAllObjects(object sender, RhinoDeselectAllObjectsEventArgs e)
         {
-            //throw new NotImplementedException();
+            Core.Instance.Selected.Clear();
         }
 
         private void HandlesDeselectObjects(object sender, RhinoObjectSelectionEventArgs e)

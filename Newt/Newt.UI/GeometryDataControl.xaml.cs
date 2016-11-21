@@ -16,15 +16,13 @@ using System.Windows.Shapes;
 namespace Salamander.UI
 {
     /// <summary>
-    /// Interaction logic for SideBarControl.xaml
+    /// Interaction logic for GeometryDataControl.xaml
     /// </summary>
-    public partial class SideBarControl : UserControl
+    public partial class GeometryDataControl : UserControl
     {
-        public SideBarControl()
+        public GeometryDataControl()
         {
             InitializeComponent();
-
-            LayoutBase.DataContext = Core.Instance;
         }
     }
 }

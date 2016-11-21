@@ -16,15 +16,13 @@ using System.Windows.Shapes;
 namespace Salamander.UI
 {
     /// <summary>
-    /// Interaction logic for SideBarControl.xaml
+    /// Interaction logic for SectionSelectionControl.xaml
     /// </summary>
-    public partial class SideBarControl : UserControl
+    public partial class SectionSelectionControl : UserControl
     {
-        public SideBarControl()
+        public SectionSelectionControl()
         {
             InitializeComponent();
-
-            LayoutBase.DataContext = Core.Instance;
         }
     }
 }

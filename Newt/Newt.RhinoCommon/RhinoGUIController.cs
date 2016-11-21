@@ -34,7 +34,7 @@ namespace Salamander.Rhino
                 R.PlugIns.PlugIn.LoadPlugIn(pluginId);
                 plugin = R.PlugIns.PlugIn.Find(pluginId);
             }
-            R.UI.Panels.RegisterPanel(plugin, typeof(SideBarUIHost), "Salamander", Salamander.Rhino.Properties.Resources.SalamanderIcon);
+            R.UI.Panels.RegisterPanel(plugin, typeof(SideBarUIHost), "Salamander 3", Salamander.Rhino.Properties.Resources.SalamanderIcon);
                
         }
 

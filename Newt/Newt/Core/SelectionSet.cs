@@ -1,4 +1,5 @@
 ﻿using FreeBuild.Model;
+using FreeBuild.Selection;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,7 +18,7 @@ namespace Salamander
         /// <summary>
         /// The currently selected linear elements
         /// </summary>
-        public LinearElementCollection LinearElements { get; } = new LinearElementCollection();
+        public LinearElementSelection LinearElements { get; } = new LinearElementSelection();
 
         #endregion
 
@@ -32,7 +33,7 @@ namespace Salamander
         public bool Select(ModelObject mObject)
         {
             if (mObject == null) return false;
-            else if (mObject is LinearElement) return LinearElements.TryAdd((LinearElement)mObject);
+            else if (mObject is LinearElement) return LinearElements.Add((LinearElement)mObject);
             else return false;
         }
 
@@ -46,6 +47,14 @@ namespace Salamander
             if (mObject == null) return false;
             if (mObject is LinearElement) return LinearElements.Remove(mObject.GUID);
             else return false;
+        }
+
+        /// <summary>
+        /// Clear the selection
+        /// </summary>
+        public void Clear()
+        {
+            LinearElements.Clear();
         }
 
         #endregion

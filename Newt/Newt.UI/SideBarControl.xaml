@@ -7,12 +7,19 @@
              xmlns:fb="clr-namespace:Freebuild.WPF;assembly=Freebuild.WPF"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
-    <Grid>
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/Salamander.UI;component/Styles.xaml"></ResourceDictionary>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </UserControl.Resources>
+    <Grid Name="LayoutBase">
         <ScrollViewer HorizontalScrollBarVisibility="Hidden">
             <StackPanel>
-                <Expander Header="Elements">
-                    
-                </Expander>
+                <fb:PropertiesExpander HeaderContent="Linear Elements"  DataContext="{Binding Path=Selected.LinearElements}">
+                    <local:LinearElementSelectionControl/>
+                </fb:PropertiesExpander>
             </StackPanel>
         </ScrollViewer> 
     </Grid>

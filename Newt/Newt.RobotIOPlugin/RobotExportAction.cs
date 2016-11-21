@@ -24,8 +24,11 @@ namespace Salamander.RobotIOPlugin
         {
             Document.Model.RegenerateNodes(new NodeGenerationParameters());
             var robot = new RobotController();
+            robot.Message += HandleMessage;
             RobotIDMappingTable idMap = new RobotIDMappingTable();
             robot.WriteModelToRobot(FilePath, Document.Model, ref idMap);
+            robot.Close();
+            robot.Release();
             return true;
         }
     }

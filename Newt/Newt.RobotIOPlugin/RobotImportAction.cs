@@ -24,9 +24,12 @@ namespace Salamander.RobotIOPlugin
         public override bool Execute(ExecutionInfo exInfo = null)
         {
             var robot = new RobotController();
+            robot.Message += HandleMessage;
             RobotIDMappingTable idMap = new RobotIDMappingTable();
             Model model = robot.LoadModelFromRobot(FilePath, ref idMap);
             Document = new ModelDocument(FilePath, model);
+            robot.Close();
+            robot.Release();
             return true;
         }
     }

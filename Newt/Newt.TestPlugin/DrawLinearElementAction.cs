@@ -23,10 +23,11 @@ namespace Salamander.TestPlugin
         {
             if (Line.Length > 0)
             {
-                Section = new SectionProperty(new SymmetricIProfile(1, 0.5, 0.1, 0.05, 0.1));
                 //Section = new SectionProperty(new CircularHollowProfile(1.0, 0.1));
                 //Section = new SectionProperty(new RectangularHollowProfile(1, 0.5, 0.1, 0.08));
+                Section = Model.Create.SectionProperty(new SymmetricIProfile(0.6358, 0.3114, 0.0314, 0.0145, 0.0152));
                 Element = Model.Create.LinearElement(Line, exInfo);
+                Element.Name = "B-01";
                 Element.Property = Section;
                 return true;
             }

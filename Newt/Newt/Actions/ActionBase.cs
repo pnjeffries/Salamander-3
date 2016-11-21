@@ -1,4 +1,5 @@
 ﻿using FreeBuild.Actions;
+using FreeBuild.Events;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -173,6 +174,16 @@ namespace Salamander.Actions
         public virtual bool FinalOperations(ExecutionInfo exInfo = null)
         {
             return true;
+        }
+
+        /// <summary>
+        /// Handle messages raised by MessageRaiser objects
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="args"></param>
+        public virtual void HandleMessage(object sender, MessageRaisedEventArgs args)
+        {
+            Core.PrintLine(args.Message);
         }
     }
 }
