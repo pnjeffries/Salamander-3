@@ -4,65 +4,106 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Salamander.UI"
-             xmlns:fb="clr-namespace:Freebuild.WPF;assembly=Freebuild.WPF"
-             xmlns:converters="clr-namespace:Freebuild.WPF.Converters;assembly=Freebuild.WPF"
+             xmlns:fb="clr-namespace:FreeBuild.WPF;assembly=FreeBuild.WPF"
+             xmlns:converters="clr-namespace:FreeBuild.WPF.Converters;assembly=Freebuild.WPF"
+             xmlns:model="clr-namespace:FreeBuild.Model;assembly=FreeBuild"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
     <UserControl.Resources>
         <ResourceDictionary>
             <converters:AlwaysVisibleConverter x:Key="AlwaysVisibleConverter"/>
+            <converters:AutoSpaceCamelCaseConverter x:Key="AutoSpaceCamelCaseConverter"/>
+            <converters:NullOrEmptyVisibilityConverter x:Key="NullOrEmptyVisibilityConverter"/>
         </ResourceDictionary>
     </UserControl.Resources>
     <Grid>
-        <StackPanel DataContext="{Binding Path=Property}">
+        <StackPanel>
             <Border BorderBrush="Black" BorderThickness="0" Margin="2" Background="White" Height="200">
                 <Viewbox Height="200" Width="200">
                     <Border>
-                        <fb:ProfileCanvas Profiles="{Binding Path=Profiles}" Width="2" Height="2"/>
+                        <fb:ProfileCanvas Profiles="{Binding Path=Section.Profiles}" Width="2" Height="2"/>
                     </Border>
                 </Viewbox>
             </Border>
-            <StackPanel DataContext="{Binding Profile}">
-            <!--<Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="Auto"/>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="*"/>
-                </Grid.ColumnDefinitions>
-                <fb:SnapBorder>
-                    <TextBlock VerticalAlignment="Center">Set-Out:</TextBlock>
-                </fb:SnapBorder>-->
-                <!--<fb:ComboFieldControl Grid.Column="1" Value="{Binding Path=Section.VerticalSetOut}" 
-                                     ItemsSource="{Binding Source={StaticResource SectionVerticalSetOutEnum}}">
+            <fb:ComboFieldControl Label="Type:"
+                                  Value="{Binding Path=Section.ProfileType}"
+                                  ItemsSource="{Binding Source={fb:SubTypeBindingSource {x:Type model:SectionProfile}}}">
+                <fb:ComboFieldControl.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding Path=Name, Converter={StaticResource AutoSpaceCamelCaseConverter}}"/>
+                    </DataTemplate>
+                </fb:ComboFieldControl.ItemTemplate>
+                
+            </fb:ComboFieldControl>
+            
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <fb:SnapBorder>
+                        <TextBlock VerticalAlignment="Center"><Run Text="Set-Out:"/></TextBlock>
+                    </fb:SnapBorder>
+                    <fb:ComboFieldControl Grid.Column="1" Value="{Binding Path=Section.Profile.VerticalSetOut}" 
+            			ItemsSource="{Binding Source={fb:EnumBindingSource {x:Type model:VerticalSetOut}}}">
+                        <fb:ComboFieldControl.ItemTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding}"/>
+                            </DataTemplate>
+                        </fb:ComboFieldControl.ItemTemplate>
+                    </fb:ComboFieldControl>
+
+                    <fb:ComboFieldControl Grid.Column="2" Value="{Binding Path = Section.Profile.HorizontalSetOut}" 
+            			ItemsSource="{Binding Source={fb:EnumBindingSource {x:Type model:HorizontalSetOut}}}">
+                        <fb:ComboFieldControl.ItemTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding}"/>
+                            </DataTemplate>
+                        </fb:ComboFieldControl.ItemTemplate>
+                    </fb:ComboFieldControl>
+                </Grid>
+
+                <fb:ComboFieldControl Label="Catalogue:"
+            		Value="{Binding Path=CatalogueName}"
+                    Visibility="{Binding Converter={StaticResource NullOrEmptyVisibilityConverter}}"
+                                      ItemsSource="{Binding Path=AvailableCatalogue}">
                     <fb:ComboFieldControl.ItemTemplate>
                         <DataTemplate>
-                            <TextBlock Text="{Binding}"/>
+                            <TextBlock Text="{Binding CatalogueName}"/>
                         </DataTemplate>
                     </fb:ComboFieldControl.ItemTemplate>
+
                 </fb:ComboFieldControl>
-                <fb:ComboFieldControl Grid.Column="2" Value="{Binding Path=Section.HorizontalSetOut}" 
-                                     ItemsSource="{Binding Source={StaticResource SectionHorizontalSetOutEnum}}">
-                    <fb:ComboFieldControl.ItemTemplate>
-                        <DataTemplate>
-                            <TextBlock Text="{Binding}"/>
-                        </DataTemplate>
-                    </fb:ComboFieldControl.ItemTemplate>
-                </fb:ComboFieldControl>
-            </Grid>-->
+
+            <StackPanel DataContext="{Binding Path = Section.Profile}">
+                
                 <fb:SliderFieldControl Label="Depth:"
-                                              ToolTip="The overall depth of the section profile"
-                                              Value="{Binding Path=Depth}"
-                                              Maximum="2.0" TickFrequency="0.001"
-                                              Units="m"
-                                              Visibility="{Binding Path=Depth, Converter={StaticResource AlwaysVisibleConverter}, FallbackValue=Collapsed}"/>
-                                            <!--Units="{Binding Path=Document.Design.Units.Distance, Converter={StaticResource LengthUnitConverter}}"-->
-                <fb:SliderFieldControl Label="Width:"
-                                              ToolTip="The overall width of the section profile"
-                                              Value="{Binding Path=Width}"
-                                              Maximum="2.0" TickFrequency="0.001"
-                                              Units="m"
-                                              Visibility="{Binding Path=Width, Converter={StaticResource AlwaysVisibleConverter}, FallbackValue=Collapsed}"/>
+            		ToolTip="The overall depth of the section profile"
+            		Value="{Binding Depth}"
+            		Maximum="2.0" TickFrequency="0.001"
+            		Units="m"
+            		Visibility="{Binding Depth, Converter={StaticResource AlwaysVisibleConverter}, FallbackValue=Collapsed}"/>
                 <!--Units="{Binding Path=Document.Design.Units.Distance, Converter={StaticResource LengthUnitConverter}}"-->
+                <!--<fb:SliderFieldControl Label="Corner Radius:"
+                                              ToolTip="The corner chamfer radius of the section profile"
+                                              Value="{Binding Path=Section.CornerRadius, Converter={StaticResource SingleToDoubleConverter}}"
+                                              Maximum="1" TickFrequency="0.001"
+                                              Units="{Binding Path=Document.Design.Units.Distance, Converter={StaticResource LengthUnitConverter}}"
+                                              Visibility="{Binding Path=Section.CornerRadius, Converter={StaticResource AlwaysVisibleConverter}, FallbackValue=Collapsed}"/>
+                <fb:SliderFieldControl Label="Toe Radius:"
+                                              ToolTip="The toe chamfer radius of the section profile"
+                                              Value="{Binding Path=Section.ToeRadius, Converter={StaticResource SingleToDoubleConverter}}"
+                                              Maximum="1" TickFrequency="0.001"
+                                              Units="{Binding Path=Document.Design.Units.Distance, Converter={StaticResource LengthUnitConverter}}"
+                                              Visibility="{Binding Path=Section.ToeRadius, Converter={StaticResource AlwaysVisibleConverter}, FallbackValue=Collapsed}"/>-->
+                <!--Units="{Binding Path=Document.Design.Units.Distance, Converter={StaticResource LengthUnitConverter}}"-->
+                <fb:SliderFieldControl Label="Width:"
+            		ToolTip="The overall width of the section profile"
+            		Value="{Binding Width}"
+            		Maximum="2.0" TickFrequency="0.001"
+            		Units="m"
+            		Visibility="{Binding Width, Converter={StaticResource AlwaysVisibleConverter}, FallbackValue=Collapsed}"/>
                 <!--<fb:SliderFieldControl Label="Top Width:"
                                               ToolTip="The width of the top flange of the section profile"
                                               Value="{Binding Path=Section.TopFlangeWidth, Converter={StaticResource SingleToDoubleConverter}}"
@@ -89,48 +130,36 @@
                                               Visibility="{Binding Path=Section.BaseWidth, Converter={StaticResource AlwaysVisibleConverter}, FallbackValue=Collapsed}"/>
                 -->
                 <fb:SliderFieldControl Label="Diameter:"
-                                              ToolTip="The outer diameter of the section profile"
-                                              Value="{Binding Path=Diameter}"
-                                              Maximum="2.0" TickFrequency="0.001"
-                                             Units="m"
-                                              Visibility="{Binding Path=Diameter, Converter={StaticResource AlwaysVisibleConverter}, FallbackValue=Collapsed}"/>  
-            <fb:SliderFieldControl Label="Flange Thickness:"
-                                              ToolTip="The flange thickness of the section profile"
-                                              Value="{Binding Path=FlangeThickness}"
-                                              Maximum="1" TickFrequency="0.001"
-                                              Units="m"
-                                              Visibility="{Binding Path=FlangeThickness, Converter={StaticResource AlwaysVisibleConverter}, FallbackValue=Collapsed}"/>
+            		ToolTip="The outer diameter of the section profile"
+            		Value="{Binding Diameter}"
+            		Maximum="2.0" TickFrequency="0.001"
+            		Units="m"
+            		Visibility="{Binding Diameter, Converter={StaticResource AlwaysVisibleConverter}, FallbackValue=Collapsed}"/>
+                <fb:SliderFieldControl Label="Flange Thickness:"
+            		ToolTip="The flange thickness of the section profile"
+            		Value="{Binding FlangeThickness}"
+            		Maximum="0.5" TickFrequency="0.001"
+            		Units="m"
+            		Visibility="{Binding FlangeThickness, Converter={StaticResource AlwaysVisibleConverter}, FallbackValue=Collapsed}"/>
                 <fb:SliderFieldControl Label="Web Thickness:"
-                                              ToolTip="The web thickness of the section profile"
-                                              Value="{Binding Path=WebThickness}"
-                                              Maximum="1" TickFrequency="0.001"
-                                              Units="m"
-                                              Visibility="{Binding Path=WebThickness, Converter={StaticResource AlwaysVisibleConverter}, FallbackValue=Collapsed}"/>
+            		ToolTip="The web thickness of the section profile"
+            		Value="{Binding WebThickness}"
+            		Maximum="0.5" TickFrequency="0.001"
+            		Units="m"
+            		Visibility="{Binding WebThickness, Converter={StaticResource AlwaysVisibleConverter}, FallbackValue=Collapsed}"/>
                 <fb:SliderFieldControl Label="Wall Thickness:"
-                                              ToolTip="The wall thickness of the section profile"
-                                              Value="{Binding Path=WallThickness}"
-                                              Maximum="1" TickFrequency="0.001"
-                                              Units="m"
-                                              Visibility="{Binding Path=Section.WallThickness, Converter={StaticResource AlwaysVisibleConverter}, FallbackValue=Collapsed}"/>
-              
-            <fb:SliderFieldControl Label="Root Radius:"
-                                              ToolTip="The root fillet radius of the section profile"
-                                              Value="{Binding Path=RootRadius}"
-                                              Maximum="1" TickFrequency="0.001"
-                                              Units="m"
-                                              Visibility="{Binding Path=RootRadius, Converter={StaticResource AlwaysVisibleConverter}, FallbackValue=Collapsed}"/>
-                <!--<fb:SliderFieldControl Label="Corner Radius:"
-                                              ToolTip="The corner chamfer radius of the section profile"
-                                              Value="{Binding Path=Section.CornerRadius, Converter={StaticResource SingleToDoubleConverter}}"
-                                              Maximum="1" TickFrequency="0.001"
-                                              Units="{Binding Path=Document.Design.Units.Distance, Converter={StaticResource LengthUnitConverter}}"
-                                              Visibility="{Binding Path=Section.CornerRadius, Converter={StaticResource AlwaysVisibleConverter}, FallbackValue=Collapsed}"/>
-                <fb:SliderFieldControl Label="Toe Radius:"
-                                              ToolTip="The toe chamfer radius of the section profile"
-                                              Value="{Binding Path=Section.ToeRadius, Converter={StaticResource SingleToDoubleConverter}}"
-                                              Maximum="1" TickFrequency="0.001"
-                                              Units="{Binding Path=Document.Design.Units.Distance, Converter={StaticResource LengthUnitConverter}}"
-                                              Visibility="{Binding Path=Section.ToeRadius, Converter={StaticResource AlwaysVisibleConverter}, FallbackValue=Collapsed}"/>-->
+            		ToolTip="The wall thickness of the section profile"
+            		Value="{Binding WallThickness}"
+            		Maximum="0.5" TickFrequency="0.001"
+            		Units="m"
+            		Visibility="{Binding WallThickness, Converter={StaticResource AlwaysVisibleConverter}, FallbackValue=Collapsed}"/>
+
+                <fb:SliderFieldControl Label="Root Radius:"
+            		ToolTip="The root fillet radius of the section profile"
+            		Value="{Binding RootRadius}"
+            		Maximum="0.5" TickFrequency="0.001"
+            		Units="m"
+            		Visibility="{Binding RootRadius, Converter={StaticResource AlwaysVisibleConverter}, FallbackValue=Collapsed}"/>
             </StackPanel>
         </StackPanel>
     </Grid>

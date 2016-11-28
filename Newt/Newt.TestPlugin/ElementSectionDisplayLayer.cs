@@ -60,10 +60,12 @@ namespace Salamander.TestPlugin
                 {
                     InvalidateRepresentation(lEl);
                 }
+                Core.Instance.Host.Refresh();
             }
             else
             {
                 base.InvalidateOnUpdate(modified, e);
+                if (modified is LinearElement && e.PropertyName == "Property") Core.Instance.Host.Refresh();
             }
         }
     }

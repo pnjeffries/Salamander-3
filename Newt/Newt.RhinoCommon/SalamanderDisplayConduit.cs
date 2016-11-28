@@ -1,14 +1,23 @@
-﻿using Rhino.Display;
+﻿using FreeBuild.Rhino;
+using Rhino.Display;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using RC = Rhino.Geometry;
 
 namespace Salamander.Rhino
 {
     public class SalamanderDisplayConduit : DisplayConduit
     {
+        protected override void CalculateBoundingBox(CalculateBoundingBoxEventArgs e)
+        {
+            base.CalculateBoundingBox(e);
+            RC.BoundingBox bBox = FBtoRC.Convert(Core.Instance.ActiveDocument.Model.BoundingBox);
+            e.IncludeBoundingBox(bBox);
+        }
+
         protected override void PostDrawObjects(DrawEventArgs e)
         {
             //Initialise rendering parameters:

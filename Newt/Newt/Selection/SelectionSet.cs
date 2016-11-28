@@ -1,12 +1,12 @@
 ﻿using FreeBuild.Model;
-using FreeBuild.Selection;
+using Salamander.Selection;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Salamander
+namespace Salamander.Selection
 {
     /// <summary>
     /// The set of currently selected objects

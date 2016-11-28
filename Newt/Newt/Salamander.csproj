@@ -62,7 +62,7 @@
     <Compile Include="Core\IHost.cs" />
     <Compile Include="Core\GUIController.cs" />
     <Compile Include="Core\InputController.cs" />
-    <Compile Include="Core\SelectionSet.cs" />
+    <Compile Include="Selection\SelectionSet.cs" />
     <Compile Include="Display\Avatar.cs" />
     <Compile Include="Display\DisplayLayer.cs" />
     <Compile Include="Display\DisplayLayerBase.cs" />
@@ -78,6 +78,10 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Selection\LinearElementSelection.cs" />
+    <Compile Include="Selection\SectionPropertyDummy.cs" />
+    <Compile Include="Selection\SectionPropertySelection.cs" />
+    <Compile Include="Selection\SelectionViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\FreeBuild\FreeBuild\FreeBuild\FreeBuild.csproj">

@@ -3,6 +3,7 @@ using FreeBuild.Model;
 using Salamander.Actions;
 using Salamander.Display;
 using Salamander.Events;
+using Salamander.Selection;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -118,6 +119,12 @@ namespace Salamander
         /// </summary>
         public SelectionSet Selected { get; } = new SelectionSet();
 
+        /// <summary>
+        /// The library of standard section profiles
+        /// !!!TO BE REVIEWED!!!
+        /// </summary>
+        public SectionProfileLibrary SectionLibrary { get; } = new SectionProfileLibrary();
+
         #endregion
 
         #region Constructors
@@ -130,7 +137,9 @@ namespace Salamander
         {
             Host = host;
             Actions = new ActionManager();
+            SectionLibrary.LoadFromCSV(new FilePath("SectLib.csv"));
             Layers = new DisplayLayerManager();
+           
         }
 
         #endregion
@@ -205,6 +214,50 @@ namespace Salamander
             }
             return result;
         }
+
+        /// <summary>
+        /// Save the active model document to a file selected via a file dialog
+        /// </summary>
+        /// <returns></returns>
+        public bool SaveModel()
+        {
+            return SaveModel(ActiveDocument);
+        }
+
+        /// <summary>
+        /// Save a model document to a file selected via a file dialog
+        /// </summary>
+        /// <param name="document">The document to be saved</param>
+        /// <returns></returns>
+        public bool SaveModel(ModelDocument document)
+        {
+            string filters = Actions.GetExportFilters();
+            string filePath = UI.ShowSaveFileDialog("Enter filepath to write to", filters);
+            if (!string.IsNullOrEmpty(filePath)) return SaveModel(filePath, document);
+            else return false;
+        }
+
+        /// <summary>
+        /// Save a model document to a file
+        /// </summary>
+        /// <param name="filePath">The filepath to save to</param>
+        /// <param name="document">The document to be saved</param>
+        /// <returns>True if export command ran successfully</returns>
+        public bool SaveModel(FilePath filePath, ModelDocument document)
+        {
+            string extension = Path.GetExtension(filePath);
+            IExportAction exporter = Actions.GetExporterFor(extension);
+            if (exporter != null)
+            {
+                exporter.FilePath = filePath;
+                exporter.Document = document;
+                Actions.ExecuteAction(exporter, null);
+                return true;
+            }
+            PrintLine("Error: No exporter loaded for extension '." + extension + "'.  File could not be written.");
+            return false;
+        }
+
 
         /// <summary>
         /// Load all plugin assemblies

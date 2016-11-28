@@ -57,6 +57,7 @@
     <Compile Include="SalamanderCommand.cs" />
     <Compile Include="SalBakeSectionsCommand.cs" />
     <Compile Include="SalCommandCommand.cs" />
+    <Compile Include="SalExportCommand.cs" />
     <Compile Include="SalImportCommand.cs" />
     <Compile Include="SalamanderPlugin.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
