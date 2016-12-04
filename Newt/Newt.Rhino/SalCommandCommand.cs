@@ -2,6 +2,7 @@
 using Rhino;
 using Rhino.Commands;
 using Salamander.RhinoCommon;
+using Salamander.Actions;
 
 namespace Salamander.Rhino
 {
@@ -22,13 +23,18 @@ namespace Salamander.Rhino
 
         public override string EnglishName
         {
-            get { return "S3Command"; }
+            get { return "SalCommand"; }
         }
 
         protected override Result RunCommand(RhinoDoc doc, RunMode mode)
         {
             Host.EnsureInitialisation();
-            string command = Host.Instance.Input.EnterString("Enter Salamander command");
+            string command = "";
+            try
+            {
+                command = Host.Instance.Input.EnterString("Enter Salamander command", Core.Instance.Actions.LastCommand?.GetCommandName());
+            }
+            catch { }
             Core.Instance.Execute(command);
             return Result.Success;
         }

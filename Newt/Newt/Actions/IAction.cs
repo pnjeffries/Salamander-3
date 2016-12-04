@@ -1,4 +1,6 @@
 ﻿using FreeBuild.Actions;
+using FreeBuild.Geometry;
+using Salamander.Display;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -66,6 +68,13 @@ namespace Salamander.Actions
         /// </summary>
         /// <returns>True if all inputs successful, false if user cancels</returns>
         bool PromptUserForInputs();
+
+        /// <summary>
+        /// Get the renderable preview layer which may be displayed to provide dynamic feedback
+        /// during selection operations
+        /// </summary>
+        /// <returns></returns>
+        DisplayLayer PreviewLayer(PreviewParameters parameters);
     }
 
     /// <summary>

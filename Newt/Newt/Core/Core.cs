@@ -137,7 +137,6 @@ namespace Salamander
         {
             Host = host;
             Actions = new ActionManager();
-            SectionLibrary.LoadFromCSV(new FilePath("SectLib.csv"));
             Layers = new DisplayLayerManager();
            
         }
@@ -155,6 +154,7 @@ namespace Salamander
         public static void Initialise(IHost host)
         {
             if (_Instance == null) _Instance = new Core(host);
+            _Instance.LoadAssets();
             _Instance.LoadPlugins();
         }
 
@@ -166,6 +166,59 @@ namespace Salamander
         public static bool IsInitialised()
         {
             return Instance != null;
+        }
+
+        private void LoadAssets()
+        {
+            FilePath directory = FilePath.DirectoryOf(Assembly.GetExecutingAssembly());
+
+            // Load Section Library
+            FilePath sectLibPath = directory + "\\SectLib.csv";
+            PrintLine("Loading Section library from " + sectLibPath);
+            try
+            {
+                SectionLibrary.LoadFromCSV(sectLibPath);
+            }
+            catch (Exception ex)
+            {
+                PrintLine("Error during loading: " + ex.Message);
+            }
+        }
+
+        /// <summary>
+        /// Load all plugin assemblies
+        /// </summary>
+        private void LoadPlugins()
+        {
+            string location = System.Reflection.Assembly.GetExecutingAssembly().Location;
+            FileInfo executing = new FileInfo(location);
+            DirectoryInfo directory = executing.Directory;
+            DirectoryInfo[] subDirectories = directory.GetDirectories("Plugins");
+            foreach (DirectoryInfo pluginFolder in subDirectories)
+            {
+                //PrintLine("Loading plugins from " + pluginFolder.FullName);
+                FileInfo[] files = pluginFolder.GetFiles();
+                foreach (FileInfo file in files)
+                {
+                    if (file.Extension == ".dll")
+                    {
+                        string filePath = file.FullName;
+                        Assembly pluginAss = Assembly.LoadFrom(filePath);
+                        if (pluginAss != null)
+                        {
+                            PrintLine("Loading Salamander plugin '" + filePath + "'...");
+                            //Load Actions:
+                            Actions.LoadPlugin(pluginAss);
+                            //Load Layers:
+                            Layers.LoadPlugin(pluginAss);
+                        }
+                        else
+                        {
+                            PrintLine("Warning: Could not load assembly '" + filePath + "'!");
+                        }
+                    }
+                }
+            }
         }
 
         /// <summary>
@@ -259,40 +312,7 @@ namespace Salamander
         }
 
 
-        /// <summary>
-        /// Load all plugin assemblies
-        /// </summary>
-        private void LoadPlugins()
-        {
-            string location = System.Reflection.Assembly.GetExecutingAssembly().Location;
-            FileInfo executing = new FileInfo(location);
-            DirectoryInfo directory = executing.Directory;
-            DirectoryInfo[] subDirectories = directory.GetDirectories("Plugins");
-            foreach (DirectoryInfo pluginFolder in subDirectories)
-            {
-                FileInfo[] files = pluginFolder.GetFiles();
-                foreach (FileInfo file in files)
-                {
-                    if (file.Extension == ".dll")
-                    {
-                        string filePath = file.FullName;
-                        Assembly pluginAss = Assembly.LoadFrom(filePath);
-                        if (pluginAss != null)
-                        {
-                            PrintLine("Loading Salamander plugin '" + filePath + "'...");
-                            //Load Actions:
-                            Actions.LoadPlugin(pluginAss);
-                            //Load Layers:
-                            Layers.LoadPlugin(pluginAss);
-                        }
-                        else
-                        {
-                            PrintLine("Warning: Could not load assembly '" + filePath + "'!");
-                        }
-                    }
-                }
-            }
-        }
+       
 
         /// <summary>
         /// Execute the action with the given command name

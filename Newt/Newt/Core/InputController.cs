@@ -88,7 +88,12 @@ namespace Salamander
         public abstract Line EnterLine(string startPointPrompt = "Enter start of line", 
             string endPointPrompt = "Enter end of line", Vector? startPoint = null);
 
-        
+        /// <summary>
+        /// Prompt the user to enter a collection of geometry
+        /// </summary>
+        /// <param name="prompt"></param>
+        /// <returns></returns>
+        public abstract ShapeCollection EnterGeometry(string prompt = "Enter geometry");
 
         /// <summary>
         /// Prompt the user to enter data of the specified type.
@@ -137,6 +142,8 @@ namespace Salamander
                 else if (inputType == typeof(Line)) //FreeBuild Line
                     value = EnterLine("Enter start point of " + description,
                         "Enter end point of " + description);
+                else if (inputType == typeof(ShapeCollection)) //FreeBuild Shapes
+                    value = EnterGeometry("Enter " + description);
                 else return false; //Input not recognised
             }
             catch (OperationCanceledException)

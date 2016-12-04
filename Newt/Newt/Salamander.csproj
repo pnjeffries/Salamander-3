@@ -48,6 +48,7 @@
     <Compile Include="Actions\ActionManager.cs" />
     <Compile Include="Actions\ActionOutputAttribute.cs" />
     <Compile Include="Actions\ActionParameterAttribute.cs" />
+    <Compile Include="Actions\PreviewParameters.cs" />
     <Compile Include="Actions\IImportDocumentAction.cs" />
     <Compile Include="Actions\ImportActionBase.cs" />
     <Compile Include="Actions\ModelDocumentActionBase.cs" />
@@ -62,6 +63,7 @@
     <Compile Include="Core\IHost.cs" />
     <Compile Include="Core\GUIController.cs" />
     <Compile Include="Core\InputController.cs" />
+    <Compile Include="Display\ManualDisplayLayer.cs" />
     <Compile Include="Selection\SelectionSet.cs" />
     <Compile Include="Display\Avatar.cs" />
     <Compile Include="Display\DisplayLayer.cs" />

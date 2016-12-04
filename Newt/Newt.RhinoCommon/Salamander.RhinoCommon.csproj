@@ -52,6 +52,7 @@
     <Reference Include="WindowsFormsIntegration" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="GetPointDynamic.cs" />
     <Compile Include="HandlesManager.cs" />
     <Compile Include="Host.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

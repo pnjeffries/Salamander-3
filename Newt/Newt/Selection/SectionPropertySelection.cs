@@ -40,7 +40,7 @@ namespace Salamander.Selection
         {
             get
             {
-                if (Section == null || Section.Profile == null) return null;
+                if (Section == null || Section.Profile == null || Section.Profile.CatalogueName == null) return null;
                 else return Core.Instance.SectionLibrary.GetByCatalogueName(Section.Profile.CatalogueName);
             }
             set
@@ -86,6 +86,10 @@ namespace Salamander.Selection
             if (propertyName == "ProfileType")
             {
                 NotifyPropertyChanged("AvailableCatalogue");
+            }
+            else if (propertyName == "Profile")
+            {
+                NotifyPropertyChanged("CatalogueName");
             }
         }
 

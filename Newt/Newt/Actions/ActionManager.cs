@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FreeBuild.Base;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
@@ -10,7 +11,7 @@ namespace Salamander.Actions
     /// <summary>
     /// Manager class for Salamander actions
     /// </summary>
-    public class ActionManager
+    public class ActionManager : NotifyPropertyChangedBase
     {
         /// <summary>
         /// A registry of all loaded actions
@@ -38,9 +39,22 @@ namespace Salamander.Actions
         public Dictionary<string, IAction> PreviousActions { get; } = new Dictionary<string, IAction>();
 
         /// <summary>
+        /// Private backing field for CurrentAction 
+        /// </summary>
+        private IAction _CurrentAction = null;
+
+        /// <summary>
         /// The currently active action
         /// </summary>
-        public IAction CurrentAction { get; set; } = null;
+        public IAction CurrentAction
+        {
+            get { return _CurrentAction; }
+            set
+            {
+                _CurrentAction = value;
+                NotifyPropertyChanged("CurrentAction");
+            }
+        }
 
         /// <summary>
         /// Constructor
@@ -138,7 +152,8 @@ namespace Salamander.Actions
         /// <summary>
         /// Execute a loaded action with the given command name
         /// </summary>
-        /// <param name="commandName"></param>
+        /// <param name="commandName">The name of the command to be executed.
+        /// If left blank, the last executed command will be run again.</param>
         /// <returns></returns>
         public IAction ExecuteAction(string commandName, object context = null)
         {

@@ -48,7 +48,7 @@ namespace Salamander.Selection
                     SectionPropertyDummy dummy = (SectionPropertyDummy)value;
                     if (dummy.Name.Equals("New..."))
                     {
-                        SectionProperty newSection = Selection[0].Model?.Create.SectionProperty(null);
+                        SectionProperty newSection = Selection[0].Model?.Create.SectionProperty();
                         value = newSection;
                         NotifyPropertyChanged("AvailableSections");
                     }

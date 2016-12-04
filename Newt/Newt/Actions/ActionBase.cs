@@ -6,6 +6,7 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
+using Salamander.Display;
 
 namespace Salamander.Actions
 {
@@ -15,6 +16,21 @@ namespace Salamander.Actions
     /// </summary>
     public abstract class ActionBase : IAction
     {
+        #region Properties
+
+        /// <summary>
+        /// The name of this 
+        /// </summary>
+        public string CommandName
+        {
+            get
+            {
+                return this.GetCommandName();
+            }
+        }
+
+        #endregion
+
         /// <summary>
         /// Execute this action.  Input parameters will be consumed and output parameters will be populated.
         /// </summary>
@@ -184,6 +200,16 @@ namespace Salamander.Actions
         public virtual void HandleMessage(object sender, MessageRaisedEventArgs args)
         {
             Core.PrintLine(args.Message);
+        }
+
+        /// <summary>
+        /// Overridable implementation of PreviewLayer function.  By default will return null.
+        /// </summary>
+        /// <param name="parameters"></param>
+        /// <returns></returns>
+        public virtual DisplayLayer PreviewLayer(PreviewParameters parameters)
+        {
+            return null;
         }
     }
 }

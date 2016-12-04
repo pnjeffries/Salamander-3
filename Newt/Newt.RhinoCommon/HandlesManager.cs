@@ -87,7 +87,22 @@ namespace Salamander.Rhino
 
         private void HandlesAddRhinoObject(object sender, RhinoObjectEventArgs e)
         {
-            //throw new NotImplementedException();
+            if (!RhinoOutput.Writing)
+            {
+                if (e.TheObject.Attributes.HasUserData)
+                {
+                    string data = e.TheObject.Attributes.GetUserString("SAL_ORIGINAL");
+                    if (!string.IsNullOrEmpty(data))
+                    {
+                        Guid storedGuid = new Guid(data);
+                        if (this.Links.ContainsSecond(storedGuid))
+                        {
+                            ModelObject mO = LinkedModelObject(storedGuid);
+                            //TODO: Create copy of object
+                        }
+                    }
+                }
+            }
         }
 
         private void HandlesReplaceRhinoObject(object sender, RhinoReplaceObjectEventArgs e)
@@ -172,8 +187,17 @@ namespace Salamander.Rhino
             {
                 if (!element.IsDeleted)
                 {
-                    Guid curveID = RhinoOutput.BakeCurve(element.Geometry);
-                    Links.Add(element.GUID, curveID);
+
+                    Guid objID = Guid.Empty;
+                    string idString = element.Geometry?.Attributes?.SourceID;
+                    if (!string.IsNullOrWhiteSpace(idString))
+                    {
+                        objID = new Guid(idString);
+                        if (!RhinoOutput.ObjectExists(objID)) objID = Guid.Empty;
+                    }
+                    objID = RhinoOutput.BakeOrReplace(objID, element.Geometry);
+                    if (objID != Guid.Empty) RhinoOutput.SetOriginalIDUserString(objID);
+                    Links.Add(element.GUID, objID);
                 }
             }
             else

@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Drawing;
 
 namespace Salamander.Rhino
 {
@@ -14,7 +15,8 @@ namespace Salamander.Rhino
     /// </summary>
     public abstract class RhinoAvatar : Avatar
     {
-        protected static DisplayMaterial _DefaultMaterial = new DisplayMaterial();
+        protected static DisplayMaterial _DefaultMaterial = 
+            new DisplayMaterial(Color.Gray, Color.White, Color.FromArgb(40, 40, 60), Color.FromArgb(60,60,60), 0.75, 0);
 
         private DisplayMaterial _Material = null;
 
@@ -39,7 +41,7 @@ namespace Salamander.Rhino
         /// </summary>
         /// <returns></returns>
         public DisplayMaterial GetDefaultMaterial()
-        {
+        { 
             return _DefaultMaterial;
         }
 

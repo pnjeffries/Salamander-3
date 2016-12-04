@@ -14,11 +14,26 @@
                 <ResourceDictionary Source="pack://application:,,,/Salamander.UI;component/Styles.xaml"></ResourceDictionary>
             </ResourceDictionary.MergedDictionaries>
             <converters:CountVisibilityConverter x:Key="CountVisibilityConverter"/>
+            <converters:NullOrEmptyVisibilityConverter x:Key="NullOrEmptyVisibilityConverter"/>
         </ResourceDictionary>
     </UserControl.Resources>
     <Grid Name="LayoutBase">
         <ScrollViewer HorizontalScrollBarVisibility="Hidden">
             <StackPanel>
+                <Border Visibility="{Binding Path=Actions.CurrentAction, Converter={StaticResource NullOrEmptyVisibilityConverter}}">
+                <Expander IsExpanded="True" DataContext="{Binding Path=Actions.CurrentAction}"
+                    >
+                    <Expander.Header>
+                        <TextBlock Grid.Column="1" Text="{Binding Path=CommandName}"
+                                TextTrimming="CharacterEllipsis"
+                                               ></TextBlock>
+                    </Expander.Header>
+                    <!--<Border DataContext="{Binding Path=Actions.CurrentAction}">-->
+                        <fb:AutoPropertiesPanel></fb:AutoPropertiesPanel>
+                    <!--</Border>-->
+                </Expander>
+                </Border>
+                <StackPanel> <!--Selection Panel-->
                 <fb:PropertiesExpander DataContext="{Binding Path=Selected.LinearElements}"
                                        Visibility="{Binding Path=Selection.Count, Converter={StaticResource CountVisibilityConverter}}">
                     <fb:PropertiesExpander.HeaderContent>
@@ -28,6 +43,7 @@
                     </fb:PropertiesExpander.HeaderContent>
                     <local:LinearElementSelectionControl/>                     
                 </fb:PropertiesExpander>
+            </StackPanel>
             </StackPanel>
         </ScrollViewer> 
     </Grid>

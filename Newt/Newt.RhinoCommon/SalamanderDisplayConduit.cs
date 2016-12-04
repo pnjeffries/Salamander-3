@@ -1,5 +1,6 @@
 ﻿using FreeBuild.Rhino;
 using Rhino.Display;
+using Salamander.Display;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,18 +21,19 @@ namespace Salamander.Rhino
 
         protected override void PostDrawObjects(DrawEventArgs e)
         {
-            //Initialise rendering parameters:
+            // Initialise rendering parameters:
             RhinoRenderingParameters parameters = new RhinoRenderingParameters(e);
 
-            //Draw everything:
-            //SalamanderHost.Instance.OrnamentTable.DrawAll(parameters);
+            // Draw everything:
+            // SalamanderHost.Instance.OrnamentTable.DrawAll(parameters);
             Core.Instance.Layers.Draw(parameters);
-            //Draw current action preview
-            /*if (Core.Instance.Actions.CurrentAction != null &&
-                Core.Instance.Actions.CurrentAction.PreviewLayer != null)
+
+            // Draw current action preview:
+            if (Core.Instance.Actions.CurrentAction != null)
             {
-                Core.Instance.Actions.CurrentAction.PreviewLayer.Draw(parameters);
-            }*/
+                DisplayLayer previewLayer = Core.Instance.Actions.CurrentAction.PreviewLayer(new Actions.PreviewParameters());
+                if (previewLayer != null) previewLayer.Draw(parameters);
+            }
         }
     }
 }

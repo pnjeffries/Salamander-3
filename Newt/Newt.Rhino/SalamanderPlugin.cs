@@ -1,4 +1,7 @@
 ﻿using Rhino.PlugIns;
+using System;
+using System.IO;
+using System.Text;
 
 namespace Salamander.RhinoPlugin
 {
@@ -26,5 +29,54 @@ namespace Salamander.RhinoPlugin
         // You can override methods here to change the plug-in behavior on
         // loading and shut down, add options pages to the Rhino _Option command
         // and mantain plug-in wide options in a document.
+
+        /// <summary>
+        /// Called when the plugin is being loaded.
+        /// </summary>
+        protected override LoadReturnCode OnLoad(ref string errorMessage)
+        {
+            // Get the version number of our plugin, that was last used, from our settings file.
+            var plugin_version = Settings.GetString("PlugInVersion", null);
+
+            if (!string.IsNullOrEmpty(plugin_version))
+            {
+                // If the version number of the plugin that was last used does not match the
+                // version number of this plugin, proceed.
+                if (0 != string.Compare(Version, plugin_version, StringComparison.OrdinalIgnoreCase))
+                {
+                    // Build a path to the user's staged RUI file.
+                    var sb = new StringBuilder();
+                    sb.Append(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData));
+                    sb.Append("\\McNeel\\Rhinoceros\\5.0\\Plug-ins\\");
+                    sb.AppendFormat("{0} ({1})", Name, Id);
+                    sb.Append("\\settings\\");
+                    sb.AppendFormat("{0}.rui", Assembly.GetName().Name);
+
+                    var path = sb.ToString();
+
+                    // Verify the RUI file exists.
+                    if (File.Exists(path))
+                    {
+                        try
+                        {
+                            // Delete the RUI file.
+                            File.Delete(path);
+                        }
+                        catch
+                        {
+                            // ignored
+                        }
+                    }
+
+                    // Save the version number of this plugin to our settings file.
+                    Settings.SetString("PlugInVersion", Version);
+                }
+            }
+
+            // After successfully loading the plugin, if Rhino detects a plugin RUI
+            // file, it will automatically stage it, if it doesn't already exist.
+
+            return LoadReturnCode.Success;
+        }
     }
 }
