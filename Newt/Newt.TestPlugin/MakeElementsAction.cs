@@ -16,7 +16,7 @@ namespace Salamander.TestPlugin
     public class MakeElementsAction : ModelActionBase
     {
         [ActionInput(1, "the geometry to be converted")]
-        public ShapeCollection Geometry { get; set; }
+        public VertexGeometryCollection Geometry { get; set; }
 
         [AutoUI(1, Label = "Assign Properties by Layer")]
         [ActionInput(Manual = false, Persistant = true)]
@@ -29,7 +29,7 @@ namespace Salamander.TestPlugin
         {
             if (Geometry != null)
             {
-                foreach (Shape shape in Geometry)
+                foreach (VertexGeometry shape in Geometry)
                 {
                     if (shape is Curve)
                     {

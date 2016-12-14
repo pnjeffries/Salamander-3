@@ -88,18 +88,18 @@ namespace Salamander.RhinoCommon
             return new Line(RCtoFB.Convert(gP.Point()), RCtoFB.Convert(gP2.Point()));
         }
 
-        public override ShapeCollection EnterGeometry(string prompt = "Enter geometry")
+        public override VertexGeometryCollection EnterGeometry(string prompt = "Enter geometry")
         {
             GetObject gO = new GetObject();
             gO.GeometryFilter = ObjectType.Curve; //TODO
             gO.SetCommandPrompt(prompt);
             if (gO.GetMultiple(1, 0) == GetResult.Cancel) throw new OperationCanceledException("Operation cancelled by user");
-            ShapeCollection result = new ShapeCollection();
+            VertexGeometryCollection result = new VertexGeometryCollection();
             foreach (ObjRef objRef in gO.Objects())
             {
                 try
                 {
-                    Shape shape = RCtoFB.Convert(objRef);
+                    VertexGeometry shape = RCtoFB.Convert(objRef);
                     if (shape != null) result.Add(shape);
                 }
                 catch (NotImplementedException)

@@ -93,7 +93,7 @@ namespace Salamander
         /// </summary>
         /// <param name="prompt"></param>
         /// <returns></returns>
-        public abstract ShapeCollection EnterGeometry(string prompt = "Enter geometry");
+        public abstract VertexGeometryCollection EnterGeometry(string prompt = "Enter geometry");
 
         /// <summary>
         /// Prompt the user to enter data of the specified type.
@@ -142,7 +142,7 @@ namespace Salamander
                 else if (inputType == typeof(Line)) //FreeBuild Line
                     value = EnterLine("Enter start point of " + description,
                         "Enter end point of " + description);
-                else if (inputType == typeof(ShapeCollection)) //FreeBuild Shapes
+                else if (inputType == typeof(VertexGeometryCollection)) //FreeBuild Shapes
                     value = EnterGeometry("Enter " + description);
                 else return false; //Input not recognised
             }

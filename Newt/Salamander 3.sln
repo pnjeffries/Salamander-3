@@ -35,6 +35,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FreeBuild.Robot", "..\..\Fr
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Salamander.RobotIOPlugin", "Newt.RobotIOPlugin\Salamander.RobotIOPlugin.csproj", "{AA3A00FC-FC95-4BB5-B129-563B48F6DDBC}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Salamander.Rhino.RobotImport", "Salamander.Rhino.RobotImport\Salamander.Rhino.RobotImport.csproj", "{F2201CF6-2166-4167-9138-21D6E3969571}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -147,6 +149,14 @@ Global
 		{AA3A00FC-FC95-4BB5-B129-563B48F6DDBC}.Debug64|Any CPU.Build.0 = Debug|Any CPU
 		{AA3A00FC-FC95-4BB5-B129-563B48F6DDBC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AA3A00FC-FC95-4BB5-B129-563B48F6DDBC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F2201CF6-2166-4167-9138-21D6E3969571}.Debug|Any CPU.ActiveCfg = Debug64|Any CPU
+		{F2201CF6-2166-4167-9138-21D6E3969571}.Debug|Any CPU.Build.0 = Debug64|Any CPU
+		{F2201CF6-2166-4167-9138-21D6E3969571}.Debug32|Any CPU.ActiveCfg = Debug32|Any CPU
+		{F2201CF6-2166-4167-9138-21D6E3969571}.Debug32|Any CPU.Build.0 = Debug32|Any CPU
+		{F2201CF6-2166-4167-9138-21D6E3969571}.Debug64|Any CPU.ActiveCfg = Debug64|Any CPU
+		{F2201CF6-2166-4167-9138-21D6E3969571}.Debug64|Any CPU.Build.0 = Debug64|Any CPU
+		{F2201CF6-2166-4167-9138-21D6E3969571}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F2201CF6-2166-4167-9138-21D6E3969571}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -98,7 +98,16 @@ namespace Salamander.Rhino
                         if (this.Links.ContainsSecond(storedGuid))
                         {
                             ModelObject mO = LinkedModelObject(storedGuid);
-                            //TODO: Create copy of object
+                            VertexGeometry geometry = RCtoFB.Convert(e.TheObject.Geometry);
+                            //Create copy of object:
+                            if (mO is LinearElement)
+                            {
+                                LinearElement newElement = ((LinearElement)mO).Duplicate();//Core.Instance.ActiveDocument?.Model?.Create.CopyOf((Element)mO, geometry);
+                                if (geometry is Curve) newElement.Geometry = (Curve)geometry;
+                                RhinoOutput.SetOriginalIDUserString(e.ObjectId);
+                                Links.Add(newElement.GUID, e.ObjectId);
+                                Core.Instance.ActiveDocument.Model.Add(newElement);
+                            }
                         }
                     }
                 }

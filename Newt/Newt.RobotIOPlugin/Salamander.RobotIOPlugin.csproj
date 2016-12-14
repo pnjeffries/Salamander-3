@@ -43,6 +43,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RobotExportAction.cs" />
     <Compile Include="RobotImportAction.cs" />
+    <Compile Include="RobotUpdateAction.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\FreeBuild\FreeBuild\FreeBuild.Robot\FreeBuild.Robot.csproj">
