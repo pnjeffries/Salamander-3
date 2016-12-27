@@ -3,6 +3,7 @@ using FreeBuild.Extensions;
 using FreeBuild.Model;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -93,7 +94,7 @@ namespace Salamander.Selection
             }
         }
 
-        /*public void MonitorElementSelectionSection(StructAnalysis1DElementSelection elementSelection)
+        public void MonitorElementSelectionSection(LinearElementSelection elementSelection)
         {
             elementSelection.PropertyChanged += HandlesElementPropertyChanged;
         }
@@ -105,17 +106,17 @@ namespace Salamander.Selection
         /// <param name="e"></param>
         private void HandlesElementPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-            if (sender is StructAnalysis1DElementSelection && (e.PropertyName == null ||
-                e.PropertyName == PropertyNames.STRUCTANALYSIS1DELEMENT_SECTIONPROFILE))
+            if (sender is LinearElementSelection && (e.PropertyName == null ||
+                e.PropertyName == "Property"))
             {
-                StructAnalysis1DElementSelection elementSelection = (StructAnalysis1DElementSelection)sender;
-                object selected = elementSelection.SectionProfile;
-                if (selected != null && selected is SectionProfile)
+                LinearElementSelection elementSelection = (LinearElementSelection)sender;
+                object selected = elementSelection.Property;
+                if (selected != null && selected is SectionProperty)
                 {
-                    Set((SectionProfile)selected);
+                    Set((SectionProperty)selected);
                 }
                 else Clear();
             }
-        }*/
+        }
     }
 }

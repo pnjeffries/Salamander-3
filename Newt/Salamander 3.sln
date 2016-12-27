@@ -21,7 +21,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Salamander.UI", "Newt.UI\Sa
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Salamander.Grasshopper", "Newt.Grasshopper\Salamander.Grasshopper.csproj", "{77A7C389-8C84-411C-88AE-6E61340B1B00}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Salamander.TestPlugin", "Newt.TestPlugin\Salamander.TestPlugin.csproj", "{AEB92DAD-98FE-4709-A0C5-D115E4FB2B18}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Salamander.BasicTools", "Newt.TestPlugin\Salamander.BasicTools.csproj", "{AEB92DAD-98FE-4709-A0C5-D115E4FB2B18}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Salamander.TestPluginGH", "TestPluginGH\Salamander.TestPluginGH.csproj", "{6172F272-9DBD-427C-B858-186634C6FFED}"
 EndProject

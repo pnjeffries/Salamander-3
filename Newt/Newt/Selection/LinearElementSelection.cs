@@ -21,7 +21,7 @@ namespace Salamander.Selection
         /// </summary>
         public virtual string Name
         {
-            get { return (string)CombinedValue(i => i.Name, "[Multi]"); }
+            get { return CombinedValue(i => i.Name, "[Multi]"); }
             set { foreach (LinearElement item in Selection) item.Name = value; }
         }
 
@@ -35,12 +35,21 @@ namespace Salamander.Selection
         }
 
         /// <summary>
+        /// Combined Orientation value
+        /// </summary>
+        public virtual Angle Orientation
+        {
+            get { return CombinedValue(i => i.Orientation, Angle.Multi, Angle.Undefined); }
+            set { foreach (LinearElement item in Selection) item.Orientation = value; }
+        }
+
+        /// <summary>
         /// Set or set the combined value of the section properties of the elsments
         /// within this collection.
         /// </summary>
         public SectionProperty Property
         {
-            get { return (SectionProperty)CombinedValue(i => i.Property, null); }
+            get { return CombinedValue(i => i.Property, null); }
             set
             {
                 if (value != null && value is SectionPropertyDummy)

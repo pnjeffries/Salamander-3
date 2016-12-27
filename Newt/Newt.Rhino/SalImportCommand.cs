@@ -2,6 +2,7 @@
 using Rhino;
 using Rhino.Commands;
 using Salamander.RhinoCommon;
+using FreeBuild.Model;
 
 namespace Salamander.Rhino
 {
@@ -28,7 +29,8 @@ namespace Salamander.Rhino
         protected override Result RunCommand(RhinoDoc doc, RunMode mode)
         {
             Host.EnsureInitialisation();
-            Core.Instance.ActiveDocument = Core.Instance.OpenDocument(false);
+            ModelDocument document = Core.Instance.OpenDocument(false);
+            if (document != null) Core.Instance.ActiveDocument = document;
             return Result.Success;
         }
     }

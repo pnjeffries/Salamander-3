@@ -16,9 +16,31 @@ namespace Salamander.Selection
         #region Properties
 
         /// <summary>
+        /// The currently selected nodes
+        /// </summary>
+        public NodeSelection Nodes { get; } = new NodeSelection();
+
+        /// <summary>
         /// The currently selected linear elements
         /// </summary>
         public LinearElementSelection LinearElements { get; } = new LinearElementSelection();
+
+        /// <summary>
+        /// The currently selected section properties
+        /// </summary>
+        public SectionPropertySelection SectionProperties { get; } = new SectionPropertySelection();
+
+        #endregion
+
+        #region Constructors
+
+        /// <summary>
+        /// Default constructor
+        /// </summary>
+        public SelectionSet()
+        {
+            SectionProperties.MonitorElementSelectionSection(LinearElements);
+        }
 
         #endregion
 
@@ -34,6 +56,7 @@ namespace Salamander.Selection
         {
             if (mObject == null) return false;
             else if (mObject is LinearElement) return LinearElements.Add((LinearElement)mObject);
+            else if (mObject is Node) return Nodes.Add((Node)mObject);
             else return false;
         }
 
@@ -45,7 +68,8 @@ namespace Salamander.Selection
         public bool Deselect(ModelObject mObject)
         {
             if (mObject == null) return false;
-            if (mObject is LinearElement) return LinearElements.Remove(mObject.GUID);
+            else if (mObject is LinearElement) return LinearElements.Remove(mObject.GUID);
+            else if (mObject is Node) return Nodes.Remove(mObject.GUID);
             else return false;
         }
 
@@ -55,6 +79,7 @@ namespace Salamander.Selection
         public void Clear()
         {
             LinearElements.Clear();
+            Nodes.Clear();
         }
 
         #endregion

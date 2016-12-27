@@ -324,6 +324,7 @@ namespace Salamander.Display
         /// <param name="doc"></param>
         public override void InitialiseToModel(Model model)
         {
+            Clear();
             foreach (object obj in model.Everything)
             {
                 if (obj is T) Register((T)obj);

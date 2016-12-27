@@ -7,8 +7,8 @@
     <ProjectGuid>{AEB92DAD-98FE-4709-A0C5-D115E4FB2B18}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Newt.TestPlugin</RootNamespace>
-    <AssemblyName>Newt.TestPlugin</AssemblyName>
+    <RootNamespace>Salamander.BasicTools</RootNamespace>
+    <AssemblyName>Salamander.BasicTools</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -24,7 +24,7 @@
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
+    <OutputPath>..\Newt\bin\Release\Plugins\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -46,6 +46,7 @@
     <Compile Include="DrawLinearElementAction.cs" />
     <Compile Include="ElementSectionDisplayLayer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RegenerateNodes.cs" />
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />

@@ -15,9 +15,9 @@ namespace Salamander.RobotIOPlugin
     [ExportAction(Extensions = new string[] { ".rtd" }, Filter = "Robot File (*.rtd) | *.rtd")]
     public class RobotExportAction : ModelDocumentActionBase, IExportAction
     {
-        [ActionFilePathInput(Order = 0,
-            Description = "the filepath to write to",
-            Filter = "Robot File (*.rtd) | *.rtd")]
+        //[ActionFilePathInput(Order = 0,
+        //    Description = "the filepath to write to",
+        //    Filter = "Robot File (*.rtd) | *.rtd")]
         public FilePath FilePath { get; set; }
 
         public override bool Execute(ExecutionInfo exInfo = null)

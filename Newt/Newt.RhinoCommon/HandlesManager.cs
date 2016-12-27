@@ -131,6 +131,15 @@ namespace Salamander.Rhino
                                 ((LinearElement)mObj).ReplaceGeometry(crv);
                         }
                     }
+                    else if (mObj is Node)
+                    {
+                        RC.GeometryBase geometry = e.NewRhinoObject.Geometry;
+                        if (geometry is RC.Point)
+                        {
+                            Node node = (Node)mObj;
+                            node.Position = RCtoFB.Convert(((RC.Point)geometry).Location);
+                        }
+                    }
                 }
             }
         }
@@ -179,9 +188,9 @@ namespace Salamander.Rhino
         {
             IList<IAvatar> result = new List<IAvatar>();
             if (source is LinearElement)
-            {
                 GenerateRepresentations((LinearElement)source);   
-            }
+            else if (source is Node)
+                GenerateRepresentations((Node)source);
             return result;
         }
 
@@ -190,6 +199,35 @@ namespace Salamander.Rhino
             return GenerateRepresentations(key);
         }
 
+        protected void GenerateRepresentations(Node node)
+        {
+            if (!Links.ContainsFirst(node.GUID))
+            {
+                if (!node.IsDeleted)
+                {
+                    Guid objID = RhinoOutput.BakePoint(node.Position);
+                    RhinoOutput.SetOriginalIDUserString(objID);
+                    Links.Add(node.GUID, objID);
+                }
+            }
+            else
+            {
+                Guid ptID = Links.GetSecond(node.GUID);
+                if (node.IsDeleted)
+                {
+                    RhinoOutput.DeleteObject(ptID);
+                }
+                else
+                {
+                    RhinoOutput.ReplacePoint(ptID, node.Position);
+                }
+            }
+        }
+
+        /// <summary>
+        /// Generate the handle representation of a linear element
+        /// </summary>
+        /// <param name="element"></param>
         protected void GenerateRepresentations(LinearElement element)
         {
             if (!Links.ContainsFirst(element.GUID))
@@ -205,7 +243,10 @@ namespace Salamander.Rhino
                         if (!RhinoOutput.ObjectExists(objID)) objID = Guid.Empty;
                     }
                     objID = RhinoOutput.BakeOrReplace(objID, element.Geometry);
-                    if (objID != Guid.Empty) RhinoOutput.SetOriginalIDUserString(objID);
+                    if (objID != Guid.Empty)
+                    {
+                        RhinoOutput.SetOriginalIDUserString(objID);
+                    }
                     Links.Add(element.GUID, objID);
                 }
             }

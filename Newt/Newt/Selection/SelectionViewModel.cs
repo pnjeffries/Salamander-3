@@ -160,9 +160,9 @@ namespace Salamander.Selection
         /// <param name="propertyDelegate">A lambda function that returns a particular property for each item in the selection</param>
         /// <param name="multiValue">The return value that indicates multiple inconsistent values</param>
         /// <returns></returns>
-        public object CombinedValue(Func<TUnique, object> propertyDelegate, object multiValue)
+        public TValue CombinedValue<TValue>(Func<TUnique, TValue> propertyDelegate, TValue multiValue = default(TValue), TValue nullValue = default(TValue))
         {
-            return Selection.CombinedValue(propertyDelegate, multiValue);
+            return Selection.CombinedValue(propertyDelegate, multiValue, nullValue);
         }
 
         /// <summary>

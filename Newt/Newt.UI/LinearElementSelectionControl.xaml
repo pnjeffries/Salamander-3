@@ -11,6 +11,7 @@
     <UserControl.Resources>
         <ResourceDictionary>
             <converters:NullOrEmptyVisibilityConverter x:Key="NullOrEmptyVisibilityConverter"/>
+            <converters:RadiansDegreesConverter x:Key="RadiansDegreesConverter"/>
         </ResourceDictionary>
     </UserControl.Resources>
     <Grid>
@@ -41,9 +42,16 @@
                     </DataTemplate>
                 </fb:ComboFieldControl.ItemTemplate>
             </fb:ComboFieldControl>
+            <fb:SliderFieldControl
+                Label="Orientation:"
+                Value="{Binding Path=Orientation, Converter={StaticResource RadiansDegreesConverter}}"
+                Units="°"
+                Maximum="360"/>
             <Border Visibility="{Binding Path=Property, Converter={StaticResource NullOrEmptyVisibilityConverter}}">
-                <local:SectionSelectionControl DataContext="{Binding Path=Section}"></local:SectionSelectionControl>
+                
             </Border>
+            
+
         </StackPanel>
     </Grid>
 </UserControl>

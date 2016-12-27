@@ -65,7 +65,7 @@ namespace Salamander.TestPlugin
             else
             {
                 base.InvalidateOnUpdate(modified, e);
-                if (modified is LinearElement && e.PropertyName == "Property") Core.Instance.Host.Refresh();
+                if (modified is LinearElement && (e.PropertyName == "Property" || e.PropertyName == "Orientation")) Core.Instance.Host.Refresh();
             }
         }
     }
