@@ -60,7 +60,7 @@ namespace Salamander.RhinoCommon
         /// The manager which maintains links between Rhino object 'handles'
         /// and model objects
         /// </summary>
-        public HandlesManager Handles { get; private set; }
+        public HandlesLayer Handles { get; private set; }
 
         /// <summary>
         /// The factory class which generates display avatars
@@ -119,7 +119,7 @@ namespace Salamander.RhinoCommon
             GUI = new RhinoGUIController();
             Input = new RhinoInputController();
             AvatarFactory = new RhinoAvatarFactory();
-            Handles = new HandlesManager();
+            Handles = new HandlesLayer();
             Core.Instance.Layers.Layers.Add(Handles); //TEST
             DisplayConduit = new SalamanderDisplayConduit();
             DisplayConduit.Enabled = true;

@@ -17,7 +17,7 @@ using FreeBuild.Rhino;
 
 namespace Salamander.Rhino
 {
-    public class HandlesManager : DisplayLayer<ModelObject>
+    public class HandlesLayer : DisplayLayer<ModelObject>
     {
         #region Properties
 
@@ -36,7 +36,7 @@ namespace Salamander.Rhino
         /// <summary>
         /// Default constructors
         /// </summary>
-        public HandlesManager() : base("Handles", "The Rhino object handles which allow manipulation of model objects",0,null)
+        public HandlesLayer() : base("Handles", "The Rhino object handles which allow manipulation of model objects",0,null)
         {
             InitialiseEventWatching();
         }
@@ -187,8 +187,8 @@ namespace Salamander.Rhino
         public override IList<IAvatar> GenerateRepresentations(ModelObject source)
         {
             IList<IAvatar> result = new List<IAvatar>();
-            if (source is LinearElement)
-                GenerateRepresentations((LinearElement)source);   
+            if (source is Element)
+                GenerateRepresentations((Element)source);   
             else if (source is Node)
                 GenerateRepresentations((Node)source);
             return result;
@@ -199,6 +199,10 @@ namespace Salamander.Rhino
             return GenerateRepresentations(key);
         }
 
+        /// <summary>
+        /// Generate representations for nodes
+        /// </summary>
+        /// <param name="node"></param>
         protected void GenerateRepresentations(Node node)
         {
             if (!Links.ContainsFirst(node.GUID))
@@ -206,7 +210,11 @@ namespace Salamander.Rhino
                 if (!node.IsDeleted)
                 {
                     Guid objID = RhinoOutput.BakePoint(node.Position);
-                    RhinoOutput.SetOriginalIDUserString(objID);
+                    if (objID != Guid.Empty)
+                    {
+                        RhinoOutput.SetOriginalIDUserString(objID);
+                        RhinoOutput.SetObjectName(objID, node.Description);
+                    }
                     Links.Add(node.GUID, objID);
                 }
             }
@@ -214,7 +222,7 @@ namespace Salamander.Rhino
             {
                 Guid ptID = Links.GetSecond(node.GUID);
                 if (node.IsDeleted)
-                {
+                { 
                     RhinoOutput.DeleteObject(ptID);
                 }
                 else
@@ -225,10 +233,10 @@ namespace Salamander.Rhino
         }
 
         /// <summary>
-        /// Generate the handle representation of a linear element
+        /// Generate the handle representation of an element
         /// </summary>
         /// <param name="element"></param>
-        protected void GenerateRepresentations(LinearElement element)
+        protected void GenerateRepresentations(Element element)
         {
             if (!Links.ContainsFirst(element.GUID))
             {
@@ -236,16 +244,17 @@ namespace Salamander.Rhino
                 {
 
                     Guid objID = Guid.Empty;
-                    string idString = element.Geometry?.Attributes?.SourceID;
+                    string idString = element.GetGeometry()?.Attributes?.SourceID;
                     if (!string.IsNullOrWhiteSpace(idString))
                     {
                         objID = new Guid(idString);
                         if (!RhinoOutput.ObjectExists(objID)) objID = Guid.Empty;
                     }
-                    objID = RhinoOutput.BakeOrReplace(objID, element.Geometry);
+                    objID = RhinoOutput.BakeOrReplace(objID, element.GetGeometry());
                     if (objID != Guid.Empty)
                     {
                         RhinoOutput.SetOriginalIDUserString(objID);
+                        RhinoOutput.SetObjectName(objID, element.Description);
                     }
                     Links.Add(element.GUID, objID);
                 }
@@ -260,7 +269,7 @@ namespace Salamander.Rhino
                 }
                 else
                 {
-                    RhinoOutput.ReplaceCurve(curveID, element.Geometry);
+                    RhinoOutput.Replace(curveID, element.GetGeometry());
                 }
             }
         }

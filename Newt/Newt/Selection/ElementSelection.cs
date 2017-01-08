@@ -11,7 +11,7 @@ namespace Salamander.Selection
     /// <summary>
     /// A selection of Linear Elements
     /// </summary>
-    public class LinearElementSelection : SelectionViewModel<LinearElementCollection, LinearElement>
+    public class ElementSelection : SelectionViewModel<LinearElementCollection, LinearElement>
     {
         /// <summary>
         /// Get or set the combined name value of the objects in this collection.
@@ -47,9 +47,9 @@ namespace Salamander.Selection
         /// Set or set the combined value of the section properties of the elsments
         /// within this collection.
         /// </summary>
-        public SectionProperty Property
+        public SectionFamily Property
         {
-            get { return CombinedValue(i => i.Property, null); }
+            get { return CombinedValue(i => i.Family, null); }
             set
             {
                 if (value != null && value is SectionPropertyDummy)
@@ -57,14 +57,14 @@ namespace Salamander.Selection
                     SectionPropertyDummy dummy = (SectionPropertyDummy)value;
                     if (dummy.Name.Equals("New..."))
                     {
-                        SectionProperty newSection = Selection[0].Model?.Create.SectionProperty();
+                        SectionFamily newSection = Selection[0].Model?.Create.SectionProperty();
                         value = newSection;
                         NotifyPropertyChanged("AvailableSections");
                     }
                 }
-                foreach (LinearElement lEl in Selection) lEl.Property = value;
+                foreach (LinearElement lEl in Selection) lEl.Family = value;
                
-                NotifyPropertyChanged("Property");
+                NotifyPropertyChanged("Family");
                 NotifyPropertyChanged("Section");
             }
         }
@@ -84,13 +84,13 @@ namespace Salamander.Selection
         /// The set of sections which are available to be assigned to the elements
         /// in this collection.
         /// </summary>
-        public SectionPropertyCollection AvailableSections
+        public SectionFamilyCollection AvailableSections
         {
             get
             {
                 if (Selection.Count > 0)
                 {
-                    SectionPropertyCollection result = new SectionPropertyCollection(Selection[0].Model?.Properties.Sections);
+                    SectionFamilyCollection result = new SectionFamilyCollection(Selection[0].Model?.Properties.Sections);
                     result.Add(new SectionPropertyDummy("New..."));
                     return result;
                 }

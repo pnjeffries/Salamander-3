@@ -37,12 +37,12 @@ namespace Salamander.TestPlugin
                         if (PropertiesFromLayers && shape.Attributes != null && !string.IsNullOrWhiteSpace(shape.Attributes.LayerName))
                         {
                             string layerName = shape.Attributes.LayerName;
-                            SectionProperty sP = Model.Properties.Sections.FindByName(layerName);
+                            SectionFamily sP = Model.Properties.Sections.FindByName(layerName);
                             if (sP == null)
                             {
                                 sP = Model.Create.SectionProperty(layerName, exInfo);
                             }
-                            element.Property = sP;
+                            element.Family = sP;
                         }
                     }
                             

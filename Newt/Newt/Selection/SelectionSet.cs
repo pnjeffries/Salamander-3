@@ -23,7 +23,7 @@ namespace Salamander.Selection
         /// <summary>
         /// The currently selected linear elements
         /// </summary>
-        public LinearElementSelection LinearElements { get; } = new LinearElementSelection();
+        public ElementSelection LinearElements { get; } = new ElementSelection();
 
         /// <summary>
         /// The currently selected section properties

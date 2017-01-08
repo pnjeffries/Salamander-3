@@ -16,9 +16,9 @@ namespace Salamander.TestPlugin
 
         [AutoUIComboBox("AvailableSections")]
         [ActionInput(Manual = false, Persistant = true)]
-        public SectionProperty Section { get; set; }
+        public SectionFamily Section { get; set; }
 
-        public SectionPropertyCollection AvailableSections { get { return Model.Properties.Sections; } }
+        public SectionFamilyCollection AvailableSections { get { return Model.Properties.Sections; } }
 
         [ActionOutput(1, "the created element")]
         public LinearElement Element { get; set; }
@@ -28,7 +28,7 @@ namespace Salamander.TestPlugin
             if (Line.Length > 0)
             {
                 Element = Model.Create.LinearElement(Line, exInfo);
-                Element.Property = Section;
+                Element.Family = Section;
                 return true;
             }
             return false;

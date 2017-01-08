@@ -81,7 +81,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Include="Selection\LinearElementSelection.cs" />
+    <Compile Include="Selection\ElementSelection.cs" />
     <Compile Include="Selection\SectionPropertyDummy.cs" />
     <Compile Include="Selection\SectionPropertySelection.cs" />
     <Compile Include="Selection\SelectionViewModel.cs" />

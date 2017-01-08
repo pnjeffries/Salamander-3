@@ -22,7 +22,7 @@ namespace Salamander.TestPlugin
         public double Width { get; set; }
 
         [ActionOutput(3, "the output section property")]
-        public SectionProperty Section { get; set; }
+        public SectionFamily Section { get; set; }
 
         public override bool Execute(ExecutionInfo exInfo = null)
         {

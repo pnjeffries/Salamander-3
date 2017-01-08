@@ -52,9 +52,9 @@ namespace Salamander.TestPlugin
         /// <param name="e"></param>
         public override void InvalidateOnUpdate(object modified, PropertyChangedEventArgs e)
         {
-            if (modified is SectionProperty)
+            if (modified is SectionFamily)
             {
-                SectionProperty sp = (SectionProperty)modified;
+                SectionFamily sp = (SectionFamily)modified;
                 ElementCollection els = sp.Elements();
                 foreach (LinearElement lEl in els)
                 {
@@ -65,7 +65,7 @@ namespace Salamander.TestPlugin
             else
             {
                 base.InvalidateOnUpdate(modified, e);
-                if (modified is LinearElement && (e.PropertyName == "Property" || e.PropertyName == "Orientation")) Core.Instance.Host.Refresh();
+                if (modified is LinearElement && (e.PropertyName == "Family" || e.PropertyName == "Orientation")) Core.Instance.Host.Refresh();
             }
         }
     }

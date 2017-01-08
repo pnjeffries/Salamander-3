@@ -10,18 +10,18 @@ using System.Threading.Tasks;
 
 namespace Salamander.Selection
 {
-    public class SectionPropertySelection : SelectionViewModel<SectionPropertyCollection, SectionProperty>
+    public class SectionPropertySelection : SelectionViewModel<SectionFamilyCollection, SectionFamily>
     {
         /// <summary>
         /// The primary selected section for individual property display - will be the last selected section
         /// </summary>
-        public SectionProperty Section
+        public SectionFamily Section
         {
             get
             {
                 if (Selection.Count > 0)
                 {
-                    SectionProperty result = Selection.Last();
+                    SectionFamily result = Selection.Last();
                     //if (result.StructuralModifiers == null) result.StructuralModifiers = new ProfileStructuralModifiers();
                     return result;
                 }
@@ -76,7 +76,7 @@ namespace Salamander.Selection
 
         }
 
-        public SectionPropertySelection(SectionProperty section)
+        public SectionPropertySelection(SectionFamily section)
         {
             Section = section;
         }
@@ -94,7 +94,7 @@ namespace Salamander.Selection
             }
         }
 
-        public void MonitorElementSelectionSection(LinearElementSelection elementSelection)
+        public void MonitorElementSelectionSection(ElementSelection elementSelection)
         {
             elementSelection.PropertyChanged += HandlesElementPropertyChanged;
         }
@@ -106,14 +106,14 @@ namespace Salamander.Selection
         /// <param name="e"></param>
         private void HandlesElementPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-            if (sender is LinearElementSelection && (e.PropertyName == null ||
-                e.PropertyName == "Property"))
+            if (sender is ElementSelection && (e.PropertyName == null ||
+                e.PropertyName == "Family"))
             {
-                LinearElementSelection elementSelection = (LinearElementSelection)sender;
+                ElementSelection elementSelection = (ElementSelection)sender;
                 object selected = elementSelection.Property;
-                if (selected != null && selected is SectionProperty)
+                if (selected != null && selected is SectionFamily)
                 {
-                    Set((SectionProperty)selected);
+                    Set((SectionFamily)selected);
                 }
                 else Clear();
             }
