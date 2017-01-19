@@ -19,11 +19,12 @@ namespace Salamander.UI
         /// <param name="filter">The filetype filter string</param>
         /// <returns>The selected filepath.  Or, null if the dialog is closed
         /// without a filepath being selected.</returns>
-        public override string ShowOpenFileDialog(string prompt, string filter, string defaultPath = null)
+        public override string ShowOpenFileDialog(string prompt, string filter, string defaultPath = null, int filterIndex = 0)
         {
             OpenFileDialog dialog = new OpenFileDialog();
             dialog.Title = prompt;
             dialog.Filter = filter;
+            if (filterIndex > 0) dialog.FilterIndex = filterIndex;
             if (defaultPath != null) dialog.FileName = defaultPath;
             if (dialog.ShowDialog() == true)
             {
@@ -39,11 +40,12 @@ namespace Salamander.UI
         /// <param name="filter">Filetype filter text</param>
         /// <returns>The selected filepath.  Or, null if the dialog is closed
         /// without a filepath being selected.</returns>
-        public override string ShowSaveFileDialog(string prompt, string filter, string defaultPath = null)
+        public override string ShowSaveFileDialog(string prompt, string filter, string defaultPath = null, int filterIndex = 0)
         {
             SaveFileDialog dialog = new SaveFileDialog();
             dialog.Title = prompt;
             dialog.Filter = filter;
+            if (filterIndex > 0) dialog.FilterIndex = filterIndex;
             if (defaultPath != null) dialog.FileName = defaultPath;
             if (dialog.ShowDialog() == true)
             {

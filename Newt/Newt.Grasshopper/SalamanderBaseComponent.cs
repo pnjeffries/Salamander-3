@@ -15,14 +15,17 @@ using RC = Rhino.Geometry;
 
 namespace Salamander.Grasshopper
 {
-    public abstract class NewtBaseComponent : GH_Component
+    /// <summary>
+    /// Base class for Salamander 3 components
+    /// </summary>
+    public abstract class SalamanderBaseComponent : GH_Component
     {
         #region Constants
 
         /// <summary>
         /// The name of the tab on which components are, by default, to be placed
         /// </summary>
-        public const string CategoryName = "Newt";
+        public const string CategoryName = "Salamander 3";
 
         #endregion
 
@@ -100,7 +103,7 @@ namespace Salamander.Grasshopper
         /// <param name="nickname">The abbreviation of this component.  Keep it short, 1-5 characters are best</param>
         /// <param name="category">The category of this component.  Controls which tab components will end up in.</param>
         /// <param name="subCategory">The subcategory for this component.  Controls which group the component will be in.</param>
-        protected NewtBaseComponent(string commandName, string name, string nickname,
+        protected SalamanderBaseComponent(string commandName, string name, string nickname,
             string subCategory, string category = CategoryName)
           : base()
         {

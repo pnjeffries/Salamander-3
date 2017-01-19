@@ -47,5 +47,90 @@ namespace Salamander.Selection
             get { return CombinedValue(i => i.Position.Z, double.NaN, double.NaN); }
             set { foreach (Node item in Selection) item.Position = item.Position.WithZ(value); }
         }
+
+
+        /// <summary>
+        /// Fixity.X
+        /// </summary>
+        public bool? Fixity_X
+        {
+            get { return CombinedValue<bool?>(i => i.Fixity.X, null, false); }
+            set
+            {
+                if (value.HasValue)
+                foreach (Node item in Selection)
+                    item.Fixity = item.Fixity.WithX((bool)value);      
+            }
+        }
+
+        /// <summary>
+        /// Fixity.Y
+        /// </summary>
+        public bool? Fixity_Y
+        {
+            get { return CombinedValue<bool?>(i => i.Fixity.Y, null, false); }
+            set
+            {
+                if (value.HasValue)
+                    foreach (Node item in Selection)
+                        item.Fixity = item.Fixity.WithY((bool)value);
+            }
+        }
+
+        /// <summary>
+        /// Fixity.Z
+        /// </summary>
+        public bool? Fixity_Z
+        {
+            get { return CombinedValue<bool?>(i => i.Fixity.Z, null, false); }
+            set
+            {
+                if (value.HasValue)
+                    foreach (Node item in Selection)
+                        item.Fixity = item.Fixity.WithZ((bool)value);
+            }
+        }
+
+        /// <summary>
+        /// Fixity.XX
+        /// </summary>
+        public bool? Fixity_XX
+        {
+            get { return CombinedValue<bool?>(i => i.Fixity.XX, null, false); }
+            set
+            {
+                if (value.HasValue)
+                    foreach (Node item in Selection)
+                        item.Fixity = item.Fixity.WithXX((bool)value);
+            }
+        }
+
+        /// <summary>
+        /// Fixity.YY
+        /// </summary>
+        public bool? Fixity_YY
+        {
+            get { return CombinedValue<bool?>(i => i.Fixity.YY, null, false); }
+            set
+            {
+                if (value.HasValue)
+                    foreach (Node item in Selection)
+                        item.Fixity = item.Fixity.WithYY((bool)value);
+            }
+        }
+
+        /// <summary>
+        /// Fixity.ZZ
+        /// </summary>
+        public bool? Fixity_ZZ
+        {
+            get { return CombinedValue<bool?>(i => i.Fixity.ZZ, null, false); }
+            set
+            {
+                if (value.HasValue)
+                    foreach (Node item in Selection)
+                        item.Fixity = item.Fixity.WithZZ((bool)value);
+            }
+        }
     }
 }

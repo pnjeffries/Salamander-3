@@ -285,7 +285,7 @@ namespace Salamander
         public bool SaveModel(ModelDocument document)
         {
             string filters = Actions.GetExportFilters();
-            string filePath = UI.ShowSaveFileDialog("Enter filepath to write to", filters);
+            string filePath = UI.ShowSaveFileDialog("Enter filepath to write to", filters, null, Actions.ExportFilterIndex(".sal") + 1);
             if (!string.IsNullOrEmpty(filePath)) return SaveModel(filePath, document);
             else return false;
         }
@@ -310,9 +310,6 @@ namespace Salamander
             PrintLine("Error: No exporter loaded for extension '." + extension + "'.  File could not be written.");
             return false;
         }
-
-
-       
 
         /// <summary>
         /// Execute the action with the given command name

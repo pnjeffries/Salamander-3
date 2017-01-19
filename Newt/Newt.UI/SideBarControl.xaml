@@ -36,7 +36,8 @@
                 <StackPanel> <!--Selection Panel-->
                     
                     <fb:PropertiesExpander DataContext="{Binding Path=Selected.Nodes}"
-                                           Visibility="{Binding Path=Selection.Count, Converter={StaticResource CountVisibilityConverter}}">
+                                           Visibility="{Binding Path=Selection.Count, Converter={StaticResource CountVisibilityConverter}}"
+                                           >
                         <fb:PropertiesExpander.HeaderContent>
                         <TextBlock Grid.Column="1" Text="{Binding Path=Selection, StringFormat='NODES: {0}'}"
                                 TextTrimming="CharacterEllipsis"

@@ -10,7 +10,7 @@ namespace TestPluginGH
         {
             get
             {
-                return "Newt";
+                return "Salamander 3";
             }
         }
         public override Bitmap Icon
@@ -33,7 +33,7 @@ namespace TestPluginGH
         {
             get
             {
-                return new Guid("b2b7d5dc-a367-4c76-9b2f-761612d8bf61");
+                return new Guid("42E44C6C-0623-4FCA-9CB5-435672141F17");
             }
         }
 
@@ -42,7 +42,7 @@ namespace TestPluginGH
             get
             {
                 //Return a string identifying you or your company.
-                return "";
+                return "Paul Jeffries";
             }
         }
         public override string AuthorContact
@@ -50,7 +50,7 @@ namespace TestPluginGH
             get
             {
                 //Return a string representing your preferred contact details.
-                return "";
+                return "paul.jeffries@ramboll.co.uk";
             }
         }
     }

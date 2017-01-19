@@ -18,6 +18,14 @@
                 XValue="{Binding Path=X}"
                 YValue="{Binding Path=Y}"
                 ZValue="{Binding Path=Z}"/>
+            <fb:Bool6DFieldsControl
+                Label="Fixity:"
+                XValue="{Binding Path=Fixity_X}"
+                YValue="{Binding Path=Fixity_Y}"
+                ZValue="{Binding Path=Fixity_Z}"
+                XXValue="{Binding Path=Fixity_XX}"
+                YYValue="{Binding Path=Fixity_YY}"
+                ZZValue="{Binding Path=Fixity_ZZ}"/>
         </StackPanel>
     </Grid>
 </UserControl>

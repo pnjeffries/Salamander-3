@@ -7,13 +7,13 @@ using Salamander.Grasshopper;
 
 namespace Salamander.TestPluginGH
 {
-    public class CalculateGeometricPropertiesComponent : NewtBaseComponent
+    public class CalculateGeometricPropertiesComponent : SalamanderBaseComponent
     {
         public override Guid ComponentGuid
         {
             get
             {
-                return new Guid("{B8F850F3-8867-452F-8F30-7E921C3C3FF8}");
+                return new Guid("{F36B9018-952A-426B-A2C0-2CA18315F90C}");
             }
         }
 

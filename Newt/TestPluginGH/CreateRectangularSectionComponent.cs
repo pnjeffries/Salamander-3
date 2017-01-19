@@ -7,13 +7,13 @@ using System.Threading.Tasks;
 
 namespace Salamander.TestPluginGH
 {
-    public class CreateRectangularSectionComponent : NewtBaseComponent
+    public class CreateRectangularSectionComponent : SalamanderBaseComponent
     {
         public override Guid ComponentGuid
         {
             get
             {
-                return new Guid("{889830A0-0121-4A40-89C3-B7771B52903F}");
+                return new Guid("{AB82100C-6102-4AAE-B4BB-52CCCAE4070A}");
             }
         }
 

@@ -1,4 +1,5 @@
 ﻿using FreeBuild.Base;
+using FreeBuild.Extensions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -281,7 +282,34 @@ namespace Salamander.Actions
                     }
                 }
             }
-            return "All compatible file types (" + sbX.ToString() + ")|" + sbX.ToString() + "|" + sb.ToString();
+            return sb.ToString(); //"All compatible file types (" + sbX.ToString() + ")|" + sbX.ToString() + "|" + sb.ToString();
+        }
+
+        /// <summary>
+        /// Find the index of the specified import filter from loaded importers
+        /// </summary>
+        /// <param name="extension"></param>
+        /// <returns></returns>
+        public int ExportFilterIndex(string extension)
+        {
+            int count = -1;
+            foreach (KeyValuePair<string, Type> kvp in LoadedActions)
+            {
+                Type t = kvp.Value;
+                if (typeof(IExportAction).IsAssignableFrom(t))
+                {
+                    ExportActionAttribute exportAtt = ExportActionAttribute.ExtractFrom(t);
+                    if (exportAtt != null)
+                    {
+                        count++;
+                        foreach (string ext in exportAtt.Extensions)
+                        {
+                            if(extension.EqualsIgnoreCase(ext)) return count;
+                        }
+                    }
+                }
+            }
+            return -1;
         }
 
         /// <summary>
@@ -318,5 +346,34 @@ namespace Salamander.Actions
             }
             return "All compatible file types (" + sbX.ToString() + ")|" + sbX.ToString() + "|" + sb.ToString();
         }
+
+        /// <summary>
+        /// Find the index of the specified import filter from loaded importers
+        /// </summary>
+        /// <param name="extension"></param>
+        /// <returns></returns>
+        public int ImportFilterIndex(string extension)
+        {
+            int count = -1;
+            foreach (KeyValuePair<string, Type> kvp in LoadedActions)
+            {
+                count++;
+                Type t = kvp.Value;
+                if (typeof(IImportAction).IsAssignableFrom(t))
+                {
+                    ImportActionAttribute importAtt = ImportActionAttribute.ExtractFrom(t);
+                    if (importAtt != null)
+                    {
+                        count++;
+                        foreach (string ext in importAtt.Extensions)
+                        {
+                            if (extension.EqualsIgnoreCase(ext)) return count + 1; // +1 for 'all compatible types'
+                        }
+                    }
+                }
+            }
+            return -1;
+        }
     }
+    
 }

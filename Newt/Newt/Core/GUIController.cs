@@ -20,7 +20,7 @@ namespace Salamander
         /// <param name="filter">The filetype filter string</param>
         /// <returns>The selected filepath.  Or, null if the dialog is closed
         /// without a filepath being selected.</returns>
-        public abstract string ShowOpenFileDialog(string prompt, string filter, string defaultPath = null);
+        public abstract string ShowOpenFileDialog(string prompt, string filter, string defaultPath = null, int filterIndex = -1);
 
         /// <summary>
         /// Show a SaveFileDialog and use it to prompt the user to enter a filepath
@@ -29,7 +29,7 @@ namespace Salamander
         /// <param name="filter">Filetype filter text</param>
         /// <returns>The selected filepath.  Or, null if the dialog is closed
         /// without a filepath being selected.</returns>
-        public abstract string ShowSaveFileDialog(string prompt, string filter, string defaultPath = null);
+        public abstract string ShowSaveFileDialog(string prompt, string filter, string defaultPath = null, int filterIndex = -1);
 
     }
 }

@@ -1,4 +1,9 @@
-﻿using Rhino.PlugIns;
+﻿using FreeBuild.Base;
+using FreeBuild.Model;
+using Rhino;
+using Rhino.FileIO;
+using Rhino.PlugIns;
+using Salamander.RhinoCommon;
 using System;
 using System.IO;
 using System.Text;
@@ -77,6 +82,45 @@ namespace Salamander.RhinoPlugin
             // file, it will automatically stage it, if it doesn't already exist.
 
             return LoadReturnCode.Success;
+        }
+
+        protected override bool ShouldCallWriteDocument(FileWriteOptions options)
+        {
+            return true;
+        }
+
+        protected override void WriteDocument(RhinoDoc doc, BinaryArchiveWriter archive, FileWriteOptions options)
+        {
+            if (Core.Instance?.ActiveDocument != null && !options.WriteSelectedObjectsOnly)
+            {
+                byte[] data = Core.Instance.ActiveDocument.ToBinary();
+
+                if (data != null)
+                {
+                    archive.Write3dmChunkVersion(0, 1);
+                    archive.WriteByteArray(data);
+
+                    if (archive.WriteErrorOccured)
+                        Core.PrintLine("ERROR: Writing Salamander model to Rhino .3dm failed!");
+                    else
+                        Core.PrintLine("Salamander model data written to .3dm.");
+                }
+            }
+            base.WriteDocument(doc, archive, options);
+        }
+
+        protected override void ReadDocument(RhinoDoc doc, BinaryArchiveReader archive, FileReadOptions options)
+        {
+            int major, minor;
+            archive.Read3dmChunkVersion(out major, out minor);
+            byte[] data = archive.ReadByteArray();
+            if (!archive.ReadErrorOccured && data != null)
+            {
+                Host.EnsureInitialisation();
+                ModelDocument mDoc = Document.FromBinary<ModelDocument>(data);
+                Core.Instance.ActiveDocument = mDoc;
+            }
+            base.ReadDocument(doc, archive, options);
         }
     }
 }

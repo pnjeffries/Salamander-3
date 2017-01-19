@@ -69,7 +69,7 @@
     <Compile Include="Conversion.cs" />
     <Compile Include="GrasshopperInfo.cs" />
     <Compile Include="IconResourceHelper.cs" />
-    <Compile Include="NewtBaseComponent.cs" />
+    <Compile Include="SalamanderBaseComponent.cs" />
     <Compile Include="NicknameConverter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

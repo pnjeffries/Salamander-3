@@ -7,13 +7,13 @@ using System.Threading.Tasks;
 
 namespace Salamander.TestPluginGH
 {
-    public class DrawLinearElementComponent : NewtBaseComponent
+    public class DrawLinearElementComponent : SalamanderBaseComponent
     {
         public override Guid ComponentGuid
         {
             get
             {
-                return new Guid("{9FABBC5F-571A-493E-A082-B3583CCC4155}");
+                return new Guid("{C04BCE6D-8799-4336-8DA6-8F7360759618}");
             }
         }
 

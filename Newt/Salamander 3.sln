@@ -23,7 +23,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Salamander.Grasshopper", "N
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Salamander.BasicTools", "Newt.TestPlugin\Salamander.BasicTools.csproj", "{AEB92DAD-98FE-4709-A0C5-D115E4FB2B18}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Salamander.TestPluginGH", "TestPluginGH\Salamander.TestPluginGH.csproj", "{6172F272-9DBD-427C-B858-186634C6FFED}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Salamander.BasicToolsGH", "TestPluginGH\Salamander.BasicToolsGH.csproj", "{6172F272-9DBD-427C-B858-186634C6FFED}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FreeBuild.Excel", "..\..\FreeBuild\FreeBuild\FreeBuild.Excel\FreeBuild.Excel.csproj", "{A86503CF-0FA6-434C-A546-93D12D1AD45C}"
 EndProject
@@ -36,6 +36,10 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Salamander.RobotIOPlugin", "Newt.RobotIOPlugin\Salamander.RobotIOPlugin.csproj", "{AA3A00FC-FC95-4BB5-B129-563B48F6DDBC}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Salamander.Rhino.RobotImport", "Salamander.Rhino.RobotImport\Salamander.Rhino.RobotImport.csproj", "{F2201CF6-2166-4167-9138-21D6E3969571}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Salamander.Revit", "Salamander.Revit\Salamander.Revit.csproj", "{D9307A44-9C1E-42D2-82B6-5342F2F95022}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FreeBuild.Revit", "..\..\FreeBuild\FreeBuild\FreeBuild.Revit\FreeBuild.Revit.csproj", "{E4E2CE0F-C3CF-4EA2-A5C2-E06B49939604}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -157,6 +161,22 @@ Global
 		{F2201CF6-2166-4167-9138-21D6E3969571}.Debug64|Any CPU.Build.0 = Debug64|Any CPU
 		{F2201CF6-2166-4167-9138-21D6E3969571}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F2201CF6-2166-4167-9138-21D6E3969571}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D9307A44-9C1E-42D2-82B6-5342F2F95022}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D9307A44-9C1E-42D2-82B6-5342F2F95022}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D9307A44-9C1E-42D2-82B6-5342F2F95022}.Debug32|Any CPU.ActiveCfg = Debug|Any CPU
+		{D9307A44-9C1E-42D2-82B6-5342F2F95022}.Debug32|Any CPU.Build.0 = Debug|Any CPU
+		{D9307A44-9C1E-42D2-82B6-5342F2F95022}.Debug64|Any CPU.ActiveCfg = Debug|Any CPU
+		{D9307A44-9C1E-42D2-82B6-5342F2F95022}.Debug64|Any CPU.Build.0 = Debug|Any CPU
+		{D9307A44-9C1E-42D2-82B6-5342F2F95022}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D9307A44-9C1E-42D2-82B6-5342F2F95022}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E4E2CE0F-C3CF-4EA2-A5C2-E06B49939604}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E4E2CE0F-C3CF-4EA2-A5C2-E06B49939604}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E4E2CE0F-C3CF-4EA2-A5C2-E06B49939604}.Debug32|Any CPU.ActiveCfg = Debug|Any CPU
+		{E4E2CE0F-C3CF-4EA2-A5C2-E06B49939604}.Debug32|Any CPU.Build.0 = Debug|Any CPU
+		{E4E2CE0F-C3CF-4EA2-A5C2-E06B49939604}.Debug64|Any CPU.ActiveCfg = Debug|Any CPU
+		{E4E2CE0F-C3CF-4EA2-A5C2-E06B49939604}.Debug64|Any CPU.Build.0 = Debug|Any CPU
+		{E4E2CE0F-C3CF-4EA2-A5C2-E06B49939604}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E4E2CE0F-C3CF-4EA2-A5C2-E06B49939604}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
