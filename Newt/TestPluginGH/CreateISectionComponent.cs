@@ -7,19 +7,22 @@ using System.Threading.Tasks;
 
 namespace Salamander.TestPluginGH
 {
-    public class DrawLinearElementComponent : SalamanderBaseComponent
+    public class CreateISectionComponent : SalamanderBaseComponent
     {
         public override Guid ComponentGuid
         {
             get
             {
-                return new Guid("{C04BCE6D-8799-4336-8DA6-8F7360759618}");
+                return new Guid("{5569A197-D16B-42F6-B37E-35750E892099}");
             }
         }
 
-        public DrawLinearElementComponent() :
-            base("DrawLinearElement", "Draw Linear Element", "Element", "Model")
+        public CreateISectionComponent()
+                : base("CreateISection",
+                     "I Section",
+                     "IS",
+                     "Sections")
         { }
-        
+
     }
 }

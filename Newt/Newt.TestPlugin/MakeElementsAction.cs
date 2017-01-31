@@ -9,7 +9,7 @@ using FreeBuild.Geometry;
 using FreeBuild.Model;
 using FreeBuild.UI;
 
-namespace Salamander.TestPlugin
+namespace Salamander.BasicTools
 {
     [Action("MakeElements",
             "Convert 'dumb' geometry into Salamander elements.")]

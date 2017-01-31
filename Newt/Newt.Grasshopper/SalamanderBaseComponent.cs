@@ -1,9 +1,13 @@
 ﻿using FreeBuild.Actions;
 using FreeBuild.Extensions;
 using FreeBuild.Geometry;
+using FreeBuild.Model;
 using FreeBuild.Rhino;
 using Grasshopper.Kernel;
+using Grasshopper.Kernel.Types;
 using Salamander.Actions;
+using Salamander.Display;
+using Salamander.Rhino;
 using Salamander.RhinoCommon;
 using System;
 using System.Collections.Generic;
@@ -59,13 +63,24 @@ namespace Salamander.Grasshopper
             get
             {
                 var actionAtt = ActionAttribute.ExtractFrom(ActionType);
-                if (!string.IsNullOrWhiteSpace(actionAtt.IconURI))
+                if (!string.IsNullOrWhiteSpace(actionAtt.IconForeground))
                 {
-                    return IconResourceHelper.BitmapFromURI(actionAtt.IconURI);
+                    if (!string.IsNullOrWhiteSpace(actionAtt.IconBackground))
+                    {
+                        return IconResourceHelper.CombinedBitmapFromURIs(actionAtt.IconBackground, actionAtt.IconForeground);
+                    }
+                    else return IconResourceHelper.BitmapFromURI(actionAtt.IconForeground);
                 }
+                else if (!string.IsNullOrWhiteSpace(actionAtt.IconBackground)) return IconResourceHelper.BitmapFromURI(actionAtt.IconBackground);
                 return base.Internal_Icon_24x24;
             }
         }
+
+        /// <summary>
+        /// The display layer used to draw the preview for this component
+        /// </summary>
+        protected DisplayLayer PreviewLayer { get; set; } = null;
+
 
         #endregion
 
@@ -129,6 +144,7 @@ namespace Salamander.Grasshopper
         /// </summary>
         protected override void RegisterInputParams(GH_InputParamManager pManager)
         {
+            IAction action = (IAction)Activator.CreateInstance(ActionType, true);
             NicknameConverter nC = new NicknameConverter();
             IList<PropertyInfo> inputs = ActionBase.ExtractInputParameters(ActionType);
             foreach (PropertyInfo pInfo in inputs)
@@ -142,7 +158,11 @@ namespace Salamander.Grasshopper
                     string description = inputAtt.CapitalisedDescription;
                     if (inputType == typeof(double))
                     {
-                        pManager.AddNumberParameter(name, nickname, description, GH_ParamAccess.item);
+                        pManager.AddNumberParameter(name, nickname, description, GH_ParamAccess.item, (double)pInfo.GetValue(action));
+                    }
+                    else if (inputType == typeof(string))
+                    {
+                        pManager.AddTextParameter(name, nickname, description, GH_ParamAccess.item, (string)pInfo.GetValue(action));
                     }
                     else if (inputType == typeof(Vector))
                     {
@@ -152,9 +172,23 @@ namespace Salamander.Grasshopper
                     {
                         pManager.AddLineParameter(name, nickname, description, GH_ParamAccess.item);
                     }
+                    else if (inputType == typeof(Angle))
+                    {
+                        pManager.AddAngleParameter(name, nickname, description, GH_ParamAccess.item, (Angle)pInfo.GetValue(action));
+                    }
                     else if (typeof(Curve).IsAssignableFrom(inputType))
                     {
                         pManager.AddCurveParameter(name, nickname, description, GH_ParamAccess.item);
+                    }
+                    else if (typeof(LinearElement).IsAssignableFrom(inputType))
+                    {
+                        IGH_Param param = new LinearElementParam();
+                        pManager.AddParameter(param, name, nickname, description, GH_ParamAccess.item);
+                    }
+                    else if (typeof(SectionFamily).IsAssignableFrom(inputType))
+                    {
+                        IGH_Param param = new SectionFamilyParam();
+                        pManager.AddParameter(param, name, nickname, description, GH_ParamAccess.item);
                     }
                     else
                     {
@@ -181,13 +215,27 @@ namespace Salamander.Grasshopper
                     string name = pInfo.Name;
                     string nickname = string.IsNullOrEmpty(outputAtt.ShortName) ? nC.Convert(pInfo.Name) : outputAtt.ShortName;
                     string description = outputAtt.CapitalisedDescription;
-                    if (outputType == typeof(double))
+                    if (outputType == typeof(double) || outputType == typeof(Angle))
                     {
                         pManager.AddNumberParameter(name, nickname, description, GH_ParamAccess.item);
                     }
                     else if (outputType == typeof(Vector))
                     {
                         pManager.AddPointParameter(name, nickname, description, GH_ParamAccess.item);
+                    }
+                    else if (typeof(Curve).IsAssignableFrom(outputType))
+                    {
+                        pManager.AddCurveParameter(name, nickname, description, GH_ParamAccess.item);
+                    }
+                    else if (outputType == typeof(LinearElement))
+                    {
+                        IGH_Param param = new LinearElementParam();
+                        pManager.AddParameter(param, name, nickname, description, GH_ParamAccess.item);
+                    }
+                    else if (typeof(SectionFamily).IsAssignableFrom(outputType))
+                    {
+                        IGH_Param param = new SectionFamilyParam();
+                        pManager.AddParameter(param, name, nickname, description, GH_ParamAccess.item);
                     }
                     else
                     {
@@ -196,6 +244,12 @@ namespace Salamander.Grasshopper
                     //TODO
                 }
             }
+        }
+
+        protected override void BeforeSolveInstance()
+        {
+            if (PreviewLayer != null) PreviewLayer.Clear();
+            base.BeforeSolveInstance();
         }
 
         /// <summary>
@@ -262,8 +316,10 @@ namespace Salamander.Grasshopper
             foreach (PropertyInfo pInfo in outputs)
             {
                 object outputData = pInfo.GetValue(action, null);
+                if (PreviewLayer != null) PreviewLayer.TryRegister(outputData);
                 outputData = FormatForOutput(outputData);
                 DA.SetData(pInfo.Name, outputData);
+
             }
             return true;
         }
@@ -318,6 +374,9 @@ namespace Salamander.Grasshopper
         protected object FormatForOutput(object obj)
         {
             if (obj is Vector) return FBtoRC.Convert((Vector)obj);
+            else if (obj is Curve) return FBtoRC.Convert((Curve)obj);
+            else if (obj is LinearElement) return new LinearElementGoo((LinearElement)obj);
+            else if (obj is SectionFamily) return new SectionFamilyGoo((SectionFamily)obj);
             //TODO
             return obj;
         }
@@ -333,6 +392,13 @@ namespace Salamander.Grasshopper
         ///  DesignLink.Types.Line</remarks>
         protected virtual object Convert(object obj, Type toType)
         {
+            //if (obj is SectionFamilyGoo && typeof(SectionFamily).IsAssignableFrom(toType)) return ((SectionFamilyGoo)obj).Value;
+            //if (toType == typeof(LinearElementGoo)) return new LinearElementGoo(obj as LinearElement);
+            //else if (toType == typeof(SectionFamily)) return new SectionFamilyGoo(obj as SectionFamily);
+
+            if (obj is ISalamander_Goo) return ((ISalamander_Goo)obj).Value;
+            else if (toType == typeof(Angle)) return new Angle((double)obj);
+
             return Conversion.Instance.Convert(obj, toType);
             /*
             //From RhinoCommon:
@@ -353,8 +419,20 @@ namespace Salamander.Grasshopper
         {
             //TODO
             if (typeof(Line).IsAssignableFrom(type)) return typeof(RC.Line);
+            else if (type == typeof(Angle)) return typeof(double);
             else if (typeof(Curve).IsAssignableFrom(type)) return typeof(RC.Curve);
+            else if (typeof(LinearElement).IsAssignableFrom(type)) return typeof(LinearElementGoo);
+            else if (typeof(SectionFamily).IsAssignableFrom(type)) return typeof(SectionFamilyGoo);
             return type;
+        }
+
+        public override void DrawViewportMeshes(IGH_PreviewArgs args)
+        {
+            if (PreviewLayer != null)
+            {
+                PreviewLayer.Draw(new RhinoRenderingParameters(args.Display));
+            }
+            base.DrawViewportMeshes(args);
         }
 
         #endregion

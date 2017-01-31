@@ -41,6 +41,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CalculateGeometricPropertiesAction.cs" />
+    <Compile Include="CreateISectionAction.cs" />
     <Compile Include="GWAExportAction.cs" />
     <Compile Include="MakeElementsAction.cs" />
     <Compile Include="CreateRectangularSectionAction.cs" />

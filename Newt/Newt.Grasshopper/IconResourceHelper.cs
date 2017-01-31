@@ -14,6 +14,11 @@ namespace Salamander.Grasshopper
     public static class IconResourceHelper
     {
         /// <summary>
+        /// The default location for standard icon files
+        /// </summary>
+        public static readonly string ResourceLocation = "/Salamander3;Component/Resources/";
+
+        /// <summary>
         /// Load a System.Drawing.Bitmap from a URI
         /// </summary>
         /// <param name="uriString"></param>

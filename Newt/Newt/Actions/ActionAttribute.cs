@@ -22,10 +22,16 @@ namespace Salamander.Actions
         public string Description { get; set; } = null;
 
         /// <summary>
-        /// The URI string that identifies the image resource to be used as the icon for this action 
+        /// The URI string that identifies the image resource to be used as the foreground of the icon for this action 
         /// on buttons and grasshopper components.
         /// </summary>
-        public string IconURI { get; set; } = null;
+        public string IconForeground { get; set; } = null;
+
+        /// <summary>
+        /// The URI string that identifies the image resource to be used as the background of the icon for this action
+        /// on button and grasshopper components.
+        /// </summary>
+        public string IconBackground { get; set; } = null;
 
         /// <summary>
         /// Constructor
@@ -54,7 +60,7 @@ namespace Salamander.Actions
         /// <param name="iconURI"></param>
         public ActionAttribute(string commandName, string description, string iconURI) : this(commandName, description)
         {
-            IconURI = iconURI;
+            IconForeground = iconURI;
         }
 
         /// <summary>

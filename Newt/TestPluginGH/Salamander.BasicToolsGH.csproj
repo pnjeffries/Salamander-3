@@ -65,10 +65,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CalculateGeometricPropertiesComponent.cs" />
+    <Compile Include="CreateISectionComponent.cs" />
     <Compile Include="CreateRectangularSectionComponent.cs" />
     <Compile Include="DrawLinearElementComponent.cs" />
     <Compile Include="BasicToolsGHInfo.cs" />
+    <Compile Include="LinearElementParam.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SectionFamilyParam.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Newt.Grasshopper\Salamander.Grasshopper.csproj">

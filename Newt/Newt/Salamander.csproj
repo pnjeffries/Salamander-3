@@ -8,7 +8,7 @@
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Salamander</RootNamespace>
-    <AssemblyName>Salamander</AssemblyName>
+    <AssemblyName>Salamander3</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -64,6 +64,7 @@
     <Compile Include="Core\GUIController.cs" />
     <Compile Include="Core\InputController.cs" />
     <Compile Include="Display\ManualDisplayLayer.cs" />
+    <Compile Include="Resources\BaseURI.cs" />
     <Compile Include="Selection\NodeSelection.cs" />
     <Compile Include="Selection\SelectionSet.cs" />
     <Compile Include="Display\Avatar.cs" />
@@ -103,6 +104,17 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Salamander2_64x64.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\LinearElement.png" />
+    <Resource Include="Resources\ParamBackground.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\AddIcon.png" />
+    <Resource Include="Resources\SectionFamily.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\RectangleSection.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

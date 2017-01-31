@@ -111,6 +111,16 @@ namespace Salamander.Display
             return 0;
         }
 
+        /// <summary>
+        /// Try and register the specified object
+        /// </summary>
+        /// <param name="obj"></param>
+        public abstract bool TryRegister(object obj);
+
+        /// <summary>
+        /// Clear all registered key objects geometry on this layer
+        /// </summary>
+        public abstract void Clear();
     }
 
     /// <summary>
@@ -146,7 +156,7 @@ namespace Salamander.Display
         /// <summary>
         /// Clear all registered key objects geometry on this layer
         /// </summary>
-        public void Clear()
+        public override void Clear()
         {
             _Avatars.Clear();
         }
@@ -169,6 +179,21 @@ namespace Salamander.Display
         public void Register(T key)
         {
             _Avatars[key] = InitialRepresentation(key);
+        }
+
+        /// <summary>
+        /// Try and register the specified object.
+        /// </summary>
+        /// <param name="obj"></param>
+        /// <returns></returns>
+        public override bool TryRegister(object obj)
+        {
+            if (obj != null && obj is T)
+            {
+                Register((T)obj);
+                return true;
+            }
+            return false;
         }
 
         /// <summary>

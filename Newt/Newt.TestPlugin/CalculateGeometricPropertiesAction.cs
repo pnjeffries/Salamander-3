@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Salamander.TestPlugin
+namespace Salamander.BasicTools
 {
     [Action("GeometricProperties",
         "Calculate the geometric properties of a profile")]

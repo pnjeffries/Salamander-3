@@ -17,9 +17,9 @@ namespace Salamander.Rhino
     public class RhinoRenderingParameters : RenderingParameters
     {
         /// <summary>
-        /// The Rhino DrawEventArgs containing the current pipeline
+        /// The Rhino display pipeline
         /// </summary>
-        public DrawEventArgs Args { get; protected set; }
+        public DisplayPipeline Display { get; protected set; }
 
         /// <summary>
         /// Constructor
@@ -27,7 +27,16 @@ namespace Salamander.Rhino
         /// <param name="args"></param>
         public RhinoRenderingParameters(DrawEventArgs args)
         {
-            Args = args;
+            Display = args.Display;
+        }
+
+        /// <summary>
+        /// Pipeline constructor
+        /// </summary>
+        /// <param name="display"></param>
+        public RhinoRenderingParameters(DisplayPipeline display)
+        {
+            Display = display;
         }
 
         /// <summary>
@@ -46,7 +55,7 @@ namespace Salamander.Rhino
         /// <returns></returns>
         public void Draw(RhinoObject rObj)
         {
-            Args.Display.DrawObject(rObj);
+            Display.DrawObject(rObj);
         }
 
         /// <summary>
@@ -56,7 +65,7 @@ namespace Salamander.Rhino
         /// <param name="material"></param>
         public void Draw(RC.Mesh mesh, DisplayMaterial material)
         {
-            Args.Display.DrawMeshShaded(mesh, material);
+            Display.DrawMeshShaded(mesh, material);
         }
 
         /// <summary>
@@ -66,7 +75,7 @@ namespace Salamander.Rhino
         /// <remarks>TODO: Replace with shaded drawing method</remarks>
         public void Draw(RC.Extrusion extrusion)
         {
-            Args.Display.DrawSurface(extrusion, Color.Black, 1);
+            Display.DrawSurface(extrusion, Color.Black, 1);
         }
 
         /// <summary>
@@ -76,7 +85,7 @@ namespace Salamander.Rhino
         /// <param name="material"></param>
         public void Draw(RC.Brep brep, DisplayMaterial material)
         {
-            Args.Display.DrawBrepShaded(brep, material);
+            Display.DrawBrepShaded(brep, material);
         }
 
         /// <summary>
@@ -87,7 +96,7 @@ namespace Salamander.Rhino
         /// <param name="thickness"></param>
         public void Draw(IEnumerable<RC.Point3d> polyline, Color colour, int thickness)
         {
-            Args.Display.DrawPolyline(polyline, colour, thickness);
+            Display.DrawPolyline(polyline, colour, thickness);
         }
 
         /// <summary>
@@ -98,7 +107,7 @@ namespace Salamander.Rhino
         /// <param name="size"></param>
         public void Draw(RC.PointCloud points, Color colour, double size)
         {
-            Args.Display.DrawPointCloud(points, (int)size, colour);
+            Display.DrawPointCloud(points, (int)size, colour);
         }
     }
 }

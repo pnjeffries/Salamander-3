@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.ComponentModel;
 
-namespace Salamander.TestPlugin
+namespace Salamander.BasicTools
 {
     /// <summary>
     /// A DisplayLayer which draws 3D section profile representations over 1D Elements

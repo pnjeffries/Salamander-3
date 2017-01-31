@@ -69,9 +69,14 @@
     <Compile Include="Conversion.cs" />
     <Compile Include="GrasshopperInfo.cs" />
     <Compile Include="IconResourceHelper.cs" />
+    <Compile Include="ISalamander_Goo.cs" />
+    <Compile Include="LinearElementGoo.cs" />
+    <Compile Include="LinearElementParam.cs" />
     <Compile Include="SalamanderBaseComponent.cs" />
     <Compile Include="NicknameConverter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SectionFamilyGoo.cs" />
+    <Compile Include="SectionFamilyParam.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\FreeBuild\FreeBuild\FreeBuild.Rhino\FreeBuild.Rhino.csproj">
