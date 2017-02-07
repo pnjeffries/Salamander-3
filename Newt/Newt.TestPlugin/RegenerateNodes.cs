@@ -13,7 +13,7 @@ namespace Salamander.BasicTools
     {
         public override bool Execute(ExecutionInfo exInfo = null)
         {
-            Model.RegenerateNodes(new FreeBuild.Model.NodeGenerationParameters());
+            Model.GenerateNodes(new FreeBuild.Model.NodeGenerationParameters());
             return true;
         }
     }

@@ -41,7 +41,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CalculateGeometricPropertiesAction.cs" />
+    <Compile Include="CreateCircularHollowSectionAction.cs" />
+    <Compile Include="CreateCircularSectionAction.cs" />
     <Compile Include="CreateISectionAction.cs" />
+    <Compile Include="CreateRectangularHollowSectionAction.cs" />
     <Compile Include="GWAExportAction.cs" />
     <Compile Include="MakeElementsAction.cs" />
     <Compile Include="CreateRectangularSectionAction.cs" />

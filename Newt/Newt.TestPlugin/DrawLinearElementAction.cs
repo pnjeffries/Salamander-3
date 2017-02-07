@@ -47,7 +47,7 @@ namespace Salamander.BasicTools
             {
                 ManualDisplayLayer layer = new ManualDisplayLayer();
                 IMeshAvatar mesh = layer.CreateMeshAvatar();
-                mesh.Builder.AddSectionPreview(new Line(parameters.BasePoint, parameters.CursorPoint), Section, 0);
+                mesh.Builder.AddSectionPreview(new Line(parameters.BasePoint, parameters.CursorPoint), Section, Orientation);
                 mesh.FinalizeMesh();
                 layer.Add(mesh);
                 return layer;

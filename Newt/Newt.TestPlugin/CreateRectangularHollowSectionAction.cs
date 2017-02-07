@@ -11,15 +11,15 @@ using System.Threading.Tasks;
 namespace Salamander.BasicTools
 {
     [Action(
-        "CreateISection",
-        "Create a new section property with a symmetric I-shaped profile",
-        IconBackground = Resources.BaseURI + "SectionFamily.png",
+        "CreateRectangularHollowSection",
+        "Create a new section property with a rectangular hollow profile",
+        IconBackground = Resources.BaseURI + "RectangularHollowSection.png",
         IconForeground = Resources.BaseURI + "AddIcon.png")]
-    public class CreateISectionAction : ModelActionBase
+    public class CreateRectangularHollowSectionAction : ModelActionBase
     {
 
         [ActionInput(1, "the name of the section")]
-        public string Name { get; set; } = "I Section";
+        public string Name { get; set; } = "Rectangular Hollow Section";
 
         [ActionInput(2, "the depth of the section")]
         public double Depth { get; set; }
@@ -33,9 +33,6 @@ namespace Salamander.BasicTools
         [ActionInput(5, "the thickness of the section web")]
         public double WebThickness { get; set; }
 
-        [ActionInput(6, "the radius of the root fillet")]
-        public double RootRadius { get; set; }
-
         [ActionOutput(1, "the output section property")]
         public SectionFamily Section { get; set; }
 
@@ -45,11 +42,17 @@ namespace Salamander.BasicTools
             get { return Section?.Profile?.Perimeter; }
         }
 
+        [ActionOutput(3, "the output section internal void perimeter")]
+        public Curve Void
+        {
+            get { return Section?.Profile?.Voids?.FirstOrDefault(); }
+        }
+
         public override bool Execute(ExecutionInfo exInfo = null)
-        { 
-            SymmetricIProfile iProfile = new SymmetricIProfile(Depth, Width, FlangeThickness, WebThickness, RootRadius);
+        {
+            var rProfile = new RectangularHollowProfile(Depth, Width, FlangeThickness, WebThickness);
             Section = Model.Create.SectionProperty(Name, exInfo);
-            Section.Profile = iProfile;
+            Section.Profile = rProfile;
             return true;
         }
     }

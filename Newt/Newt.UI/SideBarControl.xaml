@@ -29,7 +29,7 @@
                                                ></TextBlock>
                     </Expander.Header>
                     <!--<Border DataContext="{Binding Path=Actions.CurrentAction}">-->
-                        <fb:AutoPropertiesPanel></fb:AutoPropertiesPanel>
+                        <fb:AutoUIStackPanel></fb:AutoUIStackPanel>
                     <!--</Border>-->
                 </Expander>
                 </Border>

@@ -19,7 +19,7 @@ namespace Salamander.BasicTools
         
         public override bool Execute(ExecutionInfo exInfo = null)
         {
-            Document.Model.RegenerateNodes(new NodeGenerationParameters());
+            Document.Model.GenerateNodes(new NodeGenerationParameters());
             var serialiser = new ModelDocumentTextSerialiser(new GWAFormat(), new GWAContext());
             Document.SaveAs(FilePath, serialiser);
             return true;

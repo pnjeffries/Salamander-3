@@ -22,7 +22,7 @@ namespace Salamander.RobotIOPlugin
 
         public override bool Execute(ExecutionInfo exInfo = null)
         {
-            Document.Model.RegenerateNodes(new NodeGenerationParameters());
+            Document.Model.GenerateNodes(new NodeGenerationParameters());
             var robot = new RobotController();
             robot.Message += HandleMessage;
             RobotIDMappingTable idMap = new RobotIDMappingTable();

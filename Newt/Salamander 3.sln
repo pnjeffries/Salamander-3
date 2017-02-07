@@ -41,6 +41,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Salamander.Revit", "Salaman
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FreeBuild.Revit", "..\..\FreeBuild\FreeBuild\FreeBuild.Revit\FreeBuild.Revit.csproj", "{E4E2CE0F-C3CF-4EA2-A5C2-E06B49939604}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FreeBuild.OpenTK", "..\..\FreeBuild\FreeBuild\FreeBuild.OpenTK\FreeBuild.OpenTK.csproj", "{022305D8-4399-4B96-B8C1-C87E25F2E68E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -177,6 +179,14 @@ Global
 		{E4E2CE0F-C3CF-4EA2-A5C2-E06B49939604}.Debug64|Any CPU.Build.0 = Debug|Any CPU
 		{E4E2CE0F-C3CF-4EA2-A5C2-E06B49939604}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E4E2CE0F-C3CF-4EA2-A5C2-E06B49939604}.Release|Any CPU.Build.0 = Release|Any CPU
+		{022305D8-4399-4B96-B8C1-C87E25F2E68E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{022305D8-4399-4B96-B8C1-C87E25F2E68E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{022305D8-4399-4B96-B8C1-C87E25F2E68E}.Debug32|Any CPU.ActiveCfg = Debug|Any CPU
+		{022305D8-4399-4B96-B8C1-C87E25F2E68E}.Debug32|Any CPU.Build.0 = Debug|Any CPU
+		{022305D8-4399-4B96-B8C1-C87E25F2E68E}.Debug64|Any CPU.ActiveCfg = Debug|Any CPU
+		{022305D8-4399-4B96-B8C1-C87E25F2E68E}.Debug64|Any CPU.Build.0 = Debug|Any CPU
+		{022305D8-4399-4B96-B8C1-C87E25F2E68E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{022305D8-4399-4B96-B8C1-C87E25F2E68E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

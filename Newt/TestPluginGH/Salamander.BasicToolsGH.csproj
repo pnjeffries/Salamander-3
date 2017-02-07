@@ -8,8 +8,8 @@
     <ProjectGuid>{6172F272-9DBD-427C-B858-186634C6FFED}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Salamander.TestPluginGH</RootNamespace>
-    <AssemblyName>Salamander.TestPluginGH</AssemblyName>
+    <RootNamespace>Salamander.BasicToolsGH</RootNamespace>
+    <AssemblyName>Salamander.BasicToolsGH</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <IsWebBootstrapper>false</IsWebBootstrapper>
@@ -65,7 +65,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CalculateGeometricPropertiesComponent.cs" />
+    <Compile Include="CreateCircularHollowSectionComponent.cs" />
+    <Compile Include="CreateCircularSectionComponent.cs" />
     <Compile Include="CreateISectionComponent.cs" />
+    <Compile Include="CreateRectangularHollowSectionComponent.cs" />
     <Compile Include="CreateRectangularSectionComponent.cs" />
     <Compile Include="DrawLinearElementComponent.cs" />
     <Compile Include="BasicToolsGHInfo.cs" />
