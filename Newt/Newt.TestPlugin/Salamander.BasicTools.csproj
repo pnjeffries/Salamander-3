@@ -45,6 +45,7 @@
     <Compile Include="CreateCircularSectionAction.cs" />
     <Compile Include="CreateISectionAction.cs" />
     <Compile Include="CreateRectangularHollowSectionAction.cs" />
+    <Compile Include="GetSectionAction.cs" />
     <Compile Include="GWAExportAction.cs" />
     <Compile Include="MakeElementsAction.cs" />
     <Compile Include="CreateRectangularSectionAction.cs" />

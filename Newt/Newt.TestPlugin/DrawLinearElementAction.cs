@@ -20,7 +20,7 @@ namespace Salamander.BasicTools
         [ActionInput(2, "the section of the new element", Manual = false, Persistant = true)]
         public SectionFamily Section { get; set; }
 
-        public SectionFamilyCollection AvailableSections { get { return Model.Properties.Sections; } }
+        public SectionFamilyCollection AvailableSections { get { return Model.Families.Sections; } }
 
         [AutoUI(3, Label="Orientation")]
         [ActionInput(3, "the orientation angle of the new element", Manual = false, Persistant = true)]

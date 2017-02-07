@@ -9,8 +9,13 @@ using System.Threading.Tasks;
 
 namespace Salamander.Grasshopper
 {
+    /// <summary>
+    /// Linear element Grasshopper parameter
+    /// </summary>
     public class LinearElementParam : GH_Param<LinearElementGoo>
     {
+        #region Properties
+
         public override Guid ComponentGuid
         {
             get
@@ -30,10 +35,16 @@ namespace Salamander.Grasshopper
             }
         }
 
+        #endregion
+
+        #region Constructor
+
         public LinearElementParam()
             : base("Linear Element", "Linear Element", "A Salamander Linear Element", "Salamander 3", "Params", GH_ParamAccess.item)
         { }
 
-        
+        #endregion
+
+
     }
 }

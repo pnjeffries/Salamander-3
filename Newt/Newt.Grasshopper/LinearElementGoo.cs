@@ -12,6 +12,9 @@ using Grasshopper.Kernel;
 
 namespace Salamander.Grasshopper
 {
+    /// <summary>
+    /// Geometric Goo for Linear Elements
+    /// </summary>
     public class LinearElementGoo : GH_GeometricGoo<LinearElement>, ISalamander_Goo
     {
         #region Properties

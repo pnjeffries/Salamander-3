@@ -23,11 +23,11 @@ namespace Salamander.Grasshopper
         /// </summary>
         /// <param name="uriString"></param>
         /// <returns></returns>
-        public static System.Drawing.Bitmap BitmapFromURI(string uriString)
+        public static Bitmap BitmapFromURI(string uriString)
         {
             Uri uri = new Uri(uriString, UriKind.RelativeOrAbsolute);
             StreamResourceInfo info = Application.GetResourceStream(uri);
-            System.Drawing.Bitmap bmp = new System.Drawing.Bitmap(info.Stream);
+            Bitmap bmp = new Bitmap(info.Stream);
             //TODO: size is hard-coded - change?
             if (bmp != null && (bmp.Width != 24 || bmp.Height != 24)) bmp = ResizeImage(bmp, 24, 24);
             return bmp;

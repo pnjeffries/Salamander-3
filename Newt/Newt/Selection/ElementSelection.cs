@@ -90,7 +90,7 @@ namespace Salamander.Selection
             {
                 if (Selection.Count > 0)
                 {
-                    SectionFamilyCollection result = new SectionFamilyCollection(Selection[0].Model?.Properties.Sections);
+                    SectionFamilyCollection result = new SectionFamilyCollection(Selection[0].Model?.Families.Sections);
                     result.Add(new SectionPropertyDummy("New..."));
                     return result;
                 }

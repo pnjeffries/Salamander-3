@@ -72,6 +72,8 @@
     <Compile Include="ISalamander_Goo.cs" />
     <Compile Include="LinearElementGoo.cs" />
     <Compile Include="LinearElementParam.cs" />
+    <Compile Include="NodeGoo.cs" />
+    <Compile Include="NodeParam.cs" />
     <Compile Include="SalamanderBaseComponent.cs" />
     <Compile Include="NicknameConverter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

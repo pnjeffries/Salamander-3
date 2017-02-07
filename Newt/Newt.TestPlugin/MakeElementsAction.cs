@@ -37,7 +37,7 @@ namespace Salamander.BasicTools
                         if (PropertiesFromLayers && shape.Attributes != null && !string.IsNullOrWhiteSpace(shape.Attributes.LayerName))
                         {
                             string layerName = shape.Attributes.LayerName;
-                            SectionFamily sP = Model.Properties.Sections.FindByName(layerName);
+                            SectionFamily sP = Model.Families.Sections.FindByName(layerName);
                             if (sP == null)
                             {
                                 sP = Model.Create.SectionProperty(layerName, exInfo);
