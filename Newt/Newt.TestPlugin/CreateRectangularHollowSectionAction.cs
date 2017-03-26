@@ -22,16 +22,16 @@ namespace Salamander.BasicTools
         public string Name { get; set; } = "Rectangular Hollow Section";
 
         [ActionInput(2, "the depth of the section")]
-        public double Depth { get; set; }
+        public double Depth { get; set; } = 0.2;
 
         [ActionInput(3, "the width of the section")]
-        public double Width { get; set; }
+        public double Width { get; set; } = 0.2;
 
         [ActionInput(4, "the thickness of the section flanges")]
-        public double FlangeThickness { get; set; }
+        public double FlangeThickness { get; set; } = 0.01;
 
         [ActionInput(5, "the thickness of the section web")]
-        public double WebThickness { get; set; }
+        public double WebThickness { get; set; } = 0.01;
 
         [ActionOutput(1, "the output section property")]
         public SectionFamily Section { get; set; }

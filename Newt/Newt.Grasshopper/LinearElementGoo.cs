@@ -43,14 +43,6 @@ namespace Salamander.Grasshopper
             }
         }
 
-        object ISalamander_Goo.Value
-        {
-            get
-            {
-                return Value;
-            }
-        }
-
         #endregion
 
         #region Constructors
@@ -103,6 +95,23 @@ namespace Salamander.Grasshopper
                 builder.Finalize();
                 args.Display.DrawMeshShaded(builder.Mesh, args.ShadeMaterial);
             }
+        }
+
+        public static List<LinearElementGoo> Convert(LinearElementCollection collection)
+        {
+            var result = new List<LinearElementGoo>();
+            if (collection != null)
+                foreach (LinearElement obj in collection) result.Add(new LinearElementGoo(obj));
+            return result;
+        }
+
+        object ISalamander_Goo.GetValue(Type type)
+        {
+            if (type == typeof(LinearElementCollection))
+                return new LinearElementCollection(Value);
+            else if (type == typeof(ElementCollection))
+                return new ElementCollection(Value);
+            else return Value;
         }
 
         #endregion

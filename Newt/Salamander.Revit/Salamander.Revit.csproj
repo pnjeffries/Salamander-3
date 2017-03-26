@@ -30,6 +30,13 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="RevitAPI, Version=16.0.0.0, Culture=neutral, processorArchitecture=AMD64">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\Salamander 2\Salamander_2\References\Revit\RevitAPI.dll</HintPath>
+    </Reference>
+    <Reference Include="RevitAPIUI">
+      <HintPath>..\..\..\Salamander 2\Salamander_2\References\Revit\RevitAPIUI.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -42,15 +49,25 @@
   <ItemGroup>
     <Compile Include="Host.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RevitGUIController.cs" />
+    <Compile Include="SalamanderImportCommand.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\FreeBuild\FreeBuild\FreeBuild.Revit\FreeBuild.Revit.csproj">
       <Project>{e4e2ce0f-c3cf-4ea2-a5c2-e06b49939604}</Project>
       <Name>FreeBuild.Revit</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\..\FreeBuild\FreeBuild\Freebuild.WPF\Freebuild.WPF.csproj">
+      <Project>{e2d93282-51bd-4317-8d13-363347065f8b}</Project>
+      <Name>Freebuild.WPF</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\..\FreeBuild\FreeBuild\FreeBuild\FreeBuild.csproj">
       <Project>{7635522c-178f-4db5-9106-ff8dfd4b833b}</Project>
       <Name>FreeBuild</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Newt.UI\Salamander.UI.csproj">
+      <Project>{73c76479-4f9d-48e1-a4fe-203821fb800c}</Project>
+      <Name>Salamander.UI</Name>
     </ProjectReference>
     <ProjectReference Include="..\NEWT\Salamander.csproj">
       <Project>{55d9743e-6f9b-4b89-b3de-18b03c4cfe61}</Project>

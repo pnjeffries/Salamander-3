@@ -12,6 +12,8 @@ namespace Salamander.Display
     /// </summary>
     public abstract class Avatar : IRenderable, IAvatar
     {
+        public abstract DisplayBrush Brush { get; set; }
+
         /// <summary>
         /// This avatar's GUID.
         /// </summary>

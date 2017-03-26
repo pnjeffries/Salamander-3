@@ -1,9 +1,12 @@
 ﻿using Microsoft.Win32;
+using Salamander.Selection;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace Salamander.UI
 {
@@ -52,6 +55,42 @@ namespace Salamander.UI
                 return dialog.FileName;
             }
             else return null;
+        }
+
+        /// <summary>
+        /// Show the application splash screen
+        /// </summary>
+        public override void ShowSplashScreen()
+        {
+            SplashScreen ss = new SplashScreen(this);
+            ss.Show();
+        }
+
+        /// <summary>
+        /// Show a data table for the specified data
+        /// </summary>
+        /// <param name="name"></param>
+        /// <param name="data"></param>
+        public override void ShowDataTable(string name, IEnumerable data, SelectionViewModel selection = null)
+        {
+            CreateContainerWindow(name, new DataTable(data, selection));
+        }
+
+        /// <summary>
+        /// Create a window as a container for another FrameworkElement
+        /// </summary>
+        /// <param name="title"></param>
+        /// <param name="contents"></param>
+        /// <returns></returns>
+        private static Window CreateContainerWindow(string title, FrameworkElement contents)
+        {
+            Window window = new Window();
+            window.Content = contents;
+            window.Title = title;
+            window.Topmost = true;
+            window.SizeToContent = SizeToContent.WidthAndHeight;
+            window.Show();
+            return window;
         }
     }
 }

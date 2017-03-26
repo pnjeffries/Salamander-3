@@ -48,18 +48,20 @@ namespace Salamander.Selection
             set { foreach (Node item in Selection) item.Position = item.Position.WithZ(value); }
         }
 
-
         /// <summary>
         /// Fixity.X
         /// </summary>
         public bool? Fixity_X
         {
-            get { return CombinedValue<bool?>(i => i.Fixity.X, null, false); }
+            get { return CombinedValue<bool?>(i => i.GetData<NodeSupport>().Fixity.X, null, false); }
             set
             {
                 if (value.HasValue)
-                foreach (Node item in Selection)
-                    item.Fixity = item.Fixity.WithX((bool)value);      
+                    foreach (Node item in Selection)
+                    {
+                        NodeSupport support = item.GetData<NodeSupport>(true);
+                        support.Fixity = support.Fixity.WithX((bool)value);
+                    }
             }
         }
 
@@ -68,12 +70,15 @@ namespace Salamander.Selection
         /// </summary>
         public bool? Fixity_Y
         {
-            get { return CombinedValue<bool?>(i => i.Fixity.Y, null, false); }
+            get { return CombinedValue<bool?>(i => i.GetData<NodeSupport>().Fixity.Y, null, false); }
             set
             {
                 if (value.HasValue)
                     foreach (Node item in Selection)
-                        item.Fixity = item.Fixity.WithY((bool)value);
+                    {
+                        NodeSupport support = item.GetData<NodeSupport>(true);
+                        support.Fixity = support.Fixity.WithY((bool)value);
+                    }
             }
         }
 
@@ -82,12 +87,15 @@ namespace Salamander.Selection
         /// </summary>
         public bool? Fixity_Z
         {
-            get { return CombinedValue<bool?>(i => i.Fixity.Z, null, false); }
+            get { return CombinedValue<bool?>(i => i.GetData<NodeSupport>().Fixity.Z, null, false); }
             set
             {
                 if (value.HasValue)
                     foreach (Node item in Selection)
-                        item.Fixity = item.Fixity.WithZ((bool)value);
+                    {
+                        NodeSupport support = item.GetData<NodeSupport>(true);
+                        support.Fixity = support.Fixity.WithZ((bool)value);
+                    }
             }
         }
 
@@ -96,12 +104,15 @@ namespace Salamander.Selection
         /// </summary>
         public bool? Fixity_XX
         {
-            get { return CombinedValue<bool?>(i => i.Fixity.XX, null, false); }
+            get { return CombinedValue<bool?>(i => i.GetData<NodeSupport>().Fixity.XX, null, false); }
             set
             {
                 if (value.HasValue)
                     foreach (Node item in Selection)
-                        item.Fixity = item.Fixity.WithXX((bool)value);
+                    {
+                        NodeSupport support = item.GetData<NodeSupport>(true);
+                        support.Fixity = support.Fixity.WithXX((bool)value);
+                    }
             }
         }
 
@@ -110,12 +121,15 @@ namespace Salamander.Selection
         /// </summary>
         public bool? Fixity_YY
         {
-            get { return CombinedValue<bool?>(i => i.Fixity.YY, null, false); }
+            get { return CombinedValue<bool?>(i => i.GetData<NodeSupport>().Fixity.YY, null, false); }
             set
             {
                 if (value.HasValue)
                     foreach (Node item in Selection)
-                        item.Fixity = item.Fixity.WithYY((bool)value);
+                    {
+                        NodeSupport support = item.GetData<NodeSupport>(true);
+                        support.Fixity = support.Fixity.WithYY((bool)value);
+                    }
             }
         }
 
@@ -124,13 +138,18 @@ namespace Salamander.Selection
         /// </summary>
         public bool? Fixity_ZZ
         {
-            get { return CombinedValue<bool?>(i => i.Fixity.ZZ, null, false); }
+            get { return CombinedValue<bool?>(i => i.GetData<NodeSupport>().Fixity.ZZ, null, false); }
             set
             {
                 if (value.HasValue)
                     foreach (Node item in Selection)
-                        item.Fixity = item.Fixity.WithZZ((bool)value);
+                    {
+                        NodeSupport support = item.GetData<NodeSupport>(true);
+                        support.Fixity = support.Fixity.WithZZ((bool)value);
+                    }
             }
         }
+
+    
     }
 }

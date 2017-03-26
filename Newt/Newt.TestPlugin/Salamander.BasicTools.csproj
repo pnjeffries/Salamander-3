@@ -40,20 +40,26 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AddSupportPointAction.cs" />
     <Compile Include="CalculateGeometricPropertiesAction.cs" />
+    <Compile Include="CreateBool6DAction.cs" />
     <Compile Include="CreateCircularHollowSectionAction.cs" />
     <Compile Include="CreateCircularSectionAction.cs" />
     <Compile Include="CreateISectionAction.cs" />
     <Compile Include="CreateRectangularHollowSectionAction.cs" />
+    <Compile Include="ExampleAction.cs" />
+    <Compile Include="GetElementNodesAction.cs" />
     <Compile Include="GetSectionAction.cs" />
     <Compile Include="GWAExportAction.cs" />
     <Compile Include="MakeElementsAction.cs" />
     <Compile Include="CreateRectangularSectionAction.cs" />
     <Compile Include="DrawLinearElementAction.cs" />
     <Compile Include="ElementSectionDisplayLayer.cs" />
+    <Compile Include="NodeRestraintDisplayLayer.cs" />
     <Compile Include="OpenAction.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RegenerateNodes.cs" />
+    <Compile Include="RestrainNodeAction.cs" />
     <Compile Include="SaveAsAction.cs" />
   </ItemGroup>
   <ItemGroup>

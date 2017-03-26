@@ -1,4 +1,5 @@
 ﻿using FreeBuild.Actions;
+using FreeBuild.Base;
 using FreeBuild.Extensions;
 using FreeBuild.Geometry;
 using FreeBuild.Model;
@@ -10,6 +11,7 @@ using Salamander.Display;
 using Salamander.Rhino;
 using Salamander.RhinoCommon;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
@@ -24,7 +26,7 @@ namespace Salamander.Grasshopper
     /// </summary>
     public abstract class SalamanderBaseComponent : GH_Component
     {
-        #region Constants
+        #region 
 
         /// <summary>
         /// The name of the tab on which components are, by default, to be placed
@@ -140,6 +142,17 @@ namespace Salamander.Grasshopper
         #region Methods
 
         /// <summary>
+        /// Get the appropriate GH_ParamAccess value for a collection type with the given ActionInput attribute
+        /// </summary>
+        /// <param name="inputAtt"></param>
+        /// <returns></returns>
+        private GH_ParamAccess ParamAccess(ActionInputAttribute inputAtt)
+        {
+            if (inputAtt.OneByOne) return GH_ParamAccess.item;
+            else return GH_ParamAccess.list;
+        }
+
+        /// <summary>
         /// Registers all the input parameters for this component.
         /// </summary>
         protected override void RegisterInputParams(GH_InputParamManager pManager)
@@ -149,46 +162,84 @@ namespace Salamander.Grasshopper
             IList<PropertyInfo> inputs = ActionBase.ExtractInputParameters(ActionType);
             foreach (PropertyInfo pInfo in inputs)
             {
-                Type inputType = pInfo.PropertyType;
+                Type pType = pInfo.PropertyType;
                 ActionInputAttribute inputAtt = ActionInputAttribute.ExtractFrom(pInfo);
                 if (inputAtt != null)
                 {
                     string name = pInfo.Name;
                     string nickname = string.IsNullOrEmpty(inputAtt.ShortName) ? nC.Convert(pInfo.Name) : inputAtt.ShortName;
                     string description = inputAtt.CapitalisedDescription;
-                    if (inputType == typeof(double))
+                    if (pType == typeof(double))
                     {
                         pManager.AddNumberParameter(name, nickname, description, GH_ParamAccess.item, (double)pInfo.GetValue(action));
                     }
-                    else if (inputType == typeof(string))
+                    else if (pType == typeof(string))
                     {
                         pManager.AddTextParameter(name, nickname, description, GH_ParamAccess.item, (string)pInfo.GetValue(action));
                     }
-                    else if (inputType == typeof(Vector))
+                    else if (pType == typeof(bool))
+                    {
+                        pManager.AddBooleanParameter(name, nickname, description, GH_ParamAccess.item, (bool)pInfo.GetValue(action));
+                    }
+                    else if (pType == typeof(Vector))
                     {
                         pManager.AddPointParameter(name, nickname, description, GH_ParamAccess.item);
                     }
-                    else if (inputType == typeof(Line))
+                    else if (pType == typeof(Line))
                     {
                         pManager.AddLineParameter(name, nickname, description, GH_ParamAccess.item);
                     }
-                    else if (inputType == typeof(Angle))
+                    else if (pType == typeof(Angle))
                     {
                         pManager.AddAngleParameter(name, nickname, description, GH_ParamAccess.item, (Angle)pInfo.GetValue(action));
                     }
-                    else if (typeof(Curve).IsAssignableFrom(inputType))
+                    else if (typeof(Curve).IsAssignableFrom(pType))
                     {
                         pManager.AddCurveParameter(name, nickname, description, GH_ParamAccess.item);
                     }
-                    else if (typeof(LinearElement).IsAssignableFrom(inputType))
+                    else if (typeof(LinearElement).IsAssignableFrom(pType))
                     {
                         IGH_Param param = new LinearElementParam();
                         pManager.AddParameter(param, name, nickname, description, GH_ParamAccess.item);
                     }
-                    else if (typeof(SectionFamily).IsAssignableFrom(inputType))
+                    else if (typeof(Element).IsAssignableFrom(pType))
+                    {
+                        IGH_Param param = new LinearElementParam(); //TEMP!
+                        pManager.AddParameter(param, name, nickname, description, GH_ParamAccess.item);
+                    }
+                    else if (typeof(LinearElementCollection).IsAssignableFrom(pType))
+                    {
+                        IGH_Param param = new LinearElementParam();
+                        pManager.AddParameter(param, name, nickname, description, ParamAccess(inputAtt));
+                    }
+                    else if (typeof(ElementCollection).IsAssignableFrom(pType))
+                    {
+                        IGH_Param param = new LinearElementParam(); //TEMP!
+                        pManager.AddParameter(param, name, nickname, description, ParamAccess(inputAtt));
+                    }
+                    else if (pType == typeof(Node))
+                    {
+                        IGH_Param param = new NodeParam();
+                        pManager.AddParameter(param, name, nickname, description, GH_ParamAccess.item);
+                    }
+                    else if (pType == typeof(NodeCollection))
+                    {
+                        IGH_Param param = new NodeParam();
+                        pManager.AddParameter(param, name, nickname, description, ParamAccess(inputAtt));
+                    }
+                    else if (typeof(SectionFamily).IsAssignableFrom(pType))
                     {
                         IGH_Param param = new SectionFamilyParam();
                         pManager.AddParameter(param, name, nickname, description, GH_ParamAccess.item);
+                    }
+                    else if (pType == typeof(Bool6D))
+                    {
+                        IGH_Param param = new Bool6DParam();
+                        pManager.AddParameter(param, name, nickname, description, GH_ParamAccess.item);
+                    }
+                    else if (pType == typeof(ActionTriggerInput))
+                    {
+                        pManager.AddGenericParameter(name, nickname, description, GH_ParamAccess.tree);
                     }
                     else
                     {
@@ -208,33 +259,71 @@ namespace Salamander.Grasshopper
             IList<PropertyInfo> outputs = ActionBase.ExtractOutputParameters(ActionType);
             foreach (PropertyInfo pInfo in outputs)
             {
-                Type outputType = pInfo.PropertyType;
+                Type pType = pInfo.PropertyType;
                 ActionOutputAttribute outputAtt = ActionOutputAttribute.ExtractFrom(pInfo);
                 if (outputAtt != null)
                 {
                     string name = pInfo.Name;
                     string nickname = string.IsNullOrEmpty(outputAtt.ShortName) ? nC.Convert(pInfo.Name) : outputAtt.ShortName;
                     string description = outputAtt.CapitalisedDescription;
-                    if (outputType == typeof(double) || outputType == typeof(Angle))
+                    if (pType == typeof(double) || pType == typeof(Angle))
                     {
                         pManager.AddNumberParameter(name, nickname, description, GH_ParamAccess.item);
                     }
-                    else if (outputType == typeof(Vector))
+                    else if (pType == typeof(string))
+                    {
+                        pManager.AddTextParameter(name, nickname, description, GH_ParamAccess.item);
+                    }
+                    else if (pType == typeof(bool))
+                    {
+                        pManager.AddBooleanParameter(name, nickname, description, GH_ParamAccess.item);
+                    }
+                    else if (pType == typeof(Vector))
                     {
                         pManager.AddPointParameter(name, nickname, description, GH_ParamAccess.item);
                     }
-                    else if (typeof(Curve).IsAssignableFrom(outputType))
+                    else if (typeof(Curve).IsAssignableFrom(pType))
                     {
                         pManager.AddCurveParameter(name, nickname, description, GH_ParamAccess.item);
                     }
-                    else if (outputType == typeof(LinearElement))
+                    else if (pType == typeof(LinearElement))
                     {
                         IGH_Param param = new LinearElementParam();
                         pManager.AddParameter(param, name, nickname, description, GH_ParamAccess.item);
                     }
-                    else if (typeof(SectionFamily).IsAssignableFrom(outputType))
+                    else if (pType == typeof(LinearElementCollection))
+                    {
+                        IGH_Param param = new LinearElementParam();
+                        pManager.AddParameter(param, name, nickname, description, GH_ParamAccess.list);
+                    }
+                    else if (pType == typeof(Element))
+                    {
+                        IGH_Param param = new LinearElementParam(); //TEMP!
+                        pManager.AddParameter(param, name, nickname, description, GH_ParamAccess.item);
+                    }
+                    else if (pType == typeof(ElementCollection))
+                    {
+                        IGH_Param param = new LinearElementParam(); //TEMP!
+                        pManager.AddParameter(param, name, nickname, description, GH_ParamAccess.list);
+                    }
+                    else if (pType == typeof(Node))
+                    {
+                        IGH_Param param = new NodeParam();
+                        pManager.AddParameter(param, name, nickname, description, GH_ParamAccess.item);
+                    }
+                    else if (pType == typeof(NodeCollection))
+                    {
+                        IGH_Param param = new NodeParam();
+                        pManager.AddParameter(param, name, nickname, description, GH_ParamAccess.list);
+                    }
+                    else if (typeof(SectionFamily).IsAssignableFrom(pType))
                     {
                         IGH_Param param = new SectionFamilyParam();
+                        pManager.AddParameter(param, name, nickname, description, GH_ParamAccess.item);
+                    }
+                    else if (pType == typeof(Bool6D))
+                    {
+                        IGH_Param param = new Bool6DParam();
                         pManager.AddParameter(param, name, nickname, description, GH_ParamAccess.item);
                     }
                     else
@@ -318,7 +407,11 @@ namespace Salamander.Grasshopper
                 object outputData = pInfo.GetValue(action, null);
                 if (PreviewLayer != null) PreviewLayer.TryRegister(outputData);
                 outputData = FormatForOutput(outputData);
-                DA.SetData(pInfo.Name, outputData);
+                if (outputData is IList)
+                {
+                    DA.SetDataList(pInfo.Name, (IEnumerable)outputData);
+                }
+                else DA.SetData(pInfo.Name, outputData);
 
             }
             return true;
@@ -334,34 +427,37 @@ namespace Salamander.Grasshopper
         protected object GetInputData(string name, Type type, IGH_DataAccess DA)
         {
             object result = null;
-            try
+            if (type != typeof(ActionTriggerInput))
             {
-                Type equivalentType = GetEquivalentType(type);
-                MemberInfo[] mInfos = typeof(IGH_DataAccess).GetMember("GetData");
-                MethodInfo getDataMethod = null;
-                foreach (MethodInfo mInfo in mInfos)
+                try
                 {
-                    Type firstPT = mInfo.GetParameters()[0].ParameterType;
-                    if (firstPT == typeof(string)) getDataMethod = mInfo;
-                }
-                if (getDataMethod != null)
-                {
-                    object[] args = new object[] { name, result };
-                    MethodInfo getDataGeneric = getDataMethod.MakeGenericMethod(new Type[] { equivalentType });
-                    bool success = (bool)getDataGeneric.Invoke(DA, args);
-                    if (success)
+                    Type equivalentType = GetEquivalentType(type);
+                    MemberInfo[] mInfos = typeof(IGH_DataAccess).GetMember("GetData");
+                    MethodInfo getDataMethod = null;
+                    foreach (MethodInfo mInfo in mInfos)
                     {
-                        result = args[1];
-                        if (result.GetType() != type)
+                        Type firstPT = mInfo.GetParameters()[0].ParameterType;
+                        if (firstPT == typeof(string)) getDataMethod = mInfo;
+                    }
+                    if (getDataMethod != null)
+                    {
+                        object[] args = new object[] { name, result };
+                        MethodInfo getDataGeneric = getDataMethod.MakeGenericMethod(new Type[] { equivalentType });
+                        bool success = (bool)getDataGeneric.Invoke(DA, args);
+                        if (success)
                         {
-                            result = Convert(result, type);
+                            result = args[1];
+                            if (result.GetType() != type)
+                            {
+                                result = Convert(result, type);
+                            }
                         }
                     }
                 }
-            }
-            catch (Exception e)
-            {
-                AddRuntimeMessage(GH_RuntimeMessageLevel.Error, e.Message);
+                catch (Exception e)
+                {
+                    AddRuntimeMessage(GH_RuntimeMessageLevel.Error, e.Message);
+                }
             }
             return result;
         }
@@ -376,8 +472,13 @@ namespace Salamander.Grasshopper
             if (obj is Vector) return FBtoRC.Convert((Vector)obj);
             else if (obj is Curve) return FBtoRC.Convert((Curve)obj);
             else if (obj is LinearElement) return new LinearElementGoo((LinearElement)obj);
+            else if (obj is LinearElementCollection) return LinearElementGoo.Convert((LinearElementCollection)obj);
             else if (obj is SectionFamily) return new SectionFamilyGoo((SectionFamily)obj);
-            //TODO
+            else if (obj is Node) return new NodeGoo((Node)obj);
+            else if (obj is NodeCollection) return NodeGoo.Convert((NodeCollection)obj);
+            else if (obj is Bool6D) return new Bool6DGoo((Bool6D)obj);
+            else if (obj is FilePath) return obj.ToString();
+            //Add more types here
             return obj;
         }
 
@@ -396,8 +497,10 @@ namespace Salamander.Grasshopper
             //if (toType == typeof(LinearElementGoo)) return new LinearElementGoo(obj as LinearElement);
             //else if (toType == typeof(SectionFamily)) return new SectionFamilyGoo(obj as SectionFamily);
 
-            if (obj is ISalamander_Goo) return ((ISalamander_Goo)obj).Value;
+            if (obj is ISalamander_Goo) return ((ISalamander_Goo)obj).GetValue(toType);
             else if (toType == typeof(Angle)) return new Angle((double)obj);
+            else if (toType == typeof(FilePath)) return new FilePath(obj.ToString());
+            else if (toType == typeof(ActionTriggerInput)) return new ActionTriggerInput();
 
             return Conversion.Instance.Convert(obj, toType);
             /*
@@ -417,23 +520,30 @@ namespace Salamander.Grasshopper
 
         protected virtual Type GetEquivalentType(Type type)
         {
-            //TODO
             if (typeof(Line).IsAssignableFrom(type)) return typeof(RC.Line);
             else if (type == typeof(Angle)) return typeof(double);
             else if (typeof(Curve).IsAssignableFrom(type)) return typeof(RC.Curve);
             else if (typeof(LinearElement).IsAssignableFrom(type)) return typeof(LinearElementGoo);
+            else if (typeof(Element).IsAssignableFrom(type)) return typeof(LinearElementGoo); // TEMP!
+            else if (typeof(LinearElementCollection).IsAssignableFrom(type)) return typeof(LinearElementGoo);
+            else if (typeof(ElementCollection).IsAssignableFrom(type)) return typeof(LinearElementGoo);
             else if (typeof(SectionFamily).IsAssignableFrom(type)) return typeof(SectionFamilyGoo);
+            else if (typeof(Node).IsAssignableFrom(type)) return typeof(NodeGoo);
+            else if (typeof(NodeCollection).IsAssignableFrom(type)) return typeof(NodeGoo);
+            else if (typeof(Bool6D).IsAssignableFrom(type)) return typeof(Bool6DGoo);
+            else if (typeof(FilePath) == type) return typeof(string);
+            else if (typeof(ActionTriggerInput) == type) return typeof(object);
             return type;
         }
 
-        public override void DrawViewportMeshes(IGH_PreviewArgs args)
-        {
-            if (PreviewLayer != null)
-            {
-                PreviewLayer.Draw(new RhinoRenderingParameters(args.Display));
-            }
-            base.DrawViewportMeshes(args);
-        }
+        //public override void DrawViewportMeshes(IGH_PreviewArgs args)
+        //{
+        //    if (PreviewLayer != null)
+        //    {
+        //        PreviewLayer.Draw(new RhinoRenderingParameters(args.Display));
+        //    }
+        //    base.DrawViewportMeshes(args);
+        //}
 
         #endregion
 

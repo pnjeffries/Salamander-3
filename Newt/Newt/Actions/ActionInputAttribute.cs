@@ -46,6 +46,13 @@ namespace Salamander.Actions
         public bool Dialog { get; set; } = false;
 
         /// <summary>
+        /// Only applies to collection types when being wrapped inside a paramatric component.
+        /// If true (default) objects in this collection will be processed one at a time and
+        /// the action executed once for each item individually.
+        /// </summary>
+        public bool OneByOne { get; set; } = true;
+
+        /// <summary>
         /// Constructor
         /// </summary>
         public ActionInputAttribute()

@@ -1,0 +1,221 @@
+﻿<UserControl x:Class="Salamander.UI.ModelTree"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Salamander.UI"
+             xmlns:converters="clr-namespace:FreeBuild.WPF.Converters;assembly=FreeBuild.WPF"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300">
+    <UserControl.Resources>
+        
+        <converters:TreeViewLineConverter x:Key="LineConverter"/>
+        <converters:UndeletedCountConverter x:Key="UndeletedCountConverter"/>
+        
+        <!--======-->
+        <!--STYLES-->
+        <!--======-->
+
+        <!-- Toggle Button -->
+        <Style x:Key="ExpandCollapseToggleStyle" TargetType="ToggleButton">
+            <Setter Property="Focusable" Value="False"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ToggleButton">
+                        <Grid Width="15" Height="13" SnapsToDevicePixels="True">
+                            <!-- Rectangle 9x9 pixels -->
+                            <Rectangle Width="9" Height="9" Stroke="#919191" SnapsToDevicePixels="true">
+                                <Rectangle.Fill>
+                                    <LinearGradientBrush EndPoint="0.5,2" StartPoint="0.5,0">
+                                        <GradientStop Color="White" Offset="0"/>
+                                        <GradientStop Color="Silver" Offset="0.5"/>
+                                        <GradientStop Color="LightGray" Offset="1"/>
+                                    </LinearGradientBrush>
+                                </Rectangle.Fill>
+                            </Rectangle>
+                            <!-- Vertical line inside rectangle -->
+                            <Rectangle x:Name="ExpandPath" Width="1" Height="5" Stroke="Black" SnapsToDevicePixels="true"/>
+                            <!-- Horizontal line inside rectangle -->
+                            <Rectangle Width="5" Height="1" Stroke="Black" SnapsToDevicePixels="true"/>
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsChecked" Value="True">
+                                <Setter Property="Visibility"  TargetName="ExpandPath" Value="Collapsed"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <!--Root TreeViewItem-->
+        <Style x:Key="RootNode" TargetType="{x:Type TreeViewItem}">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type TreeViewItem}">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition/>
+                            </Grid.RowDefinitions>
+
+
+                            <Border Name="Bd" Grid.Column="0" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Padding="{TemplateBinding Padding}" SnapsToDevicePixels="True">
+                                <StackPanel Orientation="Horizontal" Margin="0,1,1,1">
+                                    <Image Source="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Tag}" MaxWidth="16" MaxHeight="16" VerticalAlignment="Center" Margin="0,0,2,0"></Image>
+                                    <ContentPresenter x:Name="PART_Header" ContentSource="Header" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" MinWidth="20" VerticalAlignment="Center"/>
+                                    <TextBlock Margin="3,0,0,0"  VerticalAlignment="Center">
+
+                                    </TextBlock>
+
+                                </StackPanel>
+
+                            </Border>
+                            <ItemsPresenter x:Name="ItemsHost" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="1"/>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <!-- TreeViewItem -->
+        <Style x:Key="{x:Type TreeViewItem}" TargetType="{x:Type TreeViewItem}">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type TreeViewItem}">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition MinWidth="19" Width="Auto"/>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition/>
+                            </Grid.RowDefinitions>
+
+                            <!-- Connecting Lines -->
+                            <!-- Horizontal line -->
+                            <Rectangle x:Name="HorLn" Margin="9,1,0,0" Height="1" Stroke="#DCDCDC" SnapsToDevicePixels="True"/>
+                            <!-- Vertical line -->
+                            <Rectangle x:Name="VerLn" Width="1" Stroke="#DCDCDC" Margin="0,0,1,0" Grid.RowSpan="2" SnapsToDevicePixels="true" Fill="White"/>
+                            <!-- Insert Toggle Button -->
+                            <ToggleButton Margin="-1,0,0,0" x:Name="Expander" Style="{StaticResource ExpandCollapseToggleStyle}" IsChecked="{Binding Path=IsExpanded, RelativeSource={RelativeSource TemplatedParent}}" ClickMode="Press"/>
+                            <Border Name="Bd" Grid.Column="1" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Padding="{TemplateBinding Padding}" SnapsToDevicePixels="True">
+                                <StackPanel Orientation="Horizontal" Margin="0,1,1,1">
+                                    <Image Source="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Tag}" MaxWidth="16" MaxHeight="16" VerticalAlignment="Center" Margin="0,0,2,0"></Image>
+                                    <ContentPresenter x:Name="PART_Header" ContentSource="Header" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" MinWidth="20" VerticalAlignment="Center"/>
+                                    <TextBlock Margin="3,0,0,0"  VerticalAlignment="Center">
+                                        <TextBlock.Text>
+                                            <MultiBinding Converter="{StaticResource UndeletedCountConverter}" StringFormat="({0})">
+                                                <Binding UpdateSourceTrigger="PropertyChanged"></Binding>
+                                                <Binding Path="Count" UpdateSourceTrigger="PropertyChanged"></Binding>
+                                            </MultiBinding>
+                                        </TextBlock.Text>
+                                    </TextBlock>
+                                </StackPanel>
+
+                            </Border>
+                            <ItemsPresenter x:Name="ItemsHost" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2"/>
+                        </Grid>
+                        <ControlTemplate.Triggers>
+
+                            <!-- This trigger changes the connecting lines if the item is the last in the list -->
+                            <DataTrigger Binding="{Binding RelativeSource={RelativeSource Self}, Converter={StaticResource LineConverter}}" Value="true">
+                                <Setter TargetName="VerLn" Property="Height" Value="9"/>
+                                <Setter TargetName="VerLn" Property="VerticalAlignment" Value="Top"/>
+                            </DataTrigger>
+                            <Trigger Property="IsExpanded" Value="false">
+                                <Setter TargetName="ItemsHost" Property="Visibility" Value="Collapsed"/>
+                            </Trigger>
+                            <Trigger Property="HasItems" Value="false">
+                                <Setter TargetName="Expander" Property="Visibility" Value="Hidden"/>
+                            </Trigger>
+                            <MultiTrigger>
+                                <MultiTrigger.Conditions>
+                                    <Condition Property="HasHeader" Value="false"/>
+                                    <Condition Property="Width" Value="Auto"/>
+                                </MultiTrigger.Conditions>
+                                <Setter TargetName="PART_Header" Property="MinWidth" Value="75"/>
+                            </MultiTrigger>
+                            <MultiTrigger>
+                                <MultiTrigger.Conditions>
+                                    <Condition Property="HasHeader" Value="false"/>
+                                    <Condition Property="Height" Value="Auto"/>
+                                </MultiTrigger.Conditions>
+                                <Setter TargetName="PART_Header" Property="MinHeight" Value="19"/>
+                            </MultiTrigger>
+                            <Trigger Property="IsSelected" Value="true">
+                                <Setter TargetName="Bd" Property="Background" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}"/>
+                                <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.HighlightTextBrushKey}}"/>
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="false">
+                                <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+    </UserControl.Resources>
+    
+    
+    <Grid>
+            <!--Model Tree-->
+        <TreeView>
+
+            <TreeViewItem Header="Model" IsExpanded="True">
+
+                <TreeViewItem Header="Coordinate Systems" 
+                              DataContext="{Binding Path=CoordinateSystems}"
+                              MouseDoubleClick="CoordinateSystems_DoubleClick"/>
+
+                <TreeViewItem Header="Levels"
+                              DataContext="{Binding Path=Levels}"
+                              MouseDoubleClick="Levels_DoubleClick"/>
+
+                <TreeViewItem Header="Materials"
+                              DataContext="{Binding Path=Materials}"
+                              MouseDoubleClick="Materials_DoubleClick"/>
+
+                <TreeViewItem Header="Families" 
+                              DataContext="{Binding Path=Families}"
+                              MouseDoubleClick="Families_DoubleClick">
+                    <!--<TreeViewItem Header="Sections"></TreeViewItem>
+                    <TreeViewItem Header="Face Properties"></TreeViewItem>-->
+                </TreeViewItem>
+
+                <TreeViewItem Header="Elements" 
+                              DataContext="{Binding Path=Elements}" 
+                              MouseDoubleClick="Elements_DoubleClick">
+                    <!--<TreeViewItem Header="Linear Elements"></TreeViewItem>
+                    <TreeViewItem Header="Panel Elements"></TreeViewItem>-->
+                </TreeViewItem>
+
+                <TreeViewItem Header="Nodes" 
+                              DataContext="{Binding Path=Nodes}"
+                              MouseDoubleClick="Nodes_DoubleClick"/>
+
+                <TreeViewItem Header="Sets"
+                              DataContext="{Binding Path=Sets}"
+                              MouseDoubleClick="Sets_DoubleClick"/>
+
+                <TreeViewItem Header="Loads"
+                              DataContext="{Binding Path=Loads}"
+                              MouseDoubleClick="Loads_DoubleClick"/>
+
+                <TreeViewItem Header="Load Cases"
+                              DataContext="{Binding Path=LoadCases}"
+                              MouseDoubleClick="LoadCases_DoubleClick"/>
+
+            </TreeViewItem>
+            
+        </TreeView>
+    </Grid>
+</UserControl>

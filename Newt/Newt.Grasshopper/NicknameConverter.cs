@@ -39,6 +39,8 @@ namespace Salamander.Grasshopper
             if (result == null) result = "A";
             if (Previous.Contains(result))
             {
+                if (fullName.Length > 1)
+                    result = fullName.Substring(0, 2);
                 //TODO
             }
             Previous.Add(result);

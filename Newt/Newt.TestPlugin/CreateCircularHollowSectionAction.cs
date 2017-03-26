@@ -21,10 +21,10 @@ namespace Salamander.BasicTools
         public string Name { get; set; } = "Circular Hollow Section";
 
         [ActionInput(2, "the depth of the section")]
-        public double Diameter { get; set; }
+        public double Diameter { get; set; } = 0.2191;
 
         [ActionInput(3, "the wall thickness of the section")]
-        public double WallThickness { get; set; }
+        public double WallThickness { get; set; } = 0.01;
 
         [ActionOutput(1, "the output section property")]
         public SectionFamily Section { get; set; }

@@ -6,13 +6,14 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Rhino.Geometry;
 
 namespace Salamander.Grasshopper
 {
     /// <summary>
     /// Linear element Grasshopper parameter
     /// </summary>
-    public class LinearElementParam : GH_Param<LinearElementGoo>
+    public class LinearElementParam : SalamanderPreviewParamBase<LinearElementGoo>
     {
         #region Properties
 
@@ -33,7 +34,7 @@ namespace Salamander.Grasshopper
                 Bitmap bmp = IconResourceHelper.CombinedBitmapFromURIs(uri1, uri2);
                 return bmp;
             }
-        }
+        }     
 
         #endregion
 

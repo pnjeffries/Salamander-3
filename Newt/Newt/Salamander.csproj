@@ -48,6 +48,7 @@
     <Compile Include="Actions\ActionManager.cs" />
     <Compile Include="Actions\ActionOutputAttribute.cs" />
     <Compile Include="Actions\ActionParameterAttribute.cs" />
+    <Compile Include="Actions\ActionTriggerInput.cs" />
     <Compile Include="Actions\PreviewParameters.cs" />
     <Compile Include="Actions\IImportDocumentAction.cs" />
     <Compile Include="Actions\ImportActionBase.cs" />
@@ -128,6 +129,28 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\Node.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\GetElementNodes.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Bool6D.png" />
+    <Resource Include="Resources\CoordinateSystem.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\NodeRestraint.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\AssignIcon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\GSA.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Robot.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\SplashScreen.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

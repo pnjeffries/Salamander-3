@@ -11,6 +11,7 @@ using Rhino.Commands;
 using RC = Rhino.Geometry;
 using Salamander.Rhino;
 using Rhino.DocObjects;
+using FreeBuild.Model;
 
 namespace Salamander.RhinoCommon
 {
@@ -108,6 +109,85 @@ namespace Salamander.RhinoCommon
                 }
             }
             return result;
+        }
+
+        private bool FilterElements(RhinoObject rObj, RC.GeometryBase geometry, RC.ComponentIndex index)
+        {
+            return Host.Instance.Handles.Links.ContainsSecond(rObj.Id);
+        }
+
+        public override Element EnterElement(string prompt = "Enter element")
+        {
+            GetObject gO = new GetObject();
+            gO.SetCustomGeometryFilter(new GetObjectGeometryFilter(FilterElements));
+            //gO.GeometryFilter = ObjectType.Curve;
+            gO.SetCommandPrompt(prompt);
+            if (gO.Get() == GetResult.Cancel) throw new OperationCanceledException("Operation cancelled by user");
+            ObjRef rObj = gO.Object(0);
+            if (Host.Instance.Handles.Links.ContainsSecond(rObj.ObjectId))
+            {
+                Guid guid = Host.Instance.Handles.Links.GetFirst(rObj.ObjectId);
+                return Core.Instance.ActiveDocument?.Model?.Elements[guid];
+            }
+            return null;
+        }
+
+        public override ElementCollection EnterElements(string prompt = "Enter elements")
+        {
+            GetObject gO = new GetObject();
+            gO.SetCustomGeometryFilter(new GetObjectGeometryFilter(FilterElements));
+            //gO.GeometryFilter = ObjectType.Curve;
+            gO.SetCommandPrompt(prompt);
+            if (gO.GetMultiple(1,0) == GetResult.Cancel) throw new OperationCanceledException("Operation cancelled by user");
+            foreach (ObjRef rObj in gO.Objects())
+            {
+                var result = new ElementCollection();
+                if (Host.Instance.Handles.Links.ContainsSecond(rObj.ObjectId))
+                {
+                    Guid guid = Host.Instance.Handles.Links.GetFirst(rObj.ObjectId);
+                    Element element = Core.Instance.ActiveDocument?.Model?.Elements[guid];
+                    if (element != null) result.Add(element);
+                }
+                return result;
+            }
+            return null;
+        }
+
+        public override LinearElement EnterLinearElement(string prompt = "Enter linear element")
+        {
+            GetObject gO = new GetObject();
+            gO.SetCustomGeometryFilter(new GetObjectGeometryFilter(FilterElements));
+            gO.GeometryFilter = ObjectType.Curve;
+            gO.SetCommandPrompt(prompt);
+            if (gO.Get() == GetResult.Cancel) throw new OperationCanceledException("Operation cancelled by user");
+            ObjRef rObj = gO.Object(0);
+            if (Host.Instance.Handles.Links.ContainsSecond(rObj.ObjectId))
+            {
+                Guid guid = Host.Instance.Handles.Links.GetFirst(rObj.ObjectId);
+                return Core.Instance.ActiveDocument?.Model?.Elements[guid] as LinearElement;
+            }
+            return null;
+        }
+
+        public override LinearElementCollection EnterLinearElements(string prompt = "Enter linear elements")
+        {
+            GetObject gO = new GetObject();
+            gO.SetCustomGeometryFilter(new GetObjectGeometryFilter(FilterElements));
+            gO.GeometryFilter = ObjectType.Curve;
+            gO.SetCommandPrompt(prompt);
+            if (gO.GetMultiple(1, 0) == GetResult.Cancel) throw new OperationCanceledException("Operation cancelled by user");
+            foreach (ObjRef rObj in gO.Objects())
+            {
+                var result = new LinearElementCollection();
+                if (Host.Instance.Handles.Links.ContainsSecond(rObj.ObjectId))
+                {
+                    Guid guid = Host.Instance.Handles.Links.GetFirst(rObj.ObjectId);
+                    Element element = Core.Instance.ActiveDocument?.Model?.Elements[guid];
+                    if (element != null && element is LinearElement) result.Add((LinearElement)element);
+                }
+                return result;
+            }
+            return null;
         }
 
         #endregion

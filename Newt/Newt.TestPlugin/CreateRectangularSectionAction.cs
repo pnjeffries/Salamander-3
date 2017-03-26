@@ -21,11 +21,11 @@ namespace Salamander.BasicTools
         [ActionInput(1, "the name of the section")]
         public string Name { get; set; } = "Rectangular Section";
 
-        [ActionInput(2,"the depth of the section")]
-        public double Depth { get; set; }
+        [ActionInput(2, "the depth of the section")]
+        public double Depth { get; set; } = 0.3;
 
-        [ActionInput(3,"the width of the section")]
-        public double Width { get; set; }
+        [ActionInput(3, "the width of the section")]
+        public double Width { get; set; } = 0.3;
 
         [ActionOutput(1, "the output section property")]
         public SectionFamily Section { get; set; }

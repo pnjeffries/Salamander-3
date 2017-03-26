@@ -40,11 +40,25 @@ namespace Salamander.Revit
             }
         }
 
+        /// <summary>
+        /// Private backing field for GUI property
+        /// </summary>
+        private RevitGUIController _GUI;
+
+        /// <summary>
+        /// Revit GUI Controller
+        /// </summary>
+        public RevitGUIController GUI
+        {
+            get { return _GUI; }
+            private set { _GUI = value; }
+        }
+
         GUIController IHost.GUI
         {
             get
             {
-                throw new NotImplementedException();
+                return _GUI;
             }
         }
 
@@ -57,6 +71,15 @@ namespace Salamander.Revit
         }
 
 
+
+        #endregion
+
+        #region Constructor
+
+        public Host()
+        {
+            GUI = new RevitGUIController();
+        }
 
         #endregion
 

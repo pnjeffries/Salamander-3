@@ -61,6 +61,22 @@ namespace Salamander.Rhino
             RhinoApp.Idle += HandlesIdle;
         }
 
+        public override void InitialiseToModel(Model model)
+        {
+            base.InitialiseToModel(model);
+            RhinoIDMappingTable idMap = Core.Instance.ActiveDocument.IDMappings.GetLatest<RhinoIDMappingTable>();
+            if (idMap == null)
+            {
+                idMap = new RhinoIDMappingTable();
+                Core.Instance.ActiveDocument.IDMappings["Rhino"] = idMap;
+            }
+            if (!idMap.ContainsKey(idMap.HandlesCategory))
+            {
+                idMap[idMap.HandlesCategory] = new BiDirectionary<Guid, Guid>();
+            }
+            Links = idMap[idMap.HandlesCategory];
+        }
+
         /// <summary>
         /// Get the FreeBuild model object linked to the specified Rhino handle ID
         /// </summary>
@@ -261,15 +277,15 @@ namespace Salamander.Rhino
             }
             else
             {
-                Guid curveID = Links.GetSecond(element.GUID);
+                Guid objID = Links.GetSecond(element.GUID);
                 if (element.IsDeleted)
                 {
-                    RhinoOutput.DeleteObject(curveID);
-                    //Links.Remove(element.GUID);
+                    RhinoOutput.DeleteObject(objID);
                 }
                 else
                 {
-                    RhinoOutput.Replace(curveID, element.GetGeometry());
+                    objID = RhinoOutput.BakeOrReplace(objID, element.GetGeometry());
+                    Links.Set(element.GUID, objID);
                 }
             }
         }

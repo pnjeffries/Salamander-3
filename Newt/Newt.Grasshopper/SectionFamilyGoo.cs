@@ -35,14 +35,6 @@ namespace Salamander.Grasshopper
             }
         }
 
-        object ISalamander_Goo.Value
-        {
-            get
-            {
-                return Value;
-            }
-        }
-
         #region Constructors
 
         public SectionFamilyGoo() : base() { }
@@ -64,6 +56,13 @@ namespace Salamander.Grasshopper
         public void DrawViewportMeshes(IGH_PreviewArgs args)
         {
             throw new NotImplementedException();
+        }
+
+        public object GetValue(Type type)
+        {
+            if (type == typeof(SectionFamilyCollection))
+                return new SectionFamilyCollection(Value);
+            else return Value;
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using FreeBuild.Base;
 using FreeBuild.Geometry;
+using FreeBuild.Model;
 using Salamander.Actions;
 using System;
 using System.Collections.Generic;
@@ -96,6 +97,34 @@ namespace Salamander
         public abstract VertexGeometryCollection EnterGeometry(string prompt = "Enter geometry");
 
         /// <summary>
+        /// Prompt the user to select an Element
+        /// </summary>
+        /// <param name="prompt"></param>
+        /// <returns></returns>
+        public abstract Element EnterElement(string prompt = "Enter element");
+
+        /// <summary>
+        /// Prompt the user to select multiple elements
+        /// </summary>
+        /// <param name="prompt"></param>
+        /// <returns></returns>
+        public abstract ElementCollection EnterElements(string prompt = "Enter elements");
+
+        /// <summary>
+        /// Prompt the user to select a Linear Element
+        /// </summary>
+        /// <param name="prompt"></param>
+        /// <returns></returns>
+        public abstract LinearElement EnterLinearElement(string prompt = "Enter linear element");
+
+        /// <summary>
+        /// Prompt the user to select multiple Linear Element
+        /// </summary>
+        /// <param name="prompt"></param>
+        /// <returns></returns>
+        public abstract LinearElementCollection EnterLinearElements(string prompt = "Enter linear elements");
+
+        /// <summary>
         /// Prompt the user to enter data of the specified type.
         /// The appropriate 'Enter____' function will be automatically selected based on the type.
         /// Override this to enable actions to use application-specific data types as inputs.
@@ -144,6 +173,14 @@ namespace Salamander
                         "Enter end point of " + description);
                 else if (inputType == typeof(VertexGeometryCollection)) //FreeBuild Shapes
                     value = EnterGeometry("Enter " + description);
+                else if (inputType == typeof(Element)) // FreeBuild Element
+                    value = EnterElement("Enter " + description);
+                else if (inputType == typeof(ElementCollection)) // FreeBuild Elements
+                    value = EnterElements("Enter " + description);
+                else if (inputType == typeof(LinearElement))
+                    value = EnterLinearElement("Enter " + description);
+                else if (inputType == typeof(LinearElementCollection))
+                    value = EnterLinearElements("Enter " + description);
                 else return false; //Input not recognised
             }
             catch (OperationCanceledException)

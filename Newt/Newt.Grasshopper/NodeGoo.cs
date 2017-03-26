@@ -5,13 +5,17 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Grasshopper.Kernel;
+using Rhino.Geometry;
+using FreeBuild.Rhino;
+using RD = Rhino.Display;
 
 namespace Salamander.Grasshopper
 {
     /// <summary>
     /// Node Goo
     /// </summary>
-    public class NodeGoo : GH_Goo<Node>
+    public class NodeGoo : GH_Goo<Node>, ISalamander_Goo, IGH_PreviewData
     {
         #region Properties
 
@@ -39,6 +43,15 @@ namespace Salamander.Grasshopper
             }
         }
 
+        public BoundingBox ClippingBox
+        {
+            get
+            {
+                Point3d pt = FBtoRC.Convert(Value.Position);
+                return new BoundingBox(pt, pt);
+            }
+        }
+
         #endregion
 
         #region Constructor
@@ -59,6 +72,31 @@ namespace Salamander.Grasshopper
         public override string ToString()
         {
             return "Node " + Value.NumericID;
+        }
+
+        public static List<NodeGoo> Convert(NodeCollection collection)
+        {
+            var result = new List<NodeGoo>();
+            if (collection != null)
+                foreach (Node obj in collection) result.Add(new NodeGoo(obj));
+            return result;
+        }
+
+        public object GetValue(Type type)
+        {
+            if (type == typeof(NodeCollection)) return new NodeCollection(Value);
+            else return Value;
+        }
+
+
+        public void DrawViewportWires(GH_PreviewWireArgs args)
+        {
+            args.Pipeline.DrawPoint(FBtoRC.Convert(Value.Position), RD.PointStyle.Simple, 8, args.Color);
+        }
+
+        public void DrawViewportMeshes(GH_PreviewMeshArgs args)
+        {
+            //args.Pipeline.DrawPoint(FBtoRC.Convert(Value.Position), RD.PointStyle.ActivePoint, 1, args.Material.Diffuse);
         }
 
         #endregion

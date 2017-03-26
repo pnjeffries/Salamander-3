@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Salamander.Selection;
+using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -13,6 +15,19 @@ namespace Salamander
     /// </summary>
     public abstract class GUIController
     {
+        /// <summary>
+        /// An event raised when UI initialisation has been completed
+        /// </summary>
+        public event EventHandler UIInitialisationCompleted;
+
+        /// <summary>
+        /// Notify the controller that application initialisation has completed
+        /// </summary>
+        public void NotifyInitialisationCompleted()
+        {
+            UIInitialisationCompleted(this, null);
+        }
+
         /// <summary>
         /// Show an OpenFileDialog and use it to obtain a filepath
         /// </summary>
@@ -30,6 +45,18 @@ namespace Salamander
         /// <returns>The selected filepath.  Or, null if the dialog is closed
         /// without a filepath being selected.</returns>
         public abstract string ShowSaveFileDialog(string prompt, string filter, string defaultPath = null, int filterIndex = -1);
+
+        /// <summary>
+        /// Show the application splash scren
+        /// </summary>
+        public abstract void ShowSplashScreen();
+
+        /// <summary>
+        /// Show a data table for the specified data
+        /// </summary>
+        /// <param name="name"></param>
+        /// <param name="data"></param>
+        public abstract void ShowDataTable(string name, IEnumerable data, SelectionViewModel selection = null);
 
     }
 }

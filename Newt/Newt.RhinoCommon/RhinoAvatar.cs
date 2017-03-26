@@ -6,6 +6,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Drawing;
+using FreeBuild.Rendering;
+using FreeBuild.Rhino;
 
 namespace Salamander.Rhino
 {
@@ -43,6 +45,19 @@ namespace Salamander.Rhino
         public DisplayMaterial GetDefaultMaterial()
         { 
             return _DefaultMaterial;
+        }
+
+        public override DisplayBrush Brush
+        {
+            get
+            {
+                return null;
+            }
+
+            set
+            {
+                Material = FBtoRC.Convert(value);
+            }
         }
 
     }

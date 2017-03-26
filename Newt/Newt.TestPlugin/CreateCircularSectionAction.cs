@@ -21,7 +21,7 @@ namespace Salamander.BasicTools
         public string Name { get; set; } = "Circular Section";
 
         [ActionInput(2, "the depth of the section")]
-        public double Diameter { get; set; } = 0.5;
+        public double Diameter { get; set; } = 0.3;
 
         [ActionOutput(1, "the output section property")]
         public SectionFamily Section { get; set; }

@@ -9,5 +9,9 @@ namespace Salamander.Display
 {
     public interface IAvatar : IRenderable
     {
+        /// <summary>
+        /// The brush used to display this avatar
+        /// </summary>
+        DisplayBrush Brush { get; set; } 
     }
 }

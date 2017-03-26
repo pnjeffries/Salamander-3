@@ -108,15 +108,22 @@ namespace Salamander.RhinoCommon
         {
             if (!Core.IsInitialised())
             {
+                Instance.PreInitialise();
                 Core.Initialise(Instance);
                 Instance.Initialise();
             }
             return true;
         }
 
-        public void Initialise()
+        private void PreInitialise()
         {
             GUI = new RhinoGUIController();
+            GUI.ShowSplashScreen();
+        }
+
+        private void Initialise()
+        {
+            
             Input = new RhinoInputController();
             AvatarFactory = new RhinoAvatarFactory();
             Handles = new HandlesLayer();

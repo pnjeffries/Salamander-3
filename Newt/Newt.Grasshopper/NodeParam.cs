@@ -5,10 +5,11 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Rhino.Geometry;
 
 namespace Salamander.Grasshopper
 {
-    public class NodeParam : GH_Param<NodeGoo>
+    public class NodeParam : SalamanderPreviewParamBase<NodeGoo>
     {
         public override Guid ComponentGuid
         {
@@ -32,5 +33,10 @@ namespace Salamander.Grasshopper
         public NodeParam()
             : base("Node", "Node", "A Salamander Node", "Salamander 3", "Params", GH_ParamAccess.item)
         { }
+
+        public override void DrawViewportMeshes(IGH_PreviewArgs args)
+        {
+            //Do nothing!
+        }
     }
 }

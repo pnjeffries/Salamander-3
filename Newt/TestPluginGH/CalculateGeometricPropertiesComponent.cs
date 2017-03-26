@@ -7,7 +7,7 @@ using Salamander.Grasshopper;
 
 namespace Salamander.TestPluginGH
 {
-    public class CalculateGeometricPropertiesComponent : SalamanderBaseComponent
+    /*public class CalculateGeometricPropertiesComponent : SalamanderBaseComponent
     {
         public override Guid ComponentGuid
         {
@@ -25,5 +25,5 @@ namespace Salamander.TestPluginGH
         {
 
         }
-    }
+    }*/
 }

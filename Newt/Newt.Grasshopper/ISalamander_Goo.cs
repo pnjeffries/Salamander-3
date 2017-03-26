@@ -16,12 +16,6 @@ namespace Salamander.Grasshopper
         /// <summary>
         /// The wrapped goo value
         /// </summary>
-        object Value { get; }
-
-        /// <summary>
-        /// Draw preview meshes
-        /// </summary>
-        /// <param name="args"></param>
-        void DrawViewportMeshes(IGH_PreviewArgs args);
+        object GetValue(Type type);
     }
 }

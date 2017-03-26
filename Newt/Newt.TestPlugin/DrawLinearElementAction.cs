@@ -8,7 +8,7 @@ using Salamander.Display;
 namespace Salamander.BasicTools
 {
     [Action("DrawLinearElement",
-            "Create a new linear element between two points.",
+            "Create a new linear element along a straight line.",
         IconBackground = Resources.BaseURI + "LinearElement.png",
         IconForeground = Resources.BaseURI + "AddIcon.png")]
     public class DrawLinearElementAction : ModelActionBase

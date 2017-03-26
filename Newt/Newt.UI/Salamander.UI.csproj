@@ -44,11 +44,17 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DataTable.xaml.cs">
+      <DependentUpon>DataTable.xaml</DependentUpon>
+    </Compile>
     <Compile Include="GeometryDataControl.xaml.cs">
       <DependentUpon>GeometryDataControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="LinearElementSelectionControl.xaml.cs">
       <DependentUpon>LinearElementSelectionControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ModelTree.xaml.cs">
+      <DependentUpon>ModelTree.xaml</DependentUpon>
     </Compile>
     <Compile Include="NodeSelectionControl.xaml.cs">
       <DependentUpon>NodeSelectionControl.xaml</DependentUpon>
@@ -59,6 +65,9 @@
     </Compile>
     <Compile Include="SideBarControl.xaml.cs">
       <DependentUpon>SideBarControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="SplashScreen.xaml.cs">
+      <DependentUpon>SplashScreen.xaml</DependentUpon>
     </Compile>
     <Compile Include="WPFGUIController.cs" />
   </ItemGroup>
@@ -77,11 +86,19 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Page Include="DataTable.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="GeometryDataControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="LinearElementSelectionControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ModelTree.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -94,6 +111,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="SideBarControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="SplashScreen.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
