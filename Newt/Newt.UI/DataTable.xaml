@@ -20,7 +20,7 @@
                  ItemsSource="{Binding Path=ItemsSource}" PreviewKeyDown="DataGrid_KeyDown" CanUserDeleteRows="False"
                      ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.HorizontalScrollBarVisibility="Auto"
                       SelectionChanged="DataGrid_SelectionChanged" SelectionMode="{Binding Path=SelectionMode}"
-                           RowHeaderWidth="20"
+                           RowHeaderWidth="20" Unloaded="DataGrid_Unloaded"
                   >
             <fb:AutoUIDataGrid.RowHeaderTemplate>
                 <DataTemplate>

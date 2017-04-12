@@ -37,6 +37,12 @@ namespace Salamander.Selection
         {
             NotifyPropertyChanged(propertyName);
         }
+
+        /// <summary>
+        /// Get the Selection collection belonging to this viewmodel
+        /// </summary>
+        /// <returns></returns>
+        public abstract INotifyCollectionChanged GetCollection();
     }
 
     /// <summary>
@@ -59,6 +65,11 @@ namespace Salamander.Selection
         public SelectionViewModel()
         {
             Selection.CollectionChanged += HandleSelectionChanged;
+        }
+
+        public override INotifyCollectionChanged GetCollection()
+        {
+            return Selection;
         }
 
         /// <summary>

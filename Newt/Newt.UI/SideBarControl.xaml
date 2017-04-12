@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Salamander.UI"
+             xmlns:display="clr-namespace:Salamander.Display;assembly=Salamander3"
              xmlns:converters="clr-namespace:FreeBuild.WPF.Converters;assembly=FreeBuild.WPF"
              xmlns:fb="clr-namespace:FreeBuild.WPF;assembly=FreeBuild.WPF"
              Loaded="OnWindowLoaded"
@@ -16,6 +17,7 @@
             </ResourceDictionary.MergedDictionaries>
             <converters:CountVisibilityConverter x:Key="CountVisibilityConverter"/>
             <converters:NullOrEmptyVisibilityConverter x:Key="NullOrEmptyVisibilityConverter"/>
+            <converters:VisibilityConverter x:Key="VisibilityConverter"/>
         </ResourceDictionary>
     </UserControl.Resources>
     <Grid Name="LayoutBase">
@@ -24,6 +26,7 @@
             <RowDefinition Height="140"/>
             <RowDefinition Height="5"/>
             <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
             
         </Grid.RowDefinitions>
 
@@ -80,6 +83,33 @@
                     </fb:PropertiesExpander>
             </StackPanel>
             </StackPanel>
-        </ScrollViewer> 
+        </ScrollViewer>
+        
+        <!--Display Layer ToolBar-->
+        <ToolBarTray Grid.Row="3">
+            <ToolBar ItemsSource="{Binding Path=Layers.Layers}">
+                <ToolBar.ItemTemplate>
+                    <DataTemplate DataType="display:DisplayLayer">
+                        <ToggleButton IsChecked="{Binding Path=Visible}"
+                                      Checked="RefreshViewport"
+                                      Unchecked="RefreshViewport"
+                                      BorderThickness="0"
+                                      Background="Transparent"
+                                      Visibility="{Binding Path=Toggleable, Converter={StaticResource VisibilityConverter}}">
+                            <ToggleButton.ToolTip>
+                                <ToolTip>
+                                    <StackPanel>
+                                        <TextBlock Text="{Binding Path=Name}" FontWeight="Bold"/>
+                                        <TextBlock Text="{Binding Path=Description}"/>
+                                    </StackPanel>
+                                </ToolTip>
+                            </ToggleButton.ToolTip>
+                            <Image Width="16" Height="16" Source="{Binding Path=IconURI}"></Image>
+                        </ToggleButton>
+                    </DataTemplate>
+                </ToolBar.ItemTemplate>
+            </ToolBar>
+        </ToolBarTray>
+
     </Grid>
 </UserControl>

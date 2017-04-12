@@ -176,6 +176,14 @@
             		Maximum="0.5" TickFrequency="0.001"
             		Units="m"
             		Visibility="{Binding RootRadius, Converter={StaticResource AlwaysVisibleConverter}, FallbackValue=Collapsed}"/>
+
+                <fb:SliderFieldControl Label="Corner Radius:"
+            		ToolTip="The corner radius of the section profile"
+            		Value="{Binding CornerRadius}"
+            		Maximum="0.5" TickFrequency="0.001"
+            		Units="m"
+            		Visibility="{Binding CornerRadius, Converter={StaticResource AlwaysVisibleConverter}, FallbackValue=Collapsed}"/>
+                
             </StackPanel>
         </StackPanel>
     </Grid>

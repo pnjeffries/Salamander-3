@@ -36,6 +36,7 @@ namespace Salamander.BasicTools
                 Element = Model.Create.LinearElement(Line, exInfo);
                 Element.Family = Section;
                 Element.Orientation = Orientation;
+                Element.GenerateNodes(new NodeGenerationParameters(exInfo));
                 return true;
             }
             return false;

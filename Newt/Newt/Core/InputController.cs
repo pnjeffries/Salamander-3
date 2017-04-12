@@ -69,7 +69,7 @@ namespace Salamander
         /// <param name="prompt">The prompt message to be displayed</param>
         /// <param name="defaultValue">The default value which will be suggested to the user</param>
         /// <returns></returns>
-        public abstract string EnterString(string prompt = "Enter string", string defaultValue = "");
+        public abstract string EnterString(string prompt = "Enter string", string defaultValue = null);
 
         /// <summary>
         /// Prompt the user to select a point in 3D space

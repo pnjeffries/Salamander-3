@@ -32,5 +32,10 @@ namespace Salamander.UI
         {
             Dispatcher.BeginInvoke(new Action(() => Core.Instance.UI.NotifyInitialisationCompleted()), DispatcherPriority.ContextIdle, null);
         }
+
+        private void RefreshViewport(object sender, RoutedEventArgs e)
+        {
+            Core.Instance.Host.Refresh();
+        }
     }
 }

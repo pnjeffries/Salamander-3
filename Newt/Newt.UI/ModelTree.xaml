@@ -172,7 +172,7 @@
 
             <TreeViewItem Header="Model" IsExpanded="True">
 
-                <TreeViewItem Header="Coordinate Systems" 
+                <!--<TreeViewItem Header="Coordinate Systems" 
                               DataContext="{Binding Path=CoordinateSystems}"
                               MouseDoubleClick="CoordinateSystems_DoubleClick"/>
 
@@ -182,7 +182,7 @@
 
                 <TreeViewItem Header="Materials"
                               DataContext="{Binding Path=Materials}"
-                              MouseDoubleClick="Materials_DoubleClick"/>
+                              MouseDoubleClick="Materials_DoubleClick"/>-->
 
                 <TreeViewItem Header="Families" 
                               DataContext="{Binding Path=Families}"
@@ -202,7 +202,7 @@
                               DataContext="{Binding Path=Nodes}"
                               MouseDoubleClick="Nodes_DoubleClick"/>
 
-                <TreeViewItem Header="Sets"
+                <!--<TreeViewItem Header="Sets"
                               DataContext="{Binding Path=Sets}"
                               MouseDoubleClick="Sets_DoubleClick"/>
 
@@ -212,7 +212,7 @@
 
                 <TreeViewItem Header="Load Cases"
                               DataContext="{Binding Path=LoadCases}"
-                              MouseDoubleClick="LoadCases_DoubleClick"/>
+                              MouseDoubleClick="LoadCases_DoubleClick"/>-->
 
             </TreeViewItem>
             

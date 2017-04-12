@@ -14,11 +14,22 @@ using FreeBuild.Rendering;
 using System.ComponentModel;
 using RC = Rhino.Geometry;
 using FreeBuild.Rhino;
+using System.Timers;
 
 namespace Salamander.Rhino
 {
     public class HandlesLayer : DisplayLayer<ModelObject>
     {
+        #region Fields
+
+        /// <summary>
+        /// The ID of the last rhino object to be replaced.
+        /// Used to suppress handling the deletion event of this handle
+        /// </summary>
+        private Guid _LastReplaced = Guid.Empty;
+
+        #endregion
+
         #region Properties
 
         /// <summary>
@@ -28,6 +39,14 @@ namespace Salamander.Rhino
         {
             get; set;
         } = new BiDirectionary<Guid, Guid>();
+
+        public override bool Toggleable
+        {
+            get
+            {
+                return false;
+            }
+        }
 
         #endregion
 
@@ -99,6 +118,7 @@ namespace Salamander.Rhino
         private void HandlesIdle(object sender, EventArgs e)
         {
             //throw new NotImplementedException();
+            ProcessObjectReplacedWaitingList(sender, e);
         }
 
         private void HandlesAddRhinoObject(object sender, RhinoObjectEventArgs e)
@@ -130,6 +150,50 @@ namespace Salamander.Rhino
             }
         }
 
+        /// <summary>
+        /// A storage mechanism for node update operations that have been deferred to after 
+        /// </summary>
+        private Dictionary<Node, RhinoReplaceObjectEventArgs> _ReplacedNodesWaitingList
+            = new Dictionary<Node, RhinoReplaceObjectEventArgs>();
+
+        /// <summary>
+        /// Storage for elements updated in the current batch of replacement operations
+        /// </summary>
+        private ElementCollection _ReplacedElements
+            = new ElementCollection();
+
+        /// <summary>
+        /// The timer used to defer replacement processing operations
+        /// </summary>
+        //private Timer _ObjectReplacedWaitTimer = null;
+
+        private void ProcessObjectReplacedWaitingList(object sender, EventArgs args)
+        {
+            if (_ReplacedElements.Count > 0 || _ReplacedNodesWaitingList.Count > 0)
+            {
+                foreach (KeyValuePair<Node, RhinoReplaceObjectEventArgs> kvp in _ReplacedNodesWaitingList)
+                {
+                    Node node = kvp.Key;
+                    RC.GeometryBase geometry = kvp.Value.NewRhinoObject.Geometry;
+                    if (geometry is RC.Point)
+                    {
+                        RC.Point rPt = (RC.Point)geometry;
+                        Vector pos = RCtoFB.Convert(rPt.Location);
+                        node.MoveTo(pos, true, _ReplacedElements);
+                    }
+                }
+
+                _ReplacedElements.GenerateNodes(new NodeGenerationParameters());
+
+                _ReplacedElements.Clear();
+                _ReplacedNodesWaitingList.Clear();
+
+                //_ObjectReplacedWaitTimer.Stop();
+
+                Core.Instance.Host.Refresh();
+            }
+        }
+
         private void HandlesReplaceRhinoObject(object sender, RhinoReplaceObjectEventArgs e)
         {
             if (!RhinoOutput.Writing)
@@ -137,27 +201,40 @@ namespace Salamander.Rhino
                 ModelObject mObj = LinkedModelObject(e.ObjectId);
                 if (mObj != null)
                 {
+                    //if (_ObjectReplacedWaitTimer != null) _ObjectReplacedWaitTimer.Stop();
                     if (mObj is LinearElement)
                     {
                         RC.GeometryBase geometry = e.NewRhinoObject.Geometry;
+                        LinearElement element = (LinearElement)mObj;
                         if (geometry is RC.Curve)
                         {
                             Curve crv = RCtoFB.Convert((RC.Curve)geometry);
                             if (crv != null)
-                                ((LinearElement)mObj).ReplaceGeometry(crv);
+                                element.ReplaceGeometry(crv);
                         }
+                        _ReplacedElements.Add(element);
                     }
                     else if (mObj is Node)
                     {
-                        RC.GeometryBase geometry = e.NewRhinoObject.Geometry;
+                        _ReplacedNodesWaitingList[(Node)mObj] = e;
+                        /*RC.GeometryBase geometry = e.NewRhinoObject.Geometry;
                         if (geometry is RC.Point)
                         {
                             Node node = (Node)mObj;
                             node.Position = RCtoFB.Convert(((RC.Point)geometry).Location);
-                        }
+                        }*/
+                        /*if (_ObjectReplacedWaitTimer == null)
+                        {
+                            _ObjectReplacedWaitTimer = new Timer(100);
+                            _ObjectReplacedWaitTimer.AutoReset = false;
+                            _ObjectReplacedWaitTimer.Elapsed += ProcessObjectReplacedWaitingList;
+                        }*/
+                        //if (!_ObjectReplacedWaitTimer.Enabled)
                     }
+                    //if (_ObjectReplacedWaitTimer != null) _ObjectReplacedWaitTimer.Start();
                 }
             }
+            _LastReplaced = e.ObjectId;
         }
 
         private void HandlesDeselectAllObjects(object sender, RhinoDeselectAllObjectsEventArgs e)
@@ -194,7 +271,11 @@ namespace Salamander.Rhino
 
         private void HandlesDeleteRhinoObject(object sender, RhinoObjectEventArgs e)
         {
-            if (!RhinoOutput.Writing)
+            if (e.ObjectId == _LastReplaced)
+            {
+                _LastReplaced = Guid.Empty;
+            }
+            else if(!RhinoOutput.Writing)
             {
                 LinkedModelObject(e.ObjectId)?.Delete();
             }

@@ -32,6 +32,11 @@ namespace Salamander.Display
         }
 
         /// <summary>
+        /// Can this layer be toggled on and off?
+        /// </summary>
+        public virtual bool Toggleable { get { return true; } }
+
+        /// <summary>
         /// Is this display layer a dynamic preview layer that should be updated during position selection events
         /// </summary>
         public bool IsDynamic { get; protected set; }

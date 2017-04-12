@@ -42,8 +42,9 @@ namespace Salamander.Rhino
         /// Open the sidebar panel as a sibling of the layers table
         /// </summary>
         public void CreateHostDockPanel()
-        { 
-            RUI.Panels.OpenPanelAsSibling(typeof(SideBarUIHost).GUID, RUI.PanelIds.Layers);
+        {
+            RUI.Panels.OpenPanel(typeof(SideBarUIHost).GUID);
+            //RUI.Panels.OpenPanelAsSibling(typeof(SideBarUIHost).GUID, RUI.PanelIds.Layers);
             SideBarControl selectPanel = new SideBarControl();
             selectPanel.DataContext = Core.Instance;
             SideBarUIHost host = (SideBarUIHost)RUI.Panels.GetPanel(typeof(SideBarUIHost).GUID);

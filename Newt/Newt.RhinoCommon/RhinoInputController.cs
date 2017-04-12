@@ -52,9 +52,10 @@ namespace Salamander.RhinoCommon
             return gI.Number();
         }
 
-        public override string EnterString(string prompt = "Enter string", string defaultValue = "")
+        public override string EnterString(string prompt = "Enter string", string defaultValue = null)
         {
             GetString gS = new GetString();
+            if (defaultValue != null) gS.SetDefaultString(defaultValue);
             gS.SetCommandPrompt(prompt);
             if (gS.Get() == GetResult.Cancel) throw new OperationCanceledException("Operation cancelled by user");
             return gS.StringResult();

@@ -374,6 +374,15 @@ namespace Salamander.Actions
             }
             return -1;
         }
+
+        /// <summary>
+        /// Get a list of all currently loaded commands
+        /// </summary>
+        /// <returns></returns>
+        public IList<string> GetCommandList()
+        {
+            return LoadedActions.Keys.ToList();
+        }
     }
     
 }

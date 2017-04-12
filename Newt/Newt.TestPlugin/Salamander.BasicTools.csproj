@@ -42,6 +42,7 @@
   <ItemGroup>
     <Compile Include="AddSupportPointAction.cs" />
     <Compile Include="CalculateGeometricPropertiesAction.cs" />
+    <Compile Include="CommandListAction.cs" />
     <Compile Include="CreateBool6DAction.cs" />
     <Compile Include="CreateCircularHollowSectionAction.cs" />
     <Compile Include="CreateCircularSectionAction.cs" />

@@ -53,7 +53,7 @@ namespace Salamander.Selection
         /// </summary>
         public bool? Fixity_X
         {
-            get { return CombinedValue<bool?>(i => i.GetData<NodeSupport>().Fixity.X, null, false); }
+            get { return CombinedValue<bool?>(i => i.GetData<NodeSupport>()?.Fixity.X ?? false, null, false); }
             set
             {
                 if (value.HasValue)
@@ -70,7 +70,7 @@ namespace Salamander.Selection
         /// </summary>
         public bool? Fixity_Y
         {
-            get { return CombinedValue<bool?>(i => i.GetData<NodeSupport>().Fixity.Y, null, false); }
+            get { return CombinedValue<bool?>(i => i.GetData<NodeSupport>()?.Fixity.Y ?? false, null, false); }
             set
             {
                 if (value.HasValue)
@@ -87,7 +87,7 @@ namespace Salamander.Selection
         /// </summary>
         public bool? Fixity_Z
         {
-            get { return CombinedValue<bool?>(i => i.GetData<NodeSupport>().Fixity.Z, null, false); }
+            get { return CombinedValue<bool?>(i => i.GetData<NodeSupport>()?.Fixity.Z ?? false, null, false); }
             set
             {
                 if (value.HasValue)
@@ -104,7 +104,7 @@ namespace Salamander.Selection
         /// </summary>
         public bool? Fixity_XX
         {
-            get { return CombinedValue<bool?>(i => i.GetData<NodeSupport>().Fixity.XX, null, false); }
+            get { return CombinedValue<bool?>(i => i.GetData<NodeSupport>()?.Fixity.XX ?? false, null, false); }
             set
             {
                 if (value.HasValue)
@@ -121,7 +121,7 @@ namespace Salamander.Selection
         /// </summary>
         public bool? Fixity_YY
         {
-            get { return CombinedValue<bool?>(i => i.GetData<NodeSupport>().Fixity.YY, null, false); }
+            get { return CombinedValue<bool?>(i => i.GetData<NodeSupport>()?.Fixity.YY ?? false, null, false); }
             set
             {
                 if (value.HasValue)
@@ -138,7 +138,7 @@ namespace Salamander.Selection
         /// </summary>
         public bool? Fixity_ZZ
         {
-            get { return CombinedValue<bool?>(i => i.GetData<NodeSupport>().Fixity.ZZ, null, false); }
+            get { return CombinedValue<bool?>(i => i.GetData<NodeSupport>()?.Fixity.ZZ ?? false, null, false); }
             set
             {
                 if (value.HasValue)
@@ -150,6 +150,16 @@ namespace Salamander.Selection
             }
         }
 
-    
+        protected override void OnPropertyChanged(string propertyName)
+        {
+            if (propertyName == "Position")
+                NotifyPropertiesChanged("X", "Y", "Z");
+            else if (propertyName == "Data[NodeSupport]")
+                NotifyPropertiesChanged("Fixity_X", "Fixity_Y", "Fixity_Z", "Fixity_XX", "Fixity_YY", "Fixity_ZZ");
+
+            base.OnPropertyChanged(propertyName);
+        }
+
+
     }
 }

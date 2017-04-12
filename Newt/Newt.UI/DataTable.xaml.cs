@@ -1,7 +1,9 @@
-﻿using Salamander.Selection;
+﻿using FreeBuild.Base;
+using Salamander.Selection;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -109,25 +111,84 @@ namespace Salamander.UI
             if (selection != null)
             {
                 LinkedSelection = selection;
+                selection.GetCollection().CollectionChanged += Selection_CollectionChanged;
 
-                //Doesn't work!
+                //Doesn't work, because Selection is readonly...!
                 /*Binding selectionBinding = new Binding();
                 selectionBinding.Source = selection;
                 selectionBinding.Path = new PropertyPath("Selection");
                 selectionBinding.UpdateSourceTrigger = UpdateSourceTrigger.PropertyChanged;
 //selectionBinding.Mode = BindingMode.TwoWay;
-                BindingOperations.SetBinding(this, DataTable.SelectedItemsProperty, selectionBinding);*/
+                BindingOperations.SetBinding(this, SelectedItemsProperty, selectionBinding);*/
+            }
+        }
+
+        private void Selection_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
+        {
+            if (e.NewItems != null)
+            {
+                foreach (object item in e.NewItems)
+                {
+                    //DataGrid.SelectedItems.Add(item);
+                }
+            }
+            if (e.OldItems != null)
+            {
+                foreach (object item in e.OldItems)
+                {
+                    //DataGrid.SelectedItems.Remove(item);
+                }
             }
         }
 
         private void DataGrid_KeyDown(object sender, KeyEventArgs e)
         {
-
+            if (e.Key == Key.Delete)
+            {
+                DataGrid dG = (DataGrid)sender;
+                IEditableCollectionView itemsView = dG.Items;
+                if (!itemsView.IsAddingNew && !itemsView.IsEditingItem && dG.SelectedItems != null)
+                {
+                    foreach (object item in dG.SelectedItems)
+                    {
+                        if (item is IDeletable)
+                        {
+                            var deletable = (IDeletable)item;
+                            deletable.Delete();
+                        }
+                    }
+                }
+            }
         }
 
         private void DataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            
+            SelectedItems = DataGrid.SelectedItems;
+            //TODO: Make this more sophisticated?
+            //http://blog.functionalfun.net/2009/02/how-to-databind-to-selecteditems.html - use this?
+            if (LinkedSelection != null)
+            {
+                if (e.AddedItems != null)
+                {
+                    foreach (object item in e.AddedItems)
+                    {
+                        LinkedSelection.Add(item);
+                    }
+                }
+                if (e.RemovedItems != null)
+                {
+                    foreach (object item in e.RemovedItems)
+                    {
+                        LinkedSelection.Remove(item);
+                    }
+                }
+            }
+        }
+
+        private void DataGrid_Unloaded(object sender, RoutedEventArgs e)
+        {
+            var grid = (DataGrid)sender;
+            grid.CommitEdit(DataGridEditingUnit.Row, true);
         }
     }
 }
