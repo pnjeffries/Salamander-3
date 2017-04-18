@@ -27,52 +27,53 @@
             <RowDefinition Height="5"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="Auto"/>
-            
+
         </Grid.RowDefinitions>
 
         <local:ModelTree DataContext="{Binding Path=ActiveDocument.Model}"></local:ModelTree>
-        
+
         <GridSplitter Grid.Row="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
-        
+
         <ScrollViewer HorizontalScrollBarVisibility="Hidden" Grid.Row="2">
             <StackPanel>
                 <Border Visibility="{Binding Path=Actions.CurrentAction, Converter={StaticResource NullOrEmptyVisibilityConverter}}">
-                <Expander IsExpanded="True" DataContext="{Binding Path=Actions.CurrentAction}"
+                    <Expander IsExpanded="True" DataContext="{Binding Path=Actions.CurrentAction}"
                     >
-                    <Expander.Header>
-                        <TextBlock Grid.Column="1" Text="{Binding Path=CommandName}"
+                        <Expander.Header>
+                            <TextBlock Grid.Column="1" Text="{Binding Path=CommandName}"
                                 TextTrimming="CharacterEllipsis"
                                                ></TextBlock>
-                    </Expander.Header>
-                    <!--<Border DataContext="{Binding Path=Actions.CurrentAction}">-->
+                        </Expander.Header>
+                        <!--<Border DataContext="{Binding Path=Actions.CurrentAction}">-->
                         <fb:AutoUIStackPanel></fb:AutoUIStackPanel>
-                    <!--</Border>-->
-                </Expander>
+                        <!--</Border>-->
+                    </Expander>
                 </Border>
-                <StackPanel> <!--Selection Panel-->
-                    
+                <StackPanel>
+                    <!--Selection Panel-->
+
                     <fb:PropertiesExpander DataContext="{Binding Path=Selected.Nodes}"
                                            Visibility="{Binding Path=Selection.Count, Converter={StaticResource CountVisibilityConverter}}"
                                            >
                         <fb:PropertiesExpander.HeaderContent>
-                        <TextBlock Grid.Column="1" Text="{Binding Path=Selection, StringFormat='NODES: {0}'}"
+                            <TextBlock Grid.Column="1" Text="{Binding Path=Selection, StringFormat='NODES: {0}'}"
                                 TextTrimming="CharacterEllipsis"
                                                ></TextBlock>
                         </fb:PropertiesExpander.HeaderContent>
                         <local:NodeSelectionControl/>
                     </fb:PropertiesExpander>
-                    
-                    <fb:PropertiesExpander DataContext="{Binding Path=Selected.LinearElements}"
+
+                    <fb:PropertiesExpander DataContext="{Binding Path=Selected.Elements}"
                                        Visibility="{Binding Path=Selection.Count, Converter={StaticResource CountVisibilityConverter}}">
-                    <fb:PropertiesExpander.HeaderContent>
-                        <TextBlock Grid.Column="1" Text="{Binding Path=Selection, StringFormat='ELEMENTS: {0}'}"
+                        <fb:PropertiesExpander.HeaderContent>
+                            <TextBlock Grid.Column="1" Text="{Binding Path=Selection, StringFormat='ELEMENTS: {0}'}"
                                 TextTrimming="CharacterEllipsis"
                                                ></TextBlock>
-                    </fb:PropertiesExpander.HeaderContent>
-                    <local:LinearElementSelectionControl/>                     
-                </fb:PropertiesExpander>
-                    
-                    <fb:PropertiesExpander DataContext="{Binding Path=Selected.SectionProperties}"
+                        </fb:PropertiesExpander.HeaderContent>
+                        <local:ElementSelectionControl/>
+                    </fb:PropertiesExpander>
+
+                    <fb:PropertiesExpander DataContext="{Binding Path=Selected.SectionFamilies}"
                                            Visibility="{Binding Path=Selection.Count, Converter={StaticResource CountVisibilityConverter}}">
                         <fb:PropertiesExpander.HeaderContent>
                             <TextBlock Grid.Column="1" Text="{Binding Path=Section.Name, StringFormat='SECTION: {0}'}"
@@ -81,10 +82,21 @@
                         </fb:PropertiesExpander.HeaderContent>
                         <local:SectionSelectionControl></local:SectionSelectionControl>
                     </fb:PropertiesExpander>
-            </StackPanel>
+
+                    <fb:PropertiesExpander DataContext="{Binding Path=Selected.PanelFamilies}"
+                                           Visibility="{Binding Path=Selection.Count, Converter={StaticResource CountVisibilityConverter}}">
+                        <fb:PropertiesExpander.HeaderContent>
+                            <TextBlock Grid.Column="1" Text="{Binding Path=Family.Name, StringFormat='PANEL FAMILY: {0}'}"
+                                TextTrimming="CharacterEllipsis"
+                                               ></TextBlock>
+                        </fb:PropertiesExpander.HeaderContent>
+                        <local:PanelFamilySelectionControl></local:PanelFamilySelectionControl>
+                    </fb:PropertiesExpander>
+                    
+                </StackPanel>
             </StackPanel>
         </ScrollViewer>
-        
+
         <!--Display Layer ToolBar-->
         <ToolBarTray Grid.Row="3">
             <ToolBar ItemsSource="{Binding Path=Layers.Layers}">

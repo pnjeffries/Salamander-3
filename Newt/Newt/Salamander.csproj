@@ -66,7 +66,11 @@
     <Compile Include="Core\InputController.cs" />
     <Compile Include="Display\ManualDisplayLayer.cs" />
     <Compile Include="Resources\BaseURI.cs" />
+    <Compile Include="Selection\LoadSelection.cs" />
+    <Compile Include="Selection\MaterialSelection.cs" />
     <Compile Include="Selection\NodeSelection.cs" />
+    <Compile Include="Selection\PanelFamilyDummy.cs" />
+    <Compile Include="Selection\PanelFamilySelection.cs" />
     <Compile Include="Selection\SelectionSet.cs" />
     <Compile Include="Display\Avatar.cs" />
     <Compile Include="Display\DisplayLayer.cs" />
@@ -84,8 +88,8 @@
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <Compile Include="Selection\ElementSelection.cs" />
-    <Compile Include="Selection\SectionPropertyDummy.cs" />
-    <Compile Include="Selection\SectionPropertySelection.cs" />
+    <Compile Include="Selection\SectionFamilyDummy.cs" />
+    <Compile Include="Selection\SectionFamilySelection.cs" />
     <Compile Include="Selection\SelectionViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -105,6 +109,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Salamander2_64x64.png" />
+    <None Include="Resources\SectLib.csv">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\LinearElement.png" />

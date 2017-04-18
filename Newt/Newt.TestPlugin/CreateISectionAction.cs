@@ -48,7 +48,7 @@ namespace Salamander.BasicTools
         public override bool Execute(ExecutionInfo exInfo = null)
         { 
             SymmetricIProfile iProfile = new SymmetricIProfile(Depth, Width, FlangeThickness, WebThickness, RootRadius);
-            Section = Model.Create.SectionProperty(Name, exInfo);
+            Section = Model.Create.SectionFamily(Name, exInfo);
             Section.Profile = iProfile;
             return true;
         }

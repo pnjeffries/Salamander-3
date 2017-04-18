@@ -21,14 +21,29 @@ namespace Salamander.Selection
         public NodeSelection Nodes { get; } = new NodeSelection();
 
         /// <summary>
-        /// The currently selected linear elements
+        /// The currently selected elements
         /// </summary>
-        public ElementSelection LinearElements { get; } = new ElementSelection();
+        public ElementSelection Elements { get; } = new ElementSelection();
+
+        /// <summary>
+        /// The currently selected loads
+        /// </summary>
+        public LoadSelection Loads { get; } = new LoadSelection();
 
         /// <summary>
         /// The currently selected section properties
         /// </summary>
-        public SectionPropertySelection SectionProperties { get; } = new SectionPropertySelection();
+        public SectionFamilySelection SectionFamilies { get; } = new SectionFamilySelection();
+
+        /// <summary>
+        /// The currently selected panel families
+        /// </summary>
+        public PanelFamilySelection PanelFamilies { get; } = new PanelFamilySelection();
+
+        /// <summary>
+        /// The currently selected Materials
+        /// </summary>
+        public MaterialSelection Materials { get; } = new MaterialSelection();
 
         #endregion
 
@@ -39,7 +54,8 @@ namespace Salamander.Selection
         /// </summary>
         public SelectionSet()
         {
-            SectionProperties.MonitorElementSelectionSection(LinearElements);
+            SectionFamilies.MonitorElementSelectionSection(Elements);
+            PanelFamilies.MonitorElementSelectionFamily(Elements);
         }
 
         #endregion
@@ -55,8 +71,12 @@ namespace Salamander.Selection
         public bool Select(ModelObject mObject)
         {
             if (mObject == null) return false;
-            else if (mObject is LinearElement) return LinearElements.Add((LinearElement)mObject);
+            else if (mObject is Element) return Elements.Add((Element)mObject);
             else if (mObject is Node) return Nodes.Add((Node)mObject);
+            else if (mObject is Load) return Loads.Add((Load)mObject);
+            else if (mObject is SectionFamily) return SectionFamilies.Add((SectionFamily)mObject);
+            else if (mObject is PanelFamily) return PanelFamilies.Add((PanelFamily)mObject);
+            else if (mObject is Material) return Materials.Add((Material)mObject);
             else return false;
         }
 
@@ -68,8 +88,12 @@ namespace Salamander.Selection
         public bool Deselect(ModelObject mObject)
         {
             if (mObject == null) return false;
-            else if (mObject is LinearElement) return LinearElements.Remove(mObject.GUID);
+            else if (mObject is Element) return Elements.Remove(mObject.GUID);
             else if (mObject is Node) return Nodes.Remove(mObject.GUID);
+            else if (mObject is Load) return Loads.Remove(mObject.GUID);
+            else if (mObject is SectionFamily) return SectionFamilies.Remove((SectionFamily)mObject);
+            else if (mObject is PanelFamily) return PanelFamilies.Remove((PanelFamily)mObject);
+            else if (mObject is Material) return Materials.Remove((Material)mObject);
             else return false;
         }
 
@@ -78,8 +102,12 @@ namespace Salamander.Selection
         /// </summary>
         public void Clear()
         {
-            LinearElements.Clear();
+            Elements.Clear();
             Nodes.Clear();
+            Loads.Clear();
+            SectionFamilies.Clear();
+            PanelFamilies.Clear();
+            Materials.Clear();
         }
 
         #endregion

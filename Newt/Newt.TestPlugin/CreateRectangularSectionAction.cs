@@ -39,7 +39,7 @@ namespace Salamander.BasicTools
         public override bool Execute(ExecutionInfo exInfo = null)
         {
             RectangularProfile rProfile = new RectangularProfile(Depth, Width);
-            Section = Model.Create.SectionProperty(Name, exInfo);
+            Section = Model.Create.SectionFamily(Name, exInfo);
             Section.Profile = rProfile;
             return true;
         }

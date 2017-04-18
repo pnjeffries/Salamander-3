@@ -93,7 +93,7 @@ namespace Salamander.RhinoCommon
         public override VertexGeometryCollection EnterGeometry(string prompt = "Enter geometry")
         {
             GetObject gO = new GetObject();
-            gO.GeometryFilter = ObjectType.Curve; //TODO
+            gO.GeometryFilter = ObjectType.Curve | ObjectType.Surface | ObjectType.Point | ObjectType.Mesh; //TODO: Support others
             gO.SetCommandPrompt(prompt);
             if (gO.GetMultiple(1, 0) == GetResult.Cancel) throw new OperationCanceledException("Operation cancelled by user");
             VertexGeometryCollection result = new VertexGeometryCollection();

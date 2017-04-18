@@ -27,7 +27,7 @@ namespace Salamander.UI
 
         private void Elements_DoubleClick(object sender, MouseButtonEventArgs e)
         {
-            Core.Instance.UI.ShowDataTable("Elements", Core.Instance.ActiveDocument.Model.Elements, Core.Instance.Selected.LinearElements);
+            Core.Instance.UI.ShowDataTable("Elements", Core.Instance.ActiveDocument.Model.Elements, Core.Instance.Selected.Elements);
         }
 
         private void CoordinateSystems_DoubleClick(object sender, MouseButtonEventArgs e)
@@ -47,7 +47,7 @@ namespace Salamander.UI
 
         private void Families_DoubleClick(object sender, MouseButtonEventArgs e)
         {
-            Core.Instance.UI.ShowDataTable("Families", Core.Instance.ActiveDocument.Model.Families, Core.Instance.Selected.SectionProperties); //TODO: Fix!
+            Core.Instance.UI.ShowDataTable("Families", Core.Instance.ActiveDocument.Model.Families, Core.Instance.Selected.SectionFamilies); //TODO: Fix!
         }
 
         private void Nodes_DoubleClick(object sender, MouseButtonEventArgs e)

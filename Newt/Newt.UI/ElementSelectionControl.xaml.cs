@@ -18,9 +18,9 @@ namespace Salamander.UI
     /// <summary>
     /// Interaction logic for LinearElementSelectionControl.xaml
     /// </summary>
-    public partial class LinearElementSelectionControl : UserControl
+    public partial class ElementSelectionControl : UserControl
     {
-        public LinearElementSelectionControl()
+        public ElementSelectionControl()
         {
             InitializeComponent();
         }

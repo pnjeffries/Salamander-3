@@ -10,7 +10,7 @@ namespace Salamander.Selection
     /// <summary>
     /// Class for dummy section properties.
     /// </summary>
-    public class SectionPropertyDummy : SectionFamily
+    public class SectionFamilyDummy : SectionFamily
     {
         #region Constructors
 
@@ -18,7 +18,7 @@ namespace Salamander.Selection
         /// Initialise a new dummy section property with the specified name
         /// </summary>
         /// <param name="name"></param>
-        public SectionPropertyDummy(string name) { Name = name; }
+        public SectionFamilyDummy(string name) { Name = name; }
 
         #endregion
     }

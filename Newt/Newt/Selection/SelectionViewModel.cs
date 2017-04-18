@@ -233,5 +233,6 @@ namespace Salamander.Selection
             _SelectionUpdateTimer.Stop();
             NotifyPropertyChanged(null);
         }
+
     }
 }

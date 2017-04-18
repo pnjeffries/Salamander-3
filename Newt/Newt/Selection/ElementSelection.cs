@@ -1,4 +1,5 @@
-﻿using FreeBuild.Geometry;
+﻿using FreeBuild.Extensions;
+using FreeBuild.Geometry;
 using FreeBuild.Model;
 using System;
 using System.Collections.Generic;
@@ -11,8 +12,9 @@ namespace Salamander.Selection
     /// <summary>
     /// A selection of Linear Elements
     /// </summary>
-    public class ElementSelection : SelectionViewModel<LinearElementCollection, LinearElement>
+    public class ElementSelection : SelectionViewModel<ElementCollection, Element>
     {
+
         /// <summary>
         /// Get or set the combined name value of the objects in this collection.
         /// If all the objects in this collection have the same name, that name will be returned.
@@ -22,14 +24,33 @@ namespace Salamander.Selection
         public virtual string Name
         {
             get { return CombinedValue(i => i.Name, "[Multi]"); }
-            set { foreach (LinearElement item in Selection) item.Name = value; }
+            set { foreach (Element item in Selection) item.Name = value; }
         }
 
-        public virtual Curve Geometry
+        /// <summary>
+        /// Does this selection contain only linear elements?
+        /// </summary>
+        public bool IsAllLinearElements
+        {
+            get { return Selection.ContainsOnlyType(typeof(LinearElement)); }
+        }
+
+        /// <summary>
+        /// Does this selection contain only panel elements?
+        /// </summary>
+        public bool IsAllPanelElements
+        {
+            get { return Selection.ContainsOnlyType(typeof(PanelElement)); }
+        }
+
+        /// <summary>
+        /// The selected element geometry
+        /// </summary>
+        public virtual VertexGeometry Geometry
         {
             get
             {
-                if (Selection.Count == 1) return Selection[0].Geometry;
+                if (Selection.Count == 1) return Selection[0].GetGeometry();
                 else return null;
             }
         }
@@ -44,39 +65,32 @@ namespace Salamander.Selection
         }
 
         /// <summary>
-        /// Set or set the combined value of the section properties of the elsments
+        /// Get or set the combined value of the section properties of the elements
         /// within this collection.
         /// </summary>
-        public SectionFamily Property
+        public SectionFamily SectionFamily
         {
-            get { return CombinedValue(i => i.Family, null); }
+            get
+            {
+                if (IsAllLinearElements)
+                    return (SectionFamily)CombinedValue(i => ((IElement)i).Family, null);
+                else return null;
+            }
             set
             {
-                if (value != null && value is SectionPropertyDummy)
+                if (value != null && value is SectionFamilyDummy)
                 {
-                    SectionPropertyDummy dummy = (SectionPropertyDummy)value;
+                    SectionFamilyDummy dummy = (SectionFamilyDummy)value;
                     if (dummy.Name.Equals("New..."))
                     {
-                        SectionFamily newSection = Selection[0].Model?.Create.SectionProperty();
+                        SectionFamily newSection = Selection[0].Model?.Create.SectionFamily();
                         value = newSection;
                         NotifyPropertyChanged("AvailableSections");
                     }
                 }
                 foreach (LinearElement lEl in Selection) lEl.Family = value;
                
-                NotifyPropertyChanged("Family");
-                NotifyPropertyChanged("Section");
-            }
-        }
-
-        private SectionPropertySelection _Section = new SectionPropertySelection();
-
-        public SectionPropertySelection Section
-        {
-            get
-            {
-                _Section.Section = Property;
-                return _Section;
+                NotifyPropertyChanged("SectionFamily");
             }
         }
 
@@ -91,7 +105,55 @@ namespace Salamander.Selection
                 if (Selection.Count > 0)
                 {
                     SectionFamilyCollection result = new SectionFamilyCollection(Selection[0].Model?.Families.Sections);
-                    result.Add(new SectionPropertyDummy("New..."));
+                    result.Add(new SectionFamilyDummy("New..."));
+                    return result;
+                }
+                else return null;
+            }
+        }
+
+        /// <summary>
+        /// Get or set the combined value of the section properties of the elements
+        /// within this collection.
+        /// </summary>
+        public PanelFamily PanelFamily
+        {
+            get
+            {
+                if (IsAllPanelElements)
+                    return (PanelFamily)CombinedValue(i => ((IElement)i).Family, null);
+                else return null;
+            }
+            set
+            {
+                if (value != null && value is PanelFamilyDummy)
+                {
+                    PanelFamilyDummy dummy = (PanelFamilyDummy)value;
+                    if (dummy.Name.Equals("New..."))
+                    {
+                        PanelFamily newSection = Selection[0].Model?.Create.FaceFamily();
+                        value = newSection;
+                        NotifyPropertyChanged("AvailablePanelFamilies");
+                    }
+                }
+                foreach (PanelElement lEl in Selection) lEl.Family = value;
+
+                NotifyPropertyChanged("PanelFamily");
+            }
+        }
+
+        /// <summary>
+        /// The set of panel families which are available to be assigned to the elements
+        /// in this collection.
+        /// </summary>
+        public PanelFamilyCollection AvailablePanelFamilies
+        {
+            get
+            {
+                if (Selection.Count > 0)
+                {
+                    PanelFamilyCollection result = new PanelFamilyCollection(Selection[0].Model?.Families.PanelFamilies);
+                    result.Add(new PanelFamilyDummy("New..."));
                     return result;
                 }
                 else return null;

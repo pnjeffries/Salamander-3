@@ -131,6 +131,8 @@ namespace Salamander.RhinoCommon
             DisplayConduit = new SalamanderDisplayConduit();
             DisplayConduit.Enabled = true;
 
+            RhinoDoc.CloseDocument += RhinoDoc_CloseDocument;
+
             GUI.CreateHostDockPanel(); //TEMP?
         }
 
@@ -166,6 +168,15 @@ namespace Salamander.RhinoCommon
         {
             _RefreshTimer.Stop();
             RhinoDoc.ActiveDoc.Views.Redraw();
+        }
+
+        #endregion
+
+        #region Event Handlers
+
+        private void RhinoDoc_CloseDocument(object sender, DocumentEventArgs e)
+        {
+            Core.Instance.NewDocument();
         }
 
         #endregion

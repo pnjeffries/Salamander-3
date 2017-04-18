@@ -28,11 +28,11 @@
     </UserControl.Resources>
     <Grid>
         <StackPanel>
-            
+
             <fb:TextFieldControl Label="Name:"
                                  Value="{Binding Path=Section.Name}"/>
-            
-            <Border BorderBrush="Black" BorderThickness="0" Margin="2" Background="White" Height="200">
+
+            <Border BorderBrush="Gray" BorderThickness="1" Margin="2" Background="White" Height="200">
                 <Viewbox Height="200" Width="200">
                     <Border>
                         <fb:ProfileCanvas Profiles="{Binding Path=Section.Profiles}" Width="2" Height="2">
@@ -51,8 +51,18 @@
                 </fb:ComboFieldControl.ItemTemplate>
                 
             </fb:ComboFieldControl>
-            
-                <Grid>
+
+            <fb:ComboFieldControl Label="Material:"
+                                  Value="{Binding Path=Section.Profile.Material}"
+                                  ItemsSource="{Binding Path=Section.Model.Materials}">
+                <fb:ComboFieldControl.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding Path=Name}"/>
+                    </DataTemplate>
+                </fb:ComboFieldControl.ItemTemplate>
+            </fb:ComboFieldControl>
+
+            <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto"/>
                         <ColumnDefinition Width="*"/>

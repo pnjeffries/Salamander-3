@@ -44,7 +44,7 @@ namespace Salamander.BasicTools
         public override bool Execute(ExecutionInfo exInfo = null)
         {
             var profile = new CircularHollowProfile(Diameter, WallThickness);
-            Section = Model.Create.SectionProperty(Name, exInfo);
+            Section = Model.Create.SectionFamily(Name, exInfo);
             Section.Profile = profile;
             return true;
         }

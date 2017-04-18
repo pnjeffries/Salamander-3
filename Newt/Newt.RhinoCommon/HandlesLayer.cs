@@ -136,13 +136,24 @@ namespace Salamander.Rhino
                             ModelObject mO = LinkedModelObject(storedGuid);
                             VertexGeometry geometry = RCtoFB.Convert(e.TheObject.Geometry);
                             //Create copy of object:
+                            Element element = null;
                             if (mO is LinearElement)
                             {
-                                LinearElement newElement = ((LinearElement)mO).Duplicate();//Core.Instance.ActiveDocument?.Model?.Create.CopyOf((Element)mO, geometry);
-                                if (geometry is Curve) newElement.Geometry = (Curve)geometry;
-                                RhinoOutput.SetOriginalIDUserString(e.ObjectId);
-                                Links.Add(newElement.GUID, e.ObjectId);
-                                Core.Instance.ActiveDocument.Model.Add(newElement);
+                                LinearElement lElement = ((LinearElement)mO).Duplicate();//Core.Instance.ActiveDocument?.Model?.Create.CopyOf((Element)mO, geometry);
+                                if (geometry is Curve) lElement.Geometry = (Curve)geometry;
+                                element = lElement;
+                            }
+                            if (mO is PanelElement)
+                            {
+                                PanelElement pElement = ((PanelElement)mO).Duplicate();//Core.Instance.ActiveDocument?.Model?.Create.CopyOf((Element)mO, geometry);
+                                if (geometry is Surface) pElement.Geometry = (Surface)geometry;
+                                element = pElement;
+                            }
+                            RhinoOutput.SetOriginalIDUserString(e.ObjectId);
+                            if (element != null)
+                            {
+                                Links.Add(element.GUID, e.ObjectId);
+                                Core.Instance.ActiveDocument.Model.Add(element);
                             }
                         }
                     }
@@ -201,18 +212,21 @@ namespace Salamander.Rhino
                 ModelObject mObj = LinkedModelObject(e.ObjectId);
                 if (mObj != null)
                 {
-                    //if (_ObjectReplacedWaitTimer != null) _ObjectReplacedWaitTimer.Stop();
-                    if (mObj is LinearElement)
+                    RC.GeometryBase geometry = e.NewRhinoObject.Geometry;
+                    
+                    if (mObj is Element)
                     {
-                        RC.GeometryBase geometry = e.NewRhinoObject.Geometry;
-                        LinearElement element = (LinearElement)mObj;
-                        if (geometry is RC.Curve)
+                        Element element = (Element)mObj;
+                        VertexGeometry vG = RCtoFB.Convert(geometry);
+                        if (vG != null)
                         {
-                            Curve crv = RCtoFB.Convert((RC.Curve)geometry);
-                            if (crv != null)
-                                element.ReplaceGeometry(crv);
+                            if (element is LinearElement && vG is Curve)
+                                ((LinearElement)element).ReplaceGeometry((Curve)vG);
+                            else if (element is PanelElement && vG is Surface)
+                                ((PanelElement)element).ReplaceGeometry((Surface)vG);
+
+                            _ReplacedElements.Add(element);
                         }
-                        _ReplacedElements.Add(element);
                     }
                     else if (mObj is Node)
                     {
@@ -339,7 +353,6 @@ namespace Salamander.Rhino
             {
                 if (!element.IsDeleted)
                 {
-
                     Guid objID = Guid.Empty;
                     string idString = element.GetGeometry()?.Attributes?.SourceID;
                     if (!string.IsNullOrWhiteSpace(idString))

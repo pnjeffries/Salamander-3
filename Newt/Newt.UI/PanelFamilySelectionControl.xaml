@@ -1,0 +1,45 @@
+﻿<UserControl x:Class="Salamander.UI.PanelFamilySelectionControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Salamander.UI"
+             xmlns:fb="clr-namespace:FreeBuild.WPF;assembly=FreeBuild.WPF"
+             xmlns:geo="clr-namespace:FreeBuild.Geometry;assembly=FreeBuild"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300">
+    <Grid>
+        <StackPanel>
+
+            <fb:TextFieldControl Label="Name:"
+                                 Value="{Binding Path=Family.Name}"/>
+
+            <fb:ComboFieldControl Label="Material:"
+                                  Value="{Binding Path=Material}"
+                                  ItemsSource="{Binding Path=Family.Model.Materials}">
+                <fb:ComboFieldControl.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding Path=Name}"/>
+                    </DataTemplate>
+                </fb:ComboFieldControl.ItemTemplate>
+            </fb:ComboFieldControl>
+
+            <fb:ComboFieldControl Label="Set-Out:"
+                Value="{Binding Path=Family.SetOut}" 
+            			ItemsSource="{Binding Source={fb:EnumBindingSource {x:Type geo:VerticalSetOut}}}">
+                <fb:ComboFieldControl.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding}"/>
+                    </DataTemplate>
+                </fb:ComboFieldControl.ItemTemplate>
+            </fb:ComboFieldControl>
+
+            <fb:SliderFieldControl Label="Thickness:"
+            		ToolTip="The panel thickness"
+            		Value="{Binding Thickness}"
+            		Maximum="1.0" TickFrequency="0.001"
+            		Units="m"/>
+
+        </StackPanel>
+    </Grid>
+</UserControl>

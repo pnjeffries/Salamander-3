@@ -81,7 +81,7 @@ namespace Salamander
         {
             get
             {
-                if (_ActiveDocument == null) ActiveDocument = new ModelDocument();
+                if (_ActiveDocument == null) NewDocument(true);
                 return _ActiveDocument;
             }
             set
@@ -229,6 +229,14 @@ namespace Salamander
         {
             ModelDocument result = new ModelDocument();
             ActiveDocument = result;
+
+            //TEMP:
+            result.Model.Materials.Add(Material.Steel);
+            result.Model.Materials.Add(Material.Concrete);
+            result.Model.LoadCases.Add(new LoadCase("Dead"));
+            result.Model.LoadCases.Add(new LoadCase("Superimposed Dead"));
+            result.Model.LoadCases.Add(new LoadCase("Live"));
+
             return result;
         }
 

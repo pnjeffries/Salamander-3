@@ -50,14 +50,17 @@
     <Compile Include="GeometryDataControl.xaml.cs">
       <DependentUpon>GeometryDataControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="LinearElementSelectionControl.xaml.cs">
-      <DependentUpon>LinearElementSelectionControl.xaml</DependentUpon>
+    <Compile Include="ElementSelectionControl.xaml.cs">
+      <DependentUpon>ElementSelectionControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="ModelTree.xaml.cs">
       <DependentUpon>ModelTree.xaml</DependentUpon>
     </Compile>
     <Compile Include="NodeSelectionControl.xaml.cs">
       <DependentUpon>NodeSelectionControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="PanelFamilySelectionControl.xaml.cs">
+      <DependentUpon>PanelFamilySelectionControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SectionSelectionControl.xaml.cs">
@@ -94,7 +97,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="LinearElementSelectionControl.xaml">
+    <Page Include="ElementSelectionControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -103,6 +106,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="NodeSelectionControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="PanelFamilySelectionControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

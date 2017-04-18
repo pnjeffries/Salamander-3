@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Salamander.Selection
 {
-    public class SectionPropertySelection : SelectionViewModel<SectionFamilyCollection, SectionFamily>
+    public class SectionFamilySelection : SelectionViewModel<SectionFamilyCollection, SectionFamily>
     {
         /// <summary>
         /// The primary selected section for individual property display - will be the last selected section
@@ -71,12 +71,12 @@ namespace Salamander.Selection
             }
         }
 
-        public SectionPropertySelection()
+        public SectionFamilySelection()
         {
 
         }
 
-        public SectionPropertySelection(SectionFamily section)
+        public SectionFamilySelection(SectionFamily section)
         {
             Section = section;
         }
@@ -107,10 +107,10 @@ namespace Salamander.Selection
         private void HandlesElementPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
             if (sender is ElementSelection && (e.PropertyName == null ||
-                e.PropertyName == "Family"))
+                e.PropertyName == "SectionFamily"))
             {
                 ElementSelection elementSelection = (ElementSelection)sender;
-                object selected = elementSelection.Property;
+                object selected = elementSelection.SectionFamily;
                 if (selected != null && selected is SectionFamily)
                 {
                     Set((SectionFamily)selected);
