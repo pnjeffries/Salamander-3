@@ -65,7 +65,7 @@
     <Compile Include="RhinoAvatarFactory.cs" />
     <Compile Include="RhinoGUIController.cs" />
     <Compile Include="RhinoIDMappingTable.cs" />
-    <Compile Include="RhinoInputController.cs" />
+    <Compile Include="RhinoInput.cs" />
     <Compile Include="RhinoMeshAvatar.cs" />
     <Compile Include="RhinoRenderingParameters.cs" />
     <Compile Include="SalamanderDisplayConduit.cs" />

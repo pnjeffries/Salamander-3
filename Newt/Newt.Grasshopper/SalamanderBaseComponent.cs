@@ -127,6 +127,7 @@ namespace Salamander.Grasshopper
             CommandName = commandName;
             Host.EnsureInitialisation();
             ActionType = Core.Instance.Actions.GetActionDefinition(CommandName);
+            if (ActionType == null) throw new Exception("Command '" + CommandName + "' has not been found.  The plugin that contains it may not have been successfully loaded.");
             var attributes = ActionAttribute.ExtractFrom(ActionType);
             Name = name;
             NickName = nickname;

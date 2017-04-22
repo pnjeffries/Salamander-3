@@ -18,14 +18,14 @@ namespace Salamander.RhinoCommon
     /// <summary>
     /// The Rhino input controlle
     /// </summary>
-    public class RhinoInputController : InputController
+    public class RhinoInput : InputController
     {
         #region Constructors
 
         /// <summary>
         /// Default constructor
         /// </summary>
-        public RhinoInputController()
+        public RhinoInput()
         {
 
         }
@@ -112,7 +112,7 @@ namespace Salamander.RhinoCommon
             return result;
         }
 
-        private bool FilterElements(RhinoObject rObj, RC.GeometryBase geometry, RC.ComponentIndex index)
+        private bool FilterHandles(RhinoObject rObj, RC.GeometryBase geometry, RC.ComponentIndex index)
         {
             return Host.Instance.Handles.Links.ContainsSecond(rObj.Id);
         }
@@ -120,7 +120,7 @@ namespace Salamander.RhinoCommon
         public override Element EnterElement(string prompt = "Enter element")
         {
             GetObject gO = new GetObject();
-            gO.SetCustomGeometryFilter(new GetObjectGeometryFilter(FilterElements));
+            gO.SetCustomGeometryFilter(new GetObjectGeometryFilter(FilterHandles));
             //gO.GeometryFilter = ObjectType.Curve;
             gO.SetCommandPrompt(prompt);
             if (gO.Get() == GetResult.Cancel) throw new OperationCanceledException("Operation cancelled by user");
@@ -136,7 +136,7 @@ namespace Salamander.RhinoCommon
         public override ElementCollection EnterElements(string prompt = "Enter elements")
         {
             GetObject gO = new GetObject();
-            gO.SetCustomGeometryFilter(new GetObjectGeometryFilter(FilterElements));
+            gO.SetCustomGeometryFilter(new GetObjectGeometryFilter(FilterHandles));
             //gO.GeometryFilter = ObjectType.Curve;
             gO.SetCommandPrompt(prompt);
             if (gO.GetMultiple(1,0) == GetResult.Cancel) throw new OperationCanceledException("Operation cancelled by user");
@@ -157,7 +157,7 @@ namespace Salamander.RhinoCommon
         public override LinearElement EnterLinearElement(string prompt = "Enter linear element")
         {
             GetObject gO = new GetObject();
-            gO.SetCustomGeometryFilter(new GetObjectGeometryFilter(FilterElements));
+            gO.SetCustomGeometryFilter(new GetObjectGeometryFilter(FilterHandles));
             gO.GeometryFilter = ObjectType.Curve;
             gO.SetCommandPrompt(prompt);
             if (gO.Get() == GetResult.Cancel) throw new OperationCanceledException("Operation cancelled by user");
@@ -173,7 +173,7 @@ namespace Salamander.RhinoCommon
         public override LinearElementCollection EnterLinearElements(string prompt = "Enter linear elements")
         {
             GetObject gO = new GetObject();
-            gO.SetCustomGeometryFilter(new GetObjectGeometryFilter(FilterElements));
+            gO.SetCustomGeometryFilter(new GetObjectGeometryFilter(FilterHandles));
             gO.GeometryFilter = ObjectType.Curve;
             gO.SetCommandPrompt(prompt);
             if (gO.GetMultiple(1, 0) == GetResult.Cancel) throw new OperationCanceledException("Operation cancelled by user");
@@ -189,6 +189,60 @@ namespace Salamander.RhinoCommon
                 return result;
             }
             return null;
+        }
+
+        public override Node EnterNode(string prompt = "Enter node")
+        {
+            GetObject gO = new GetObject();
+            gO.SetCustomGeometryFilter(new GetObjectGeometryFilter(FilterHandles));
+            gO.GeometryFilter = ObjectType.Point;
+            gO.SetCommandPrompt(prompt);
+            if (gO.Get() == GetResult.Cancel) throw new OperationCanceledException("Operation cancelled by user");
+            ObjRef rObj = gO.Object(0);
+            if (Host.Instance.Handles.Links.ContainsSecond(rObj.ObjectId))
+            {
+                Guid guid = Host.Instance.Handles.Links.GetFirst(rObj.ObjectId);
+                return Core.Instance.ActiveDocument?.Model?.Nodes[guid] as Node;
+            }
+            return null;
+        }
+
+        public override NodeCollection EnterNodes(string prompt = "Enter nodes")
+        {
+            GetObject gO = new GetObject();
+            gO.SetCustomGeometryFilter(new GetObjectGeometryFilter(FilterHandles));
+            gO.GeometryFilter = ObjectType.Point;
+            gO.SetCommandPrompt(prompt);
+            if (gO.GetMultiple(1, 0) == GetResult.Cancel) throw new OperationCanceledException("Operation cancelled by user");
+            foreach (ObjRef rObj in gO.Objects())
+            {
+                var result = new NodeCollection();
+                if (Host.Instance.Handles.Links.ContainsSecond(rObj.ObjectId))
+                {
+                    Guid guid = Host.Instance.Handles.Links.GetFirst(rObj.ObjectId);
+                    Node node = Core.Instance.ActiveDocument?.Model?.Nodes[guid];
+                    if (node != null && node is Node) result.Add(node);
+                }
+                return result;
+            }
+            return null;
+        }
+
+        public override Direction EnterDirection(string prompt = "Enter direction", bool xyzOnly = false)
+        {
+            GetOption gO = new GetOption();
+            gO.SetCommandPrompt(prompt);
+            gO.AddOption("X");
+            gO.AddOption("Y");
+            gO.AddOption("Z");
+            if (!xyzOnly)
+            {
+                gO.AddOption("XX");
+                gO.AddOption("YY");
+                gO.AddOption("ZZ");
+            }
+            // TODO
+            throw new NotImplementedException();
         }
 
         #endregion

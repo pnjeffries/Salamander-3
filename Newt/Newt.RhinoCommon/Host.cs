@@ -124,7 +124,7 @@ namespace Salamander.RhinoCommon
         private void Initialise()
         {
             
-            Input = new RhinoInputController();
+            Input = new RhinoInput();
             AvatarFactory = new RhinoAvatarFactory();
             Handles = new HandlesLayer();
             Core.Instance.Layers.Layers.Add(Handles); //TEST

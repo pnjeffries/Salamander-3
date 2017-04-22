@@ -10,7 +10,6 @@ namespace Salamander.Actions
     /// <summary>
     /// Attributes of an action input parameter property.
     /// Used to specify information about the input and how it should be obtained/used.
-    /// Supported
     /// </summary>
     public class ActionInputAttribute : ActionParameterAttribute
     {

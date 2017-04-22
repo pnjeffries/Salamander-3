@@ -90,6 +90,14 @@ namespace Salamander
             string endPointPrompt = "Enter end of line", Vector? startPoint = null);
 
         /// <summary>
+        /// Prompt the user to enter a direction (select one of x, y, z, xx, yy, zz)
+        /// </summary>
+        /// <param name="prompt"></param>
+        /// <param name="xyzOnly"></param>
+        /// <returns></returns>
+        public abstract Direction EnterDirection(string prompt = "Enter direction", bool xyzOnly = false);
+
+        /// <summary>
         /// Prompt the user to enter a collection of geometry
         /// </summary>
         /// <param name="prompt"></param>
@@ -123,6 +131,20 @@ namespace Salamander
         /// <param name="prompt"></param>
         /// <returns></returns>
         public abstract LinearElementCollection EnterLinearElements(string prompt = "Enter linear elements");
+
+        /// <summary>
+        /// Prompt the user to select a node
+        /// </summary>
+        /// <param name="prompt"></param>
+        /// <returns></returns>
+        public abstract Node EnterNode(string prompt = "Enter node");
+
+        /// <summary>
+        /// Prompt the user to select multiple nodes
+        /// </summary>
+        /// <param name="prompt"></param>
+        /// <returns></returns>
+        public abstract NodeCollection EnterNodes(string prompt = "Enter nodes");
 
         /// <summary>
         /// Prompt the user to enter data of the specified type.
@@ -181,6 +203,12 @@ namespace Salamander
                     value = EnterLinearElement("Enter " + description);
                 else if (inputType == typeof(LinearElementCollection))
                     value = EnterLinearElements("Enter " + description);
+                else if (inputType == typeof(Node))
+                    value = EnterNode("Enter " + description);
+                else if (inputType == typeof(NodeCollection))
+                    value = EnterNodes("Enter " + description);
+                else if (inputType == typeof(Direction))
+                    value = EnterDirection("Enter " + description);
                 else return false; //Input not recognised
             }
             catch (OperationCanceledException)

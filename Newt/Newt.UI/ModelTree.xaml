@@ -204,7 +204,7 @@
 
                 <!--<TreeViewItem Header="Sets"
                               DataContext="{Binding Path=Sets}"
-                              MouseDoubleClick="Sets_DoubleClick"/>
+                              MouseDoubleClick="Sets_DoubleClick"/>-->
 
                 <TreeViewItem Header="Loads"
                               DataContext="{Binding Path=Loads}"
@@ -212,7 +212,7 @@
 
                 <TreeViewItem Header="Load Cases"
                               DataContext="{Binding Path=LoadCases}"
-                              MouseDoubleClick="LoadCases_DoubleClick"/>-->
+                              MouseDoubleClick="LoadCases_DoubleClick"/>
 
             </TreeViewItem>
             
