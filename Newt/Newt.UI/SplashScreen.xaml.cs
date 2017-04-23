@@ -29,7 +29,12 @@ namespace Salamander.UI
 
         public void HandlesInitialisationCompleted(object sender, EventArgs e)
         {
-            this.Close();
+            Close();
+        }
+
+        private void Window_MouseUp(object sender, MouseButtonEventArgs e)
+        {
+            Close();
         }
     }
 }

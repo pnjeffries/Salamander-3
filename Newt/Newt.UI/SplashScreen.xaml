@@ -7,7 +7,7 @@
              mc:Ignorable="d" 
         Width="512" Height="256"
              WindowStyle="None" Background="Transparent" Topmost="True" WindowStartupLocation="CenterScreen"
-        ResizeMode="NoResize" ShowInTaskbar="False" AllowsTransparency="True">
+        ResizeMode="NoResize" ShowInTaskbar="False" AllowsTransparency="True" MouseUp="Window_MouseUp">
    
         <Image Source="/Salamander3;Component/Resources/SplashScreen.png"/>
   

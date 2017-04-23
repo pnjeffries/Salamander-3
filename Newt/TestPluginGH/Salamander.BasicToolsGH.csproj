@@ -49,22 +49,23 @@
     <Reference Include="System.Windows.Forms" />
     <Reference Include="RhinoCommon">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\..\..\Program Files\Rhinoceros 5 (64-bit)\System\RhinoCommon.dll</HintPath>
+      <HintPath>..\References\RhinoCommon.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Grasshopper">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\Grasshopper\Grasshopper.dll</HintPath>
+      <HintPath>..\References\Grasshopper.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="GH_IO">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\Grasshopper\GH_IO.dll</HintPath>
+      <HintPath>..\References\GH_IO.dll</HintPath>
       <Private>False</Private>
     </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Bool6DParam.cs" />
+    <Compile Include="Bool6DValueList.cs" />
     <Compile Include="CalculateGeometricPropertiesComponent.cs" />
     <Compile Include="CreateBool6DComponent.cs" />
     <Compile Include="CreateCircularHollowSectionComponent.cs" />
@@ -72,6 +73,7 @@
     <Compile Include="CreateISectionComponent.cs" />
     <Compile Include="CreateRectangularHollowSectionComponent.cs" />
     <Compile Include="CreateRectangularSectionComponent.cs" />
+    <Compile Include="DirectionValueList.cs" />
     <Compile Include="DrawLinearElementComponent.cs" />
     <Compile Include="BasicToolsGHInfo.cs" />
     <Compile Include="GetElementNodesComponent.cs" />
@@ -85,6 +87,11 @@
     <Compile Include="SectionFamilyParam.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\..\FreeBuild\FreeBuild\FreeBuild\FreeBuild.csproj">
+      <Project>{7635522c-178f-4db5-9106-ff8dfd4b833b}</Project>
+      <Name>FreeBuild</Name>
+      <Private>False</Private>
+    </ProjectReference>
     <ProjectReference Include="..\Newt.Grasshopper\Salamander.Grasshopper.csproj">
       <Project>{77a7c389-8c84-411c-88ae-6e61340b1b00}</Project>
       <Name>Salamander.Grasshopper</Name>

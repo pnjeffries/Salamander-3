@@ -57,7 +57,7 @@
     <Compile Include="CreateRectangularSectionAction.cs" />
     <Compile Include="DrawLinearElementAction.cs" />
     <Compile Include="ElementSectionDisplayLayer.cs" />
-    <Compile Include="NodeRestraintDisplayLayer.cs" />
+    <Compile Include="NodeSupportDisplayLayer.cs" />
     <Compile Include="OpenAction.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RegenerateNodes.cs" />

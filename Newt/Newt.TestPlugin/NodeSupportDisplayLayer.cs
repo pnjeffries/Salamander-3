@@ -10,9 +10,9 @@ using System.Threading.Tasks;
 
 namespace Salamander.BasicTools
 {
-    public class NodeRestraintDisplayLayer : DisplayLayer<Node>
+    public class NodeSupportDisplayLayer : DisplayLayer<Node>
     {
-        public NodeRestraintDisplayLayer() : base("Node Restraints",
+        public NodeSupportDisplayLayer() : base("Node Supports",
             "Display nodal restraint conditions", 2000,
             Resources.BaseURI + "NodeRestraint.png")
         {
@@ -29,11 +29,8 @@ namespace Salamander.BasicTools
             {
                     double scale = 0.5;
                     IMeshAvatar mAv = CreateMeshAvatar();
-                    var tip = source.Position;
-                    Vector direction = new Vector(0, 0, scale);
-                    var circle = new Circle(scale, new CylindricalCoordinateSystem(tip - direction, new Vector(new Angle(Math.PI / 4)), Vector.UnitY));
-                    mAv.Builder.AddFacetCone(tip, circle, 4);
-                    mAv.Brush = new ColourBrush(new Colour(0.5f, 0.8f, 0.2f, 0f));
+                    mAv.Builder.AddNodeSupport(source, support);
+                    mAv.Brush = new ColourBrush(new Colour(0.5f, 0.8f, 0.2f, 0f)); //TODO: Make customisable
                     mAv.FinalizeMesh();
                     result.Add(mAv);
                 }
