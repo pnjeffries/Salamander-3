@@ -12,8 +12,7 @@ namespace Salamander.BasicTools
 {
     [Action("RestrainNode",
         "Set the restraint conditions on a node",
-        IconBackground = Resources.BaseURI + "NodeRestraint.png",
-        IconForeground = Resources.BaseURI + "AssignIcon.png")]
+        IconBackground = Resources.BaseURI + "NodeRestraint.png")]
     public class RestrainNodeAction : ActionBase
     {
         [ActionInput(1, "the Node(s) to restrain")]

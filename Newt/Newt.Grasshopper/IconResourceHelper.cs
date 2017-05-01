@@ -39,10 +39,10 @@ namespace Salamander.Grasshopper
         /// <param name="uriString1">The bottom image</param>
         /// <param name="uriString2">The top image</param>
         /// <returns></returns>
-        public static Bitmap CombinedBitmapFromURIs(string uriString1, string uriString2)
+        public static Bitmap CombinedBitmapFromURIs(string uriString1, string uriString2, int offsetX = 0, int offsetY = 0)
         {
             //TODO: size is hard-coded - change?
-            return ResizeAndCombineImages(BitmapFromURI(uriString1), BitmapFromURI(uriString2), 24, 24);
+            return ResizeAndCombineImages(BitmapFromURI(uriString1), BitmapFromURI(uriString2), 24, 24, offsetX, offsetY);
         }
 
         /// <summary>
@@ -53,7 +53,7 @@ namespace Salamander.Grasshopper
         /// <param name="width">The width of the resultant image</param>
         /// <param name="height">The height of the resultant image</param>
         /// <returns></returns>
-        public static Bitmap ResizeAndCombineImages(Image image1, Image image2, int width, int height)
+        public static Bitmap ResizeAndCombineImages(Image image1, Image image2, int width, int height, int offsetX = 0, int offsetY = 0)
         {
             var destRect = new Rectangle(0, 0, width, height);
             var destImage = new Bitmap(width, height);
@@ -73,7 +73,7 @@ namespace Salamander.Grasshopper
                     wrapMode.SetWrapMode(WrapMode.TileFlipXY);
                     graphics.DrawImage(image1, destRect, 0, 0, image1.Width, image1.Height, GraphicsUnit.Pixel, wrapMode);
                     graphics.CompositingMode = CompositingMode.SourceOver;
-                    graphics.DrawImage(image2, destRect, 0, 0, image2.Width, image2.Height, GraphicsUnit.Pixel, wrapMode);
+                    graphics.DrawImage(image2, destRect, offsetX, offsetY, image2.Width, image2.Height, GraphicsUnit.Pixel, wrapMode);
                 }
             }
 

@@ -116,7 +116,7 @@
                                     </StackPanel>
                                 </ToolTip>
                             </ToggleButton.ToolTip>
-                            <Image Width="16" Height="16" Source="{Binding Path=IconURI}"></Image>
+                            <Image Width="24" Height="24" Source="{Binding Path=IconURI}"></Image>
                         </ToggleButton>
                     </DataTemplate>
                 </ToolBar.ItemTemplate>

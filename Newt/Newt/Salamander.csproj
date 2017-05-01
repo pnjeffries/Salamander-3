@@ -159,6 +159,30 @@
   <ItemGroup>
     <Resource Include="Resources\SplashScreen.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Direction.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\CheckIcon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\ValueListIcon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\TextIcon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\TextToSection.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\BlueBook.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\SectionPreview.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\PanelPreview.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

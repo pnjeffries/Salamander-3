@@ -61,7 +61,7 @@ namespace Salamander.Selection
             set
             {
                 EnsureOneLayer();
-                Family.BuildUp[0].Material = value;
+                if (Family != null) Family.BuildUp[0].Material = value;
             }
         }
 

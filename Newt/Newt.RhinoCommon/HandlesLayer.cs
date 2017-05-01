@@ -82,7 +82,6 @@ namespace Salamander.Rhino
 
         public override void InitialiseToModel(Model model)
         {
-            base.InitialiseToModel(model);
             RhinoIDMappingTable idMap = Core.Instance.ActiveDocument.IDMappings.GetLatest<RhinoIDMappingTable>();
             if (idMap == null)
             {
@@ -94,6 +93,7 @@ namespace Salamander.Rhino
                 idMap[idMap.HandlesCategory] = new BiDirectionary<Guid, Guid>();
             }
             Links = idMap[idMap.HandlesCategory];
+            base.InitialiseToModel(model);
         }
 
         /// <summary>
@@ -134,26 +134,41 @@ namespace Salamander.Rhino
                         if (this.Links.ContainsSecond(storedGuid))
                         {
                             ModelObject mO = LinkedModelObject(storedGuid);
-                            VertexGeometry geometry = RCtoFB.Convert(e.TheObject.Geometry);
                             //Create copy of object:
-                            Element element = null;
-                            if (mO is LinearElement)
+                            if (mO is Element)
                             {
-                                LinearElement lElement = ((LinearElement)mO).Duplicate();//Core.Instance.ActiveDocument?.Model?.Create.CopyOf((Element)mO, geometry);
-                                if (geometry is Curve) lElement.Geometry = (Curve)geometry;
-                                element = lElement;
+                                VertexGeometry geometry = RCtoFB.Convert(e.TheObject.Geometry);
+                                Element element = null;
+                                if (mO is LinearElement)
+                                {
+                                    LinearElement lElement = ((LinearElement)mO).Duplicate();//Core.Instance.ActiveDocument?.Model?.Create.CopyOf((Element)mO, geometry);
+                                    if (geometry is Curve) lElement.Geometry = (Curve)geometry;
+                                    element = lElement;
+                                }
+                                if (mO is PanelElement)
+                                {
+                                    PanelElement pElement = ((PanelElement)mO).Duplicate();//Core.Instance.ActiveDocument?.Model?.Create.CopyOf((Element)mO, geometry);
+                                    if (geometry is Surface) pElement.Geometry = (Surface)geometry;
+                                    element = pElement;
+                                }
+                                RhinoOutput.SetOriginalIDUserString(e.ObjectId);
+                                if (element != null)
+                                {
+                                    Links.Add(element.GUID, e.ObjectId);
+                                    Core.Instance.ActiveDocument.Model.Add(element);
+                                }
                             }
-                            if (mO is PanelElement)
+                            else if (mO is Node)
                             {
-                                PanelElement pElement = ((PanelElement)mO).Duplicate();//Core.Instance.ActiveDocument?.Model?.Create.CopyOf((Element)mO, geometry);
-                                if (geometry is Surface) pElement.Geometry = (Surface)geometry;
-                                element = pElement;
-                            }
-                            RhinoOutput.SetOriginalIDUserString(e.ObjectId);
-                            if (element != null)
-                            {
-                                Links.Add(element.GUID, e.ObjectId);
-                                Core.Instance.ActiveDocument.Model.Add(element);
+                                if (e.TheObject.Geometry is RC.Point)
+                                {
+                                    Node node = ((Node)mO).Duplicate();
+                                    RC.Point pt = (RC.Point)e.TheObject.Geometry;
+                                    node.Position = RCtoFB.Convert(pt).Position;
+                                    RhinoOutput.SetOriginalIDUserString(e.ObjectId);
+                                    Links.Add(node.GUID, e.ObjectId);
+                                    Core.Instance.ActiveDocument.Model.Add(node);
+                                }
                             }
                         }
                     }
@@ -316,30 +331,33 @@ namespace Salamander.Rhino
         /// <param name="node"></param>
         protected void GenerateRepresentations(Node node)
         {
+            Guid objID = Guid.Empty;
             if (!Links.ContainsFirst(node.GUID))
             {
                 if (!node.IsDeleted)
                 {
-                    Guid objID = RhinoOutput.BakePoint(node.Position);
-                    if (objID != Guid.Empty)
-                    {
-                        RhinoOutput.SetOriginalIDUserString(objID);
-                        RhinoOutput.SetObjectName(objID, node.Description);
-                    }
+                    objID = RhinoOutput.BakePoint(node.Position);
                     Links.Add(node.GUID, objID);
                 }
             }
             else
             {
-                Guid ptID = Links.GetSecond(node.GUID);
+                objID = Links.GetSecond(node.GUID);
                 if (node.IsDeleted)
                 { 
-                    RhinoOutput.DeleteObject(ptID);
+                    RhinoOutput.DeleteObject(objID);
+                    objID = Guid.Empty;
                 }
                 else
                 {
-                    RhinoOutput.ReplacePoint(ptID, node.Position);
+                    objID = RhinoOutput.BakeOrReplacePoint(objID, node.Position);
+                    Links.Set(node.GUID, objID);
                 }
+            }
+            if (objID != Guid.Empty)
+            {
+                RhinoOutput.SetOriginalIDUserString(objID);
+                RhinoOutput.SetObjectName(objID, node.Description);
             }
         }
 
@@ -349,11 +367,11 @@ namespace Salamander.Rhino
         /// <param name="element"></param>
         protected void GenerateRepresentations(Element element)
         {
+            Guid objID = Guid.Empty;
             if (!Links.ContainsFirst(element.GUID))
             {
                 if (!element.IsDeleted)
                 {
-                    Guid objID = Guid.Empty;
                     string idString = element.GetGeometry()?.Attributes?.SourceID;
                     if (!string.IsNullOrWhiteSpace(idString))
                     {
@@ -361,26 +379,27 @@ namespace Salamander.Rhino
                         if (!RhinoOutput.ObjectExists(objID)) objID = Guid.Empty;
                     }
                     objID = RhinoOutput.BakeOrReplace(objID, element.GetGeometry());
-                    if (objID != Guid.Empty)
-                    {
-                        RhinoOutput.SetOriginalIDUserString(objID);
-                        RhinoOutput.SetObjectName(objID, element.Description);
-                    }
                     Links.Add(element.GUID, objID);
                 }
             }
             else
             {
-                Guid objID = Links.GetSecond(element.GUID);
+                objID = Links.GetSecond(element.GUID);
                 if (element.IsDeleted)
                 {
                     RhinoOutput.DeleteObject(objID);
+                    objID = Guid.Empty;
                 }
                 else
                 {
                     objID = RhinoOutput.BakeOrReplace(objID, element.GetGeometry());
                     Links.Set(element.GUID, objID);
                 }
+            }
+            if (objID != Guid.Empty)
+            {
+                RhinoOutput.SetOriginalIDUserString(objID);
+                RhinoOutput.SetObjectName(objID, element.Description);
             }
         }
 

@@ -49,6 +49,8 @@
     <Compile Include="CreateISectionAction.cs" />
     <Compile Include="CreateNodeLoadAction.cs" />
     <Compile Include="CreateRectangularHollowSectionAction.cs" />
+    <Compile Include="PanelThicknessDisplayLayer.cs" />
+    <Compile Include="TextToSectionAction.cs" />
     <Compile Include="ExampleAction.cs" />
     <Compile Include="GetElementNodesAction.cs" />
     <Compile Include="GetSectionAction.cs" />

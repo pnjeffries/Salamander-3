@@ -67,18 +67,22 @@
     <Compile Include="Bool6DParam.cs" />
     <Compile Include="Bool6DValueList.cs" />
     <Compile Include="CalculateGeometricPropertiesComponent.cs" />
+    <Compile Include="CHSProfileCatalogueValueList.cs" />
     <Compile Include="CreateBool6DComponent.cs" />
     <Compile Include="CreateCircularHollowSectionComponent.cs" />
     <Compile Include="CreateCircularSectionComponent.cs" />
     <Compile Include="CreateISectionComponent.cs" />
     <Compile Include="CreateRectangularHollowSectionComponent.cs" />
     <Compile Include="CreateRectangularSectionComponent.cs" />
+    <Compile Include="RHSProfileCatalogueValueList.cs" />
+    <Compile Include="TextToSectionComponent.cs" />
     <Compile Include="DirectionValueList.cs" />
     <Compile Include="DrawLinearElementComponent.cs" />
     <Compile Include="BasicToolsGHInfo.cs" />
     <Compile Include="GetElementNodesComponent.cs" />
     <Compile Include="GetSectionComponent.cs" />
     <Compile Include="GWAExportComponent.cs" />
+    <Compile Include="IProfileCatalogueValueList.cs" />
     <Compile Include="LinearElementParam.cs" />
     <Compile Include="NodeParam.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -96,6 +100,10 @@
       <Project>{77a7c389-8c84-411c-88ae-6e61340b1b00}</Project>
       <Name>Salamander.Grasshopper</Name>
       <Private>False</Private>
+    </ProjectReference>
+    <ProjectReference Include="..\NEWT\Salamander.csproj">
+      <Project>{55d9743e-6f9b-4b89-b3de-18b03c4cfe61}</Project>
+      <Name>Salamander</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

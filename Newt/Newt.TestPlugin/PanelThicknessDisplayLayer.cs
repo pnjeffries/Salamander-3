@@ -2,25 +2,22 @@
 using Salamander.Display;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.ComponentModel;
 
 namespace Salamander.BasicTools
 {
-    /// <summary>
-    /// A DisplayLayer which draws 3D section profile representations over 1D Elements
-    /// </summary>
-    public class ElementSectionDisplayLayer : DisplayLayer<LinearElement>
+    class PanelThicknessDisplayLayer : Display.DisplayLayer<PanelElement>
     {
         /// <summary>
         /// Constructor
         /// </summary>
-        public ElementSectionDisplayLayer() : base("Element Sections",
-            "Display Elements with 3D Section Profile representations",
+        public PanelThicknessDisplayLayer() : base("Panel Thickness",
+            "Display Panel Elements with 3D thickness representations",
             1000,
-            Resources.BaseURI + "SectionPreview.png")
+            Resources.BaseURI + "PanelPreview.png")
         {
             Visible = true;
         }
@@ -30,13 +27,13 @@ namespace Salamander.BasicTools
         /// </summary>
         /// <param name="source"></param>
         /// <returns></returns>
-        public override IList<IAvatar> GenerateRepresentations(LinearElement source)
+        public override IList<IAvatar> GenerateRepresentations(PanelElement source)
         {
             List<IAvatar> result = new List<IAvatar>();
             if (source != null)
             {
                 IMeshAvatar mAv = CreateMeshAvatar();
-                mAv.Builder.AddSectionPreview(source);
+                mAv.Builder.AddPanelPreview(source);
                 mAv.FinalizeMesh();
                 result.Add(mAv);
             }
@@ -52,11 +49,11 @@ namespace Salamander.BasicTools
         /// <param name="e"></param>
         public override void InvalidateOnUpdate(object modified, PropertyChangedEventArgs e)
         {
-            if (modified is SectionFamily)
+            if (modified is PanelFamily)
             {
-                SectionFamily sp = (SectionFamily)modified;
+                PanelFamily sp = (PanelFamily)modified;
                 ElementCollection els = sp.Elements();
-                foreach (LinearElement lEl in els)
+                foreach (PanelElement lEl in els)
                 {
                     InvalidateRepresentation(lEl);
                 }
@@ -65,8 +62,9 @@ namespace Salamander.BasicTools
             else
             {
                 base.InvalidateOnUpdate(modified, e);
-                if (modified is LinearElement && (e.PropertyName == "Family" || e.PropertyName == "Orientation")) Core.Instance.Host.Refresh();
+                if (modified is PanelElement && (e.PropertyName == "Family")) Core.Instance.Host.Refresh();
             }
         }
+    
     }
 }

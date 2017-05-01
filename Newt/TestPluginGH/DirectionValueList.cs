@@ -1,6 +1,8 @@
 ﻿using Grasshopper.Kernel.Special;
+using Salamander.Grasshopper;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -18,6 +20,17 @@ namespace Salamander.BasicToolsGH
             }
         }
 
+        protected override Bitmap Icon
+        {
+            get
+            {
+                //string uri1 = IconResourceHelper.ResourceLocation + "ParamBackground.png";
+                string uri2 = IconResourceHelper.ResourceLocation + "Direction.png";
+                Bitmap bmp = IconResourceHelper.BitmapFromURI(uri2);
+                return bmp;
+            }
+        }
+
         public DirectionValueList() : base()
         {
             Name = "Direction";
@@ -26,12 +39,12 @@ namespace Salamander.BasicToolsGH
             Category = "Salamander 3";
             SubCategory = "Params";
             this.ListItems.Clear();
-            ListItems.Add(new GH_ValueListItem("X", "1"));
-            ListItems.Add(new GH_ValueListItem("Y", "2"));
-            ListItems.Add(new GH_ValueListItem("Z", "3"));
-            ListItems.Add(new GH_ValueListItem("XX", "4"));
-            ListItems.Add(new GH_ValueListItem("YY", "5"));
-            ListItems.Add(new GH_ValueListItem("ZZ", "6"));
+            ListItems.Add(new GH_ValueListItem("X", "\"X\""));
+            ListItems.Add(new GH_ValueListItem("Y", "\"Y\""));
+            ListItems.Add(new GH_ValueListItem("Z", "\"Z\""));
+            ListItems.Add(new GH_ValueListItem("XX", "\"XX\""));
+            ListItems.Add(new GH_ValueListItem("YY", "\"YY\""));
+            ListItems.Add(new GH_ValueListItem("ZZ", "\"ZZ\""));
         }
 
         public override void AppendAdditionalMenuItems(ToolStripDropDown menu)
