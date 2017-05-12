@@ -7,18 +7,18 @@ using System.Threading.Tasks;
 
 namespace Salamander.BasicToolsGH
 {
-    public class RestrainNodeComponent : SalamanderBaseComponent
+    public class GetBuildUpComponent : SalamanderBaseComponent
     {
         public override Guid ComponentGuid
         {
             get
             {
-                return new Guid("{9E1447A4-1177-4606-BA39-18954282D1D4}");
+                return new Guid("{09A65EA5-C6D6-4204-B1A9-6C564272051C}");
             }
         }
 
-        public RestrainNodeComponent()
-            : base("RestrainNode", "Restrain Node", "Restrain", SubCategories.Model)
+        public GetBuildUpComponent()
+            : base("GetBuildUp", "Get Build-Up", "GetBuildUp", SubCategories.BuildUp)
         { }
     }
 }

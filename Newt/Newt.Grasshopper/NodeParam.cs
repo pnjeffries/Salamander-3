@@ -31,7 +31,7 @@ namespace Salamander.Grasshopper
         }
 
         public NodeParam()
-            : base("Node", "Node", "A Salamander Node", "Salamander 3", "Params", GH_ParamAccess.item)
+            : base("Node", "Node", "A Salamander Node", "Salamander 3", SubCategories.Params, GH_ParamAccess.item)
         { }
 
         public override void DrawViewportMeshes(IGH_PreviewArgs args)

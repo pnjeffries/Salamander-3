@@ -30,7 +30,7 @@ namespace Salamander.Grasshopper
         }
 
         public Bool6DParam()
-            : base("Bool6D", "Bool6D", "A Six-dimensional boolean", "Salamander 3", "Params", GH_ParamAccess.item)
+            : base("Bool6D", "Bool6D", "A Six-dimensional boolean", "Salamander 3", SubCategories.Params, GH_ParamAccess.item)
         { }
     }
 }

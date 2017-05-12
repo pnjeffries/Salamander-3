@@ -28,6 +28,12 @@ namespace Salamander.Rhino
         /// </summary>
         private Guid _LastReplaced = Guid.Empty;
 
+        /// <summary>
+        /// Flag used to indicate when a linked object is being
+        /// undeleted.  Prevents
+        /// </summary>
+        private bool _Undeleting = false;
+
         #endregion
 
         #region Properties
@@ -147,9 +153,9 @@ namespace Salamander.Rhino
                                 }
                                 if (mO is PanelElement)
                                 {
-                                    PanelElement pElement = ((PanelElement)mO).Duplicate();//Core.Instance.ActiveDocument?.Model?.Create.CopyOf((Element)mO, geometry);
+                                    /*PanelElement pElement = ((PanelElement)mO).Duplicate();//Core.Instance.ActiveDocument?.Model?.Create.CopyOf((Element)mO, geometry);
                                     if (geometry is Surface) pElement.Geometry = (Surface)geometry;
-                                    element = pElement;
+                                    element = pElement;*/
                                 }
                                 RhinoOutput.SetOriginalIDUserString(e.ObjectId);
                                 if (element != null)
@@ -295,7 +301,39 @@ namespace Salamander.Rhino
 
         private void HandlesUndeleteRhinoObject(object sender, RhinoObjectEventArgs e)
         {
-            LinkedModelObject(e.ObjectId)?.Undelete();
+            ModelObject mObj = LinkedModelObject(e.ObjectId);
+            if (mObj != null)
+            {
+
+                //TEST!
+
+                /*RC.GeometryBase geometry = e.TheObject.Geometry;
+
+                if (mObj is Element)
+                {
+                    Element element = (Element)mObj;
+                    VertexGeometry vG = RCtoFB.Convert(geometry);
+                    if (vG != null)
+                    {
+                        if (element is LinearElement && vG is Curve)
+                            ((LinearElement)element).ReplaceGeometry((Curve)vG);
+                        else if (element is PanelElement && vG is Surface)
+                            ((PanelElement)element).ReplaceGeometry((Surface)vG);
+
+                        _ReplacedElements.Add(element);
+                    }
+                }*/
+
+                //Doesn't work!
+
+                // END TEST!
+
+                // TODO: Add condition to prevent this being done erroneously...
+                _Undeleting = true;
+                mObj.Undelete();
+                _Undeleting = false;
+
+            }
         }
 
         private void HandlesDeleteRhinoObject(object sender, RhinoObjectEventArgs e)
@@ -367,6 +405,7 @@ namespace Salamander.Rhino
         /// <param name="element"></param>
         protected void GenerateRepresentations(Element element)
         {
+
             Guid objID = Guid.Empty;
             if (!Links.ContainsFirst(element.GUID))
             {
@@ -392,8 +431,11 @@ namespace Salamander.Rhino
                 }
                 else
                 {
-                    objID = RhinoOutput.BakeOrReplace(objID, element.GetGeometry());
-                    Links.Set(element.GUID, objID);
+                    if (!_Undeleting)
+                    {
+                        objID = RhinoOutput.BakeOrReplace(objID, element.GetGeometry());
+                        Links.Set(element.GUID, objID);
+                    }
                 }
             }
             if (objID != Guid.Empty)
@@ -401,6 +443,7 @@ namespace Salamander.Rhino
                 RhinoOutput.SetOriginalIDUserString(objID);
                 RhinoOutput.SetObjectName(objID, element.Description);
             }
+
         }
 
         #endregion

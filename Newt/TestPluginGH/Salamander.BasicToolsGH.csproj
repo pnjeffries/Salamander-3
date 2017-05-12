@@ -69,11 +69,17 @@
     <Compile Include="CalculateGeometricPropertiesComponent.cs" />
     <Compile Include="CHSProfileCatalogueValueList.cs" />
     <Compile Include="CreateBool6DComponent.cs" />
+    <Compile Include="CreateBuildUpComponent.cs" />
     <Compile Include="CreateCircularHollowSectionComponent.cs" />
     <Compile Include="CreateCircularSectionComponent.cs" />
     <Compile Include="CreateISectionComponent.cs" />
+    <Compile Include="CreateNodeComponent.cs" />
+    <Compile Include="CreatePanelElementComponent.cs" />
     <Compile Include="CreateRectangularHollowSectionComponent.cs" />
     <Compile Include="CreateRectangularSectionComponent.cs" />
+    <Compile Include="GetBuildUpComponent.cs" />
+    <Compile Include="PanelElementParam.cs" />
+    <Compile Include="PanelFamilyParam.cs" />
     <Compile Include="RHSProfileCatalogueValueList.cs" />
     <Compile Include="TextToSectionComponent.cs" />
     <Compile Include="DirectionValueList.cs" />

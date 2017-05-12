@@ -474,7 +474,10 @@ namespace Salamander.Grasshopper
             else if (obj is Curve) return FBtoRC.Convert((Curve)obj);
             else if (obj is LinearElement) return new LinearElementGoo((LinearElement)obj);
             else if (obj is LinearElementCollection) return LinearElementGoo.Convert((LinearElementCollection)obj);
+            else if (obj is PanelElement) return new PanelElementGoo((PanelElement)obj);
+            else if (obj is PanelElementCollection) return PanelElementGoo.Convert((PanelElementCollection)obj);
             else if (obj is SectionFamily) return new SectionFamilyGoo((SectionFamily)obj);
+            else if (obj is BuildUpFamily) return new BuildUpFamilyGoo((BuildUpFamily)obj);
             else if (obj is Node) return new NodeGoo((Node)obj);
             else if (obj is NodeCollection) return NodeGoo.Convert((NodeCollection)obj);
             else if (obj is Bool6D) return new Bool6DGoo((Bool6D)obj);
@@ -522,13 +525,17 @@ namespace Salamander.Grasshopper
         protected virtual Type GetEquivalentType(Type type)
         {
             if (typeof(Line).IsAssignableFrom(type)) return typeof(RC.Line);
+            else if (type == typeof(Vector)) return typeof(RC.Point3d);
             else if (type == typeof(Angle)) return typeof(double);
             else if (typeof(Curve).IsAssignableFrom(type)) return typeof(RC.Curve);
             else if (typeof(LinearElement).IsAssignableFrom(type)) return typeof(LinearElementGoo);
+            else if (typeof(PanelElement).IsAssignableFrom(type)) return typeof(PanelElementGoo);
             else if (typeof(Element).IsAssignableFrom(type)) return typeof(LinearElementGoo); // TEMP!
             else if (typeof(LinearElementCollection).IsAssignableFrom(type)) return typeof(LinearElementGoo);
+            else if (typeof(PanelElementCollection).IsAssignableFrom(type)) return typeof(PanelElementGoo);
             else if (typeof(ElementCollection).IsAssignableFrom(type)) return typeof(LinearElementGoo);
             else if (typeof(SectionFamily).IsAssignableFrom(type)) return typeof(SectionFamilyGoo);
+            else if (typeof(BuildUpFamily).IsAssignableFrom(type)) return typeof(BuildUpFamilyGoo);
             else if (typeof(Node).IsAssignableFrom(type)) return typeof(NodeGoo);
             else if (typeof(NodeCollection).IsAssignableFrom(type)) return typeof(NodeGoo);
             else if (typeof(Bool6D).IsAssignableFrom(type)) return typeof(Bool6DGoo);

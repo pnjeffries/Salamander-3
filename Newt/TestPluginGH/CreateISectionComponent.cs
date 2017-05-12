@@ -21,7 +21,7 @@ namespace Salamander.TestPluginGH
                 : base("CreateISection",
                      "I Section",
                      "IS",
-                     "Sections")
+                     SubCategories.Sections)
         { }
 
     }

@@ -61,7 +61,7 @@ namespace Salamander.Selection
         public virtual Angle Orientation
         {
             get { return CombinedValue(i => i.Orientation, Angle.Multi, Angle.Undefined); }
-            set { foreach (LinearElement item in Selection) item.Orientation = value; }
+            set { foreach (Element item in Selection) item.Orientation = value; }
         }
 
         /// <summary>
@@ -116,12 +116,12 @@ namespace Salamander.Selection
         /// Get or set the combined value of the section properties of the elements
         /// within this collection.
         /// </summary>
-        public PanelFamily PanelFamily
+        public BuildUpFamily PanelFamily
         {
             get
             {
                 if (IsAllPanelElements)
-                    return (PanelFamily)CombinedValue(i => ((IElement)i).Family, null);
+                    return (BuildUpFamily)CombinedValue(i => ((IElement)i).Family, null);
                 else return null;
             }
             set
@@ -131,7 +131,7 @@ namespace Salamander.Selection
                     PanelFamilyDummy dummy = (PanelFamilyDummy)value;
                     if (dummy.Name.Equals("New..."))
                     {
-                        PanelFamily newSection = Selection[0].Model?.Create.FaceFamily();
+                        BuildUpFamily newSection = Selection[0].Model?.Create.BuildUpFamily();
                         value = newSection;
                         NotifyPropertyChanged("AvailablePanelFamilies");
                     }
@@ -146,13 +146,13 @@ namespace Salamander.Selection
         /// The set of panel families which are available to be assigned to the elements
         /// in this collection.
         /// </summary>
-        public PanelFamilyCollection AvailablePanelFamilies
+        public BuildUpFamilyCollection AvailablePanelFamilies
         {
             get
             {
                 if (Selection.Count > 0)
                 {
-                    PanelFamilyCollection result = new PanelFamilyCollection(Selection[0].Model?.Families.PanelFamilies);
+                    BuildUpFamilyCollection result = new BuildUpFamilyCollection(Selection[0].Model?.Families.PanelFamilies);
                     result.Add(new PanelFamilyDummy("New..."));
                     return result;
                 }

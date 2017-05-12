@@ -27,7 +27,7 @@ namespace Salamander.BasicToolsGH
         }
 
         public TextToSectionComponent()
-            : base("TextToSection", "Text To Section", "Text2Sect", "Sections")
+            : base("TextToSection", "Text To Section", "Text2Sect", SubCategories.Sections)
         { }
     }
 }

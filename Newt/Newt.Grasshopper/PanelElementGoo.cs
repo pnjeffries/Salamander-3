@@ -1,22 +1,17 @@
 ﻿using FreeBuild.Model;
+using FreeBuild.Rhino;
+using Grasshopper.Kernel;
 using Grasshopper.Kernel.Types;
+using Rhino.Geometry;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Rhino.Geometry;
-using FreeBuild.Rhino;
-using RC = Rhino.Geometry;
-using FB = FreeBuild.Geometry;
-using Grasshopper.Kernel;
 
 namespace Salamander.Grasshopper
 {
-    /// <summary>
-    /// Geometric Goo for Linear Elements
-    /// </summary>
-    public class LinearElementGoo : GH_Goo<LinearElement>, ISalamander_Goo, IGH_PreviewData
+    class PanelElementGoo : GH_Goo<PanelElement>, ISalamander_Goo, IGH_PreviewData
     {
         #region Properties
 
@@ -24,7 +19,7 @@ namespace Salamander.Grasshopper
         {
             get
             {
-                return "Salamander Linear Element";
+                return "Salamander Panel Element";
             }
         }
 
@@ -32,7 +27,7 @@ namespace Salamander.Grasshopper
         {
             get
             {
-                return "Linear Element";
+                return "Panel Element";
             }
         }
 
@@ -54,14 +49,14 @@ namespace Salamander.Grasshopper
 
         private Mesh _SectionMesh = null;
 
-        public Mesh SectionMesh
+        public Mesh PanelMesh
         {
             get
             {
                 if (_SectionMesh == null)
                 {
                     RhinoMeshBuilder mB = new RhinoMeshBuilder();
-                    mB.AddSectionPreview(Value);
+                    mB.AddPanelPreview(Value);
                     mB.Finalize();
                     _SectionMesh = mB.Mesh;
                 }
@@ -73,9 +68,9 @@ namespace Salamander.Grasshopper
 
         #region Constructors
 
-        public LinearElementGoo() : base() { }
+        public PanelElementGoo() : base() { }
 
-        public LinearElementGoo(LinearElement element) : base(element) { }
+        public PanelElementGoo(PanelElement element) : base(element) { }
 
         #endregion
 
@@ -104,7 +99,7 @@ namespace Salamander.Grasshopper
 
         public override string ToString()
         {
-            return "Linear Element " + Value.NumericID;
+            return "Panel Element " + Value.NumericID;
         }
 
         //public override IGH_GeometricGoo Transform(Transform xform)
@@ -117,24 +112,24 @@ namespace Salamander.Grasshopper
             if (Value != null)
             {
                 RhinoMeshBuilder builder = new RhinoMeshBuilder();
-                builder.AddSectionPreview(Value);
+                builder.AddPanelPreview(Value);
                 builder.Finalize();
                 args.Display.DrawMeshShaded(builder.Mesh, args.ShadeMaterial);
             }
         }
 
-        public static List<LinearElementGoo> Convert(LinearElementCollection collection)
+        public static List<PanelElementGoo> Convert(PanelElementCollection collection)
         {
-            var result = new List<LinearElementGoo>();
+            var result = new List<PanelElementGoo>();
             if (collection != null)
-                foreach (LinearElement obj in collection) result.Add(new LinearElementGoo(obj));
+                foreach (PanelElement obj in collection) result.Add(new PanelElementGoo(obj));
             return result;
         }
 
         object ISalamander_Goo.GetValue(Type type)
         {
-            if (type == typeof(LinearElementCollection))
-                return new LinearElementCollection(Value);
+            if (type == typeof(PanelElementCollection))
+                return new PanelElementCollection(Value);
             else if (type == typeof(ElementCollection))
                 return new ElementCollection(Value);
             else return Value;
@@ -144,15 +139,15 @@ namespace Salamander.Grasshopper
         {
             if (Value?.Geometry != null)
             {
-                if (Value.Geometry is FB.Line)
+                /*if (Value.Geometry is FB.Line)
                     args.Pipeline.DrawLine(
                         new Line(FBtoRC.Convert(Value.Geometry.StartPoint), FBtoRC.Convert(Value.Geometry.EndPoint)), args.Color);
                 else if (Value.Geometry is FB.Arc)
                     args.Pipeline.DrawArc(
                         new Arc(FBtoRC.Convert(Value.Geometry.StartPoint), FBtoRC.Convert(Value.Geometry.PointAt(0.5)), FBtoRC.Convert(Value.Geometry.EndPoint)),
-                        args.Color);
+                        args.Color);*/
 
-                args.Pipeline.DrawMeshWires(SectionMesh, args.Color);
+                args.Pipeline.DrawMeshWires(PanelMesh, args.Color);
             }
         }
 
@@ -161,15 +156,16 @@ namespace Salamander.Grasshopper
             //TODO
             if (Value?.Geometry != null)
             {
-                args.Pipeline.DrawMeshShaded(SectionMesh, args.Material);
+                args.Pipeline.DrawMeshShaded(PanelMesh, args.Material);
             }
         }
 
         public override IGH_Goo Duplicate()
         {
-            return new LinearElementGoo(Value);
+            return new PanelElementGoo(Value);
         }
 
         #endregion
+    
     }
 }

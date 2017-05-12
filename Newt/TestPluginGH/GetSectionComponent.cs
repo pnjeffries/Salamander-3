@@ -18,7 +18,7 @@ namespace Salamander.BasicToolsGH
         }
 
         public GetSectionComponent()
-            : base("GetSection", "Get Section", "Section", "Sections")
+            : base("GetSection", "Get Section", "Section", SubCategories.Sections)
         { }
     }
 }

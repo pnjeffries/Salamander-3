@@ -21,7 +21,7 @@ namespace Salamander.TestPluginGH
             : base("CreateRectangularSection",
                  "Rectangular Section",
                  "RS",
-                 "Sections")
+                 SubCategories.Sections)
         { }
 
     }

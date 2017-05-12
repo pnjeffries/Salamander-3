@@ -49,9 +49,9 @@ namespace Salamander.BasicTools
         /// <param name="e"></param>
         public override void InvalidateOnUpdate(object modified, PropertyChangedEventArgs e)
         {
-            if (modified is PanelFamily)
+            if (modified is BuildUpFamily)
             {
-                PanelFamily sp = (PanelFamily)modified;
+                BuildUpFamily sp = (BuildUpFamily)modified;
                 ElementCollection els = sp.Elements();
                 foreach (PanelElement lEl in els)
                 {

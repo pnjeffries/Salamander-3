@@ -19,7 +19,7 @@ namespace Salamander.BasicToolsGH
         }
 
         public RobotExportComponent()
-            : base("SaveAsRobot", "Export Robot", "Robot", "Export")
+            : base("SaveAsRobot", "Export Robot", "Robot", SubCategories.Export)
         { }
     }
 }

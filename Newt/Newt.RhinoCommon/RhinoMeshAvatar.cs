@@ -6,9 +6,11 @@ using System.Threading.Tasks;
 using FreeBuild.Rendering;
 using FreeBuild.Rhino;
 using Salamander.Display;
+using R = Rhino;
 using RC = Rhino.Geometry;
 using FreeBuild.Meshing;
 using FreeBuild.Model;
+using System.Drawing;
 
 namespace Salamander.Rhino
 {
@@ -68,7 +70,14 @@ namespace Salamander.Rhino
             if (parameters is RhinoRenderingParameters && RenderMesh != null)
             {
                 RhinoRenderingParameters rParams = (RhinoRenderingParameters)parameters;
-                rParams.Draw(RenderMesh, Material);
+                if (rParams.Display.DisplayPipelineAttributes.ShadingEnabled)
+                {
+                    rParams.Draw(RenderMesh, Material);
+                }
+                else
+                {
+                    rParams.DrawWireframe(RenderMesh, Material.Diffuse);
+                }
                 return true;
             }
             else return false;

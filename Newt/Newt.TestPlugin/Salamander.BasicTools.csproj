@@ -47,8 +47,12 @@
     <Compile Include="CreateCircularHollowSectionAction.cs" />
     <Compile Include="CreateCircularSectionAction.cs" />
     <Compile Include="CreateISectionAction.cs" />
+    <Compile Include="CreateNode.cs" />
     <Compile Include="CreateNodeLoadAction.cs" />
+    <Compile Include="CreateBuildUp.cs" />
+    <Compile Include="CreatePanelElement.cs" />
     <Compile Include="CreateRectangularHollowSectionAction.cs" />
+    <Compile Include="GetBuildUp.cs" />
     <Compile Include="PanelThicknessDisplayLayer.cs" />
     <Compile Include="TextToSectionAction.cs" />
     <Compile Include="ExampleAction.cs" />
@@ -57,7 +61,7 @@
     <Compile Include="GWAExportAction.cs" />
     <Compile Include="MakeElementsAction.cs" />
     <Compile Include="CreateRectangularSectionAction.cs" />
-    <Compile Include="DrawLinearElementAction.cs" />
+    <Compile Include="CreateLinearElementAction.cs" />
     <Compile Include="ElementSectionDisplayLayer.cs" />
     <Compile Include="NodeSupportDisplayLayer.cs" />
     <Compile Include="OpenAction.cs" />

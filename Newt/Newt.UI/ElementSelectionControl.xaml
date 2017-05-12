@@ -45,7 +45,7 @@
                 </fb:ComboFieldControl.ItemTemplate>
             </fb:ComboFieldControl>
             <fb:ComboFieldControl
-                            Label="Family:"
+                            Label="Build-Up:"
                             Value="{Binding Path=PanelFamily}"
                             ItemsSource="{Binding Path=AvailablePanelFamilies}"
                             Visibility="{Binding Path=IsAllPanelElements, Converter={StaticResource VisibilityConverter}}">

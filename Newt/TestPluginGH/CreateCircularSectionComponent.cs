@@ -21,7 +21,7 @@ namespace Salamander.BasicToolsGH
             : base("CreateCircularSection",
                  "Circular Section",
                  "CS",
-                 "Sections")
+                 SubCategories.Sections)
         { }
     }
 }

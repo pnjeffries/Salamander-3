@@ -70,7 +70,7 @@
     <Compile Include="Selection\MaterialSelection.cs" />
     <Compile Include="Selection\NodeSelection.cs" />
     <Compile Include="Selection\PanelFamilyDummy.cs" />
-    <Compile Include="Selection\PanelFamilySelection.cs" />
+    <Compile Include="Selection\BuildUpFamilySelection.cs" />
     <Compile Include="Selection\SelectionSet.cs" />
     <Compile Include="Display\Avatar.cs" />
     <Compile Include="Display\DisplayLayer.cs" />
@@ -182,6 +182,12 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\PanelPreview.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\PanelElement.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\BuildUpFamily.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

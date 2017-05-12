@@ -38,7 +38,7 @@ namespace Salamander.Selection
         /// <summary>
         /// The currently selected panel families
         /// </summary>
-        public PanelFamilySelection PanelFamilies { get; } = new PanelFamilySelection();
+        public BuildUpFamilySelection BuildUpFamilies { get; } = new BuildUpFamilySelection();
 
         /// <summary>
         /// The currently selected Materials
@@ -55,7 +55,7 @@ namespace Salamander.Selection
         public SelectionSet()
         {
             SectionFamilies.MonitorElementSelectionSection(Elements);
-            PanelFamilies.MonitorElementSelectionFamily(Elements);
+            BuildUpFamilies.MonitorElementSelectionFamily(Elements);
         }
 
         #endregion
@@ -75,7 +75,7 @@ namespace Salamander.Selection
             else if (mObject is Node) return Nodes.Add((Node)mObject);
             else if (mObject is Load) return Loads.Add((Load)mObject);
             else if (mObject is SectionFamily) return SectionFamilies.Add((SectionFamily)mObject);
-            else if (mObject is PanelFamily) return PanelFamilies.Add((PanelFamily)mObject);
+            else if (mObject is BuildUpFamily) return BuildUpFamilies.Add((BuildUpFamily)mObject);
             else if (mObject is Material) return Materials.Add((Material)mObject);
             else return false;
         }
@@ -92,7 +92,7 @@ namespace Salamander.Selection
             else if (mObject is Node) return Nodes.Remove(mObject.GUID);
             else if (mObject is Load) return Loads.Remove(mObject.GUID);
             else if (mObject is SectionFamily) return SectionFamilies.Remove((SectionFamily)mObject);
-            else if (mObject is PanelFamily) return PanelFamilies.Remove((PanelFamily)mObject);
+            else if (mObject is BuildUpFamily) return BuildUpFamilies.Remove((BuildUpFamily)mObject);
             else if (mObject is Material) return Materials.Remove((Material)mObject);
             else return false;
         }
@@ -106,7 +106,7 @@ namespace Salamander.Selection
             Nodes.Clear();
             Loads.Clear();
             SectionFamilies.Clear();
-            PanelFamilies.Clear();
+            BuildUpFamilies.Clear();
             Materials.Clear();
         }
 

@@ -18,7 +18,7 @@ namespace Salamander.BasicToolsGH
         }
 
         public GetElementNodesComponent()
-            : base("GetElementNodes", "Get Nodes", "Nodes", "Model")
+            : base("GetElementNodes", "Get Nodes", "Nodes", SubCategories.Model)
         { }
 
     }

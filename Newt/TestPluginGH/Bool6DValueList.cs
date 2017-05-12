@@ -40,7 +40,7 @@ namespace Salamander.BasicToolsGH
             NickName = "Bool6D";
             Description = "A selector to toggle translational and rotational degrees of freedom in the X, Y, Z, XX, YY and ZZ directions.";
             Category = "Salamander 3";
-            SubCategory = "Params";
+            SubCategory = SubCategories.Params;
             this.ListItems.Clear();
             ListItems.Add(new GH_ValueListItem("X", "X"));
             ListItems.Add(new GH_ValueListItem("Y", "Y"));

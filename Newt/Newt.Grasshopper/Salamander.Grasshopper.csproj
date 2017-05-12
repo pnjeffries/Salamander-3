@@ -76,12 +76,17 @@
     <Compile Include="LinearElementParam.cs" />
     <Compile Include="NodeGoo.cs" />
     <Compile Include="NodeParam.cs" />
+    <Compile Include="PanelElementGoo.cs" />
+    <Compile Include="PanelElementParam.cs" />
+    <Compile Include="BuildUpFamilyGoo.cs" />
+    <Compile Include="BuildUpFamilyParam.cs" />
     <Compile Include="SalamanderBaseComponent.cs" />
     <Compile Include="NicknameConverter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SalamanderPreviewParamBase.cs" />
     <Compile Include="SectionFamilyGoo.cs" />
     <Compile Include="SectionFamilyParam.cs" />
+    <Compile Include="SubCategories.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\FreeBuild\FreeBuild\FreeBuild.Rhino\FreeBuild.Rhino.csproj">

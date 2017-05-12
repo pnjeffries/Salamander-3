@@ -11,7 +11,7 @@ namespace Salamander.BasicTools
             "Create a new linear element along a straight line.",
         IconBackground = Resources.BaseURI + "LinearElement.png",
         IconForeground = Resources.BaseURI + "AddIcon.png")]
-    public class DrawLinearElementAction : ModelActionBase
+    public class CreateLinearElementAction : ModelActionBase
     {
         [ActionInput(1, "the set-out geometry of the new element")]
         public Line Line { get; set; }
@@ -36,7 +36,7 @@ namespace Salamander.BasicTools
                 Element = Model.Create.LinearElement(Line, exInfo);
                 Element.Family = Section;
                 Element.Orientation = Orientation;
-                Element.GenerateNodes(new NodeGenerationParameters(exInfo));
+                Element.GenerateNodes(new NodeGenerationParameters());
                 return true;
             }
             return false;

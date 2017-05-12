@@ -21,7 +21,7 @@ namespace Salamander.BasicToolsGH
             : base("CreateRectangularHollowSection",
                  "Rectangular Hollow Section",
                  "RHS",
-                 "Sections")
+                 SubCategories.Sections)
         { }
 
     }

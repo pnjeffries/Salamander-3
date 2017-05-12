@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Salamander.Selection
 {
-    public class PanelFamilyDummy : PanelFamily
+    public class PanelFamilyDummy : BuildUpFamily
     {
         #region Constructors
 

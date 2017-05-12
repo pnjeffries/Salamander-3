@@ -69,6 +69,16 @@ namespace Salamander.Rhino
         }
 
         /// <summary>
+        /// Draw the specified mesh wireframe with the specified colour
+        /// </summary>
+        /// <param name="mesh"></param>
+        /// <param name="colour"></param>
+        public void DrawWireframe(RC.Mesh mesh, Color colour)
+        {
+            Display.DrawMeshWires(mesh, colour);
+        }
+
+        /// <summary>
         /// Draw the specified extrusion as a surface wireframe
         /// </summary>
         /// <param name="extrusion"></param>

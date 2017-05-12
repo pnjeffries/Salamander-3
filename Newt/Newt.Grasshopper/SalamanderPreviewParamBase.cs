@@ -35,7 +35,7 @@ namespace Salamander.Grasshopper
             get { return Preview_ComputeClippingBox(); }
         }
 
-        private SalamanderPreviewParamBase() : base("Salamander Object", "Salamander Object", "A Salamander Object", "Salamander 3", "Params", GH_ParamAccess.item)
+        private SalamanderPreviewParamBase() : base("Salamander Object", "Salamander Object", "A Salamander Object", "Salamander 3", SubCategories.Params, GH_ParamAccess.item)
         {
         }
 

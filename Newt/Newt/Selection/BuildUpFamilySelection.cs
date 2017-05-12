@@ -11,18 +11,18 @@ namespace Salamander.Selection
     /// <summary>
     /// A selection of Panel Family objects
     /// </summary>
-    public class PanelFamilySelection : SelectionViewModel<PanelFamilyCollection, PanelFamily>
+    public class BuildUpFamilySelection : SelectionViewModel<BuildUpFamilyCollection, BuildUpFamily>
     {
         /// <summary>
         /// The primary selected family for individual property display - will be the last selected family
         /// </summary>
-        public PanelFamily Family
+        public BuildUpFamily Family
         {
             get
             {
                 if (Selection.Count > 0)
                 {
-                    PanelFamily result = Selection.Last();
+                    BuildUpFamily result = Selection.Last();
                     return result;
                 }
                 else return null;
@@ -42,12 +42,12 @@ namespace Salamander.Selection
             get
             {
                 EnsureOneLayer();
-                return Family?.BuildUp[0].Thickness ?? 0;
+                return Family?.Layers[0].Thickness ?? 0;
             }
             set
             {
                 EnsureOneLayer();
-                Family.BuildUp[0].Thickness = value;
+                Family.Layers[0].Thickness = value;
             }
         }
 
@@ -56,12 +56,12 @@ namespace Salamander.Selection
             get
             {
                 EnsureOneLayer();
-                return Family?.BuildUp[0].Material;
+                return Family?.Layers[0].Material;
             }
             set
             {
                 EnsureOneLayer();
-                if (Family != null) Family.BuildUp[0].Material = value;
+                if (Family != null) Family.Layers[0].Material = value;
             }
         }
 
@@ -69,8 +69,8 @@ namespace Salamander.Selection
 
         private void EnsureOneLayer()
         {
-            if (Family != null && Family.BuildUp.Count == 0)
-                Family.BuildUp.Add(new BuildUpLayer());
+            if (Family != null && Family.Layers.Count == 0)
+                Family.Layers.Add(new BuildUpLayer());
         }
 
         public void MonitorElementSelectionFamily(ElementSelection elementSelection)
@@ -90,9 +90,9 @@ namespace Salamander.Selection
             {
                 ElementSelection elementSelection = (ElementSelection)sender;
                 object selected = elementSelection.PanelFamily;
-                if (selected != null && selected is PanelFamily)
+                if (selected != null && selected is BuildUpFamily)
                 {
-                    Set((PanelFamily)selected);
+                    Set((BuildUpFamily)selected);
                 }
                 else Clear();
             }

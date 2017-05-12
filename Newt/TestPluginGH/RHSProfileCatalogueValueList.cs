@@ -43,7 +43,7 @@ namespace Salamander.BasicToolsGH
             NickName = "RHS-Profiles";
             Description = "A selector to choose standard rectangular (and square) hollow section profile descriptions from the catalogue. Combine this with a 'Text to Section' component to generate a section family with this profile.";
             Category = "Salamander 3";
-            SubCategory = "Sections";
+            SubCategory = SubCategories.Sections;
             this.ListItems.Clear();
 
             SectionProfileCollection result = new SectionProfileCollection();

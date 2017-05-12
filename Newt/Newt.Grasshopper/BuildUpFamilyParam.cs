@@ -8,13 +8,13 @@ using System.Threading.Tasks;
 
 namespace Salamander.Grasshopper
 {
-    public class SectionFamilyParam : GH_Param<SectionFamilyGoo>
+    public class BuildUpFamilyParam : GH_Param<BuildUpFamilyGoo>
     {
         public override Guid ComponentGuid
         {
             get
             {
-                return new Guid("{BFBC0653-28EA-488A-922E-4967CBEE0C7A}");
+                return new Guid("{CBB2ADAB-9436-4766-945C-9E2D7B35CF32}");
             }
         }
 
@@ -23,14 +23,14 @@ namespace Salamander.Grasshopper
             get
             {
                 string uri1 = IconResourceHelper.ResourceLocation + "ParamBackground.png";
-                string uri2 = IconResourceHelper.ResourceLocation + "SectionFamily.png";
+                string uri2 = IconResourceHelper.ResourceLocation + "BuildUpFamily.png";
                 Bitmap bmp = IconResourceHelper.CombinedBitmapFromURIs(uri1, uri2);
                 return bmp;
             }
         }
 
-        public SectionFamilyParam()
-            : base("Section Family", "Section", "Salamander Section Family", "Salamander 3", SubCategories.Params, GH_ParamAccess.item)
+        public BuildUpFamilyParam()
+            : base("Build-Up Family", "BuildUp", "Salamander Build-Up Family", "Salamander 3", SubCategories.Params, GH_ParamAccess.item)
         { }
 
     }

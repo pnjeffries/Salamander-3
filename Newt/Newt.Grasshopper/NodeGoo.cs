@@ -91,7 +91,7 @@ namespace Salamander.Grasshopper
 
         public void DrawViewportWires(GH_PreviewWireArgs args)
         {
-            args.Pipeline.DrawPoint(FBtoRC.Convert(Value.Position), RD.PointStyle.Simple, 8, args.Color);
+            args.Pipeline.DrawPoint(FBtoRC.Convert(Value.Position), RD.PointStyle.X, 8, args.Color);
         }
 
         public void DrawViewportMeshes(GH_PreviewMeshArgs args)

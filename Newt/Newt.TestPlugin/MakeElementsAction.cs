@@ -55,10 +55,10 @@ namespace Salamander.BasicTools
                         if (FamiliesFromLayers && shape.Attributes != null && !string.IsNullOrWhiteSpace(shape.Attributes.LayerName))
                         {
                             string layerName = shape.Attributes.LayerName;
-                            PanelFamily fF = Model.Families.PanelFamilies.FindByName(layerName);
+                            BuildUpFamily fF = Model.Families.PanelFamilies.FindByName(layerName);
                             if (fF == null)
                             {
-                                fF = Model.Create.FaceFamily(layerName, exInfo);
+                                fF = Model.Create.BuildUpFamily(layerName, exInfo);
                             }
                             element.Family = fF;
                         }

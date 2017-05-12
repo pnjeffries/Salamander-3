@@ -83,10 +83,10 @@
                         <local:SectionSelectionControl></local:SectionSelectionControl>
                     </fb:PropertiesExpander>
 
-                    <fb:PropertiesExpander DataContext="{Binding Path=Selected.PanelFamilies}"
+                    <fb:PropertiesExpander DataContext="{Binding Path=Selected.BuildUpFamilies}"
                                            Visibility="{Binding Path=Selection.Count, Converter={StaticResource CountVisibilityConverter}}">
                         <fb:PropertiesExpander.HeaderContent>
-                            <TextBlock Grid.Column="1" Text="{Binding Path=Family.Name, StringFormat='PANEL FAMILY: {0}'}"
+                            <TextBlock Grid.Column="1" Text="{Binding Path=Family.Name, StringFormat='BUILD-UP: {0}'}"
                                 TextTrimming="CharacterEllipsis"
                                                ></TextBlock>
                         </fb:PropertiesExpander.HeaderContent>

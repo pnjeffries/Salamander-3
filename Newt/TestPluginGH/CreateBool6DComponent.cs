@@ -18,7 +18,7 @@ namespace Salamander.BasicToolsGH
         }
 
         public CreateBool6DComponent()
-            : base("CreateBool6D", "Bool6D", "Bool6D", "Model")
+            : base("CreateBool6D", "Bool6D", "Bool6D", SubCategories.Model)
         { }
     }
 }

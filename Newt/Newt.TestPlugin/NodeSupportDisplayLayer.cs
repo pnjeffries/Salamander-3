@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.ComponentModel;
 
 namespace Salamander.BasicTools
 {
@@ -27,7 +28,7 @@ namespace Salamander.BasicTools
                 NodeSupport support = source.GetData<NodeSupport>();
                 if (support != null && !support.Fixity.AllFalse)
             {
-                    double scale = 0.5;
+                    double scale = 1.0;
                     IMeshAvatar mAv = CreateMeshAvatar();
                     mAv.Builder.AddNodeSupport(source, support);
                     mAv.Brush = new ColourBrush(new Colour(0.5f, 0.8f, 0.2f, 0f)); //TODO: Make customisable
@@ -36,6 +37,12 @@ namespace Salamander.BasicTools
                 }
             }
             return result;
+        }
+
+        public override void InvalidateOnUpdate(object modified, PropertyChangedEventArgs e)
+        {
+            base.InvalidateOnUpdate(modified, e);
+            if (modified is Node) Core.Instance.Host.Refresh();
         }
     }
 }

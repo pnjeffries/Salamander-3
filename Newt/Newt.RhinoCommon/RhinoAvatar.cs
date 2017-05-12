@@ -17,8 +17,8 @@ namespace Salamander.Rhino
     /// </summary>
     public abstract class RhinoAvatar : Avatar
     {
-        protected static DisplayMaterial _DefaultMaterial = 
-            new DisplayMaterial(Color.Gray, Color.White, Color.FromArgb(40, 40, 60), Color.FromArgb(60,60,60), 0.75, 0);
+        protected static DisplayMaterial _DefaultMaterial = CreateDefaultMaterial();
+            
 
         private DisplayMaterial _Material = null;
 
@@ -58,6 +58,12 @@ namespace Salamander.Rhino
             {
                 Material = FBtoRC.Convert(value);
             }
+        }
+
+        protected static DisplayMaterial CreateDefaultMaterial()
+        {
+            var result = new DisplayMaterial(Color.Gray, Color.White, Color.FromArgb(40, 40, 60), Color.FromArgb(60, 60, 60), 0.75, 0);
+            return result;
         }
 
     }

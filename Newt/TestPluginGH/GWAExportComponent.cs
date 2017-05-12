@@ -17,6 +17,6 @@ namespace Salamander.BasicToolsGH
             }
         }
 
-        public GWAExportComponent() : base("SaveAsGWA", "Export GWA", "GWA", "Export") { }
+        public GWAExportComponent() : base("SaveAsGWA", "Export GWA", "GWA", SubCategories.Export) { }
     }
 }
