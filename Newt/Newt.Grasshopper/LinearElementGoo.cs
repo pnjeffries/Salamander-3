@@ -170,6 +170,32 @@ namespace Salamander.Grasshopper
             return new LinearElementGoo(Value);
         }
 
+        public override bool CastTo<Q>(ref Q target)
+        {
+            if (typeof(Q).IsAssignableFrom(typeof(GH_Curve)))
+            {
+                target = (Q)((object)new GH_Curve(FBtoRC.Convert(Value.Geometry)));
+                return true;
+            }
+            else if (typeof(Q).IsAssignableFrom(typeof(GH_Line)))
+            {
+                if (Value.Geometry is FB.Line)
+                {
+                    target = (Q)((object)new GH_Line(FBtoRC.ConvertToLine((FB.Line)Value.Geometry)));
+                    return true;
+                } 
+            }
+            else if (typeof(Q).IsAssignableFrom(typeof(GH_Mesh)))
+            {
+                if (SectionMesh != null)
+                {
+                    target = (Q)((object)new GH_Mesh(SectionMesh));
+                    return true;
+                }
+            }
+            return base.CastTo<Q>(ref target);
+        }
+
         #endregion
     }
 }

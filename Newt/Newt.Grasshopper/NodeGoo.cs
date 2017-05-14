@@ -99,6 +99,16 @@ namespace Salamander.Grasshopper
             //args.Pipeline.DrawPoint(FBtoRC.Convert(Value.Position), RD.PointStyle.ActivePoint, 1, args.Material.Diffuse);
         }
 
+        public override bool CastTo<Q>(ref Q target)
+        {
+            if (typeof(Q).IsAssignableFrom(typeof(GH_Point)))
+            {
+                target = (Q)((object)new GH_Point(FBtoRC.Convert(Value.Position)));
+                return true;
+            }
+            return base.CastTo<Q>(ref target);
+        }
+
         #endregion
     }
 }

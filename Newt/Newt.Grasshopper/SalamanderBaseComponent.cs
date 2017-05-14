@@ -553,6 +553,13 @@ namespace Salamander.Grasshopper
         //    base.DrawViewportMeshes(args);
         //}
 
+        public override void RemovedFromDocument(GH_Document document)
+        {
+            base.RemovedFromDocument(document);
+            // Clean up generated objects:
+            Core.Instance.ActiveDocument.Model.History.DeleteAllFromSource(InstanceGuid.ToString());
+        }
+
         #endregion
 
     }
