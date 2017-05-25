@@ -70,6 +70,7 @@
     <Compile Include="Bool6DParam.cs" />
     <Compile Include="Conversion.cs" />
     <Compile Include="GrasshopperInfo.cs" />
+    <Compile Include="GrasshopperManager.cs" />
     <Compile Include="IconResourceHelper.cs" />
     <Compile Include="ISalamander_Goo.cs" />
     <Compile Include="LinearElementGoo.cs" />

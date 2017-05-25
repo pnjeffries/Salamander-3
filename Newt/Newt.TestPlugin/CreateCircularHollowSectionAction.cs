@@ -15,7 +15,7 @@ namespace Salamander.BasicTools
        "Create a new section property with a circular hollow profile",
        IconBackground = Resources.BaseURI + "CircularHollowSection.png",
        IconForeground = Resources.BaseURI + "AddIcon.png")]
-    public class CreateCircularHollowSectionAction : ModelActionBase
+    public class CreateCircularHollowSectionAction : ModelDocumentActionBase
     {
         [ActionInput(1, "the name of the section")]
         public string Name { get; set; } = "Circular Hollow Section";

@@ -9,10 +9,11 @@ using System.Threading.Tasks;
 
 namespace Salamander.Actions
 {
+    /*
     /// <summary>
     /// A base class for actions which act on a Model.
     /// </summary>
-    public abstract class ModelActionBase : ActionBase
+    public abstract class ModelDocumentActionBase : ActionBase
     {
         /// <summary>
         /// Private member variable for Model
@@ -54,5 +55,5 @@ namespace Salamander.Actions
             if (exInfo != null) Model.History.CleanSubsequentIterations(exInfo);
             return true;
         }
-    }
+    }*/
 }

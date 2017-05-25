@@ -16,7 +16,7 @@ namespace Salamander.BasicTools
         IconBackground = Resources.BaseURI + "PanelElement.png",
         IconForeground = Resources.BaseURI + "AddIcon.png"
         )]
-    public class CreatePanelElement : ModelActionBase
+    public class CreatePanelElement : ModelDocumentActionBase
     {
         [ActionInput(1, "the planar curve that describes the outer perimeter of the panel")]
         public Curve Perimeter { get; set; }

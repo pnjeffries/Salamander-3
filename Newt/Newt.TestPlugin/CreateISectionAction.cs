@@ -15,7 +15,7 @@ namespace Salamander.BasicTools
         "Create a new section property with a symmetric I-shaped profile",
         IconBackground = Resources.BaseURI + "SectionFamily.png",
         IconForeground = Resources.BaseURI + "AddIcon.png")]
-    public class CreateISectionAction : ModelActionBase
+    public class CreateISectionAction : ModelDocumentActionBase
     {
 
         [ActionInput(1, "the name of the section")]

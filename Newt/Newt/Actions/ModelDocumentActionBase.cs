@@ -12,7 +12,7 @@ namespace Salamander.Actions
     /// <summary>
     /// A base class for actions which perform operations on a ModelDocument
     /// </summary>
-    public abstract class ModelDocumentActionBase : ActionBase
+    public abstract class ModelDocumentActionBase : ActionBase, IModelDocumentAction
     {
         /// <summary>
         /// Private member variable for the Document property
@@ -23,7 +23,6 @@ namespace Salamander.Actions
         /// The model document to be operated upon.  This can be specifically set, but by default will
         /// automatically return the currently active document.
         /// </summary>
-        //[ActionInput(Description = "the document to be operated upon.", Manual = false, Required = false, Order =-10)]
         public ModelDocument Document
         {
             get
@@ -34,6 +33,17 @@ namespace Salamander.Actions
             set
             {
                 _Document = value;
+            }
+        }
+
+        /// <summary>
+        /// The model to be operated upon.
+        /// </summary>
+        public Model Model
+        {
+            get
+            {
+                return Document.Model;
             }
         }
 

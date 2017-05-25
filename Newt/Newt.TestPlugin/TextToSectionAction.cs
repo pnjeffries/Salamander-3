@@ -15,7 +15,7 @@ namespace Salamander.BasicTools
        "TextToSection",
        "Create a new section property from a catalogue name or textual section description",
        IconBackground = Resources.BaseURI + "TextToSection.png")]
-    public class TextToSectionAction : ModelActionBase
+    public class TextToSectionAction : ModelDocumentActionBase
     {
         [ActionInput(1, "the name of the section")]
         public string Name { get; set; } = "Section";

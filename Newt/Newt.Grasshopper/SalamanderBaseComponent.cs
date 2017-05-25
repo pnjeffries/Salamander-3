@@ -18,6 +18,9 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using RC = Rhino.Geometry;
+using System.Windows.Forms;
+using Rhino;
+using Rhino.DocObjects;
 
 namespace Salamander.Grasshopper
 {
@@ -354,6 +357,12 @@ namespace Salamander.Grasshopper
                 IAction action = (IAction)Activator.CreateInstance(ActionType, true);
                 if (action != null)
                 {
+                    if (action is IModelDocumentAction && !GrasshopperManager.Instance.AutoBake)
+                    {
+                        IModelDocumentAction mDAction = (IModelDocumentAction)action;
+                        mDAction.Document = GrasshopperManager.Instance.BackgroundDocument;
+                    }
+
                     if (ExtractInputs(action, DA))
                     {
                         ExecutionInfo exInfo = new ExecutionInfo(InstanceGuid.ToString(), DA.Iteration);
@@ -556,8 +565,25 @@ namespace Salamander.Grasshopper
         public override void RemovedFromDocument(GH_Document document)
         {
             base.RemovedFromDocument(document);
-            // Clean up generated objects:
+            // Clean up generated objects in both the active and background models:
             Core.Instance.ActiveDocument.Model.History.DeleteAllFromSource(InstanceGuid.ToString());
+            GrasshopperManager.Instance.BackgroundDocument.Model.History.DeleteAllFromSource(InstanceGuid.ToString());
+        }
+
+        public override void AppendAdditionalMenuItems(ToolStripDropDown menu)
+        {
+            base.AppendAdditionalMenuItems(menu);
+            ToolStripMenuItem mItem = GH_DocumentObject.Menu_AppendItem(menu, "Auto-Bake To Main Model", new EventHandler(this.Menu_MainModelClicked), 
+                true, GrasshopperManager.Instance.AutoBake);
+            mItem.ToolTipText = 
+                "If checked, Salamander Grasshopper components will automatically bake to and update the primary Salamander model.  " + Environment.NewLine +
+                "Otherwise, changes will be written only to a temporary background model and will not have an effect on the main " + Environment.NewLine
+                + "model.  This is a global setting which applies to *all* Salamander components in the document.";
+        }
+
+        public void Menu_MainModelClicked(object sender, System.EventArgs e)
+        {
+            GrasshopperManager.Instance.AutoBake = !GrasshopperManager.Instance.AutoBake;
         }
 
         #endregion

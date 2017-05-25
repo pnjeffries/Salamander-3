@@ -14,7 +14,7 @@ namespace Salamander.BasicTools
         "Retrieve an existing Section Family by name.",
         IconBackground = Resources.BaseURI + "SectionFamily.png",
         IconForeground = Resources.BaseURI + "GetIcon.png")]
-    public class GetSectionAction : ModelActionBase
+    public class GetSectionAction : ModelDocumentActionBase
     {
         [ActionInput(1, "The name of the section to seach for")]
         public string Name { get; set; }

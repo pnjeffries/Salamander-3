@@ -16,7 +16,7 @@ namespace Salamander.BasicTools
             "Designate a structural support point.",
         IconBackground = Resources.BaseURI + "LinearElement.png",
         IconForeground = Resources.BaseURI + "AddIcon.png")]
-    public class AddSupportPointAction : ModelActionBase
+    public class AddSupportPointAction : ModelDocumentActionBase
     {
         [ActionInput(1, "the point to restrain.  The nearest node to this point will be restrained.")]
         public Vector Point { get; set; }

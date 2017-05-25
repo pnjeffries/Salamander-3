@@ -14,7 +14,7 @@ namespace Salamander.BasicTools
         "Create a new node at a specified position",
         IconBackground = Resources.NodeIconURI,
         IconForeground = Resources.AddIconURI)]
-    public class CreateNode : ModelActionBase
+    public class CreateNode : ModelDocumentActionBase
     {
         [ActionInput(1, "the position of the new node")]
         public Vector Position { get; set; }

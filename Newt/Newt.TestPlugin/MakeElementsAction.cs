@@ -13,7 +13,7 @@ namespace Salamander.BasicTools
 {
     [Action("MakeElements",
             "Convert 'dumb' geometry into Salamander elements.")]
-    public class MakeElementsAction : ModelActionBase
+    public class MakeElementsAction : ModelDocumentActionBase
     {
         [ActionInput(1, "the geometry to be converted")]
         public VertexGeometryCollection Geometry { get; set; }

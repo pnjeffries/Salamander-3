@@ -9,7 +9,7 @@ using FreeBuild.Actions;
 namespace Salamander.BasicTools
 {
     [Action("RegenerateNodes")]
-    public class RegenerateNodes : ModelActionBase
+    public class RegenerateNodes : ModelDocumentActionBase
     {
         public override bool Execute(ExecutionInfo exInfo = null)
         {

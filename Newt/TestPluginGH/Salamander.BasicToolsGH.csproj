@@ -81,6 +81,7 @@
     <Compile Include="PanelElementParam.cs" />
     <Compile Include="PanelFamilyParam.cs" />
     <Compile Include="RHSProfileCatalogueValueList.cs" />
+    <Compile Include="SalamanderAutoBakeComponent.cs" />
     <Compile Include="TextToSectionComponent.cs" />
     <Compile Include="DirectionValueList.cs" />
     <Compile Include="DrawLinearElementComponent.cs" />

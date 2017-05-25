@@ -12,7 +12,7 @@ namespace Salamander.BasicTools
 {
     [Action("CreateNodeLoad",
         "Create a point load applied directly to a set of nodes")] //TODO: Icon
-    public class CreateNodeLoadAction : ModelActionBase
+    public class CreateNodeLoadAction : ModelDocumentActionBase
     {
         [ActionInput(1, "the nodes to which the load should be applied.")]
         public NodeCollection Nodes { get; set; }

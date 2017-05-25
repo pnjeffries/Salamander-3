@@ -13,7 +13,7 @@ namespace Salamander.BasicTools
         "Create a new single-layer panel build-up family",
         IconBackground = Resources.BaseURI + "BuildUpFamily.png",
         IconForeground = Resources.BaseURI + "AddIcon.png")]
-    public class CreateBuildUp : ModelActionBase
+    public class CreateBuildUp : ModelDocumentActionBase
     {
         [ActionInput(1, "the name of the section")]
         public string Name { get; set; } = "Build-Up";

@@ -15,7 +15,7 @@ namespace Salamander.BasicTools
         "Create a new section property with a rectangular hollow profile",
         IconBackground = Resources.BaseURI + "RectangularHollowSection.png",
         IconForeground = Resources.BaseURI + "AddIcon.png")]
-    public class CreateRectangularHollowSectionAction : ModelActionBase
+    public class CreateRectangularHollowSectionAction : ModelDocumentActionBase
     {
 
         [ActionInput(1, "the name of the section")]

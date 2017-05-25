@@ -49,6 +49,7 @@
     <Compile Include="Actions\ActionOutputAttribute.cs" />
     <Compile Include="Actions\ActionParameterAttribute.cs" />
     <Compile Include="Actions\ActionTriggerInput.cs" />
+    <Compile Include="Actions\IModelDocumentAction.cs" />
     <Compile Include="Actions\PreviewParameters.cs" />
     <Compile Include="Actions\IImportDocumentAction.cs" />
     <Compile Include="Actions\ImportActionBase.cs" />
@@ -108,7 +109,7 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\Salamander2_64x64.png" />
+    <Resource Include="Resources\Salamander3_64x64.png" />
     <None Include="Resources\SectLib.csv">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
