@@ -98,11 +98,18 @@ namespace Salamander
         public abstract Direction EnterDirection(string prompt = "Enter direction", bool xyzOnly = false);
 
         /// <summary>
+        /// Prompt the user to select a curve
+        /// </summary>
+        /// <param name="prompt"></param>
+        /// <returns></returns>
+        public abstract Curve EnterCurve(string prompt = "Enter curve");
+
+        /// <summary>
         /// Prompt the user to enter a collection of geometry
         /// </summary>
         /// <param name="prompt"></param>
         /// <returns></returns>
-        public abstract VertexGeometryCollection EnterGeometry(string prompt = "Enter geometry");
+        public abstract VertexGeometryCollection EnterGeometry(string prompt = "Enter geometry", Type geometryType = null);
 
         /// <summary>
         /// Prompt the user to select an Element
@@ -193,6 +200,8 @@ namespace Salamander
                 else if (inputType == typeof(Line)) //FreeBuild Line
                     value = EnterLine("Enter start point of " + description,
                         "Enter end point of " + description);
+                else if (inputType == typeof(Curve)) //FreeBuild Curve
+                    value = EnterCurve("Enter " + description);
                 else if (inputType == typeof(VertexGeometryCollection)) //FreeBuild Shapes
                     value = EnterGeometry("Enter " + description);
                 else if (inputType == typeof(Element)) // FreeBuild Element

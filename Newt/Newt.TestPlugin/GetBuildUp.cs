@@ -12,8 +12,8 @@ namespace Salamander.BasicTools
     [Action(
         "GetBuildUp",
         "Retrieve an existing Panel Build-Up by name.",
-        IconBackground = Resources.BaseURI + "BuildUpFamily.png",
-        IconForeground = Resources.BaseURI + "GetIcon.png")]
+        IconBackground = Resources.URIs.BuildUpFamily,
+        IconForeground = Resources.URIs.GetIcon)]
     public class GetPanelAction : ModelDocumentActionBase
     {
         [ActionInput(1, "The name of the build-up family to seach for")]

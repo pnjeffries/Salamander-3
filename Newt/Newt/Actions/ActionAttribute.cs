@@ -34,6 +34,11 @@ namespace Salamander.Actions
         public string IconBackground { get; set; } = null;
 
         /// <summary>
+        /// The type of the preview layer (if any) to be used to display the results of this operation.
+        /// </summary>
+        public Type PreviewLayerType { get; set; } = null;
+
+        /// <summary>
         /// Constructor
         /// </summary>
         /// <param name="commandName"></param>

@@ -13,8 +13,8 @@ namespace Salamander.BasicTools
 {
     [Action("CreatePanelElement",
         Description = "Create a new Panel Element from a border curve",
-        IconBackground = Resources.BaseURI + "PanelElement.png",
-        IconForeground = Resources.BaseURI + "AddIcon.png"
+        IconBackground = Resources.URIs.PanelElement,
+        IconForeground = Resources.URIs.AddIcon
         )]
     public class CreatePanelElement : ModelDocumentActionBase
     {

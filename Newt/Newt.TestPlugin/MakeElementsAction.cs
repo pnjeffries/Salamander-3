@@ -12,7 +12,8 @@ using FreeBuild.UI;
 namespace Salamander.BasicTools
 {
     [Action("MakeElements",
-            "Convert 'dumb' geometry into Salamander elements.")]
+            "Convert 'dumb' geometry into Salamander elements.",
+        IconBackground = Resources.URIs.Convert)]
     public class MakeElementsAction : ModelDocumentActionBase
     {
         [ActionInput(1, "the geometry to be converted")]

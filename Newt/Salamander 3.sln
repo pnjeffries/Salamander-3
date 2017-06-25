@@ -35,13 +35,15 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FreeBuild.Robot", "..\..\Fr
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Salamander.RobotIOPlugin", "Newt.RobotIOPlugin\Salamander.RobotIOPlugin.csproj", "{AA3A00FC-FC95-4BB5-B129-563B48F6DDBC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Salamander.Rhino.RobotImport", "Salamander.Rhino.RobotImport\Salamander.Rhino.RobotImport.csproj", "{F2201CF6-2166-4167-9138-21D6E3969571}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Salamander.Rhino.Import", "Salamander.Rhino.RobotImport\Salamander.Rhino.Import.csproj", "{F2201CF6-2166-4167-9138-21D6E3969571}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Salamander.Revit", "Salamander.Revit\Salamander.Revit.csproj", "{D9307A44-9C1E-42D2-82B6-5342F2F95022}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FreeBuild.Revit", "..\..\FreeBuild\FreeBuild\FreeBuild.Revit\FreeBuild.Revit.csproj", "{E4E2CE0F-C3CF-4EA2-A5C2-E06B49939604}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FreeBuild.OpenTK", "..\..\FreeBuild\FreeBuild\FreeBuild.OpenTK\FreeBuild.OpenTK.csproj", "{022305D8-4399-4B96-B8C1-C87E25F2E68E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Salamander.Rhino.Export", "Salamander.Rhino.Export\Salamander.Rhino.Export.csproj", "{2CAEE355-2217-4A4E-A4FF-C44DCA32CC46}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -187,6 +189,14 @@ Global
 		{022305D8-4399-4B96-B8C1-C87E25F2E68E}.Debug64|Any CPU.Build.0 = Debug|Any CPU
 		{022305D8-4399-4B96-B8C1-C87E25F2E68E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{022305D8-4399-4B96-B8C1-C87E25F2E68E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2CAEE355-2217-4A4E-A4FF-C44DCA32CC46}.Debug|Any CPU.ActiveCfg = Debug64|Any CPU
+		{2CAEE355-2217-4A4E-A4FF-C44DCA32CC46}.Debug|Any CPU.Build.0 = Debug64|Any CPU
+		{2CAEE355-2217-4A4E-A4FF-C44DCA32CC46}.Debug32|Any CPU.ActiveCfg = Debug32|Any CPU
+		{2CAEE355-2217-4A4E-A4FF-C44DCA32CC46}.Debug32|Any CPU.Build.0 = Debug32|Any CPU
+		{2CAEE355-2217-4A4E-A4FF-C44DCA32CC46}.Debug64|Any CPU.ActiveCfg = Debug64|Any CPU
+		{2CAEE355-2217-4A4E-A4FF-C44DCA32CC46}.Debug64|Any CPU.Build.0 = Debug64|Any CPU
+		{2CAEE355-2217-4A4E-A4FF-C44DCA32CC46}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2CAEE355-2217-4A4E-A4FF-C44DCA32CC46}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -13,7 +13,7 @@ namespace Salamander.BasicTools
 {
     [Action("SaveAsGWA", 
         Description = "Export the Salamander model to a text GWA format for import to Oasys GSA",
-        IconBackground = Resources.BaseURI + "GSA.png")]
+        IconBackground = Resources.URIs.GSA)]
     [ExportAction(Extensions = new string[] { ".gwa" }, Filter = "GSA Text File (*.gwa) | *.gwa")]
     public class GWAExportAction : ModelDocumentActionBase, IExportAction
     {

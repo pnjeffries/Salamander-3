@@ -41,7 +41,20 @@ namespace Salamander.Grasshopper
             set { _AutoBake = value; }
         }
 
-        private ModelDocument _BackgroundDocument = null;
+        /// <summary>
+        /// Private backing field for BackgroundDocuments property
+        /// </summary>
+        private Dictionary<Guid, ModelDocument> _BackgroundDocuments = new Dictionary<Guid, ModelDocument>();
+
+        /// <summary>
+        /// A map of Grasshopper document IDs to the background Salamander document linked to them
+        /// </summary>
+        public Dictionary<Guid, ModelDocument> BackgroundDocuments
+        {
+            get { return _BackgroundDocuments; }
+        }
+
+        /*private ModelDocument _BackgroundDocument = null;
 
         /// <summary>
         /// The background document that can be used to generate the model without
@@ -59,8 +72,35 @@ namespace Salamander.Grasshopper
             {
                 _BackgroundDocument = value;
             }
+        }*/
+
+        /// <summary>
+        /// Get the background Salamander document associated with the specified
+        /// Grasshopper document
+        /// </summary>
+        /// <param name="document"></param>
+        /// <returns></returns>
+        public ModelDocument BackgroundDocument(GH_Document document)
+        {
+            if (document != null)
+            {
+                Guid id = document.DocumentID;
+                if (!BackgroundDocuments.ContainsKey(id))
+                {
+                    ModelDocument doc = new ModelDocument();
+                    BackgroundDocuments.Add(id, doc);
+                    return doc;
+                }
+                else return BackgroundDocuments[id];
+            }
+            else return null;
         }
-        
+
+        /// <summary>
+        /// Expire the solution of all Salamander components in the document, forcing them to
+        /// re-compute.
+        /// </summary>
+        /// <param name="document"></param>
         public void InvalidateAllSalamanderComponents(GH_Document document)
         {
             if (document != null)

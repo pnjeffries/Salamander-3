@@ -4,6 +4,7 @@ using Rhino.Commands;
 using Salamander.RhinoCommon;
 using FreeBuild.Model;
 using Salamander.Display;
+using FreeBuild.Rhino;
 
 namespace Salamander.Rhino
 {

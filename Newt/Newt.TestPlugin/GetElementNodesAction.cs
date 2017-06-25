@@ -11,7 +11,7 @@ namespace Salamander.BasicTools
 {
     [Action("GetElementNodes",
         "Extract the nodes from an element",
-        IconBackground = Resources.BaseURI + "GetElementNodes.png")]
+        IconBackground = Resources.URIs.GetElementNodes)]
     public class GetElementNodesAction : ActionBase
     {
         [ActionInput(1, "the element(s) from which to extract the nodes")]

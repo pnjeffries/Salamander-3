@@ -88,9 +88,9 @@ namespace Salamander.Selection
         public bool Deselect(ModelObject mObject)
         {
             if (mObject == null) return false;
-            else if (mObject is Element) return Elements.Remove(mObject.GUID);
-            else if (mObject is Node) return Nodes.Remove(mObject.GUID);
-            else if (mObject is Load) return Loads.Remove(mObject.GUID);
+            else if (mObject is Element) return Elements.Remove((Element)mObject);
+            else if (mObject is Node) return Nodes.Remove((Node)mObject);
+            else if (mObject is Load) return Loads.Remove((Load)mObject);
             else if (mObject is SectionFamily) return SectionFamilies.Remove((SectionFamily)mObject);
             else if (mObject is BuildUpFamily) return BuildUpFamilies.Remove((BuildUpFamily)mObject);
             else if (mObject is Material) return Materials.Remove((Material)mObject);

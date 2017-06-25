@@ -17,7 +17,7 @@ namespace Salamander.BasicTools
         public PanelThicknessDisplayLayer() : base("Panel Thickness",
             "Display Panel Elements with 3D thickness representations",
             1000,
-            Resources.BaseURI + "PanelPreview.png")
+            Resources.URIs.PanelPreview)
         {
             Visible = true;
         }

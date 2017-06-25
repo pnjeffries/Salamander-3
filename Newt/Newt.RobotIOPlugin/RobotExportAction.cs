@@ -13,7 +13,7 @@ namespace Salamander.RobotIOPlugin
 {
     [Action("SaveAsRobot", 
         Description = "Export the Salamander model to Autodesk Robot via the COM interface.  Requires Robot to be installed.",
-        IconBackground = Resources.BaseURI + "Robot.png")]
+        IconBackground = Resources.URIs.Robot)]
     [ExportAction(Extensions = new string[] { ".rtd" }, Filter = "Robot File (*.rtd) | *.rtd")]
     public class RobotExportAction : ModelDocumentActionBase, IExportAction
     {
@@ -46,6 +46,7 @@ namespace Salamander.RobotIOPlugin
                 robot.WriteModelToRobot(FilePath, Document.Model, ref idMap);
                 robot.Close();
                 robot.Release();
+                Document.IDMappings[FilePath] = idMap;
                 Result = true;
             }
             return true;

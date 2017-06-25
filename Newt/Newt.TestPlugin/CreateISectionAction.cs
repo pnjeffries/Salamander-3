@@ -13,8 +13,8 @@ namespace Salamander.BasicTools
     [Action(
         "CreateISection",
         "Create a new section property with a symmetric I-shaped profile",
-        IconBackground = Resources.BaseURI + "SectionFamily.png",
-        IconForeground = Resources.BaseURI + "AddIcon.png")]
+        IconBackground = Resources.URIs.SectionFamily,
+        IconForeground = Resources.URIs.AddIcon)]
     public class CreateISectionAction : ModelDocumentActionBase
     {
 

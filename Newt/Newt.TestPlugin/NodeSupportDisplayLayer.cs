@@ -15,7 +15,7 @@ namespace Salamander.BasicTools
     {
         public NodeSupportDisplayLayer() : base("Node Supports",
             "Display nodal restraint conditions", 2000,
-            Resources.BaseURI + "NodeRestraint.png")
+            Resources.URIs.NodeSupport)
         {
             Visible = true;
         }

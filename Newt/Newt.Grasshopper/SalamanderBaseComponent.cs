@@ -21,6 +21,7 @@ using RC = Rhino.Geometry;
 using System.Windows.Forms;
 using Rhino;
 using Rhino.DocObjects;
+using Rhino.Display;
 
 namespace Salamander.Grasshopper
 {
@@ -59,6 +60,20 @@ namespace Salamander.Grasshopper
         /// The execution information for the last execution
         /// </summary>
         private ExecutionInfo LastExecutionInfo { get; set; }
+
+        /// <summary>
+        /// Override this to return true if the outputs of this component should be cached
+        /// in the collection returned by the OutputCache property, which should also be overridden
+        /// </summary>
+        protected virtual bool CacheOutputs { get { return false; } }
+
+        /// <summary>
+        /// Override this to return a collection to use to cache the outputs of the component
+        /// </summary>
+        protected virtual IList OutputCache
+        {
+            get { return null; }
+        }
 
         /// <summary>
         /// Provides an Icon for the component.
@@ -137,6 +152,8 @@ namespace Salamander.Grasshopper
             Description = attributes.Description.CapitaliseFirst();
             Category = category;
             SubCategory = subCategory;
+            if (attributes.PreviewLayerType != null)
+                PreviewLayer = Activator.CreateInstance(attributes.PreviewLayerType) as DisplayLayer;
             PostConstructor();
         }
 
@@ -360,7 +377,7 @@ namespace Salamander.Grasshopper
                     if (action is IModelDocumentAction && !GrasshopperManager.Instance.AutoBake)
                     {
                         IModelDocumentAction mDAction = (IModelDocumentAction)action;
-                        mDAction.Document = GrasshopperManager.Instance.BackgroundDocument;
+                        mDAction.Document = GrasshopperManager.Instance.BackgroundDocument(OnPingDocument());
                     }
 
                     if (ExtractInputs(action, DA))
@@ -370,7 +387,7 @@ namespace Salamander.Grasshopper
                             if (action.Execute(exInfo))
                                 if (action.PostExecutionOperations(exInfo))
                                 {
-                                    ExtractOutputs(action, DA);
+                                    ExtractOutputs(action, DA, exInfo);
                                     LastExecuted = action;
                                     LastExecutionInfo = exInfo;
                                 }
@@ -409,14 +426,24 @@ namespace Salamander.Grasshopper
             return true;
         }
 
-        protected bool ExtractOutputs(IAction action, IGH_DataAccess DA)
+        protected bool ExtractOutputs(IAction action, IGH_DataAccess DA, ExecutionInfo exInfo)
         {
             IList<PropertyInfo> outputs = ActionBase.ExtractOutputParameters(ActionType);
             foreach (PropertyInfo pInfo in outputs)
             {
                 object outputData = pInfo.GetValue(action, null);
-                if (PreviewLayer != null) PreviewLayer.TryRegister(outputData);
-                outputData = FormatForOutput(outputData);
+                if (PreviewLayer != null)
+                {
+                    if (outputData is ICollection) //TODO: This would currently catch mesh faces and other similar objects...
+                    {
+                        PreviewLayer.TryRegisterAll((ICollection)outputData);
+                    }
+                    else
+                    { 
+                        PreviewLayer.TryRegister(outputData);
+                    }
+                }
+                outputData = FormatForOutput(outputData, exInfo);
                 if (outputData is IList)
                 {
                     DA.SetDataList(pInfo.Name, (IEnumerable)outputData);
@@ -477,18 +504,18 @@ namespace Salamander.Grasshopper
         /// </summary>
         /// <param name="obj"></param>
         /// <returns></returns>
-        protected object FormatForOutput(object obj)
+        protected object FormatForOutput(object obj, ExecutionInfo exInfo)
         {
             if (obj is Vector) return FBtoRC.Convert((Vector)obj);
             else if (obj is Curve) return FBtoRC.Convert((Curve)obj);
-            else if (obj is LinearElement) return new LinearElementGoo((LinearElement)obj);
+            else if (obj is LinearElement) return new LinearElementGoo((LinearElement)obj, exInfo);
             else if (obj is LinearElementCollection) return LinearElementGoo.Convert((LinearElementCollection)obj);
             else if (obj is PanelElement) return new PanelElementGoo((PanelElement)obj);
             else if (obj is PanelElementCollection) return PanelElementGoo.Convert((PanelElementCollection)obj);
             else if (obj is SectionFamily) return new SectionFamilyGoo((SectionFamily)obj);
             else if (obj is BuildUpFamily) return new BuildUpFamilyGoo((BuildUpFamily)obj);
-            else if (obj is Node) return new NodeGoo((Node)obj);
-            else if (obj is NodeCollection) return NodeGoo.Convert((NodeCollection)obj);
+            else if (obj is Node) return new NodeGoo((Node)obj, exInfo);
+            else if (obj is NodeCollection) return NodeGoo.Convert((NodeCollection)obj, exInfo);
             else if (obj is Bool6D) return new Bool6DGoo((Bool6D)obj);
             else if (obj is FilePath) return obj.ToString();
             //Add more types here
@@ -553,21 +580,28 @@ namespace Salamander.Grasshopper
             return type;
         }
 
-        //public override void DrawViewportMeshes(IGH_PreviewArgs args)
-        //{
-        //    if (PreviewLayer != null)
-        //    {
-        //        PreviewLayer.Draw(new RhinoRenderingParameters(args.Display));
-        //    }
-        //    base.DrawViewportMeshes(args);
-        //}
-
         public override void RemovedFromDocument(GH_Document document)
         {
-            base.RemovedFromDocument(document);
+           
             // Clean up generated objects in both the active and background models:
-            Core.Instance.ActiveDocument.Model.History.DeleteAllFromSource(InstanceGuid.ToString());
-            GrasshopperManager.Instance.BackgroundDocument.Model.History.DeleteAllFromSource(InstanceGuid.ToString());
+            Core.Instance?.ActiveDocument?.Model?.History?.DeleteAllFromSource(InstanceGuid.ToString());
+
+            GH_Document doc = OnPingDocument();
+            if (doc != null)
+            {
+                ModelDocument modelDoc = GrasshopperManager.Instance.BackgroundDocument(doc);
+                modelDoc?.Model?.History?.DeleteAllFromSource(InstanceGuid.ToString());
+            }
+            else
+            {
+                //If we can't lookup the document, we'll have to clear it from all of them!
+                foreach (var kvp in GrasshopperManager.Instance.BackgroundDocuments)
+                {
+                    kvp.Value?.Model?.History?.DeleteAllFromSource(InstanceGuid.ToString());
+                }
+            }
+
+            base.RemovedFromDocument(document);
         }
 
         public override void AppendAdditionalMenuItems(ToolStripDropDown menu)
@@ -584,6 +618,38 @@ namespace Salamander.Grasshopper
         public void Menu_MainModelClicked(object sender, System.EventArgs e)
         {
             GrasshopperManager.Instance.AutoBake = !GrasshopperManager.Instance.AutoBake;
+        }
+
+        public override void DrawViewportWires(IGH_PreviewArgs args)
+        {
+            base.DrawViewportWires(args);
+            if (PreviewLayer != null)
+            {
+                DisplayMaterial material;
+                if (this.Attributes.GetTopLevel.Selected)
+                {
+                    material = args.ShadeMaterial_Selected;
+                }
+                else material = args.ShadeMaterial;
+                args.Display.DisplayPipelineAttributes.ShadingEnabled = false;
+                PreviewLayer.Draw(new RhinoRenderingParameters(args.Display, material));
+            }
+        }
+
+        public override void DrawViewportMeshes(IGH_PreviewArgs args)
+        {
+            base.DrawViewportMeshes(args);
+            if (PreviewLayer != null)
+            {
+                DisplayMaterial material;
+                if (this.Attributes.GetTopLevel.Selected)
+                {
+                    material = args.ShadeMaterial_Selected;
+                }
+                else material = args.ShadeMaterial;
+                    args.Display.DisplayPipelineAttributes.ShadingEnabled = true;
+                PreviewLayer.Draw(new RhinoRenderingParameters(args.Display, material));
+            }
         }
 
         #endregion

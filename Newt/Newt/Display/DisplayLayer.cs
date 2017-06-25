@@ -3,6 +3,7 @@ using FreeBuild.Events;
 using FreeBuild.Model;
 using FreeBuild.Rendering;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -116,6 +117,21 @@ namespace Salamander.Display
         /// </summary>
         /// <param name="obj"></param>
         public abstract bool TryRegister(object obj);
+
+        /// <summary>
+        /// Try and register all objects in the specified collection
+        /// </summary>
+        /// <param name="collection"></param>
+        /// <returns>True if any of the items in the collection can be added</returns>
+        public bool TryRegisterAll(ICollection collection)
+        {
+            bool result = false;
+            foreach (object obj in collection)
+            {
+                if (TryRegister(obj)) result = true;
+            }
+            return result;
+        }
 
         /// <summary>
         /// Clear all registered key objects geometry on this layer

@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Salamander.UI"
+             xmlns:res="clr-namespace:Salamander.Resources;assembly=Salamander3"
              xmlns:converters="clr-namespace:FreeBuild.WPF.Converters;assembly=FreeBuild.WPF"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
@@ -66,7 +67,7 @@
 
                             <Border Name="Bd" Grid.Column="0" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Padding="{TemplateBinding Padding}" SnapsToDevicePixels="True">
                                 <StackPanel Orientation="Horizontal" Margin="0,1,1,1">
-                                    <Image Source="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Tag}" MaxWidth="16" MaxHeight="16" VerticalAlignment="Center" Margin="0,0,2,0"></Image>
+                                    <Image Source="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Tag}" MaxWidth="18" MaxHeight="18" VerticalAlignment="Center" Margin="0,0,2,0"></Image>
                                     <ContentPresenter x:Name="PART_Header" ContentSource="Header" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" MinWidth="20" VerticalAlignment="Center"/>
                                     <TextBlock Margin="3,0,0,0"  VerticalAlignment="Center">
 
@@ -170,7 +171,7 @@
             <!--Model Tree-->
         <TreeView>
 
-            <TreeViewItem Header="Model" IsExpanded="True">
+            <TreeViewItem Header="Model" IsExpanded="True" Tag="{x:Static res:URIs.Salamander}">
 
                 <!--<TreeViewItem Header="Coordinate Systems" 
                               DataContext="{Binding Path=CoordinateSystems}"
@@ -180,39 +181,42 @@
                               DataContext="{Binding Path=Levels}"
                               MouseDoubleClick="Levels_DoubleClick"/>-->
 
-                <TreeViewItem Header="Materials"
+                <!--<TreeViewItem Header="Materials"
                               DataContext="{Binding Path=Materials}"
-                              MouseDoubleClick="Materials_DoubleClick"/>
+                              MouseDoubleClick="Materials_DoubleClick"/>-->
 
                 <TreeViewItem Header="Families" 
                               DataContext="{Binding Path=Families}"
-                              MouseDoubleClick="Families_DoubleClick">
-                    <!--<TreeViewItem Header="Sections"></TreeViewItem>
-                    <TreeViewItem Header="Face Properties"></TreeViewItem>-->
+                              MouseDoubleClick="Families_DoubleClick"
+                              Tag="{x:Static res:URIs.SectionFamilySmall}">
+                    <TreeViewItem Header="Sections" Tag="{x:Static res:URIs.SectionFamilySmall}"></TreeViewItem>
+                    <TreeViewItem Header="Build-Ups" Tag="{x:Static res:URIs.BuildUpFamilySmall}"></TreeViewItem>
                 </TreeViewItem>
 
                 <TreeViewItem Header="Elements" 
                               DataContext="{Binding Path=Elements}" 
-                              MouseDoubleClick="Elements_DoubleClick">
-                    <!--<TreeViewItem Header="Linear Elements"></TreeViewItem>
-                    <TreeViewItem Header="Panel Elements"></TreeViewItem>-->
+                              MouseDoubleClick="Elements_DoubleClick"
+                              Tag="{x:Static res:URIs.LinearElementSmall}">
+                    <TreeViewItem Header="Linear Elements" Tag="{x:Static res:URIs.LinearElementSmall}" DataContext="{Binding Path=Elements.LinearElements}"></TreeViewItem>
+                    <TreeViewItem Header="Panel Elements" Tag="{x:Static res:URIs.PanelElementSmall}" DataContext="{Binding Path=Elements.PanelElements}"></TreeViewItem>
                 </TreeViewItem>
 
                 <TreeViewItem Header="Nodes" 
                               DataContext="{Binding Path=Nodes}"
-                              MouseDoubleClick="Nodes_DoubleClick"/>
+                              MouseDoubleClick="Nodes_DoubleClick"
+                              Tag="{x:Static res:URIs.NodeSmall}"/>
 
                 <!--<TreeViewItem Header="Sets"
                               DataContext="{Binding Path=Sets}"
                               MouseDoubleClick="Sets_DoubleClick"/>-->
 
-                <TreeViewItem Header="Loads"
+                <!--<TreeViewItem Header="Loads"
                               DataContext="{Binding Path=Loads}"
                               MouseDoubleClick="Loads_DoubleClick"/>
 
                 <TreeViewItem Header="Load Cases"
                               DataContext="{Binding Path=LoadCases}"
-                              MouseDoubleClick="LoadCases_DoubleClick"/>
+                              MouseDoubleClick="LoadCases_DoubleClick"/>-->
 
             </TreeViewItem>
             

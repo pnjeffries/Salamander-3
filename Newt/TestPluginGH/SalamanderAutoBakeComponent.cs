@@ -65,9 +65,9 @@ namespace Salamander.BasicToolsGH
             get
             {
                 //You can add image files to your project resources and access them like this:
-                //string uri1 = IconResourceHelper.ResourceLocation + "ParamBackground.png";
+                string uri1 = IconResourceHelper.ResourceLocation + "BakeIcon.png";
                 string uri2 = IconResourceHelper.ResourceLocation + "Salamander3_64x64.png";
-                Bitmap bmp = IconResourceHelper.BitmapFromURI(uri2);
+                Bitmap bmp = IconResourceHelper.CombinedBitmapFromURIs(uri2, uri1);
                 return bmp;
             }
         }

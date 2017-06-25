@@ -5,11 +5,11 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{F2201CF6-2166-4167-9138-21D6E3969571}</ProjectGuid>
+    <ProjectGuid>{2CAEE355-2217-4A4E-A4FF-C44DCA32CC46}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Salamander.Rhino.RobotImport</RootNamespace>
-    <AssemblyName>Salamander.Rhino.RobotImport</AssemblyName>
+    <RootNamespace>Salamander.Rhino.Export</RootNamespace>
+    <AssemblyName>Salamander.Rhino.Export</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <IsWebBootstrapper>false</IsWebBootstrapper>
@@ -43,40 +43,33 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="RhinoCommon">
-      <HintPath>..\..\..\FreeBuild\FreeBuild\References\RhinoCommon.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="RhinoCommon">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>C:\Users\Paul\Documents\Work\FreeBuild\FreeBuild\References\RhinoCommon.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="SalamanderRhinoRobotImportPlugIn.cs" />
+    <Compile Include="SalamanderRhinoExportPlugIn.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\FreeBuild\FreeBuild\FreeBuild.Rhino\FreeBuild.Rhino.csproj">
-      <Project>{2595e792-7880-484b-877d-9873aac7d946}</Project>
-      <Name>FreeBuild.Rhino</Name>
-      <Private>False</Private>
-    </ProjectReference>
     <ProjectReference Include="..\..\..\FreeBuild\FreeBuild\FreeBuild\FreeBuild.csproj">
       <Project>{7635522c-178f-4db5-9106-ff8dfd4b833b}</Project>
       <Name>FreeBuild</Name>
-      <Private>False</Private>
     </ProjectReference>
     <ProjectReference Include="..\Newt.RhinoCommon\Salamander.RhinoCommon.csproj">
       <Project>{eb529cba-2af1-4952-b0e8-8baa1fe9fde5}</Project>
       <Name>Salamander.RhinoCommon</Name>
-      <Private>False</Private>
     </ProjectReference>
     <ProjectReference Include="..\NEWT\Salamander.csproj">
       <Project>{55d9743e-6f9b-4b89-b3de-18b03c4cfe61}</Project>
       <Name>Salamander</Name>
-      <Private>False</Private>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

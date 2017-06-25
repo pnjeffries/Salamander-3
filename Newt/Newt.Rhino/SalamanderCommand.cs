@@ -34,6 +34,7 @@ namespace Salamander.Rhino
         protected override Result RunCommand(RhinoDoc doc, RunMode mode)
         {
             Host.EnsureInitialisation();
+            Host.Instance.GUI.CreateHostDockPanel();
             return Result.Success;
         }
     }

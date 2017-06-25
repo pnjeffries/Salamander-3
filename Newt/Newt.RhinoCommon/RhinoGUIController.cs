@@ -43,13 +43,19 @@ namespace Salamander.Rhino
         /// </summary>
         public void CreateHostDockPanel()
         {
-            //RUI.Panels.OpenPanel(typeof(SideBarUIHost).GUID);
-            RUI.Panels.OpenPanelAsSibling(typeof(SideBarUIHost).GUID, RUI.PanelIds.Layers);
+            if (!RUI.Panels.IsPanelVisible(typeof(SideBarUIHost).GUID))
+            {
+                //RUI.Panels.OpenPanelAsSibling(typeof(SideBarUIHost).GUID, RUI.PanelIds.Layers);
+                RUI.Panels.OpenPanel(typeof(SideBarUIHost).GUID);
+            }
+
             SideBarControl selectPanel = new SideBarControl();
             selectPanel.DataContext = Core.Instance;
             SideBarUIHost host = (SideBarUIHost)RUI.Panels.GetPanel(typeof(SideBarUIHost).GUID);
             host.Host(selectPanel);
 
         }
+
+        
     }
 }

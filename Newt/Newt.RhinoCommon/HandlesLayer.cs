@@ -160,7 +160,7 @@ namespace Salamander.Rhino
                                 RhinoOutput.SetOriginalIDUserString(e.ObjectId);
                                 if (element != null)
                                 {
-                                    Links.Add(element.GUID, e.ObjectId);
+                                    Links.Set(element.GUID, e.ObjectId);
                                     Core.Instance.ActiveDocument.Model.Add(element);
                                 }
                             }
@@ -172,7 +172,7 @@ namespace Salamander.Rhino
                                     RC.Point pt = (RC.Point)e.TheObject.Geometry;
                                     node.Position = RCtoFB.Convert(pt).Position;
                                     RhinoOutput.SetOriginalIDUserString(e.ObjectId);
-                                    Links.Add(node.GUID, e.ObjectId);
+                                    Links.Set(node.GUID, e.ObjectId);
                                     Core.Instance.ActiveDocument.Model.Add(node);
                                 }
                             }

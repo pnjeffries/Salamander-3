@@ -28,7 +28,7 @@ namespace Salamander.Rhino
         protected override Result RunCommand(RhinoDoc doc, RunMode mode)
         {
             Host.EnsureInitialisation();
-            Core.Instance.SaveModel();
+            Core.Instance.SaveDocument();
             return Result.Success;
         }
     }

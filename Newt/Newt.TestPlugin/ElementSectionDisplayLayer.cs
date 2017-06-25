@@ -20,7 +20,7 @@ namespace Salamander.BasicTools
         public ElementSectionDisplayLayer() : base("Element Sections",
             "Display Elements with 3D Section Profile representations",
             1000,
-            Resources.BaseURI + "SectionPreview.png")
+            Resources.URIs.SectionPreview)
         {
             Visible = true;
         }

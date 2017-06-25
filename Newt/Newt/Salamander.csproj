@@ -30,15 +30,18 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="PresentationFramework" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Xml" />
+    <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Actions\ActionAttribute.cs" />
@@ -66,7 +69,8 @@
     <Compile Include="Core\GUIController.cs" />
     <Compile Include="Core\InputController.cs" />
     <Compile Include="Display\ManualDisplayLayer.cs" />
-    <Compile Include="Resources\BaseURI.cs" />
+    <Compile Include="Resources\IconResourceHelper.cs" />
+    <Compile Include="Resources\URIs.cs" />
     <Compile Include="Selection\LoadSelection.cs" />
     <Compile Include="Selection\MaterialSelection.cs" />
     <Compile Include="Selection\NodeSelection.cs" />
@@ -189,6 +193,35 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\BuildUpFamily.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\UpdateIcon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\BakeIcon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\LinearElement_Small.png" />
+    <Resource Include="Resources\Node_Small.png" />
+    <Resource Include="Resources\PanelElement_Small.png" />
+    <Resource Include="Resources\SectionFamily_Small.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\BuildUpFamily_Small.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Convert.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\MergeNodes.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\SplitNode.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Readme.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

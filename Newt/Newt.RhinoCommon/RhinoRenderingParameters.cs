@@ -22,6 +22,12 @@ namespace Salamander.Rhino
         public DisplayPipeline Display { get; protected set; }
 
         /// <summary>
+        /// Overriding display material that replaces the locally-defined one.
+        /// Ignored if null.
+        /// </summary>
+        public DisplayMaterial OverrideMaterial { get; protected set; } = null;
+
+        /// <summary>
         /// Constructor
         /// </summary>
         /// <param name="args"></param>
@@ -34,9 +40,10 @@ namespace Salamander.Rhino
         /// Pipeline constructor
         /// </summary>
         /// <param name="display"></param>
-        public RhinoRenderingParameters(DisplayPipeline display)
+        public RhinoRenderingParameters(DisplayPipeline display, DisplayMaterial overrideMaterial = null)
         {
             Display = display;
+            OverrideMaterial = overrideMaterial;
         }
 
         /// <summary>
@@ -65,7 +72,7 @@ namespace Salamander.Rhino
         /// <param name="material"></param>
         public void Draw(RC.Mesh mesh, DisplayMaterial material)
         {
-            Display.DrawMeshShaded(mesh, material);
+            Display.DrawMeshShaded(mesh, OverrideMaterial ?? material);
         }
 
         /// <summary>
@@ -75,7 +82,7 @@ namespace Salamander.Rhino
         /// <param name="colour"></param>
         public void DrawWireframe(RC.Mesh mesh, Color colour)
         {
-            Display.DrawMeshWires(mesh, colour);
+            Display.DrawMeshWires(mesh, OverrideMaterial?.Diffuse ?? colour);
         }
 
         /// <summary>

@@ -11,8 +11,8 @@ namespace Salamander.BasicTools
 {
     [Action("CreateBool6D",
         "Create a Bool6D representing six degrees of freedom",
-        IconBackground = Resources.BaseURI + "Bool6D.png",
-        IconForeground = Resources.BaseURI + "AddIcon.png")]
+        IconBackground = Resources.URIs.Bool6D,
+        IconForeground = Resources.URIs.AddIcon)]
     public class CreateBool6DAction : ActionBase
     {
         [ActionInput(1, "the translational degree of freedom along the X-axis")]

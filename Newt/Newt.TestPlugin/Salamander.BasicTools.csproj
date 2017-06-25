@@ -32,6 +32,7 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -52,8 +53,11 @@
     <Compile Include="CreateBuildUp.cs" />
     <Compile Include="CreatePanelElement.cs" />
     <Compile Include="CreateRectangularHollowSectionAction.cs" />
+    <Compile Include="GenerateIcons.cs" />
     <Compile Include="GetBuildUp.cs" />
+    <Compile Include="MergeNodes.cs" />
     <Compile Include="PanelThicknessDisplayLayer.cs" />
+    <Compile Include="SplitNode.cs" />
     <Compile Include="TextToSectionAction.cs" />
     <Compile Include="ExampleAction.cs" />
     <Compile Include="GetElementNodesAction.cs" />
@@ -69,6 +73,7 @@
     <Compile Include="RegenerateNodes.cs" />
     <Compile Include="RestrainNodeAction.cs" />
     <Compile Include="SaveAsAction.cs" />
+    <Compile Include="WindLoadCalculation.cs" />
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />

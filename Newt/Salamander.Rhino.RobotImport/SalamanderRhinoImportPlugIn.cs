@@ -15,16 +15,16 @@ namespace Salamander.Rhino.RobotImport
     /// attributes in AssemblyInfo.cs (you might need to click "Project" ->
     /// "Show All Files" to see it in the "Solution Explorer" window).</para>
     ///</summary>
-    public class SalamanderRhinoRobotImportPlugIn : FileImportPlugIn
+    public class SalamanderRhinoImportPlugIn : FileImportPlugIn
 
     {
-        public SalamanderRhinoRobotImportPlugIn()
+        public SalamanderRhinoImportPlugIn()
         {
             Instance = this;
         }
 
         ///<summary>Gets the only instance of the SalamanderRhinoRobotImportPlugIn plug-in.</summary>
-        public static SalamanderRhinoRobotImportPlugIn Instance
+        public static SalamanderRhinoImportPlugIn Instance
         {
             get; private set;
         }
@@ -36,6 +36,7 @@ namespace Salamander.Rhino.RobotImport
         {
             var result = new FileTypeList();
             result.AddFileType("Salamander: Robot File (*.rtd)", "rtd");
+            result.AddFileType("Salamander File (*.s3b)", "s3b");
             return result;
         }
 

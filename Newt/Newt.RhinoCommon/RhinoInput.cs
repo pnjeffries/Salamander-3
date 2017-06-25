@@ -90,10 +90,20 @@ namespace Salamander.RhinoCommon
             return new Line(RCtoFB.Convert(gP.Point()), RCtoFB.Convert(gP2.Point()));
         }
 
-        public override VertexGeometryCollection EnterGeometry(string prompt = "Enter geometry")
+        public override Curve EnterCurve(string prompt = "Enter curve")
+        {
+            return EnterGeometry(prompt, typeof(Curve)).First() as Curve;
+        }
+
+        public override VertexGeometryCollection EnterGeometry(string prompt = "Enter geometry", Type geometryType = null)
         {
             GetObject gO = new GetObject();
-            gO.GeometryFilter = ObjectType.Curve | ObjectType.Surface | ObjectType.Point | ObjectType.Mesh; //TODO: Support others
+
+            if (geometryType == typeof(Curve)) gO.GeometryFilter = ObjectType.Curve;
+            else if (geometryType == typeof(Surface)) gO.GeometryFilter = ObjectType.Surface | ObjectType.Mesh;
+            else if (geometryType == typeof(Point)) gO.GeometryFilter = ObjectType.Point;
+            else gO.GeometryFilter = ObjectType.Curve | ObjectType.Surface | ObjectType.Point | ObjectType.Mesh; //TODO: Support others
+
             gO.SetCommandPrompt(prompt);
             if (gO.GetMultiple(1, 0) == GetResult.Cancel) throw new OperationCanceledException("Operation cancelled by user");
             VertexGeometryCollection result = new VertexGeometryCollection();
@@ -214,18 +224,17 @@ namespace Salamander.RhinoCommon
             gO.GeometryFilter = ObjectType.Point;
             gO.SetCommandPrompt(prompt);
             if (gO.GetMultiple(1, 0) == GetResult.Cancel) throw new OperationCanceledException("Operation cancelled by user");
+            var result = new NodeCollection();
             foreach (ObjRef rObj in gO.Objects())
-            {
-                var result = new NodeCollection();
+            {       
                 if (Host.Instance.Handles.Links.ContainsSecond(rObj.ObjectId))
                 {
                     Guid guid = Host.Instance.Handles.Links.GetFirst(rObj.ObjectId);
                     Node node = Core.Instance.ActiveDocument?.Model?.Nodes[guid];
                     if (node != null && node is Node) result.Add(node);
                 }
-                return result;
             }
-            return null;
+            return result;
         }
 
         public override Direction EnterDirection(string prompt = "Enter direction", bool xyzOnly = false)

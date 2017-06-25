@@ -9,6 +9,7 @@ using Grasshopper.Kernel;
 using Rhino.Geometry;
 using FreeBuild.Rhino;
 using RD = Rhino.Display;
+using FreeBuild.Actions;
 
 namespace Salamander.Grasshopper
 {
@@ -52,13 +53,53 @@ namespace Salamander.Grasshopper
             }
         }
 
+        /// <summary>
+        /// Private backing field for ExInfo property
+        /// </summary>
+        private ExecutionInfo _ExInfo;
+
+        /// <summary>
+        /// The execution information for the operation which created this object
+        /// </summary>
+        public ExecutionInfo ExInfo
+        {
+            get { return _ExInfo; }
+        }
+
+        private Mesh _SupportMesh = null;
+
+        public Mesh SupportMesh
+        {
+            get
+            {
+                if (_SupportMesh == null)
+                {
+                    if (Value.HasData<NodeSupport>())
+                    {
+                        NodeSupport support = Value.GetData<NodeSupport>();
+                        if (!support.Fixity.AllFalse)
+                        {
+                            RhinoMeshBuilder mB = new RhinoMeshBuilder();
+                            mB.AddNodeSupport(Value, support);
+                            mB.Finalize();
+                            _SupportMesh = mB.Mesh;
+                        }
+                    }
+                }
+                return _SupportMesh;
+            }
+        }
+
         #endregion
 
         #region Constructor
 
         public NodeGoo() : base() { }
 
-        public NodeGoo(Node value) : base(value) { }
+        public NodeGoo(Node value, ExecutionInfo exInfo) : base(value)
+        {
+            _ExInfo = exInfo;
+        }
 
         #endregion
 
@@ -66,7 +107,7 @@ namespace Salamander.Grasshopper
 
         public override IGH_Goo Duplicate()
         {
-            return new NodeGoo(Value);
+            return new NodeGoo(Value, _ExInfo);
         }
 
         public override string ToString()
@@ -74,11 +115,11 @@ namespace Salamander.Grasshopper
             return "Node " + Value.NumericID;
         }
 
-        public static List<NodeGoo> Convert(NodeCollection collection)
+        public static List<NodeGoo> Convert(NodeCollection collection, ExecutionInfo exInfo)
         {
             var result = new List<NodeGoo>();
             if (collection != null)
-                foreach (Node obj in collection) result.Add(new NodeGoo(obj));
+                foreach (Node obj in collection) result.Add(new NodeGoo(obj, exInfo));
             return result;
         }
 
@@ -91,12 +132,22 @@ namespace Salamander.Grasshopper
 
         public void DrawViewportWires(GH_PreviewWireArgs args)
         {
-            args.Pipeline.DrawPoint(FBtoRC.Convert(Value.Position), RD.PointStyle.X, 8, args.Color);
+            if (Value != null)
+            {
+                args.Pipeline.DrawPoint(FBtoRC.Convert(Value.Position), RD.PointStyle.X, 8, args.Color);
+                /*Mesh mesh = SupportMesh;
+                if (mesh != null) args.Pipeline.DrawMeshWires(mesh, args.Color);*/
+            }
         }
+
 
         public void DrawViewportMeshes(GH_PreviewMeshArgs args)
         {
-            //args.Pipeline.DrawPoint(FBtoRC.Convert(Value.Position), RD.PointStyle.ActivePoint, 1, args.Material.Diffuse);
+            /*if (Value != null)
+            {
+                Mesh mesh = SupportMesh;
+                if (mesh != null) args.Pipeline.DrawMeshShaded(mesh, args.Material);
+            }*/
         }
 
         public override bool CastTo<Q>(ref Q target)

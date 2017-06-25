@@ -7,10 +7,10 @@ using Salamander.Display;
 
 namespace Salamander.BasicTools
 {
-    [Action("DrawLinearElement",
+    [Action("CreateLinearElement",
             "Create a new linear element along a straight line.",
-        IconBackground = Resources.BaseURI + "LinearElement.png",
-        IconForeground = Resources.BaseURI + "AddIcon.png")]
+        IconBackground = Resources.URIs.LinearElement,
+        IconForeground = Resources.URIs.AddIcon)]
     public class CreateLinearElementAction : ModelDocumentActionBase
     {
         [ActionInput(1, "the set-out geometry of the new element")]

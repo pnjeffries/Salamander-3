@@ -10,6 +10,7 @@ using FreeBuild.Rhino;
 using RC = Rhino.Geometry;
 using FB = FreeBuild.Geometry;
 using Grasshopper.Kernel;
+using FreeBuild.Actions;
 
 namespace Salamander.Grasshopper
 {
@@ -52,6 +53,19 @@ namespace Salamander.Grasshopper
             }
         }
 
+        /// <summary>
+        /// Private backing field for ExInfo property
+        /// </summary>
+        private ExecutionInfo _ExInfo;
+
+        /// <summary>
+        /// The execution information for the operation which created this object
+        /// </summary>
+        public ExecutionInfo ExInfo
+        {
+            get { return _ExInfo; }
+        }
+
         private Mesh _SectionMesh = null;
 
         public Mesh SectionMesh
@@ -75,7 +89,10 @@ namespace Salamander.Grasshopper
 
         public LinearElementGoo() : base() { }
 
-        public LinearElementGoo(LinearElement element) : base(element) { }
+        public LinearElementGoo(LinearElement element, ExecutionInfo exInfo = null) : base(element)
+        {
+            _ExInfo = exInfo;
+        }
 
         #endregion
 
@@ -123,11 +140,11 @@ namespace Salamander.Grasshopper
             }
         }
 
-        public static List<LinearElementGoo> Convert(LinearElementCollection collection)
+        public static List<LinearElementGoo> Convert(LinearElementCollection collection, ExecutionInfo exInfo = null)
         {
             var result = new List<LinearElementGoo>();
             if (collection != null)
-                foreach (LinearElement obj in collection) result.Add(new LinearElementGoo(obj));
+                foreach (LinearElement obj in collection) result.Add(new LinearElementGoo(obj, exInfo));
             return result;
         }
 
@@ -167,7 +184,7 @@ namespace Salamander.Grasshopper
 
         public override IGH_Goo Duplicate()
         {
-            return new LinearElementGoo(Value);
+            return new LinearElementGoo(Value, ExInfo);
         }
 
         public override bool CastTo<Q>(ref Q target)

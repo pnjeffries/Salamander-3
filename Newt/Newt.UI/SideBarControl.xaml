@@ -5,6 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Salamander.UI"
              xmlns:display="clr-namespace:Salamander.Display;assembly=Salamander3"
+             xmlns:res="clr-namespace:Salamander.Resources;assembly=Salamander3"
              xmlns:converters="clr-namespace:FreeBuild.WPF.Converters;assembly=FreeBuild.WPF"
              xmlns:fb="clr-namespace:FreeBuild.WPF;assembly=FreeBuild.WPF"
              Loaded="OnWindowLoaded"
@@ -54,7 +55,7 @@
 
                     <fb:PropertiesExpander DataContext="{Binding Path=Selected.Nodes}"
                                            Visibility="{Binding Path=Selection.Count, Converter={StaticResource CountVisibilityConverter}}"
-                                           >
+                                           HeaderIcon="{Binding Source={x:Static res:URIs.NodeSmall}}">
                         <fb:PropertiesExpander.HeaderContent>
                             <TextBlock Grid.Column="1" Text="{Binding Path=Selection, StringFormat='NODES: {0}'}"
                                 TextTrimming="CharacterEllipsis"
@@ -64,7 +65,9 @@
                     </fb:PropertiesExpander>
 
                     <fb:PropertiesExpander DataContext="{Binding Path=Selected.Elements}"
-                                       Visibility="{Binding Path=Selection.Count, Converter={StaticResource CountVisibilityConverter}}">
+                                       Visibility="{Binding Path=Selection.Count, Converter={StaticResource CountVisibilityConverter}}"
+                                           HeaderIcon="{Binding Source={x:Static res:URIs.LinearElementSmall}}">
+                        
                         <fb:PropertiesExpander.HeaderContent>
                             <TextBlock Grid.Column="1" Text="{Binding Path=Selection, StringFormat='ELEMENTS: {0}'}"
                                 TextTrimming="CharacterEllipsis"

@@ -138,7 +138,7 @@ namespace Salamander
             Host = host;
             Actions = new ActionManager();
             Layers = new DisplayLayerManager();
-           
+
         }
 
         #endregion
@@ -233,6 +233,9 @@ namespace Salamander
             //TEMP:
             result.Model.Materials.Add(Material.Steel);
             result.Model.Materials.Add(Material.Concrete);
+            result.Model.Materials.Add(Material.Aluminium);
+            result.Model.Materials.Add(Material.Glass);
+            result.Model.Materials.Add(Material.Wood);
             result.Model.LoadCases.Add(new LoadCase("Dead"));
             result.Model.LoadCases.Add(new LoadCase("Superimposed Dead"));
             result.Model.LoadCases.Add(new LoadCase("Live"));
@@ -280,9 +283,19 @@ namespace Salamander
         /// Save the active model document to a file selected via a file dialog
         /// </summary>
         /// <returns></returns>
-        public bool SaveModel()
+        public bool SaveDocument()
         {
-            return SaveModel(ActiveDocument);
+            return SaveDocument(ActiveDocument);
+        }
+
+        /// <summary>
+        /// Save the active model document to a file at the specified location
+        /// </summary>
+        /// <param name="filePath"></param>
+        /// <returns></returns>
+        public bool SaveDocument(FilePath filePath)
+        {
+            return SaveDocument(filePath, ActiveDocument);
         }
 
         /// <summary>
@@ -290,11 +303,11 @@ namespace Salamander
         /// </summary>
         /// <param name="document">The document to be saved</param>
         /// <returns></returns>
-        public bool SaveModel(ModelDocument document)
+        public bool SaveDocument(ModelDocument document)
         {
             string filters = Actions.GetExportFilters();
             string filePath = UI.ShowSaveFileDialog("Enter filepath to write to", filters, null, Actions.ExportFilterIndex(".sal") + 1);
-            if (!string.IsNullOrEmpty(filePath)) return SaveModel(filePath, document);
+            if (!string.IsNullOrEmpty(filePath)) return SaveDocument(filePath, document);
             else return false;
         }
 
@@ -304,7 +317,7 @@ namespace Salamander
         /// <param name="filePath">The filepath to save to</param>
         /// <param name="document">The document to be saved</param>
         /// <returns>True if export command ran successfully</returns>
-        public bool SaveModel(FilePath filePath, ModelDocument document)
+        public bool SaveDocument(FilePath filePath, ModelDocument document)
         {
             string extension = Path.GetExtension(filePath);
             IExportAction exporter = Actions.GetExporterFor(extension);

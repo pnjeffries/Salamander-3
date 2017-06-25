@@ -18,7 +18,7 @@ namespace Salamander.TestPluginGH
         }
 
         public DrawLinearElementComponent() :
-            base("DrawLinearElement", "Create Linear Element", "Element", SubCategories.Model)
+            base("CreateLinearElement", "Create Linear Element", "Element", SubCategories.Model)
         { }
         
     }
