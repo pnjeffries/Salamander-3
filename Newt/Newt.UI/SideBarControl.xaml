@@ -6,8 +6,8 @@
              xmlns:local="clr-namespace:Salamander.UI"
              xmlns:display="clr-namespace:Salamander.Display;assembly=Salamander3"
              xmlns:res="clr-namespace:Salamander.Resources;assembly=Salamander3"
-             xmlns:converters="clr-namespace:FreeBuild.WPF.Converters;assembly=FreeBuild.WPF"
-             xmlns:fb="clr-namespace:FreeBuild.WPF;assembly=FreeBuild.WPF"
+             xmlns:converters="clr-namespace:Nucleus.WPF.Converters;assembly=Nucleus.WPF"
+             xmlns:fb="clr-namespace:Nucleus.WPF;assembly=Nucleus.WPF"
              Loaded="OnWindowLoaded"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">

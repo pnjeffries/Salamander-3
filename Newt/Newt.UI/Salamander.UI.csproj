@@ -75,13 +75,13 @@
     <Compile Include="WPFGUIController.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\FreeBuild\FreeBuild\Freebuild.WPF\Freebuild.WPF.csproj">
+    <ProjectReference Include="..\..\..\freebuild\FreeBuild\Freebuild.WPF\Nucleus.WPF.csproj">
       <Project>{e2d93282-51bd-4317-8d13-363347065f8b}</Project>
-      <Name>Freebuild.WPF</Name>
+      <Name>Nucleus.WPF</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\..\FreeBuild\FreeBuild\FreeBuild\FreeBuild.csproj">
+    <ProjectReference Include="..\..\..\freebuild\FreeBuild\FreeBuild\Nucleus.csproj">
       <Project>{7635522c-178f-4db5-9106-ff8dfd4b833b}</Project>
-      <Name>FreeBuild</Name>
+      <Name>Nucleus</Name>
     </ProjectReference>
     <ProjectReference Include="..\NEWT\Salamander.csproj">
       <Project>{55d9743e-6f9b-4b89-b3de-18b03c4cfe61}</Project>

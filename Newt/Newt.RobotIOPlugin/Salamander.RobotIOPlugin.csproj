@@ -46,14 +46,14 @@
     <Compile Include="RobotUpdateAction.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\FreeBuild\FreeBuild\FreeBuild.Robot\FreeBuild.Robot.csproj">
+    <ProjectReference Include="..\..\..\freebuild\FreeBuild\FreeBuild.Robot\Nucleus.Robot.csproj">
       <Project>{827a1ce7-6eda-431e-bd5a-665aa7918439}</Project>
-      <Name>FreeBuild.Robot</Name>
+      <Name>Nucleus.Robot</Name>
       <Private>True</Private>
     </ProjectReference>
-    <ProjectReference Include="..\..\..\FreeBuild\FreeBuild\FreeBuild\FreeBuild.csproj">
+    <ProjectReference Include="..\..\..\freebuild\FreeBuild\FreeBuild\Nucleus.csproj">
       <Project>{7635522c-178f-4db5-9106-ff8dfd4b833b}</Project>
-      <Name>FreeBuild</Name>
+      <Name>Nucleus</Name>
       <Private>False</Private>
     </ProjectReference>
     <ProjectReference Include="..\NEWT\Salamander.csproj">

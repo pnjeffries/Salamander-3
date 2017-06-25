@@ -5,13 +5,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Rhino.Input;
-using FreeBuild.Geometry;
-using FreeBuild.Rhino;
+using Nucleus.Geometry;
+using Nucleus.Rhino;
 using Rhino.Commands;
 using RC = Rhino.Geometry;
 using Salamander.Rhino;
 using Rhino.DocObjects;
-using FreeBuild.Model;
+using Nucleus.Model;
 
 namespace Salamander.RhinoCommon
 {

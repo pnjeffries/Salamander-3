@@ -1,4 +1,4 @@
-﻿using FreeBuild.Model;
+﻿using Nucleus.Model;
 using Grasshopper.Kernel.Types;
 using System;
 using System.Collections.Generic;
@@ -6,11 +6,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Rhino.Geometry;
-using FreeBuild.Rhino;
+using Nucleus.Rhino;
 using RC = Rhino.Geometry;
-using FB = FreeBuild.Geometry;
+using FB = Nucleus.Geometry;
 using Grasshopper.Kernel;
-using FreeBuild.Actions;
+using Nucleus.Actions;
 
 namespace Salamander.Grasshopper
 {

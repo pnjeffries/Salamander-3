@@ -4,16 +4,16 @@ using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 using Rhino;
-using FreeBuild.Model;
+using Nucleus.Model;
 using Salamander.Events;
-using FreeBuild.Base;
-using FreeBuild.Geometry;
+using Nucleus.Base;
+using Nucleus.Geometry;
 using Salamander.Display;
-using FreeBuild.Events;
-using FreeBuild.Rendering;
+using Nucleus.Events;
+using Nucleus.Rendering;
 using System.ComponentModel;
 using RC = Rhino.Geometry;
-using FreeBuild.Rhino;
+using Nucleus.Rhino;
 using System.Timers;
 
 namespace Salamander.Rhino
@@ -103,7 +103,7 @@ namespace Salamander.Rhino
         }
 
         /// <summary>
-        /// Get the FreeBuild model object linked to the specified Rhino handle ID
+        /// Get the Nucleus model object linked to the specified Rhino handle ID
         /// </summary>
         /// <param name="rhinoID"></param>
         /// <returns></returns>

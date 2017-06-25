@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using FreeBuild.Actions;
+using Nucleus.Actions;
 
 namespace Salamander.BasicTools
 {
@@ -13,7 +13,7 @@ namespace Salamander.BasicTools
     {
         public override bool Execute(ExecutionInfo exInfo = null)
         {
-            Model.GenerateNodes(new FreeBuild.Model.NodeGenerationParameters());
+            Model.GenerateNodes(new Nucleus.Model.NodeGenerationParameters());
             return true;
         }
     }

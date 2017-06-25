@@ -2,7 +2,7 @@
 using Rhino;
 using Rhino.Commands;
 using Salamander.RhinoCommon;
-using FreeBuild.Model;
+using Nucleus.Model;
 
 namespace Salamander.Rhino
 {

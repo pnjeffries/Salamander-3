@@ -98,9 +98,9 @@
     <Compile Include="Selection\SelectionViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\FreeBuild\FreeBuild\FreeBuild\FreeBuild.csproj">
+    <ProjectReference Include="..\..\..\freebuild\FreeBuild\FreeBuild\Nucleus.csproj">
       <Project>{7635522c-178f-4db5-9106-ff8dfd4b833b}</Project>
-      <Name>FreeBuild</Name>
+      <Name>Nucleus</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

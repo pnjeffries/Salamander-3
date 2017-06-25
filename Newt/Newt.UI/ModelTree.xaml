@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Salamander.UI"
              xmlns:res="clr-namespace:Salamander.Resources;assembly=Salamander3"
-             xmlns:converters="clr-namespace:FreeBuild.WPF.Converters;assembly=FreeBuild.WPF"
+             xmlns:converters="clr-namespace:Nucleus.WPF.Converters;assembly=Nucleus.WPF"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
     <UserControl.Resources>

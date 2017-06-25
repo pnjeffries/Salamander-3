@@ -1,6 +1,6 @@
-﻿using FreeBuild.Base;
-using FreeBuild.Geometry;
-using FreeBuild.Model;
+﻿using Nucleus.Base;
+using Nucleus.Geometry;
+using Nucleus.Model;
 using Salamander.Actions;
 using System;
 using System.Collections.Generic;
@@ -195,18 +195,18 @@ namespace Salamander
                     if (open) value = EnterOpenFilePath("Select " + description, filter, (FilePath)value);
                     else value = EnterSaveFilePath("Select " + description, filter, (FilePath)value);
                 }
-                else if (inputType == typeof(Vector)) //FreeBuild Vector
+                else if (inputType == typeof(Vector)) //Nucleus Vector
                     value = EnterPoint("Enter " + description);
-                else if (inputType == typeof(Line)) //FreeBuild Line
+                else if (inputType == typeof(Line)) //Nucleus Line
                     value = EnterLine("Enter start point of " + description,
                         "Enter end point of " + description);
-                else if (inputType == typeof(Curve)) //FreeBuild Curve
+                else if (inputType == typeof(Curve)) //Nucleus Curve
                     value = EnterCurve("Enter " + description);
-                else if (inputType == typeof(VertexGeometryCollection)) //FreeBuild Shapes
+                else if (inputType == typeof(VertexGeometryCollection)) //Nucleus Shapes
                     value = EnterGeometry("Enter " + description);
-                else if (inputType == typeof(Element)) // FreeBuild Element
+                else if (inputType == typeof(Element)) // Nucleus Element
                     value = EnterElement("Enter " + description);
-                else if (inputType == typeof(ElementCollection)) // FreeBuild Elements
+                else if (inputType == typeof(ElementCollection)) // Nucleus Elements
                     value = EnterElements("Enter " + description);
                 else if (inputType == typeof(LinearElement))
                     value = EnterLinearElement("Enter " + description);
