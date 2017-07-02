@@ -58,13 +58,8 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\freebuild\FreeBuild\FreeBuild.Rhino\Nucleus.Rhino.csproj">
-      <Project>{2595e792-7880-484b-877d-9873aac7d946}</Project>
-      <Name>Nucleus.Rhino</Name>
-      <Private>False</Private>
-    </ProjectReference>
-    <ProjectReference Include="..\..\..\freebuild\FreeBuild\FreeBuild\Nucleus.csproj">
-      <Project>{7635522c-178f-4db5-9106-ff8dfd4b833b}</Project>
+    <ProjectReference Include="..\..\..\Nucleus\Nucleus\Nucleus\Nucleus.csproj">
+      <Project>{5169f74f-0bcc-42bf-829f-277f36ef7677}</Project>
       <Name>Nucleus</Name>
       <Private>False</Private>
     </ProjectReference>

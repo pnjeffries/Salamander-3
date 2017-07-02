@@ -77,7 +77,8 @@
                     </fb:PropertiesExpander>
 
                     <fb:PropertiesExpander DataContext="{Binding Path=Selected.SectionFamilies}"
-                                           Visibility="{Binding Path=Selection.Count, Converter={StaticResource CountVisibilityConverter}}">
+                                           Visibility="{Binding Path=Selection.Count, Converter={StaticResource CountVisibilityConverter}}"
+                                           HeaderIcon="{Binding Source={x:Static res:URIs.SectionFamilySmall}}">
                         <fb:PropertiesExpander.HeaderContent>
                             <TextBlock Grid.Column="1" Text="{Binding Path=Section.Name, StringFormat='SECTION: {0}'}"
                                 TextTrimming="CharacterEllipsis"
@@ -87,7 +88,8 @@
                     </fb:PropertiesExpander>
 
                     <fb:PropertiesExpander DataContext="{Binding Path=Selected.BuildUpFamilies}"
-                                           Visibility="{Binding Path=Selection.Count, Converter={StaticResource CountVisibilityConverter}}">
+                                           Visibility="{Binding Path=Selection.Count, Converter={StaticResource CountVisibilityConverter}}"
+                                           HeaderIcon="{Binding Source={x:Static res:URIs.BuildUpFamilySmall}}">
                         <fb:PropertiesExpander.HeaderContent>
                             <TextBlock Grid.Column="1" Text="{Binding Path=Family.Name, StringFormat='BUILD-UP: {0}'}"
                                 TextTrimming="CharacterEllipsis"

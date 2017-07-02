@@ -11,7 +11,7 @@ using Nucleus.Model;
 namespace Salamander.BasicTools
 {
     [Action("Open")]
-    [ImportAction(Extensions = new string[] { ".sal" }, Filter = "Salamander 3 File (*.sal) | *.sal")]
+    [ImportAction(Extensions = new string[] { ".s3b" }, Filter = "Salamander 3 File (*.s3b) | *.s3b")]
     public class OpenAction : ModelDocumentActionBase, IImportDocumentAction
     {
         public FilePath FilePath { get; set; }

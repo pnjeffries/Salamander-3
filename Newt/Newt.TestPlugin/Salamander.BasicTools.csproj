@@ -55,6 +55,7 @@
     <Compile Include="CreateRectangularHollowSectionAction.cs" />
     <Compile Include="GenerateIcons.cs" />
     <Compile Include="GetBuildUp.cs" />
+    <Compile Include="MergeCoincidentNodes.cs" />
     <Compile Include="MergeNodes.cs" />
     <Compile Include="PanelThicknessDisplayLayer.cs" />
     <Compile Include="SplitNode.cs" />
@@ -79,10 +80,9 @@
     <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\freebuild\FreeBuild\FreeBuild\Nucleus.csproj">
-      <Project>{7635522c-178f-4db5-9106-ff8dfd4b833b}</Project>
+    <ProjectReference Include="..\..\..\Nucleus\Nucleus\Nucleus\Nucleus.csproj">
+      <Project>{5169f74f-0bcc-42bf-829f-277f36ef7677}</Project>
       <Name>Nucleus</Name>
-      <Private>False</Private>
     </ProjectReference>
     <ProjectReference Include="..\NEWT\Salamander.csproj">
       <Project>{55d9743e-6f9b-4b89-b3de-18b03c4cfe61}</Project>

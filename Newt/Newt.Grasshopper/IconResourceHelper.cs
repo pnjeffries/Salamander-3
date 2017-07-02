@@ -11,7 +11,7 @@ using System.Windows.Resources;
 
 namespace Salamander.Grasshopper
 {
-    public static class IconResourceHelper
+    /*public static class IconResourceHelper
     {
         /// <summary>
         /// The default location for standard icon files
@@ -113,5 +113,5 @@ namespace Salamander.Grasshopper
         }
 
 
-    }
+    }*/
 }

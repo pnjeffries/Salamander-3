@@ -7,8 +7,8 @@
     <ProjectGuid>{AA3A00FC-FC95-4BB5-B129-563B48F6DDBC}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Newt.RobotIOPlugin</RootNamespace>
-    <AssemblyName>Newt.RobotIOPlugin</AssemblyName>
+    <RootNamespace>Salamander.RobotIOPlugin</RootNamespace>
+    <AssemblyName>Salamander.RobotIOPlugin</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -46,13 +46,12 @@
     <Compile Include="RobotUpdateAction.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\freebuild\FreeBuild\FreeBuild.Robot\Nucleus.Robot.csproj">
-      <Project>{827a1ce7-6eda-431e-bd5a-665aa7918439}</Project>
+    <ProjectReference Include="..\..\..\Nucleus\Nucleus\Nucleus.Robot\Nucleus.Robot.csproj">
+      <Project>{eca5186f-d2ed-4820-b207-880b2c4e02ca}</Project>
       <Name>Nucleus.Robot</Name>
-      <Private>True</Private>
     </ProjectReference>
-    <ProjectReference Include="..\..\..\freebuild\FreeBuild\FreeBuild\Nucleus.csproj">
-      <Project>{7635522c-178f-4db5-9106-ff8dfd4b833b}</Project>
+    <ProjectReference Include="..\..\..\Nucleus\Nucleus\Nucleus\Nucleus.csproj">
+      <Project>{5169f74f-0bcc-42bf-829f-277f36ef7677}</Project>
       <Name>Nucleus</Name>
       <Private>False</Private>
     </ProjectReference>

@@ -23,7 +23,7 @@ namespace Salamander.RobotIOPlugin
         [ActionFilePathInput(Order = 2,
             Description = "the filepath to write to",
             Filter = "Robot File (*.rtd) | *.rtd",
-            Manual = false)]
+            Manual = true)]
         public FilePath FilePath { get; set; }
 
         [ActionInput(3,

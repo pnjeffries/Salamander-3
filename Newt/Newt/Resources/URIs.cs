@@ -157,6 +157,11 @@ namespace Salamander.Resources
         public const string RectangularHollowSection = Base + "RectangularHollowSection.png";
 
         /// <summary>
+        /// The URI of the standard regeneration icon
+        /// </summary>
+        public const string RegenerateIcon = Base + "RegenerateIcon.png";
+
+        /// <summary>
         /// The URI of the standard Robot logo icon
         /// </summary>
         public const string Robot = Base + "Robot.png";

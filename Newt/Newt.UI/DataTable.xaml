@@ -32,7 +32,7 @@
             <fb:AutoUIDataGrid.RowStyle>
                 <Style TargetType="{x:Type DataGridRow}">
                     <Style.Triggers>
-                        <DataTrigger Binding="{Binding Path=UserData.IsDeleted}" Value="True">
+                        <DataTrigger Binding="{Binding Path=IsDeleted}" Value="True">
                             <Setter Property="Visibility" Value="Collapsed"/>
                         </DataTrigger>
                     </Style.Triggers>

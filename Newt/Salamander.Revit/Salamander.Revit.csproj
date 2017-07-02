@@ -53,16 +53,12 @@
     <Compile Include="SalamanderImportCommand.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\freebuild\FreeBuild\FreeBuild.Revit\Nucleus.Revit.csproj">
-      <Project>{e4e2ce0f-c3cf-4ea2-a5c2-e06b49939604}</Project>
+    <ProjectReference Include="..\..\..\Nucleus\Nucleus\Nucleus.Revit\Nucleus.Revit.csproj">
+      <Project>{e71bd3fb-d27e-4654-bd77-cbcb5d9f7739}</Project>
       <Name>Nucleus.Revit</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\..\freebuild\FreeBuild\Freebuild.WPF\Nucleus.WPF.csproj">
-      <Project>{e2d93282-51bd-4317-8d13-363347065f8b}</Project>
-      <Name>Nucleus.WPF</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\..\freebuild\FreeBuild\FreeBuild\Nucleus.csproj">
-      <Project>{7635522c-178f-4db5-9106-ff8dfd4b833b}</Project>
+    <ProjectReference Include="..\..\..\Nucleus\Nucleus\Nucleus\Nucleus.csproj">
+      <Project>{5169f74f-0bcc-42bf-829f-277f36ef7677}</Project>
       <Name>Nucleus</Name>
     </ProjectReference>
     <ProjectReference Include="..\Newt.UI\Salamander.UI.csproj">

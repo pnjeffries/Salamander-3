@@ -45,8 +45,8 @@ namespace Salamander.Rhino
         {
             if (!RUI.Panels.IsPanelVisible(typeof(SideBarUIHost).GUID))
             {
-                //RUI.Panels.OpenPanelAsSibling(typeof(SideBarUIHost).GUID, RUI.PanelIds.Layers);
-                RUI.Panels.OpenPanel(typeof(SideBarUIHost).GUID);
+                if (!RUI.Panels.OpenPanelAsSibling(typeof(SideBarUIHost).GUID, RUI.PanelIds.Layers))
+                    RUI.Panels.OpenPanel(typeof(SideBarUIHost).GUID);
             }
 
             SideBarControl selectPanel = new SideBarControl();

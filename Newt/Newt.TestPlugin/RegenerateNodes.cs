@@ -8,12 +8,13 @@ using Nucleus.Actions;
 
 namespace Salamander.BasicTools
 {
-    [Action("RegenerateNodes")]
+    [Action("RegenerateNodes", Description = "Regenerate Element Nodes",
+        IconBackground = Resources.URIs.Node, IconForeground = Resources.URIs.RegenerateIcon)]
     public class RegenerateNodes : ModelDocumentActionBase
     {
         public override bool Execute(ExecutionInfo exInfo = null)
         {
-            Model.GenerateNodes(new Nucleus.Model.NodeGenerationParameters());
+            Model.GenerateNodes(new Nucleus.Model.NodeGenerationParameters(false));
             return true;
         }
     }

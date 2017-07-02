@@ -15,10 +15,10 @@ namespace Salamander.RobotIOPlugin
     [ImportAction(Extensions = new string[] { ".rtd" }, Filter = "Robot File (*.rtd) | *.rtd")]
     public class RobotImportAction : ModelDocumentActionBase, IImportDocumentAction
     {
-        //[ActionFilePathInput(Order = 0,
-        //    Description = "the Robot file to import",
-        //    Open = true,
-        //    Filter = "Robot File (*.rtd) | *.rtd")]
+        [ActionFilePathInput(Order = 0,
+            Description = "the Robot file to import",
+            Open = true,
+            Filter = "Robot File (*.rtd) | *.rtd")]
         public FilePath FilePath { get; set; }
 
         public override bool Execute(ExecutionInfo exInfo = null)

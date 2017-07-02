@@ -30,9 +30,15 @@ namespace Salamander.Rhino
 
         /// <summary>
         /// Flag used to indicate when a linked object is being
-        /// undeleted.  Prevents
+        /// undeleted.  Prevents unwanted deletions.
         /// </summary>
         private bool _Undeleting = false;
+
+        /// <summary>
+        /// Flag used to indicate when a linked object is being
+        /// replaced.
+        /// </summary>
+        private bool _Replacing = false;
 
         #endregion
 
@@ -129,12 +135,12 @@ namespace Salamander.Rhino
 
         private void HandlesAddRhinoObject(object sender, RhinoObjectEventArgs e)
         {
-            if (!RhinoOutput.Writing)
+            if (!RhinoOutput.Writing && !_Replacing)
             {
                 if (e.TheObject.Attributes.HasUserData)
                 {
                     string data = e.TheObject.Attributes.GetUserString("SAL_ORIGINAL");
-                    if (!string.IsNullOrEmpty(data))
+                    if (!string.IsNullOrEmpty(data) && data != e.ObjectId.ToString())
                     {
                         Guid storedGuid = new Guid(data);
                         if (this.Links.ContainsSecond(storedGuid))
@@ -149,6 +155,7 @@ namespace Salamander.Rhino
                                 {
                                     LinearElement lElement = ((LinearElement)mO).Duplicate();//Core.Instance.ActiveDocument?.Model?.Create.CopyOf((Element)mO, geometry);
                                     if (geometry is Curve) lElement.Geometry = (Curve)geometry;
+                                    lElement.GenerateNodes(new NodeGenerationParameters());
                                     element = lElement;
                                 }
                                 if (mO is PanelElement)
@@ -241,12 +248,13 @@ namespace Salamander.Rhino
                         VertexGeometry vG = RCtoFB.Convert(geometry);
                         if (vG != null)
                         {
+                            _Replacing = true;
                             if (element is LinearElement && vG is Curve)
                                 ((LinearElement)element).ReplaceGeometry((Curve)vG);
                             else if (element is PanelElement && vG is Surface)
                                 ((PanelElement)element).ReplaceGeometry((Surface)vG);
-
-                            _ReplacedElements.Add(element);
+                            _Replacing = false;
+                            _ReplacedElements.TryAdd(element);
                         }
                     }
                     else if (mObj is Node)
@@ -431,7 +439,7 @@ namespace Salamander.Rhino
                 }
                 else
                 {
-                    if (!_Undeleting)
+                    if (!_Undeleting && !_Replacing)
                     {
                         objID = RhinoOutput.BakeOrReplace(objID, element.GetGeometry());
                         Links.Set(element.GUID, objID);

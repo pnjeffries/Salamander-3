@@ -189,16 +189,16 @@
                               DataContext="{Binding Path=Families}"
                               MouseDoubleClick="Families_DoubleClick"
                               Tag="{x:Static res:URIs.SectionFamilySmall}">
-                    <TreeViewItem Header="Sections" Tag="{x:Static res:URIs.SectionFamilySmall}"></TreeViewItem>
-                    <TreeViewItem Header="Build-Ups" Tag="{x:Static res:URIs.BuildUpFamilySmall}"></TreeViewItem>
+                    <!--<TreeViewItem Header="Sections" Tag="{x:Static res:URIs.SectionFamilySmall}"></TreeViewItem>
+                    <TreeViewItem Header="Build-Ups" Tag="{x:Static res:URIs.BuildUpFamilySmall}"></TreeViewItem>-->
                 </TreeViewItem>
 
                 <TreeViewItem Header="Elements" 
                               DataContext="{Binding Path=Elements}" 
                               MouseDoubleClick="Elements_DoubleClick"
                               Tag="{x:Static res:URIs.LinearElementSmall}">
-                    <TreeViewItem Header="Linear Elements" Tag="{x:Static res:URIs.LinearElementSmall}" DataContext="{Binding Path=Elements.LinearElements}"></TreeViewItem>
-                    <TreeViewItem Header="Panel Elements" Tag="{x:Static res:URIs.PanelElementSmall}" DataContext="{Binding Path=Elements.PanelElements}"></TreeViewItem>
+                    <!--<TreeViewItem Header="Linear Elements" Tag="{x:Static res:URIs.LinearElementSmall}" DataContext="{Binding Path=Elements.LinearElements}"></TreeViewItem>
+                    <TreeViewItem Header="Panel Elements" Tag="{x:Static res:URIs.PanelElementSmall}" DataContext="{Binding Path=Elements.PanelElements}"></TreeViewItem>-->
                 </TreeViewItem>
 
                 <TreeViewItem Header="Nodes" 

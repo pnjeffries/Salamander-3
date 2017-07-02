@@ -12,6 +12,8 @@ using Salamander.Display;
 
 namespace Salamander.BasicToolsGH
 {
+    //Disabled, as the direct use of System.Drawing causes problems when attempting to load this from within Grasshopper
+
     [Action("GenerateIcons")]
     class GenerateIcons : ActionBase
     {

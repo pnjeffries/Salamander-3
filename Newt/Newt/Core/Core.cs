@@ -173,7 +173,7 @@ namespace Salamander
             FilePath directory = FilePath.DirectoryOf(Assembly.GetExecutingAssembly());
 
             // Load Section Library
-            FilePath sectLibPath = directory + "\\SectLib.csv";
+            FilePath sectLibPath = directory + "\\Resources\\SectLib.csv";
             PrintLine("Loading Section library from " + sectLibPath);
             try
             {
@@ -272,7 +272,7 @@ namespace Salamander
                 if (importer != null)
                 {
                     importer.FilePath = filePath;
-                    Actions.ExecuteAction(importer, null, !background);
+                    Actions.ExecuteAction(importer, null, !background, false);
                     if (importer is IImportDocumentAction) result = ((IImportDocumentAction)importer).Document;
                 }
             }

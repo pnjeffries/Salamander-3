@@ -20,7 +20,10 @@ namespace Salamander.BasicTools
         [ActionInput(1, "write toggle.  Set to true to write out a GWA file", Manual = false)]
         public bool Write { get; set; } = true;
 
-        [ActionInput(2, "the filePath to write to", Manual = false)] //TODO: Manual when not already set
+        [ActionFilePathInput(Order = 2,
+            Description = "the filepath to write to",
+            Filter = "GSA Text File (*.gwa) | *.gwa",
+            Manual = true)]
         public FilePath FilePath { get; set; }
 
         [ActionInput(3, 

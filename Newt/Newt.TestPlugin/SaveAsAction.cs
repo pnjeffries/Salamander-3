@@ -21,7 +21,7 @@ namespace Salamander.BasicTools
         [ActionFilePathInput(Order = 2,
             Description = "the filepath to write to",
             Filter = "Salamander 3 File (*.s3b) | *.s3b",
-            Manual = false)]
+            Manual = true)]
         public FilePath FilePath { get; set; }
 
         [ActionInput(3,

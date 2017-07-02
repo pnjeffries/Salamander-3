@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Drawing;
 using Grasshopper.Kernel;
+using Salamander.Resources;
 
 namespace Salamander.Grasshopper
 {

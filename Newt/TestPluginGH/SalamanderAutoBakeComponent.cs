@@ -5,6 +5,7 @@ using Grasshopper.Kernel;
 using Rhino.Geometry;
 using Salamander.Grasshopper;
 using System.Drawing;
+using Salamander.Resources;
 
 namespace Salamander.BasicToolsGH
 {

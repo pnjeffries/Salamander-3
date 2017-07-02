@@ -22,6 +22,7 @@ using System.Windows.Forms;
 using Rhino;
 using Rhino.DocObjects;
 using Rhino.Display;
+using Salamander.Resources;
 
 namespace Salamander.Grasshopper
 {
@@ -200,7 +201,8 @@ namespace Salamander.Grasshopper
                     }
                     else if (pType == typeof(bool))
                     {
-                        pManager.AddBooleanParameter(name, nickname, description, GH_ParamAccess.item, (bool)pInfo.GetValue(action));
+                        //Special case when the input is a 'Write' toggle - default off!
+                        pManager.AddBooleanParameter(name, nickname, description, GH_ParamAccess.item, name == "Write" ? false : (bool)pInfo.GetValue(action));
                     }
                     else if (pType == typeof(Vector))
                     {
