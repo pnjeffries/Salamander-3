@@ -159,5 +159,21 @@ namespace Salamander.Selection
                 else return null;
             }
         }
+
+        public IList<MultiElementVertex> ElementVertices
+        {
+            get
+            {
+                if (Selection.Count == 1)
+                {
+                    return Selection[0].ElementVertices.ToMultiElementVertices();
+                }
+                else if (Selection.Count > 1)
+                {
+                    return Selection.GetMergedElementVertices();
+                }
+                else return null;
+            }
+        }
     }
 }

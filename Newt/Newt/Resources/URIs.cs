@@ -82,6 +82,16 @@ namespace Salamander.Resources
         public const string Direction = Base + "Direction.png";
 
         /// <summary>
+        /// The URI of the standard element offsets icon
+        /// </summary>
+        public const string ElementOffsets = Base + "ElementOffsets.png";
+
+        /// <summary>
+        /// The URI of the standard element orientation icon
+        /// </summary>
+        public const string ElementOrientation = Base + "ElementOrientation.png";
+
+        /// <summary>
         /// The URI of the 'Get Element Nodes' icon
         /// </summary>
         public const string GetElementNodes = Base + "GetElementNodes.png";
@@ -110,6 +120,11 @@ namespace Salamander.Resources
         /// The URI of the 'Merge nodes' action icon
         /// </summary>
         public const string MergeNodes = Base + "MergeNodes.png";
+
+        /// <summary>
+        /// The URI of the standard 'New' icon
+        /// </summary>
+        public const string New = Base + "New.png";
 
         /// <summary>
         /// The URI of the standard Node icon
@@ -145,6 +160,11 @@ namespace Salamander.Resources
         /// The URI of the parameter background image
         /// </summary>
         public const string ParamBackground = Base + "ParamBackground.png";
+
+        /// <summary>
+        /// The URI of the Pratt truss image
+        /// </summary>
+        public const string PrattTruss = Base + "PrattTruss.png";
 
         /// <summary>
         /// The URI of the standard rectangular section icon

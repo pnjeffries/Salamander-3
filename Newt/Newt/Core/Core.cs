@@ -203,7 +203,7 @@ namespace Salamander
                     if (file.Extension == ".dll")
                     {
                         string filePath = file.FullName;
-                        Assembly pluginAss = Assembly.LoadFrom(filePath);
+                        Assembly pluginAss = LoadAssemblyFromFile(filePath); //Assembly.LoadFrom(filePath);//
                         if (pluginAss != null)
                         {
                             PrintLine("Loading Salamander plugin '" + filePath + "'...");
@@ -219,6 +219,27 @@ namespace Salamander
                     }
                 }
             }
+        }
+
+        /// <summary>
+        /// Custom implementation to load assemblies from files.
+        /// This can cause problems if used to load non-plugin assemblies,
+        /// including, for some reason, with WPF binding.
+        /// </summary>
+        /// <param name="filePath"></param>
+        /// <returns></returns>
+        private static Assembly LoadAssemblyFromFile(string filePath)
+        {
+            using (Stream stream = File.OpenRead(filePath))
+            {
+                if (!ReferenceEquals(stream, null))
+                {
+                    byte[] assemblyData = new byte[stream.Length];
+                    stream.Read(assemblyData, 0, assemblyData.Length);
+                    return Assembly.Load(assemblyData);
+                }
+            }
+            return null;
         }
 
         /// <summary>
@@ -325,7 +346,7 @@ namespace Salamander
             {
                 exporter.FilePath = filePath;
                 exporter.Document = document;
-                Actions.ExecuteAction(exporter, null);
+                Actions.ExecuteAction(exporter, null, true, false);
                 return true;
             }
             PrintLine("Error: No exporter loaded for extension '." + extension + "'.  File could not be written.");

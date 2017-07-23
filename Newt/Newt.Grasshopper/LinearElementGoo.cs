@@ -210,6 +210,17 @@ namespace Salamander.Grasshopper
                     return true;
                 }
             }
+            else if (typeof(Q).IsAssignableFrom(typeof(GH_Surface)))
+            {
+                var surface = FBtoRC.ConvertToExtrusion(Value);
+                target = (Q)(object)new GH_Surface(surface);
+                return surface != null;
+            }
+            else if (typeof(Q).IsAssignableFrom(typeof(GH_Brep)))
+            {
+                target = (Q)(object)new GH_Brep(FBtoRC.ConvertToBrep(Value));
+                return true;
+            }
             return base.CastTo<Q>(ref target);
         }
 

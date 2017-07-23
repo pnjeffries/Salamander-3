@@ -21,7 +21,7 @@ namespace Salamander.Display
         /// Create and return a new LineAvatar
         /// </summary>
         /// <returns></returns>
-        //ILineAvatar CreateLineAvatar();
+        ILineAvatar CreateLineAvatar();
 
         /// <summary>
         /// Create and return a new PointAvatar

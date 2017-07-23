@@ -79,6 +79,13 @@ namespace Salamander
         public abstract Vector EnterPoint(string prompt = "Enter point");
 
         /// <summary>
+        /// Prompt the user to enter a vector
+        /// </summary>
+        /// <param name="prompt">The prompt message to be displayed</param>
+        /// <returns>A vector</returns>
+        public abstract Vector EnterVector(string prompt = "Enter point");
+
+        /// <summary>
         /// Prompt the user to enter a line by start and end point
         /// </summary>
         /// <param name="startPointPrompt">The prompt to be displayed when entering the first point</param>

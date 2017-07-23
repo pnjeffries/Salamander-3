@@ -317,10 +317,11 @@ namespace Salamander.Display
         /// <returns></returns>
         protected bool IsHidden(T key)
         {
-            if (key is IDeletable)
+            if (key is IDeletable && ((IDeletable)(object)key).IsDeleted)
             {
-                return ((IDeletable)(object)key).IsDeleted;
+                return true;
             }
+            if (key is Unique) return Core.Instance.Host.IsHidden(key as Unique);
             return false;
         }
 

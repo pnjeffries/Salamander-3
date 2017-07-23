@@ -36,6 +36,8 @@
         <GridSplitter Grid.Row="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
 
         <ScrollViewer HorizontalScrollBarVisibility="Hidden" Grid.Row="2">
+            <Grid>
+                <!--<TextBlock Text="No Salamander Objects Selected" Margin="10"/>-->
             <StackPanel>
                 <Border Visibility="{Binding Path=Actions.CurrentAction, Converter={StaticResource NullOrEmptyVisibilityConverter}}">
                     <Expander IsExpanded="True" DataContext="{Binding Path=Actions.CurrentAction}"
@@ -100,6 +102,7 @@
                     
                 </StackPanel>
             </StackPanel>
+            </Grid>
         </ScrollViewer>
 
         <!--Display Layer ToolBar-->

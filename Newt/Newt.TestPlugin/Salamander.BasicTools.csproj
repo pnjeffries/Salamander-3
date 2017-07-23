@@ -11,6 +11,7 @@
     <AssemblyName>Salamander.BasicTools</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -20,6 +21,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -28,6 +30,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -53,10 +56,14 @@
     <Compile Include="CreateBuildUp.cs" />
     <Compile Include="CreatePanelElement.cs" />
     <Compile Include="CreateRectangularHollowSectionAction.cs" />
+    <Compile Include="ElementOffsetDisplayLayer.cs" />
     <Compile Include="GenerateIcons.cs" />
+    <Compile Include="GeneratePrattTruss.cs" />
     <Compile Include="GetBuildUp.cs" />
     <Compile Include="MergeCoincidentNodes.cs" />
     <Compile Include="MergeNodes.cs" />
+    <Compile Include="NewDocumentAction.cs" />
+    <Compile Include="OrientateElementToVector.cs" />
     <Compile Include="PanelThicknessDisplayLayer.cs" />
     <Compile Include="SplitNode.cs" />
     <Compile Include="TextToSectionAction.cs" />
@@ -83,6 +90,7 @@
     <ProjectReference Include="..\..\..\Nucleus\Nucleus\Nucleus\Nucleus.csproj">
       <Project>{5169f74f-0bcc-42bf-829f-277f36ef7677}</Project>
       <Name>Nucleus</Name>
+      <Private>False</Private>
     </ProjectReference>
     <ProjectReference Include="..\NEWT\Salamander.csproj">
       <Project>{55d9743e-6f9b-4b89-b3de-18b03c4cfe61}</Project>

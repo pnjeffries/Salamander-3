@@ -9,6 +9,11 @@ namespace Salamander.Rhino
 {
     public class RhinoAvatarFactory : IAvatarFactory
     {
+        public ILineAvatar CreateLineAvatar()
+        {
+            return new RhinoLineAvatar();
+        }
+
         public IMeshAvatar CreateMeshAvatar()
         {
             return new RhinoMeshAvatar();

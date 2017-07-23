@@ -66,7 +66,16 @@ namespace Salamander.RhinoCommon
             GetPoint gP = new GetPoint();
             gP.SetCommandPrompt(prompt);
             if (gP.Get() == GetResult.Cancel) throw new OperationCanceledException("Operation cancelled by user");
-            return RCtoFB.Convert(gP.Point());
+            return RCtoN.Convert(gP.Point());
+        }
+
+        public override Vector EnterVector(string prompt = "Enter vector")
+        {
+            //TODO: Get direction
+            GetPoint gP = new GetPoint();
+            gP.SetCommandPrompt(prompt);
+            if (gP.Get() == GetResult.Cancel) throw new OperationCanceledException("Operation cancelled by user");
+            return RCtoN.Convert(gP.Point());
         }
 
         public override Line EnterLine(string startPointPrompt = "Enter start of line", string endPointPrompt = "Enter end of line", Vector? startPoint = null)
@@ -87,7 +96,7 @@ namespace Salamander.RhinoCommon
             gP2.EnableDrawLineFromPoint(true);
             gP2.DrawLineFromPoint(gP.Point(), true);
             if (gP2.Get() == GetResult.Cancel) throw new OperationCanceledException("Operation cancelled by user");
-            return new Line(RCtoFB.Convert(gP.Point()), RCtoFB.Convert(gP2.Point()));
+            return new Line(RCtoN.Convert(gP.Point()), RCtoN.Convert(gP2.Point()));
         }
 
         public override Curve EnterCurve(string prompt = "Enter curve")
@@ -111,7 +120,7 @@ namespace Salamander.RhinoCommon
             {
                 try
                 {
-                    VertexGeometry shape = RCtoFB.Convert(objRef);
+                    VertexGeometry shape = RCtoN.Convert(objRef);
                     if (shape != null) result.Add(shape);
                 }
                 catch (NotImplementedException)

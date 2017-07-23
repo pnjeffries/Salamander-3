@@ -23,7 +23,7 @@ namespace Salamander.Rhino
             {
                 Point3d basePt;
                 TryGetBasePoint(out basePt);
-                var pParam = new PreviewParameters(true, null, RCtoFB.Convert(e.CurrentPoint), RCtoFB.Convert(basePt));
+                var pParam = new PreviewParameters(true, null, RCtoN.Convert(e.CurrentPoint), RCtoN.Convert(basePt));
                 DisplayLayer previewLayer = action.PreviewLayer(pParam);
                 if (previewLayer != null)
                 {

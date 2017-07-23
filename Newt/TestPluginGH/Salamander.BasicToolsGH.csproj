@@ -77,8 +77,10 @@
     <Compile Include="CreatePanelElementComponent.cs" />
     <Compile Include="CreateRectangularHollowSectionComponent.cs" />
     <Compile Include="CreateRectangularSectionComponent.cs" />
+    <Compile Include="GeneratePrattTrussComponent.cs" />
     <Compile Include="GetBuildUpComponent.cs" />
     <Compile Include="MergeNodesComponent.cs" />
+    <Compile Include="OrientateElementToVectorComponent.cs" />
     <Compile Include="PanelElementParam.cs" />
     <Compile Include="PanelFamilyParam.cs" />
     <Compile Include="RHSProfileCatalogueValueList.cs" />

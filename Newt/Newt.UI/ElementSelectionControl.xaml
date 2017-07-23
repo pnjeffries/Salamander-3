@@ -13,6 +13,7 @@
             <converters:NullOrEmptyVisibilityConverter x:Key="NullOrEmptyVisibilityConverter"/>
             <converters:RadiansDegreesConverter x:Key="RadiansDegreesConverter"/>
             <converters:VisibilityConverter x:Key="VisibilityConverter"/>
+            <converters:NaNToBlankConverter x:Key="NaNToBlankConverter"/>
         </ResourceDictionary>
     </UserControl.Resources>
     <Grid>
@@ -61,9 +62,33 @@
                 Units="°"
                 Maximum="360"/>
             <Border Visibility="{Binding Path=Property, Converter={StaticResource NullOrEmptyVisibilityConverter}}">
-                
+
             </Border>
-            
+            <ScrollViewer MaxHeight="300" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
+                <ItemsControl ItemsSource="{Binding Path=ElementVertices}">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <Expander Header="{Binding Path=Description}">
+                                <StackPanel>
+                                    <fb:XYZControl
+                                    Label="Position:"
+                                    XValue="{Binding Path=X, Converter={StaticResource NaNToBlankConverter}}"
+                                    YValue="{Binding Path=Y, Converter={StaticResource NaNToBlankConverter}}"
+                                    ZValue="{Binding Path=Z, Converter={StaticResource NaNToBlankConverter}}"/>
+                                    <fb:TextFieldControl Label="Node:"
+                                                     Value="{Binding Path=Node}"/>
+                                    <fb:XYZControl
+                                    Label="Offset:"
+                                    XValue="{Binding Path=Offset_X, Converter={StaticResource NaNToBlankConverter}}"
+                                    YValue="{Binding Path=Offset_Y, Converter={StaticResource NaNToBlankConverter}}"
+                                    ZValue="{Binding Path=Offset_Z, Converter={StaticResource NaNToBlankConverter}}"/>
+                                </StackPanel>
+                            </Expander>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </ScrollViewer>
+
 
         </StackPanel>
     </Grid>

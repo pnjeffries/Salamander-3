@@ -28,9 +28,9 @@ namespace Salamander.BasicTools
                 NodeSupport support = source.GetData<NodeSupport>();
                 if (support != null && !support.Fixity.AllFalse)
             {
-                    double scale = 1.0;
+                    double scale = 0.5;
                     IMeshAvatar mAv = CreateMeshAvatar();
-                    mAv.Builder.AddNodeSupport(source, support);
+                    mAv.Builder.AddNodeSupport(source, support, scale);
                     mAv.Brush = new ColourBrush(new Colour(0.5f, 0.8f, 0.2f, 0f)); //TODO: Make customisable
                     mAv.FinalizeMesh();
                     result.Add(mAv);

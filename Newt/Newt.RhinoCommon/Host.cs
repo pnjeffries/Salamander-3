@@ -8,6 +8,7 @@ using Rhino;
 using Salamander.Rhino;
 using Salamander.Events;
 using Salamander.Display;
+using Nucleus.Base;
 
 namespace Salamander.RhinoCommon
 {
@@ -131,6 +132,8 @@ namespace Salamander.RhinoCommon
             DisplayConduit = new SalamanderDisplayConduit();
             DisplayConduit.Enabled = true;
 
+            Core.Instance.ActiveModelChanged += Core_ChangeDocument;
+
             RhinoDoc.CloseDocument += RhinoDoc_CloseDocument;
 
             GUI.CreateHostDockPanel(); //TEMP?
@@ -170,6 +173,12 @@ namespace Salamander.RhinoCommon
             RhinoDoc.ActiveDoc.Views.Redraw();
         }
 
+
+        public bool IsHidden(Unique unique)
+        {
+            return Handles.IsHandleHidden(unique);
+        }
+
         #endregion
 
         #region Event Handlers
@@ -177,6 +186,11 @@ namespace Salamander.RhinoCommon
         private void RhinoDoc_CloseDocument(object sender, DocumentEventArgs e)
         {
             Core.Instance.NewDocument();
+        }
+
+        private void Core_ChangeDocument(object sender, DocumentOpenedEventArgs e)
+        {
+
         }
 
         #endregion

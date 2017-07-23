@@ -33,7 +33,7 @@ namespace Salamander.Grasshopper
         {
             //Load default converters
             LoadConverters(typeof(FBtoRC));
-            LoadConverters(typeof(RCtoFB));
+            LoadConverters(typeof(RCtoN));
         }
 
         #endregion

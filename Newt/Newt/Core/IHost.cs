@@ -1,4 +1,5 @@
-﻿using Salamander.Display;
+﻿using Nucleus.Base;
+using Salamander.Display;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -50,6 +51,13 @@ namespace Salamander
         /// must be manually triggered.
         /// </summary>
         void Refresh();
+
+        /// <summary>
+        /// Is the specified object currently not considered to be visible within the host environment?
+        /// </summary>
+        /// <param name="unique"></param>
+        /// <returns></returns>
+        bool IsHidden(Unique unique);
 
         #endregion
     }

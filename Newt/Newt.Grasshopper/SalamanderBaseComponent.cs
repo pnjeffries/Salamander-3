@@ -193,16 +193,16 @@ namespace Salamander.Grasshopper
                     string description = inputAtt.CapitalisedDescription;
                     if (pType == typeof(double))
                     {
-                        pManager.AddNumberParameter(name, nickname, description, GH_ParamAccess.item, (double)pInfo.GetValue(action));
+                        pManager.AddNumberParameter(name, nickname, description, GH_ParamAccess.item, (double)pInfo.GetValue(action, null));
                     }
                     else if (pType == typeof(string))
                     {
-                        pManager.AddTextParameter(name, nickname, description, GH_ParamAccess.item, (string)pInfo.GetValue(action));
+                        pManager.AddTextParameter(name, nickname, description, GH_ParamAccess.item, (string)pInfo.GetValue(action, null));
                     }
                     else if (pType == typeof(bool))
                     {
                         //Special case when the input is a 'Write' toggle - default off!
-                        pManager.AddBooleanParameter(name, nickname, description, GH_ParamAccess.item, name == "Write" ? false : (bool)pInfo.GetValue(action));
+                        pManager.AddBooleanParameter(name, nickname, description, GH_ParamAccess.item, name == "Write" ? false : (bool)pInfo.GetValue(action, null));
                     }
                     else if (pType == typeof(Vector))
                     {
@@ -214,7 +214,7 @@ namespace Salamander.Grasshopper
                     }
                     else if (pType == typeof(Angle))
                     {
-                        pManager.AddAngleParameter(name, nickname, description, GH_ParamAccess.item, (Angle)pInfo.GetValue(action));
+                        pManager.AddAngleParameter(name, nickname, description, GH_ParamAccess.item, (Angle)pInfo.GetValue(action, null));
                     }
                     else if (typeof(Curve).IsAssignableFrom(pType))
                     {
@@ -620,6 +620,7 @@ namespace Salamander.Grasshopper
         public void Menu_MainModelClicked(object sender, System.EventArgs e)
         {
             GrasshopperManager.Instance.AutoBake = !GrasshopperManager.Instance.AutoBake;
+            GrasshopperManager.Instance.InvalidateAllSalamanderComponents(this.OnPingDocument());
         }
 
         public override void DrawViewportWires(IGH_PreviewArgs args)

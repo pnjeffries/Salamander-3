@@ -12,7 +12,7 @@ using Nucleus.Model;
 namespace Salamander.BasicTools
 {
     //Hmmm...?
-    [Action("AddSupportPoint",
+    /*[Action("AddSupportPoint",
             "Designate a structural support point.",
         IconBackground = Resources.URIs.LinearElement,
         IconForeground = Resources.URIs.AddIcon)]
@@ -33,5 +33,5 @@ namespace Salamander.BasicTools
             Node.SetData(new NodeSupport(Fixity));
             return true;
         }
-    }
+    }*/
 }

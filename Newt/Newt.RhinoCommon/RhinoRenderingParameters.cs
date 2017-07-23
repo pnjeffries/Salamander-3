@@ -52,7 +52,7 @@ namespace Salamander.Rhino
         /// <param name="args"></param>
         public RhinoRenderingParameters(GetPointDrawEventArgs args) : this((DrawEventArgs)args)
         {
-            CursorPosition = RCtoFB.Convert(args.CurrentPoint);
+            CursorPosition = RCtoN.Convert(args.CurrentPoint);
         }
 
         /// <summary>

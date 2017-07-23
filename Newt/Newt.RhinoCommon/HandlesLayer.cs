@@ -44,6 +44,12 @@ namespace Salamander.Rhino
 
         #region Properties
 
+        public string BaseLayerName { get; set; } = "Salamander";
+
+        public string ElementsLayerPath { get; set; } = "Salamander::Elements::";
+
+        public string NodesLayerName { get; set; } = "Salamander::Nodes";
+
         /// <summary>
         /// The registry of 
         /// </summary>
@@ -94,6 +100,7 @@ namespace Salamander.Rhino
 
         public override void InitialiseToModel(Model model)
         {
+            DeleteAllHandles();
             RhinoIDMappingTable idMap = Core.Instance.ActiveDocument.IDMappings.GetLatest<RhinoIDMappingTable>();
             if (idMap == null)
             {
@@ -123,6 +130,44 @@ namespace Salamander.Rhino
             else return null;
         }
 
+        /// <summary>
+        /// Is the handle of this object (if it has one) currently hidden in Rhino?
+        /// </summary>
+        /// <param name="unique"></param>
+        /// <returns></returns>
+        public bool IsHandleHidden(Unique unique)
+        {
+            if (Links.ContainsFirst(unique.GUID))
+            {
+                return !RhinoOutput.ObjectVisible(Links.GetSecond(unique.GUID));
+            }
+            return false;
+        }
+
+        /// <summary>
+        /// Delete all Rhino handle objects linked to model objects by this layer
+        /// </summary>
+        public void DeleteAllHandles()
+        {
+            foreach (Guid guid in Links.Values)
+            {
+                RhinoOutput.DeleteObject(guid);
+            }
+        }
+
+        /// <summary>
+        /// Do any handle objects exist?
+        /// </summary>
+        /// <returns></returns>
+        public bool HandlesExist()
+        {
+            foreach (Guid guid in Links.Keys)
+            {
+                if (RhinoOutput.ObjectExists(guid)) return true; 
+            }
+            return false;
+        }
+
         #endregion
 
         #region EventHandlers
@@ -149,7 +194,7 @@ namespace Salamander.Rhino
                             //Create copy of object:
                             if (mO is Element)
                             {
-                                VertexGeometry geometry = RCtoFB.Convert(e.TheObject.Geometry);
+                                VertexGeometry geometry = RCtoN.Convert(e.TheObject.Geometry);
                                 Element element = null;
                                 if (mO is LinearElement)
                                 {
@@ -177,7 +222,7 @@ namespace Salamander.Rhino
                                 {
                                     Node node = ((Node)mO).Duplicate();
                                     RC.Point pt = (RC.Point)e.TheObject.Geometry;
-                                    node.Position = RCtoFB.Convert(pt).Position;
+                                    node.Position = RCtoN.Convert(pt).Position;
                                     RhinoOutput.SetOriginalIDUserString(e.ObjectId);
                                     Links.Set(node.GUID, e.ObjectId);
                                     Core.Instance.ActiveDocument.Model.Add(node);
@@ -217,7 +262,7 @@ namespace Salamander.Rhino
                     if (geometry is RC.Point)
                     {
                         RC.Point rPt = (RC.Point)geometry;
-                        Vector pos = RCtoFB.Convert(rPt.Location);
+                        Vector pos = RCtoN.Convert(rPt.Location);
                         node.MoveTo(pos, true, _ReplacedElements);
                     }
                 }
@@ -245,7 +290,7 @@ namespace Salamander.Rhino
                     if (mObj is Element)
                     {
                         Element element = (Element)mObj;
-                        VertexGeometry vG = RCtoFB.Convert(geometry);
+                        VertexGeometry vG = RCtoN.Convert(geometry);
                         if (vG != null)
                         {
                             _Replacing = true;
@@ -356,6 +401,20 @@ namespace Salamander.Rhino
             }
         }
 
+        public override void InvalidateOnUpdate(object modified, PropertyChangedEventArgs e)
+        {
+            if (modified is Family && e.PropertyName == "Name" && e is PropertyChangedEventArgsExtended)
+            {
+                var e2 = (PropertyChangedEventArgsExtended)e;
+                string oldName = ((string)e2.OldValue).Trim();
+                if (string.IsNullOrWhiteSpace(oldName)) oldName = "_UNNAMED_";
+                string newName = ((string)e2.NewValue).Trim();
+                if (string.IsNullOrWhiteSpace(newName)) newName = "_UNNAMED_";
+                RhinoOutput.ChangeLayerName(ElementsLayerPath + oldName, newName);
+            }
+            base.InvalidateOnUpdate(modified, e);
+        }
+
         public override IList<IAvatar> GenerateRepresentations(ModelObject source)
         {
             IList<IAvatar> result = new List<IAvatar>();
@@ -403,6 +462,8 @@ namespace Salamander.Rhino
             if (objID != Guid.Empty)
             {
                 RhinoOutput.SetOriginalIDUserString(objID);
+                string layerPath = NodesLayerName;
+                RhinoOutput.SetObjectLayer(objID, layerPath);
                 RhinoOutput.SetObjectName(objID, node.Description);
             }
         }
@@ -449,6 +510,9 @@ namespace Salamander.Rhino
             if (objID != Guid.Empty)
             {
                 RhinoOutput.SetOriginalIDUserString(objID);
+                string layerPath = ElementsLayerPath;
+                if (element.GetFamily() != null) layerPath += element.GetFamily().Name;
+                RhinoOutput.SetObjectLayer(objID, layerPath);
                 RhinoOutput.SetObjectName(objID, element.Description);
             }
 

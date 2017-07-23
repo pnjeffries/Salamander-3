@@ -56,7 +56,8 @@
   <ItemGroup>
     <Compile Include="SalamanderCommand.cs" />
     <Compile Include="SalBakePanelsCommand.cs" />
-    <Compile Include="SalBakeSectionsCommand.cs" />
+    <Compile Include="SalBakeSectionExtrusionsCommand.cs" />
+    <Compile Include="SalBakeSectionMeshesCommand.cs" />
     <Compile Include="SalCommandCommand.cs" />
     <Compile Include="SalExportCommand.cs" />
     <Compile Include="SalImportCommand.cs" />

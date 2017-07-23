@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Nucleus.Base;
 using Salamander.Display;
 
 namespace Salamander.Revit
@@ -94,6 +95,11 @@ namespace Salamander.Revit
         public void Refresh()
         {
             //throw new NotImplementedException();
+        }
+
+        public bool IsHidden(Unique unique)
+        {
+            throw new NotImplementedException();
         }
 
         #endregion
