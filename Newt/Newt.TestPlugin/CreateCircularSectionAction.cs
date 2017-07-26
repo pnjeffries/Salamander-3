@@ -17,10 +17,10 @@ namespace Salamander.BasicTools
         IconForeground = Resources.URIs.AddIcon)]
     public class CreateCircularSectionAction : ModelDocumentActionBase
     {
-        [ActionInput(1, "the name of the section")]
+        [ActionInput(1, "the name of the new section")]
         public string Name { get; set; } = "Circular Section";
 
-        [ActionInput(2, "the depth of the section")]
+        [ActionInput(2, "the diameter of the section", Manual = false)]
         public double Diameter { get; set; } = 0.3;
 
         [ActionOutput(1, "the output section property")]
@@ -38,6 +38,16 @@ namespace Salamander.BasicTools
             Section = Model.Create.SectionFamily(Name, exInfo);
             Section.Profile = profile;
             return true;
+        }
+
+        public override bool PostExecutionOperations(ExecutionInfo exInfo = null)
+        {
+            if (exInfo == null && Section != null)
+            {
+                // Select the new section
+                Core.Instance.Selected.Select(Section);
+            }
+            return base.PostExecutionOperations(exInfo);
         }
     }
 }

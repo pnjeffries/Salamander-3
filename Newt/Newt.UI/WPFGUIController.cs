@@ -7,6 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using Nucleus.UI;
+using Nucleus.WPF;
 
 namespace Salamander.UI
 {
@@ -91,6 +93,24 @@ namespace Salamander.UI
             window.SizeToContent = SizeToContent.WidthAndHeight;
             window.Show();
             return window;
+        }
+
+        /// <summary>
+        /// Show a message dialog with optional options
+        /// </summary>
+        /// <param name="title">Text to be shown in the dialog title bar</param>
+        /// <param name="message">Message to be shown in the dialog</param>
+        /// <param name="options">Options to be displayed in the dialog</param>
+        /// <returns>The returnvalue of the selected option, or null if no options are provided</returns>
+        public override object ShowDialog(string title, string message, params UIOption[] options)
+        {
+            if (options.Length == 0)
+            {
+                MessageDialog.Show(title, message);
+                return null;
+            }
+            else
+                return MessageDialog.ShowOptions(title, message, options);
         }
     }
 }

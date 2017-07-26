@@ -15,10 +15,10 @@ namespace Salamander.BasicTools
         IconForeground = Resources.URIs.AddIcon)]
     public class CreateBuildUp : ModelDocumentActionBase
     {
-        [ActionInput(1, "the name of the section")]
+        [ActionInput(1, "the name of the new build-up family")]
         public string Name { get; set; } = "Build-Up";
 
-        [ActionInput(2, "the thickness of the build-up")]
+        [ActionInput(2, "the thickness of the build-up", Manual = false)]
         public double Thickness { get; set; } = 0.1;
 
         [ActionOutput(2, "The output panel build-up")]
@@ -30,6 +30,16 @@ namespace Salamander.BasicTools
             BuildUp.Layers.Clear();
             BuildUp.Layers.Add(new BuildUpLayer(Thickness, null));
             return true;
+        }
+
+        public override bool PostExecutionOperations(ExecutionInfo exInfo = null)
+        {
+            if (exInfo == null && BuildUp != null)
+            {
+                // Select the new section
+                Core.Instance.Selected.Select(BuildUp);
+            }
+            return base.PostExecutionOperations(exInfo);
         }
     }
 }

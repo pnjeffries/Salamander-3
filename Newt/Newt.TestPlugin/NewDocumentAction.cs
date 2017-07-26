@@ -15,7 +15,9 @@ namespace Salamander.BasicTools
     {
         public override bool Execute(ExecutionInfo exInfo = null)
         {
-            Core.Instance.NewDocument(false);
+            if (Core.Instance.Host.GUI.ShowOKCancelDialog("Blank Salamander Model?", 
+                "Any unsaved data will be lost and Salamander model geometry will be deleted from the Rhino document.\n\nAre you sure you would like to proceed?"))
+                Core.Instance.NewDocument(false);
             return true;
         }
     }

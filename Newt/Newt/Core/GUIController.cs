@@ -1,4 +1,5 @@
-﻿using Salamander.Selection;
+﻿using Nucleus.UI;
+using Salamander.Selection;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -45,6 +46,26 @@ namespace Salamander
         /// <returns>The selected filepath.  Or, null if the dialog is closed
         /// without a filepath being selected.</returns>
         public abstract string ShowSaveFileDialog(string prompt, string filter, string defaultPath = null, int filterIndex = -1);
+
+        /// <summary>
+        /// Show a message dialog with optional options
+        /// </summary>
+        /// <param name="title">Text to be shown in the dialog title bar</param>
+        /// <param name="message">Message to be shown in the dialog</param>
+        /// <param name="options">Options to be displayed in the dialog</param>
+        /// <returns>The returnvalue of the selected option, or null if no options are provided</returns>
+        public abstract object ShowDialog(string title, string message, params UIOption[] options);
+
+        /// <summary>
+        /// Show a message dialog 
+        /// </summary>
+        /// <param name="title"></param>
+        /// <param name="message"></param>
+        /// <returns></returns>
+        public bool ShowOKCancelDialog(string title, string message)
+        {
+            return (bool)ShowDialog(title, message, UIOption.OK, UIOption.Cancel);
+        }
 
         /// <summary>
         /// Show the application splash scren

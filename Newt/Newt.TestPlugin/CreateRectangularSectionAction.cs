@@ -21,10 +21,10 @@ namespace Salamander.BasicTools
         [ActionInput(1, "the name of the section")]
         public string Name { get; set; } = "Rectangular Section";
 
-        [ActionInput(2, "the depth of the section")]
+        [ActionInput(2, "the depth of the section", Manual = false)]
         public double Depth { get; set; } = 0.3;
 
-        [ActionInput(3, "the width of the section")]
+        [ActionInput(3, "the width of the section", Manual = false)]
         public double Width { get; set; } = 0.3;
 
         [ActionOutput(1, "the output section property")]
@@ -42,6 +42,16 @@ namespace Salamander.BasicTools
             Section = Model.Create.SectionFamily(Name, exInfo);
             Section.Profile = rProfile;
             return true;
+        }
+
+        public override bool PostExecutionOperations(ExecutionInfo exInfo = null)
+        {
+            if (exInfo == null && Section != null)
+            {
+                // Select the new section
+                Core.Instance.Selected.Select(Section);
+            }
+            return base.PostExecutionOperations(exInfo);
         }
     }
 }

@@ -18,22 +18,22 @@ namespace Salamander.BasicTools
     public class CreateISectionAction : ModelDocumentActionBase
     {
 
-        [ActionInput(1, "the name of the section")]
+        [ActionInput(1, "the name of the new section")]
         public string Name { get; set; } = "I Section";
 
-        [ActionInput(2, "the depth of the section")]
+        [ActionInput(2, "the depth of the section", Manual = false)]
         public double Depth { get; set; } = 0.355;
 
-        [ActionInput(3, "the width of the section")]
+        [ActionInput(3, "the width of the section", Manual = false)]
         public double Width { get; set; } = 0.1715;
 
-        [ActionInput(4, "the thickness of the section flanges")]
+        [ActionInput(4, "the thickness of the section flanges", Manual = false)]
         public double FlangeThickness { get; set; } = 0.0115;
 
-        [ActionInput(5, "the thickness of the section web")]
+        [ActionInput(5, "the thickness of the section web", Manual = false)]
         public double WebThickness { get; set; } = 0.0074;
 
-        [ActionInput(6, "the radius of the root fillet")]
+        [ActionInput(6, "the radius of the root fillet", Manual = false)]
         public double RootRadius { get; set; } = 0;
 
         [ActionOutput(1, "the output section property")]
@@ -51,6 +51,16 @@ namespace Salamander.BasicTools
             Section = Model.Create.SectionFamily(Name, exInfo);
             Section.Profile = iProfile;
             return true;
+        }
+
+        public override bool PostExecutionOperations(ExecutionInfo exInfo = null)
+        {
+            if (exInfo == null && Section != null)
+            {
+                // Select the new section
+                Core.Instance.Selected.Select(Section);
+            }
+            return base.PostExecutionOperations(exInfo);
         }
     }
 }
