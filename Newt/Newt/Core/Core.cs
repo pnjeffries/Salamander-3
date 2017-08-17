@@ -265,6 +265,18 @@ namespace Salamander
         }
 
         /// <summary>
+        /// Import a document and merge it into the current active model.
+        /// </summary>
+        public void ImportDocument()
+        {
+            ModelDocument doc = OpenDocument(true);
+            if (doc != null)
+            {
+                ActiveDocument.MergeIn(doc);
+            }
+        }
+
+        /// <summary>
         /// Open a design document from a file selected via a file dialog
         /// </summary>
         /// <param name="background">If true, the opened design will not be added to the set of currently open designs or made active</param>

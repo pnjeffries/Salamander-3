@@ -19,6 +19,7 @@
             <converters:CountVisibilityConverter x:Key="CountVisibilityConverter"/>
             <converters:NullOrEmptyVisibilityConverter x:Key="NullOrEmptyVisibilityConverter"/>
             <converters:VisibilityConverter x:Key="VisibilityConverter"/>
+            <converters:AllZeroVisibilityConverter x:Key="AllZeroVisibilityConverter"/>
         </ResourceDictionary>
     </UserControl.Resources>
     <Grid Name="LayoutBase">
@@ -37,7 +38,16 @@
 
         <ScrollViewer HorizontalScrollBarVisibility="Hidden" Grid.Row="2">
             <Grid>
-                <!--<TextBlock Text="No Salamander Objects Selected" Margin="10"/>-->
+                <TextBlock Text="No Salamander Objects Selected" Margin="20" HorizontalAlignment="Stretch" TextAlignment="Center">
+                    <TextBlock.Visibility>
+                        <MultiBinding Converter="{StaticResource AllZeroVisibilityConverter}">
+                            <Binding Path="Selected.Nodes.Selection.Count"/>
+                            <Binding Path="Selected.Elements.Selection.Count"/>
+                            <Binding Path="Selected.SectionFamilies.Selection.Count"/>
+                            <Binding Path="Selected.BuildUpFamilies.Selection.Count"/>
+                        </MultiBinding>
+                    </TextBlock.Visibility>
+                </TextBlock>
             <StackPanel>
                 <Border Visibility="{Binding Path=Actions.CurrentAction, Converter={StaticResource NullOrEmptyVisibilityConverter}}">
                     <Expander IsExpanded="True" DataContext="{Binding Path=Actions.CurrentAction}"

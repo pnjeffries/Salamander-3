@@ -7,23 +7,23 @@ using Nucleus.Model;
 namespace Salamander.Rhino
 {
     [System.Runtime.InteropServices.Guid("7431e926-b59d-4116-8b8a-286c6b28ecc4")]
-    public class SalImportCommand : Command
+    public class SalOpenCommand : Command
     {
-        static SalImportCommand _instance;
-        public SalImportCommand()
+        static SalOpenCommand _instance;
+        public SalOpenCommand()
         {
             _instance = this;
         }
 
         ///<summary>The only instance of the NewtImportCommand command.</summary>
-        public static SalImportCommand Instance
+        public static SalOpenCommand Instance
         {
             get { return _instance; }
         }
 
         public override string EnglishName
         {
-            get { return "SalImport"; }
+            get { return "SalOpen"; }
         }
 
         protected override Result RunCommand(RhinoDoc doc, RunMode mode)

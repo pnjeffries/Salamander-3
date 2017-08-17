@@ -60,7 +60,7 @@
     <Compile Include="SalBakeSectionMeshesCommand.cs" />
     <Compile Include="SalCommandCommand.cs" />
     <Compile Include="SalExportCommand.cs" />
-    <Compile Include="SalImportCommand.cs" />
+    <Compile Include="SalOpenCommand.cs" />
     <Compile Include="SalamanderPlugin.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SalToolbar.cs" />

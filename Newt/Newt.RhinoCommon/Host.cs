@@ -172,22 +172,38 @@ namespace Salamander.RhinoCommon
         /// </summary>
         public void Refresh()
         {
-            if (_RefreshTimer == null)
-            {
-                _RefreshTimer = new DispatcherTimer();
-                _RefreshTimer.Interval = new TimeSpan(10000);
-                _RefreshTimer.Tick += RefreshTimer_Tick;
+            if (!_Redrawing)
+            {  
+                if (_RefreshTimer == null)
+                {
+                    _RefreshTimer = new DispatcherTimer();
+                    _RefreshTimer.Interval = new TimeSpan(10000);
+                    _RefreshTimer.Tick += RefreshTimer_Tick;
+                }
+                _RefreshTimer.Stop();
+                _RedrawCount = 0;
+                _RefreshTimer.Start();
             }
-            _RefreshTimer.Stop();
-            _RefreshTimer.Start();
         }
 
         private void RefreshTimer_Tick(object sender, EventArgs e)
         {
-            _RefreshTimer.Stop();
-            RhinoDoc.ActiveDoc.Views.Redraw();
+            _RedrawCount++;
+            if (_RedrawCount > 10)
+            {
+                _RedrawCount = 0;
+                _RefreshTimer.Stop();
+                if (_Redrawing == false)
+                {
+                    _Redrawing = true;
+                    RhinoDoc.ActiveDoc.Views.Redraw();
+                    _Redrawing = false;
+                }
+            }
         }
 
+        private bool _Redrawing = false;
+        private int _RedrawCount = 0;
 
         public bool IsHidden(Unique unique)
         {

@@ -45,6 +45,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AddSupportPointAction.cs" />
+    <Compile Include="ImportModelAction.cs" />
     <Compile Include="CalculateGeometricPropertiesAction.cs" />
     <Compile Include="CommandListAction.cs" />
     <Compile Include="CreateAngleSection.cs" />
