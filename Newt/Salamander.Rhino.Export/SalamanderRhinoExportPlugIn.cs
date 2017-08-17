@@ -49,7 +49,7 @@ namespace Salamander.Rhino.Export
         /// <returns>A value that defines success or a specific failure.</returns>
         protected override R.PlugIns.WriteFileResult WriteFile(string filename, int index, R.RhinoDoc doc, R.FileIO.FileWriteOptions options)
         {
-            Host.EnsureInitialisation();
+            Host.EnsureInitialisation(true);
             if (Core.Instance.SaveDocument(filename)) return R.PlugIns.WriteFileResult.Success;
             else return R.PlugIns.WriteFileResult.Failure;
         }

@@ -7,10 +7,12 @@ using System.Text;
 using System.Threading.Tasks;
 using Rhino.Geometry;
 using Salamander.Resources;
+using Rhino;
+using Rhino.DocObjects;
 
 namespace Salamander.Grasshopper
 {
-    public class NodeParam : SalamanderPreviewParamBase<NodeGoo>
+    public class NodeParam : SalamanderPreviewParamBase<NodeGoo>, IGH_BakeAwareObject
     {
         public override Guid ComponentGuid
         {
@@ -31,6 +33,14 @@ namespace Salamander.Grasshopper
             }
         }
 
+        public bool IsBakeCapable
+        {
+            get
+            {
+                return true;
+            }
+        }
+
         public NodeParam()
             : base("Node", "Node", "A Salamander Node", "Salamander 3", SubCategories.Params, GH_ParamAccess.item)
         { }
@@ -38,6 +48,20 @@ namespace Salamander.Grasshopper
         public override void DrawViewportMeshes(IGH_PreviewArgs args)
         {
             //Do nothing!
+        }
+
+        public void BakeGeometry(RhinoDoc doc, List<Guid> obj_ids)
+        {
+            BakeGeometry(doc, null, obj_ids);
+        }
+
+        public void BakeGeometry(RhinoDoc doc, ObjectAttributes att, List<Guid> obj_ids)
+        {
+            foreach (NodeGoo goo in m_data)
+            {
+                Guid id;
+                goo.BakeGeometry(doc, att, out id);
+            }
         }
     }
 }

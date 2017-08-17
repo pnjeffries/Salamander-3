@@ -51,7 +51,7 @@ namespace Salamander.Rhino.RobotImport
         /// <returns>A value that defines success or a specific failure.</returns>
         protected override bool ReadFile(string filename, int index, RhinoDoc doc, FileReadOptions options)
         {
-            Host.EnsureInitialisation();
+            Host.EnsureInitialisation(true);
             return Core.Instance.OpenDocument(filename) != null;
         }
 

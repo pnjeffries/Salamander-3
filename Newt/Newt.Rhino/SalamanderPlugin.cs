@@ -116,7 +116,7 @@ namespace Salamander.RhinoPlugin
             byte[] data = archive.ReadByteArray();
             if (!archive.ReadErrorOccured && data != null)
             {
-                Host.EnsureInitialisation();
+                Host.EnsureInitialisation(true);
                 ModelDocument mDoc = Document.FromBinary<ModelDocument>(data);
                 Core.Instance.ActiveDocument = mDoc;
             }

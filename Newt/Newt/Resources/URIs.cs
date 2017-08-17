@@ -22,6 +22,11 @@ namespace Salamander.Resources
         public const string AddIcon = Base + "AddIcon.png";
 
         /// <summary>
+        /// The URI of the standard Angle Section icon
+        /// </summary>
+        public const string AngleSection = Base + "AngleSection.png";
+
+        /// <summary>
         /// The URI of the standard 'Assign' icon
         /// </summary>
         public const string AssignIcon = Base + "AssignIcon.png";
@@ -50,6 +55,11 @@ namespace Salamander.Resources
         /// The URI of the standard BuildUp icon
         /// </summary>
         public const string BuildUpFamilySmall = Base + "BuildUpFamily_Small.png";
+
+        /// <summary>
+        /// The URI of the standard Channel Section icon
+        /// </summary>
+        public const string ChannelSection = Base + "ChannelSection.png";
 
         /// <summary>
         /// The URI of the standard Checkmark icon overlay
@@ -90,6 +100,11 @@ namespace Salamander.Resources
         /// The URI of the standard element orientation icon
         /// </summary>
         public const string ElementOrientation = Base + "ElementOrientation.png";
+
+        /// <summary>
+        /// The URI of the standard 'get all' icon overlay
+        /// </summary>
+        public const string GetAllIcon = Base + "GetAllIcon.png";
 
         /// <summary>
         /// The URI of the 'Get Element Nodes' icon

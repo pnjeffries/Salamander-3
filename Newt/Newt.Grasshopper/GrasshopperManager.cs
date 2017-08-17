@@ -74,6 +74,11 @@ namespace Salamander.Grasshopper
             }
         }*/
 
+        private GrasshopperManager()
+        {
+           
+        }
+
         /// <summary>
         /// Get the background Salamander document associated with the specified
         /// Grasshopper document
@@ -82,6 +87,7 @@ namespace Salamander.Grasshopper
         /// <returns></returns>
         public ModelDocument BackgroundDocument(GH_Document document)
         {
+            if (document == null) document = GH.Instances.ActiveCanvas.Document;
             if (document != null)
             {
                 Guid id = document.DocumentID;

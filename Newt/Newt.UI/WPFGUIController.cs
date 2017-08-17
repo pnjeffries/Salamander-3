@@ -112,5 +112,18 @@ namespace Salamander.UI
             else
                 return MessageDialog.ShowOptions(title, message, options);
         }
+
+        /// <summary>
+        /// Show a dialog hosting auto-generated UI Elements allowing editing of the fields
+        /// on the specified object marked with the AutoUI attribute.
+        /// </summary>
+        /// <param name="title"></param>
+        /// <param name="options"></param>
+        /// <returns></returns>
+        public override bool? ShowFieldsDialog(string title, object options)
+        {
+            var window = new AutoUIDialog(options);
+            return window.ShowDialog();
+        }
     }
 }

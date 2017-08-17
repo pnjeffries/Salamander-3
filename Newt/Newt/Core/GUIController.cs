@@ -79,5 +79,14 @@ namespace Salamander
         /// <param name="data"></param>
         public abstract void ShowDataTable(string name, IEnumerable data, SelectionViewModel selection = null);
 
+        /// <summary>
+        /// Show a dialog hosting auto-generated UI Elements allowing editing of the fields
+        /// on the specified object marked with the AutoUI attribute.
+        /// </summary>
+        /// <param name="title"></param>
+        /// <param name="options"></param>
+        /// <returns></returns>
+        public abstract bool? ShowFieldsDialog(string title, object options);
+
     }
 }

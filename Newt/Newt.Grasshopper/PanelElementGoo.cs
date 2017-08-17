@@ -8,10 +8,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Rhino;
+using Rhino.DocObjects;
 
 namespace Salamander.Grasshopper
 {
-    class PanelElementGoo : GH_Goo<PanelElement>, ISalamander_Goo, IGH_PreviewData
+    class PanelElementGoo : GH_Goo<PanelElement>, ISalamander_Goo, IGH_PreviewData, IGH_BakeAwareData
     {
         #region Properties
 
@@ -165,7 +167,44 @@ namespace Salamander.Grasshopper
             return new PanelElementGoo(Value);
         }
 
-        #endregion
-    
-    }
+        public bool BakeGeometry(RhinoDoc doc, ObjectAttributes att, out Guid obj_guid)
+        {
+            obj_guid = Guid.Empty;
+            if (GrasshopperManager.Instance.AutoBake)
+                return false;
+            else
+            {
+                var result = Core.Instance.ActiveDocument.Model.Create.CopyOf(Value, null, null);
+                obj_guid = Guid.Empty;
+                return true;
+                //TODO: Bake family
+            }
+        }
+
+        public override bool CastTo<Q>(ref Q target)
+        {
+            if (typeof(Q).IsAssignableFrom(typeof(ElementGoo)))
+            {
+                target = (Q)(object)new ElementGoo(Value);
+                return true;
+            }
+            else if (typeof(Q).IsAssignableFrom(typeof(GH_Surface)))
+            {
+                var surface = FBtoRC.Convert(Value.Geometry) as Surface;
+                target = (Q)(object)new GH_Surface(surface);
+                return surface != null;
+            }
+            else if (typeof(Q).IsAssignableFrom(typeof(GH_Brep)))
+            {
+                var surface = FBtoRC.Convert(Value.Geometry) as Brep;
+                target = (Q)(object)new GH_Brep(surface);
+                return surface != null;
+            }
+
+            return false;
+        }
+
+            #endregion
+
+        }
 }

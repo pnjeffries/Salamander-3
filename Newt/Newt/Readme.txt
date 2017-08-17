@@ -25,7 +25,7 @@ GRASSHOPPER PLUGIN:
 
 +++CHANGELOG+++
 
-v0.1.2
+v0.1.2 (Closed Beta)
 - NewDocument command added to blank current Salamander model.  TODO: Prompt to save previous.
 - Opening a new Salamander model will delete existing object handles.  TODO: Make optional.
 - Element selection properties now include vertex positions, nodes and offsets.
@@ -37,3 +37,13 @@ v0.1.2
 - Channel section profile types implemented
 - Display layer rendering disabled when object handle is hidden
 - New Pratt Truss Generation tool/component
+- Command to orientate a Linear Element to a direction vector
+
+v0.1.3
+- Create Channel and Angle commands/components added.
+- Section profile parameter interface now shown in mm.
+- Element orientation tool now works for both linear and panel elements.
+- New Element Coordinate Systems Display Layer.
+- Panel element orientation transferred to Robot.
+- Update options now displayed prior to updating a Robot file.
+- Bugfix: OrientateElementToVector was actually orientating towards a point.

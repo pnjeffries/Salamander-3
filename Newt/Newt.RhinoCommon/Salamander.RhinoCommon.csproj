@@ -66,6 +66,7 @@
     </Compile>
     <Compile Include="RhinoAvatar.cs" />
     <Compile Include="RhinoAvatarFactory.cs" />
+    <Compile Include="RhinoCoordinateSystemAvatar.cs" />
     <Compile Include="RhinoGUIController.cs" />
     <Compile Include="RhinoIDMappingTable.cs" />
     <Compile Include="RhinoInput.cs" />

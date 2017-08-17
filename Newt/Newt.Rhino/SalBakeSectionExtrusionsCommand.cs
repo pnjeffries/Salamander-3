@@ -44,6 +44,8 @@ namespace Salamander.Rhino
                     //if (brep != null) RhinoOutput.Bake
                 }
             }
+            Host.Instance.Refresh();
+
             return Result.Success;
         }
     }

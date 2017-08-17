@@ -40,6 +40,7 @@ namespace Salamander.Rhino
                 ((IMeshAvatar)mAv).FinalizeMesh();
                 RhinoOutput.BakeMesh(mAv.RenderMesh);
             }
+            Host.Instance.Refresh();
             return Result.Success;
         }
     }

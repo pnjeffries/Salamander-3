@@ -8,13 +8,15 @@ using System.Text;
 using System.Threading.Tasks;
 using Rhino.Geometry;
 using Salamander.Resources;
+using Rhino;
+using Rhino.DocObjects;
 
 namespace Salamander.Grasshopper
 {
     /// <summary>
     /// Linear element Grasshopper parameter
     /// </summary>
-    public class LinearElementParam : SalamanderPreviewParamBase<LinearElementGoo>
+    public class LinearElementParam : SalamanderPreviewParamBase<LinearElementGoo>, IGH_BakeAwareObject
     {
         #region Properties
 
@@ -35,7 +37,15 @@ namespace Salamander.Grasshopper
                 Bitmap bmp = IconResourceHelper.CombinedBitmapFromURIs(uri1, uri2);
                 return bmp;
             }
-        }     
+        }
+
+        public bool IsBakeCapable
+        {
+            get
+            {
+                return true;
+            }
+        }
 
         #endregion
 
@@ -44,6 +54,20 @@ namespace Salamander.Grasshopper
         public LinearElementParam()
             : base("Linear Element", "Linear Element", "A Salamander Linear Element", "Salamander 3", SubCategories.Params, GH_ParamAccess.item)
         { }
+
+        public void BakeGeometry(RhinoDoc doc, List<Guid> obj_ids)
+        {
+            BakeGeometry(doc, null, obj_ids);
+        }
+
+        public void BakeGeometry(RhinoDoc doc, ObjectAttributes att, List<Guid> obj_ids)
+        {
+            foreach (LinearElementGoo goo in m_data)
+            {
+                Guid id;
+                goo.BakeGeometry(doc, att, out id);
+            }
+        }
 
         #endregion
 

@@ -9,6 +9,11 @@ namespace Salamander.Rhino
 {
     public class RhinoAvatarFactory : IAvatarFactory
     {
+        public ICoordinateSystemAvatar CreateCoordinateSystemAvatar()
+        {
+            return new RhinoCoordinateSystemAvatar();
+        }
+
         public ILineAvatar CreateLineAvatar()
         {
             return new RhinoLineAvatar();

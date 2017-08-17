@@ -42,6 +42,11 @@ namespace Newt.RobotIOPlugin
             Result = false;
             if (FilePath.IsValid && Write)
             {
+                // TEMP...
+                RobotConversionOptions options = new RobotConversionOptions();
+                Core.Instance.Host.GUI.ShowFieldsDialog("Update options", options);
+                // ...Make better!
+
                 Document.Model.GenerateNodes(new NodeGenerationParameters());
                 var robot = new RobotController();
                 robot.Message += HandleMessage;
@@ -53,7 +58,7 @@ namespace Newt.RobotIOPlugin
                     idMap = new RobotIDMappingTable();
                     Document.IDMappings.Add(FilePath, idMap);
                 }
-                robot.UpdateRobotFromModel(FilePath, Model, ref idMap);
+                robot.UpdateRobotFromModel(FilePath, Model, ref idMap, options);
                 //robot.WriteModelToRobot(FilePath, Document.Model, ref idMap);
                 robot.Close();
                 robot.Release();

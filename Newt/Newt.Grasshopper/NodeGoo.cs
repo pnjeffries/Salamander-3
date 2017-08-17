@@ -10,13 +10,15 @@ using Rhino.Geometry;
 using Nucleus.Rhino;
 using RD = Rhino.Display;
 using Nucleus.Actions;
+using Rhino;
+using Rhino.DocObjects;
 
 namespace Salamander.Grasshopper
 {
     /// <summary>
     /// Node Goo
     /// </summary>
-    public class NodeGoo : GH_Goo<Node>, ISalamander_Goo, IGH_PreviewData
+    public class NodeGoo : GH_Goo<Node>, ISalamander_Goo, IGH_PreviewData, IGH_BakeAwareData
     {
         #region Properties
 
@@ -158,6 +160,21 @@ namespace Salamander.Grasshopper
                 return true;
             }
             return base.CastTo<Q>(ref target);
+        }
+
+        public bool BakeGeometry(RhinoDoc doc, ObjectAttributes att, out Guid obj_guid)
+        {
+            if (GrasshopperManager.Instance.AutoBake)
+            {
+                obj_guid = Guid.Empty;
+                return false;
+            }
+            else
+            {
+                var result = Core.Instance.ActiveDocument.Model.Create.CopyOf(Value, null);
+                obj_guid = Guid.Empty;
+                return true;
+            }
         }
 
         #endregion

@@ -31,11 +31,41 @@ namespace Salamander.Selection
             {
                 if (value != null)
                 {
+                    if (value != null && value is SectionFamilyDummy)
+                    {
+                        SectionFamilyDummy dummy = (SectionFamilyDummy)value;
+                        if (dummy.Name.Equals("New..."))
+                        {
+                            SectionFamily newSection = Selection[0].Model?.Create.SectionFamily();
+                            value = newSection;
+                            NotifyPropertyChanged("AvailableSections");
+                        }
+                    }
+
                     if (Selection.Contains(value.GUID)) Selection.Remove(value);
                     Selection.Add(value);
                 }
             }
         }
+
+        /// <summary>
+        /// The set of sections which are available to be assigned to the elements
+        /// in this collection.
+        /// </summary>
+        public SectionFamilyCollection AvailableSections
+        {
+            get
+            {
+                if (Selection.Count > 0)
+                {
+                    SectionFamilyCollection result = new SectionFamilyCollection(Selection[0].Model?.Families.Sections);
+                    result.Add(new SectionFamilyDummy("New..."));
+                    return result;
+                }
+                else return null;
+            }
+        }
+
 
         public SectionProfile CatalogueName
         {

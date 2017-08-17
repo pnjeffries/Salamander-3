@@ -11,13 +11,13 @@ using Nucleus.Geometry;
 namespace Salamander.BasicTools
 {
     [Action("OrientateElementToVector", 
-        Description = "Set element orientation such that the local z-axis of the element will align as closely as possible with a given vector.",
+        Description = "Set element orientation such that the relevant local axis of the element (Z-axis for linear elements, X-axis for panels) will align as closely as possible with a given vector.",
         IconBackground = Resources.URIs.ElementOrientation)]
     public class OrientateElementToVector : ActionBase
     {
         [ActionInput(1, "the element(s) to orientate")]
         [ActionOutput(1, "the re-orientated elements")]
-        public LinearElementCollection Elements { get; set; }
+        public ElementCollection Elements { get; set; }
 
         [ActionInput(2, "the direction to orientate the element's local Z-axis towards")]
         public Vector Vector { get; set; }
@@ -26,7 +26,7 @@ namespace Salamander.BasicTools
         {
             foreach (var element in Elements)
             {
-                element.OrientateTowards(Vector);
+                element.OrientateToVector(Vector);
             }
             return true;
         }

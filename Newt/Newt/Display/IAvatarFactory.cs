@@ -24,6 +24,12 @@ namespace Salamander.Display
         ILineAvatar CreateLineAvatar();
 
         /// <summary>
+        /// Create and return new CoordinateSystemAvatar
+        /// </summary>
+        /// <returns></returns>
+        ICoordinateSystemAvatar CreateCoordinateSystemAvatar();
+
+        /// <summary>
         /// Create and return a new PointAvatar
         /// </summary>
         /// <returns></returns>

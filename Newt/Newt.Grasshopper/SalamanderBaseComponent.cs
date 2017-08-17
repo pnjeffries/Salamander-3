@@ -144,7 +144,7 @@ namespace Salamander.Grasshopper
           : base()
         {
             CommandName = commandName;
-            Host.EnsureInitialisation();
+            Host.EnsureInitialisation(true);
             ActionType = Core.Instance.Actions.GetActionDefinition(CommandName);
             if (ActionType == null) throw new Exception("Command '" + CommandName + "' has not been found.  The plugin that contains it may not have been successfully loaded.");
             var attributes = ActionAttribute.ExtractFrom(ActionType);
@@ -227,7 +227,7 @@ namespace Salamander.Grasshopper
                     }
                     else if (typeof(Element).IsAssignableFrom(pType))
                     {
-                        IGH_Param param = new LinearElementParam(); //TEMP!
+                        IGH_Param param = new ElementParam();
                         pManager.AddParameter(param, name, nickname, description, GH_ParamAccess.item);
                     }
                     else if (typeof(LinearElementCollection).IsAssignableFrom(pType))
@@ -237,7 +237,7 @@ namespace Salamander.Grasshopper
                     }
                     else if (typeof(ElementCollection).IsAssignableFrom(pType))
                     {
-                        IGH_Param param = new LinearElementParam(); //TEMP!
+                        IGH_Param param = new ElementParam();
                         pManager.AddParameter(param, name, nickname, description, ParamAccess(inputAtt));
                     }
                     else if (pType == typeof(Node))
@@ -268,6 +268,10 @@ namespace Salamander.Grasshopper
                     {
                         pManager.AddGenericParameter(pInfo.Name, nickname, description, GH_ParamAccess.item);
                     }
+
+                    if (inputAtt.Required == false)
+                        pManager[pManager.ParamCount - 1].Optional = true;
+
                     //TODO
                 }
             }
@@ -321,12 +325,12 @@ namespace Salamander.Grasshopper
                     }
                     else if (pType == typeof(Element))
                     {
-                        IGH_Param param = new LinearElementParam(); //TEMP!
+                        IGH_Param param = new ElementParam();
                         pManager.AddParameter(param, name, nickname, description, GH_ParamAccess.item);
                     }
                     else if (pType == typeof(ElementCollection))
                     {
-                        IGH_Param param = new LinearElementParam(); //TEMP!
+                        IGH_Param param = new ElementParam();
                         pManager.AddParameter(param, name, nickname, description, GH_ParamAccess.list);
                     }
                     else if (pType == typeof(Node))
@@ -370,6 +374,7 @@ namespace Salamander.Grasshopper
         /// <param name="DA">The DA object is used to retrieve from inputs and store in outputs.</param>
         protected override void SolveInstance(IGH_DataAccess DA)
         {
+            Host.EnsureInitialisation();
             LastExecuted = null;
             if (ActionType != null)
             {
@@ -514,6 +519,8 @@ namespace Salamander.Grasshopper
             else if (obj is LinearElementCollection) return LinearElementGoo.Convert((LinearElementCollection)obj);
             else if (obj is PanelElement) return new PanelElementGoo((PanelElement)obj);
             else if (obj is PanelElementCollection) return PanelElementGoo.Convert((PanelElementCollection)obj);
+            else if (obj is Element) return new ElementGoo((Element)obj);
+            else if (obj is ElementCollection) return ElementGoo.Convert((ElementCollection)obj);
             else if (obj is SectionFamily) return new SectionFamilyGoo((SectionFamily)obj);
             else if (obj is BuildUpFamily) return new BuildUpFamilyGoo((BuildUpFamily)obj);
             else if (obj is Node) return new NodeGoo((Node)obj, exInfo);
@@ -568,10 +575,10 @@ namespace Salamander.Grasshopper
             else if (typeof(Curve).IsAssignableFrom(type)) return typeof(RC.Curve);
             else if (typeof(LinearElement).IsAssignableFrom(type)) return typeof(LinearElementGoo);
             else if (typeof(PanelElement).IsAssignableFrom(type)) return typeof(PanelElementGoo);
-            else if (typeof(Element).IsAssignableFrom(type)) return typeof(LinearElementGoo); // TEMP!
+            else if (typeof(Element).IsAssignableFrom(type)) return typeof(ElementGoo);
             else if (typeof(LinearElementCollection).IsAssignableFrom(type)) return typeof(LinearElementGoo);
             else if (typeof(PanelElementCollection).IsAssignableFrom(type)) return typeof(PanelElementGoo);
-            else if (typeof(ElementCollection).IsAssignableFrom(type)) return typeof(LinearElementGoo);
+            else if (typeof(ElementCollection).IsAssignableFrom(type)) return typeof(ElementGoo);
             else if (typeof(SectionFamily).IsAssignableFrom(type)) return typeof(SectionFamilyGoo);
             else if (typeof(BuildUpFamily).IsAssignableFrom(type)) return typeof(BuildUpFamilyGoo);
             else if (typeof(Node).IsAssignableFrom(type)) return typeof(NodeGoo);
@@ -609,7 +616,7 @@ namespace Salamander.Grasshopper
         public override void AppendAdditionalMenuItems(ToolStripDropDown menu)
         {
             base.AppendAdditionalMenuItems(menu);
-            ToolStripMenuItem mItem = GH_DocumentObject.Menu_AppendItem(menu, "Auto-Bake To Main Model", new EventHandler(this.Menu_MainModelClicked), 
+            ToolStripMenuItem mItem = GH_DocumentObject.Menu_AppendItem(menu, "Write To Main Model", new EventHandler(this.Menu_MainModelClicked), 
                 true, GrasshopperManager.Instance.AutoBake);
             mItem.ToolTipText = 
                 "If checked, Salamander Grasshopper components will automatically bake to and update the primary Salamander model.  " + Environment.NewLine +

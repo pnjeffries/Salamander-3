@@ -82,10 +82,19 @@
                                            Visibility="{Binding Path=Selection.Count, Converter={StaticResource CountVisibilityConverter}}"
                                            HeaderIcon="{Binding Source={x:Static res:URIs.SectionFamilySmall}}">
                         <fb:PropertiesExpander.HeaderContent>
-                            <TextBlock Grid.Column="1" Text="{Binding Path=Section.Name, StringFormat='SECTION: {0}'}"
+                            <!--<TextBlock Grid.Column="1" Text="{Binding Path=Section.Name, StringFormat='SECTION: {0}'}"
                                 TextTrimming="CharacterEllipsis"
-                                               ></TextBlock>
-                        </fb:PropertiesExpander.HeaderContent>
+                                               ></TextBlock>-->
+                                <fb:ComboFieldControl Grid.Column="1"
+                                    Label="SECTION:" Value="{Binding Path=Section}"
+                                                   ItemsSource="{Binding Path=AvailableSections}">
+                                    <fb:ComboFieldControl.ItemTemplate>
+                                        <DataTemplate>
+                                            <TextBlock Text="{Binding Name}"/>
+                                        </DataTemplate>
+                                    </fb:ComboFieldControl.ItemTemplate>
+                                </fb:ComboFieldControl>
+                            </fb:PropertiesExpander.HeaderContent>
                         <local:SectionSelectionControl></local:SectionSelectionControl>
                     </fb:PropertiesExpander>
 

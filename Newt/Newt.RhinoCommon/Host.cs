@@ -38,6 +38,11 @@ namespace Salamander.RhinoCommon
         }
 
         /// <summary>
+        /// Private flag set to true once the splash screen has been displayed
+        /// </summary>
+        private bool _SplashShown = false;
+
+        /// <summary>
         /// The Rhino GUI Controller
         /// </summary>
         public RhinoGUIController GUI { get; private set; }
@@ -105,24 +110,34 @@ namespace Salamander.RhinoCommon
         /// (either this time or previously) and it is OK to proceed.  False
         /// if something went wrong during the initialisation process and whatever
         /// you were hoping to do should be aborted.</returns>
-        public static bool EnsureInitialisation()
+        public static bool EnsureInitialisation(bool quiet = false)
         {
             if (!Core.IsInitialised())
             {
-                Instance.PreInitialise();
+                Instance.PreInitialise(quiet);
                 Core.Initialise(Instance);
-                Instance.Initialise();
+                Instance.Initialise(quiet);
+            }
+            else if (!Instance._SplashShown && !quiet)
+            {
+                Instance._SplashShown = true;
+                Instance.GUI.ShowSplashScreen();
+                Instance.GUI.CreateHostDockPanel();
             }
             return true;
         }
 
-        private void PreInitialise()
+        private void PreInitialise(bool quiet)
         {
             GUI = new RhinoGUIController();
-            GUI.ShowSplashScreen();
+            if (!quiet)
+            {
+                GUI.ShowSplashScreen();
+                _SplashShown = true;
+            }
         }
 
-        private void Initialise()
+        private void Initialise(bool quiet)
         {
             
             Input = new RhinoInput();
@@ -136,7 +151,7 @@ namespace Salamander.RhinoCommon
 
             RhinoDoc.CloseDocument += RhinoDoc_CloseDocument;
 
-            GUI.CreateHostDockPanel(); //TEMP?
+            if (!quiet) GUI.CreateHostDockPanel(); //TEMP?
         }
 
         public bool Print(string message)

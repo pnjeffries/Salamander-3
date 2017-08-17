@@ -71,6 +71,7 @@
     <Compile Include="Core\IHost.cs" />
     <Compile Include="Core\GUIController.cs" />
     <Compile Include="Core\InputController.cs" />
+    <Compile Include="Display\ICoordinateSystemAvatar.cs" />
     <Compile Include="Display\ManualDisplayLayer.cs" />
     <Compile Include="Resources\IconResourceHelper.cs" />
     <Compile Include="Resources\URIs.cs" />
@@ -238,6 +239,15 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\PrattTruss.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\AngleSection.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\ChannelSection.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\GetAllIcon.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -11,13 +11,15 @@ using RC = Rhino.Geometry;
 using FB = Nucleus.Geometry;
 using Grasshopper.Kernel;
 using Nucleus.Actions;
+using Rhino;
+using Rhino.DocObjects;
 
 namespace Salamander.Grasshopper
 {
     /// <summary>
     /// Geometric Goo for Linear Elements
     /// </summary>
-    public class LinearElementGoo : GH_Goo<LinearElement>, ISalamander_Goo, IGH_PreviewData
+    public class LinearElementGoo : GH_Goo<LinearElement>, ISalamander_Goo, IGH_PreviewData, IGH_BakeAwareData
     {
         #region Properties
 
@@ -189,7 +191,12 @@ namespace Salamander.Grasshopper
 
         public override bool CastTo<Q>(ref Q target)
         {
-            if (typeof(Q).IsAssignableFrom(typeof(GH_Curve)))
+            if (typeof(Q).IsAssignableFrom(typeof(ElementGoo)))
+            {
+                target = (Q)(object)new ElementGoo(Value);
+                return true;
+            }
+            else if (typeof(Q).IsAssignableFrom(typeof(GH_Curve)))
             {
                 target = (Q)((object)new GH_Curve(FBtoRC.Convert(Value.Geometry)));
                 return true;
@@ -222,6 +229,21 @@ namespace Salamander.Grasshopper
                 return true;
             }
             return base.CastTo<Q>(ref target);
+        }
+
+        public bool BakeGeometry(RhinoDoc doc, ObjectAttributes att, out Guid obj_guid)
+        {
+            obj_guid = Guid.Empty;
+            if (GrasshopperManager.Instance.AutoBake)
+                return false;
+            else
+            {
+                var result = Core.Instance.ActiveDocument.Model.Create.CopyOf(Value, null, null);
+                obj_guid = Guid.Empty;
+                return true;
+                //TODO: Bake section
+            }
+
         }
 
         #endregion
