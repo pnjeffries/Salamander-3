@@ -8,12 +8,12 @@ using System.Threading.Tasks;
 
 namespace Salamander.Display
 {
-    public interface ILineAvatar : IAvatar
+    public interface ICurveAvatar : IAvatar
     {
         /// <summary>
-        /// The line geometry to be displayed
+        /// The curve geometry to be displayed
         /// </summary>
-        Line Line { set; }
+        Curve Curve { set; }
 
         /// <summary>
         /// Should the line be drawn dotted?

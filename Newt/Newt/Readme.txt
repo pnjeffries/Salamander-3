@@ -46,4 +46,6 @@ v0.1.3
 - New Element Coordinate Systems Display Layer.
 - Panel element orientation transferred to Robot.
 - Update options now displayed prior to updating a Robot file.
+- New 'Import Model' tool to merge two models together.
 - Bugfix: OrientateElementToVector was actually orientating towards a point.
+- Bugfix: Display refresh slowdown in shaded mode when orientation changed via the slider.

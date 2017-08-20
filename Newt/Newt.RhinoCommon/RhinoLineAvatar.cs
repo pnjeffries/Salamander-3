@@ -15,39 +15,46 @@ namespace Salamander.Rhino
     /// <summary>
     /// A Rhino line avatar
     /// </summary>
-    class RhinoLineAvatar : RhinoAvatar, ILineAvatar
+    class RhinoCurveAvatar : RhinoAvatar, ICurveAvatar
     {
         /// <summary>
         /// The line to draw
         /// </summary>
-        public RC.Line RenderLine { get; set; }
+        public RC.Curve RenderCurve { get; set; }
 
         /// <summary>
         /// Whether the line should be drawn dotted
         /// </summary>
         public bool Dotted { get; set; }
 
-        Line ILineAvatar.Line
+        Curve ICurveAvatar.Curve
         {
             set
             {
-                RenderLine = FBtoRC.ConvertToLine(value);
+                RenderCurve = FBtoRC.Convert(value);
             }
         }
 
-        public RhinoLineAvatar() { }
+        public RhinoCurveAvatar() { }
 
         public override bool Draw(RenderingParameters parameters)
         {
-            if (parameters is RhinoRenderingParameters)
+            if (parameters is RhinoRenderingParameters && RenderCurve != null)
             {
                 RhinoRenderingParameters rParams = (RhinoRenderingParameters)parameters;
-                if (Dotted) rParams.Display.DrawDottedLine(RenderLine, Material.Diffuse);
-                else rParams.Display.DrawLine(RenderLine, Material.Diffuse);
+                if (RenderCurve is RC.LineCurve)
+                {
+                    RC.Line line = ((RC.LineCurve)RenderCurve).Line;
+                    if (Dotted) rParams.Display.DrawDottedLine(line, Material.Diffuse);
+                    else rParams.Display.DrawLine(line, Material.Diffuse);
+                }
+                else
+                {
+                    rParams.Display.DrawCurve(RenderCurve, Material.Diffuse);
+                }
                 return true;
             }
             return false;
-
         }
     }
 }

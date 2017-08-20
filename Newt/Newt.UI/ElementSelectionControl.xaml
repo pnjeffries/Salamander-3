@@ -72,17 +72,25 @@
                                 <Expander Header="{Binding Path=Description}">
                                     <StackPanel>
                                         <fb:XYZControl
-                                    Label="Position:"
-                                    XValue="{Binding Path=X, Converter={StaticResource NaNToBlankConverter}}"
-                                    YValue="{Binding Path=Y, Converter={StaticResource NaNToBlankConverter}}"
-                                    ZValue="{Binding Path=Z, Converter={StaticResource NaNToBlankConverter}}"/>
+                                            Label="Position:"
+                                            XValue="{Binding Path=X, Converter={StaticResource NaNToBlankConverter}}"
+                                            YValue="{Binding Path=Y, Converter={StaticResource NaNToBlankConverter}}"
+                                            ZValue="{Binding Path=Z, Converter={StaticResource NaNToBlankConverter}}"/>
                                         <fb:TextFieldControl Label="Node:"
                                                      Value="{Binding Path=Node}"/>
                                         <fb:XYZControl
-                                    Label="Offset:"
-                                    XValue="{Binding Path=Offset_X, Converter={StaticResource NaNToBlankConverter}}"
-                                    YValue="{Binding Path=Offset_Y, Converter={StaticResource NaNToBlankConverter}}"
-                                    ZValue="{Binding Path=Offset_Z, Converter={StaticResource NaNToBlankConverter}}"/>
+                                            Label="Offset:"
+                                            XValue="{Binding Path=Offset_X, Converter={StaticResource NaNToBlankConverter}}"
+                                            YValue="{Binding Path=Offset_Y, Converter={StaticResource NaNToBlankConverter}}"
+                                            ZValue="{Binding Path=Offset_Z, Converter={StaticResource NaNToBlankConverter}}"/>
+                                        <fb:Bool6DFieldsControl
+                                            Label="Releases:"
+                                            XValue="{Binding Path=Release_X}"
+                                            YValue="{Binding Path=Release_Y}"
+                                            ZValue="{Binding Path=Release_Z}"
+                                            XXValue="{Binding Path=Release_XX}"
+                                            YYValue="{Binding Path=Release_YY}"
+                                            ZZValue="{Binding Path=Release_ZZ}"/>
                                     </StackPanel>
                                 </Expander>
                             </DataTemplate>

@@ -18,10 +18,10 @@ namespace Salamander.Display
         IMeshAvatar CreateMeshAvatar();
 
         /// <summary>
-        /// Create and return a new LineAvatar
+        /// Create and return a new CurveAvatar
         /// </summary>
         /// <returns></returns>
-        ILineAvatar CreateLineAvatar();
+        ICurveAvatar CreateCurveAvatar();
 
         /// <summary>
         /// Create and return new CoordinateSystemAvatar

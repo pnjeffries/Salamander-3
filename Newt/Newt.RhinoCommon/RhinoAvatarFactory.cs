@@ -14,9 +14,9 @@ namespace Salamander.Rhino
             return new RhinoCoordinateSystemAvatar();
         }
 
-        public ILineAvatar CreateLineAvatar()
+        public ICurveAvatar CreateCurveAvatar()
         {
-            return new RhinoLineAvatar();
+            return new RhinoCurveAvatar();
         }
 
         public IMeshAvatar CreateMeshAvatar()

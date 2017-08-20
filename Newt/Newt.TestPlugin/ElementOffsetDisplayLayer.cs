@@ -26,8 +26,8 @@ namespace Salamander.BasicTools
                 {
                     if (vertex.Node != null && !vertex.NodalOffset().IsZero())
                     {
-                        ILineAvatar lAv = CreateLineAvatar();
-                        lAv.Line = new Line(vertex.Node.Position, vertex.Position);
+                        ICurveAvatar lAv = CreateCurveAvatar();
+                        lAv.Curve = new Line(vertex.Node.Position, vertex.Position);
                         lAv.Dotted = true;
                         lAv.Brush = _Brush;
                         result.Add(lAv);
