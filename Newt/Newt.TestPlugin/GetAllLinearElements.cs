@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Nucleus.Actions;
 using Nucleus.Model;
+using Nucleus.Base;
 
 namespace Salamander.BasicTools
 {
@@ -26,6 +27,7 @@ namespace Salamander.BasicTools
         public override bool Execute(ExecutionInfo exInfo = null)
         {
             Elements = Model.Elements.LinearElements;
+            Elements.RemoveDeleted();
             return true;
         }
     }

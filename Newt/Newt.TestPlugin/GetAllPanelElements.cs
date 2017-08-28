@@ -1,4 +1,5 @@
 ﻿using Nucleus.Actions;
+using Nucleus.Base;
 using Nucleus.Model;
 using Salamander.Actions;
 using System;
@@ -26,6 +27,7 @@ namespace Salamander.BasicTools
         public override bool Execute(ExecutionInfo exInfo = null)
         {
             Elements = Model.Elements.PanelElements;
+            Elements.RemoveDeleted();
             return true;
         }
     }

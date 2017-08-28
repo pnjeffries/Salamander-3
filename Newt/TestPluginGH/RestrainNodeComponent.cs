@@ -19,7 +19,7 @@ namespace Salamander.BasicToolsGH
         }
 
         public RestrainNodeComponent()
-            : base("RestrainNode", "Restrain Node", "Restrain", SubCategories.Model)
+            : base("RestrainNode", "Restrain Node", "Restrain", SubCategories.Model, GH_Exposure.secondary)
         { }
 
         

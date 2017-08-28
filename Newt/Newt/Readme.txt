@@ -1,13 +1,22 @@
 ﻿Salamander 3: Next Engineering Workflow Tool
-Open Beta version 0.1.1
+Open Beta version 0.1.2
 © Paul Jeffries 2016-2017
 @pnjeffries
 
 Development supported by Ramboll Computational Design
 http://www.ramboll.co.uk/
 
+To report bugs and provide feedback, or to procure professional design services, contact paul.jeffries@ramboll.co.uk.
 
-Salamander is a structural modelling plugin for Rhino.
+
++++SALAMANDER 3+++
+
+Salamander is a structural modelling plugin hich links the modelling environment of Rhino and Grasshopper to the analytical capabilities of Autodesk Robot Structual Analysis and Oayss GSA.
+
+The tool is still early in development and is currently in open Beta for community testing and feedback.  Be aware that serious bugs may still be present and that the tool may undergo major alterations in future - at this early stage save file compatibility with future versions is not guaranteed.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
 
 +++INSTALLATION INSTRUCTIONS+++
 
@@ -39,13 +48,28 @@ v0.1.2 (Closed Beta)
 - New Pratt Truss Generation tool/component
 - Command to orientate a Linear Element to a direction vector
 
-v0.1.3
+v0.2.0 (Open Beta)
 - Create Channel and Angle commands/components added.
+- Display layers linked to object handle visibility.
 - Section profile parameter interface now shown in mm.
 - Element orientation tool now works for both linear and panel elements.
 - New Element Coordinate Systems Display Layer.
 - Panel element orientation transferred to Robot.
 - Update options now displayed prior to updating a Robot file.
 - New 'Import Model' tool to merge two models together.
+- Element releases storage and I/O added.
+- Element releases UI, GH component and display layer added.
+- .s3b made default savefile extension.
+- .s3a made component assembly extension.
+- British catalogue L and C sections added.
+- Update options exposed in Grasshopper.
+- Elements icon on selection panel changes depending on which object types are selected.
+- Tolerance for element-node disconnection implemented.
+- 'Get all' linear and panel element grasshopper components added.
 - Bugfix: OrientateElementToVector was actually orientating towards a point.
 - Bugfix: Display refresh slowdown in shaded mode when orientation changed via the slider.
+- Bugfix: Non-standard sections not being translated correctly from Robot import.
+- Bugfix: Non-sequential Robot nodes were causing geometry corruption on import.
+- Bugfix: GSA 2D elements were not being exported from meshes correctly.
+- Bugfix: Crash due to not-exactly-planar surfaces failing to convert correctly.
+- Bugfix: ID maps for imported Robot files not being correctly stored

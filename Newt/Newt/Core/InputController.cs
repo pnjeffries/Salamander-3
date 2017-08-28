@@ -1,6 +1,8 @@
 ﻿using Nucleus.Base;
 using Nucleus.Geometry;
 using Nucleus.Model;
+using Nucleus.UI;
+using Nucleus.Extensions;
 using Salamander.Actions;
 using System;
 using System.Collections.Generic;
@@ -225,6 +227,8 @@ namespace Salamander
                     value = EnterNodes("Enter " + description);
                 else if (inputType == typeof(Direction))
                     value = EnterDirection("Enter " + description);
+                else if (value != null && value is IAutoUIHostable)
+                    Core.Instance.Host.GUI.ShowFieldsDialog(description.CapitaliseFirst(), value);
                 else return false; //Input not recognised
             }
             catch (OperationCanceledException)

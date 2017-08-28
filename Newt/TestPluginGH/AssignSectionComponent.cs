@@ -8,18 +8,18 @@ using System.Threading.Tasks;
 
 namespace Salamander.BasicToolsGH
 {
-    public class SplitNodeComponent : SalamanderBaseComponent
+    public class AssignSectionComponent : SalamanderBaseComponent
     {
         public override Guid ComponentGuid
         {
             get
             {
-                return new Guid("{5A60889F-8AA2-4142-9EAD-EE360A77DDD2}");
+                return new Guid("{1AE47C54-E5FC-4BE9-8899-C58DCBD25179}");
             }
         }
 
-        public SplitNodeComponent()
-            : base("SplitNode", "Split Node", "Split", SubCategories.Model, GH_Exposure.secondary)
+        public AssignSectionComponent()
+            : base("AssignSection", "Assign Section", "AssignSect", SubCategories.Model, GH_Exposure.tertiary)
         { }
     }
 }

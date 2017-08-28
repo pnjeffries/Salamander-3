@@ -35,13 +35,16 @@ namespace Salamander.Rhino
             LinearElementCollection elements = Core.Instance.ActiveDocument.Model.Elements.LinearElements;
             foreach (LinearElement lEl in elements)
             {
-                Extrusion extrusion = FBtoRC.ConvertToExtrusion(lEl);
-                if (extrusion != null)
-                    RhinoOutput.BakeExtrusion(extrusion);
-                else
+                if (!lEl.IsDeleted)
                 {
-                    Brep brep = FBtoRC.ConvertToBrep(lEl);
-                    //if (brep != null) RhinoOutput.Bake
+                    Extrusion extrusion = FBtoRC.ConvertToExtrusion(lEl);
+                    if (extrusion != null)
+                        RhinoOutput.BakeExtrusion(extrusion);
+                    else
+                    {
+                        Brep brep = FBtoRC.ConvertToBrep(lEl);
+                        if (brep != null) RhinoOutput.Bake(brep);
+                    }
                 }
             }
             Host.Instance.Refresh();

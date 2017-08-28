@@ -29,7 +29,10 @@ namespace Newt.RobotIOPlugin
             Manual = true)]
         public FilePath FilePath { get; set; }
 
-        [ActionInput(3,
+        [ActionInput(3, "update options", Required = false)]
+        public RobotConversionOptions Options { get; set; } = new RobotConversionOptions(true);
+
+        [ActionInput(4,
            "trigger input.  This input stream will not be used directly, but exists to allow file export to be automatically triggered on update of this data stream.",
            Manual = false, Required = false)]
         public ActionTriggerInput Trigger { get; set; }
@@ -42,10 +45,7 @@ namespace Newt.RobotIOPlugin
             Result = false;
             if (FilePath.IsValid && Write)
             {
-                // TEMP...
-                RobotConversionOptions options = new RobotConversionOptions();
-                Core.Instance.Host.GUI.ShowFieldsDialog("Update options", options);
-                // ...Make better!
+                if (Options == null) Options = new RobotConversionOptions(true);
 
                 Document.Model.GenerateNodes(new NodeGenerationParameters());
                 var robot = new RobotController();
@@ -58,7 +58,7 @@ namespace Newt.RobotIOPlugin
                     idMap = new RobotIDMappingTable();
                     Document.IDMappings.Add(FilePath, idMap);
                 }
-                robot.UpdateRobotFromModel(FilePath, Model, ref idMap, options);
+                robot.UpdateRobotFromModel(FilePath, Model, ref idMap, Options);
                 //robot.WriteModelToRobot(FilePath, Document.Model, ref idMap);
                 robot.Close();
                 robot.Release();

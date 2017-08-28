@@ -25,14 +25,20 @@ namespace Salamander.BasicTools
             if (Node?.Vertices != null && Node.Vertices.Count > 1)
             {
                 Nodes = new NodeCollection();
-                Nodes.Add(Node);
+                //Nodes.Add(Node);
                 VertexCollection vertices = new VertexCollection(Node.Vertices);
-                for (int i = 1; i < vertices.Count; i++)
+                for (int i = 0; i < vertices.Count; i++)
                 {
-                    Node newNode = Model.Create.CopyOf(Node, exInfo);
                     Vertex v = vertices[i];
-                    if (v.Node == Node) v.Node = newNode;
-                    Nodes.Add(newNode);
+                    if (v.Node != null && v.Owner != null)
+                    {
+                        if (Nodes.Contains(v.Node))
+                        {
+                            Node newNode = Model.Create.CopyOf(Node);//, exInfo);
+                            v.Node = newNode;
+                        }
+                        Nodes.Add(v.Node);
+                    }
                 }
             }
             return true;

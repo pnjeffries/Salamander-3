@@ -175,5 +175,24 @@ namespace Salamander.Selection
                 else return null;
             }
         }
+
+        public string SelectionIcon
+        {
+            get
+            {
+                if (Selection.IsAllLinear)
+                {
+                    return Resources.URIs.LinearElementSmall;
+                }
+                else if (Selection.IsAllPanels)
+                {
+                    return Resources.URIs.PanelElementSmall;
+                }
+                else
+                {
+                    return Resources.URIs.ElementsSmall;
+                }
+            }
+        }
     }
 }

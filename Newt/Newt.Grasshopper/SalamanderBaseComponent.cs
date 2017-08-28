@@ -76,6 +76,19 @@ namespace Salamander.Grasshopper
             get { return null; }
         }
 
+        private GH_Exposure _Exposure = GH_Exposure.primary;
+
+        /// <summary>
+        /// The exposure of the component
+        /// </summary>
+        public override GH_Exposure Exposure
+        {
+            get
+            {
+                return _Exposure;
+            }
+        }
+
         /// <summary>
         /// Provides an Icon for the component.
         /// </summary>
@@ -140,7 +153,7 @@ namespace Salamander.Grasshopper
         /// <param name="category">The category of this component.  Controls which tab components will end up in.</param>
         /// <param name="subCategory">The subcategory for this component.  Controls which group the component will be in.</param>
         protected SalamanderBaseComponent(string commandName, string name, string nickname,
-            string subCategory, string category = CategoryName)
+            string subCategory, GH_Exposure exposure = GH_Exposure.primary, string category = CategoryName)
           : base()
         {
             CommandName = commandName;
@@ -153,6 +166,7 @@ namespace Salamander.Grasshopper
             Description = attributes.Description.CapitaliseFirst();
             Category = category;
             SubCategory = subCategory;
+            _Exposure = exposure;
             if (attributes.PreviewLayerType != null)
                 PreviewLayer = Activator.CreateInstance(attributes.PreviewLayerType) as DisplayLayer;
             PostConstructor();
@@ -260,6 +274,18 @@ namespace Salamander.Grasshopper
                         IGH_Param param = new Bool6DParam();
                         pManager.AddParameter(param, name, nickname, description, GH_ParamAccess.item);
                     }
+                    else if (pType == typeof(FilePath))
+                    {
+                        pManager.AddTextParameter(name, nickname, description, GH_ParamAccess.item);
+                    }
+                    else if (pType == typeof(VertexGeometry))
+                    {
+                        pManager.AddGeometryParameter(name, nickname, description, GH_ParamAccess.item);
+                    }
+                    else if (pType == typeof(VertexGeometryCollection))
+                    {
+                        pManager.AddGeometryParameter(name, nickname, description, ParamAccess(inputAtt));
+                    }
                     else if (pType == typeof(ActionTriggerInput))
                     {
                         pManager.AddGenericParameter(name, nickname, description, GH_ParamAccess.tree);
@@ -352,6 +378,14 @@ namespace Salamander.Grasshopper
                     {
                         IGH_Param param = new Bool6DParam();
                         pManager.AddParameter(param, name, nickname, description, GH_ParamAccess.item);
+                    }
+                    else if (pType == typeof(VertexGeometry))
+                    {
+                        pManager.AddGeometryParameter(name, nickname, description, GH_ParamAccess.item);
+                    }
+                    else if (pType == typeof(VertexGeometryCollection))
+                    {
+                        pManager.AddGeometryParameter(name, nickname, description, GH_ParamAccess.list);
                     }
                     else
                     {
@@ -515,6 +549,8 @@ namespace Salamander.Grasshopper
         {
             if (obj is Vector) return FBtoRC.Convert((Vector)obj);
             else if (obj is Curve) return FBtoRC.Convert((Curve)obj);
+            else if (obj is VertexGeometry) return FBtoRC.Convert((VertexGeometry)obj);
+            else if (obj is VertexGeometryCollection) return FBtoRC.Convert((VertexGeometryCollection)obj);
             else if (obj is LinearElement) return new LinearElementGoo((LinearElement)obj, exInfo);
             else if (obj is LinearElementCollection) return LinearElementGoo.Convert((LinearElementCollection)obj);
             else if (obj is PanelElement) return new PanelElementGoo((PanelElement)obj);
@@ -573,6 +609,8 @@ namespace Salamander.Grasshopper
             else if (type == typeof(Vector)) return typeof(RC.Point3d);
             else if (type == typeof(Angle)) return typeof(double);
             else if (typeof(Curve).IsAssignableFrom(type)) return typeof(RC.Curve);
+            else if (typeof(VertexGeometry).IsAssignableFrom(type)) return typeof(RC.GeometryBase);
+            else if (typeof(VertexGeometryCollection).IsAssignableFrom(type)) return typeof(RC.GeometryBase);
             else if (typeof(LinearElement).IsAssignableFrom(type)) return typeof(LinearElementGoo);
             else if (typeof(PanelElement).IsAssignableFrom(type)) return typeof(PanelElementGoo);
             else if (typeof(Element).IsAssignableFrom(type)) return typeof(ElementGoo);
@@ -616,7 +654,7 @@ namespace Salamander.Grasshopper
         public override void AppendAdditionalMenuItems(ToolStripDropDown menu)
         {
             base.AppendAdditionalMenuItems(menu);
-            ToolStripMenuItem mItem = GH_DocumentObject.Menu_AppendItem(menu, "Write To Main Model", new EventHandler(this.Menu_MainModelClicked), 
+            ToolStripMenuItem mItem = GH_DocumentObject.Menu_AppendItem(menu, "Modify Main Model", new EventHandler(this.Menu_MainModelClicked), 
                 true, GrasshopperManager.Instance.AutoBake);
             mItem.ToolTipText = 
                 "If checked, Salamander Grasshopper components will automatically bake to and update the primary Salamander model.  " + Environment.NewLine +

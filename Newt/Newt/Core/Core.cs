@@ -200,7 +200,7 @@ namespace Salamander
                 FileInfo[] files = pluginFolder.GetFiles();
                 foreach (FileInfo file in files)
                 {
-                    if (file.Extension == ".dll")
+                    if (file.Extension == ".s3a")
                     {
                         string filePath = file.FullName;
                         Assembly pluginAss = LoadAssemblyFromFile(filePath); //Assembly.LoadFrom(filePath);//
@@ -216,6 +216,11 @@ namespace Salamander
                         {
                             PrintLine("Warning: Could not load assembly '" + filePath + "'!");
                         }
+                    }
+                    else if (file.Extension == ".dll") //Load plugin libraries
+                    {
+                        string filePath = file.FullName;
+                        Assembly pluginAss = LoadAssemblyFromFile(filePath);
                     }
                 }
             }
@@ -339,7 +344,7 @@ namespace Salamander
         public bool SaveDocument(ModelDocument document)
         {
             string filters = Actions.GetExportFilters();
-            string filePath = UI.ShowSaveFileDialog("Enter filepath to write to", filters, null, Actions.ExportFilterIndex(".sal") + 1);
+            string filePath = UI.ShowSaveFileDialog("Enter filepath to write to", filters, null, Actions.ExportFilterIndex(".s3b") + 1);
             if (!string.IsNullOrEmpty(filePath)) return SaveDocument(filePath, document);
             else return false;
         }

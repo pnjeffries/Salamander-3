@@ -80,7 +80,7 @@ namespace Salamander.Grasshopper
 
         public override string ToString()
         {
-            return "Panel Element " + Value.NumericID;
+            return "Element " + Value.NumericID;
         }
 
         public static List<ElementGoo> Convert(ElementCollection collection)
@@ -134,6 +134,21 @@ namespace Salamander.Grasshopper
                 return true;
                 //TODO: Bake family
             }
+        }
+
+        public override bool CastTo<Q>(ref Q target)
+        {
+            if (typeof(Q).IsAssignableFrom(typeof(LinearElementGoo)) && Value is LinearElement)
+            {
+                target = (Q)(object)new LinearElementGoo((LinearElement)Value);
+                return true;
+            }
+            if (typeof(Q).IsAssignableFrom(typeof(PanelElementGoo)) && Value is PanelElement)
+            {
+                target = (Q)(object)new PanelElementGoo((PanelElement)Value);
+                return true;
+            }
+            return false;
         }
 
         #endregion

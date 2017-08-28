@@ -122,7 +122,7 @@ namespace Salamander.UI
         /// <returns></returns>
         public override bool? ShowFieldsDialog(string title, object options)
         {
-            var window = new AutoUIDialog(options);
+            var window = new AutoUIDialog(title, options);
             return window.ShowDialog();
         }
     }

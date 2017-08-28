@@ -58,14 +58,26 @@ namespace Salamander.Actions
         }
 
         /// <summary>
-        /// CommandName, Description, IconURI constructor
+        /// CommandName, Description, Icon constructor
         /// </summary>
         /// <param name="commandName"></param>
         /// <param name="description"></param>
-        /// <param name="iconURI"></param>
-        public ActionAttribute(string commandName, string description, string iconURI) : this(commandName, description)
+        /// <param name="iconBackground"></param>
+        public ActionAttribute(string commandName, string description, string iconBackground) : this(commandName, description)
         {
-            IconForeground = iconURI;
+            IconBackground = iconBackground;
+        }
+
+        /// <summary>
+        /// CommandName, Description, Icon (2-layer) constructor
+        /// </summary>
+        /// <param name="commandName"></param>
+        /// <param name="description"></param>
+        /// <param name="iconBackground"></param>
+        /// <param name="iconForeground"></param>
+        public ActionAttribute(string commandName, string description, string iconBackground, string iconForeground) : this(commandName, description, iconBackground)
+        {
+            IconForeground = iconForeground;
         }
 
         /// <summary>

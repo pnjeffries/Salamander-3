@@ -35,10 +35,13 @@ namespace Salamander.Rhino
             LinearElementCollection elements = Core.Instance.ActiveDocument.Model.Elements.LinearElements;
             foreach (LinearElement lEl in elements)
             {
-                RhinoMeshAvatar mAv = new RhinoMeshAvatar();
-                ((IMeshAvatar)mAv).Builder.AddSectionPreview(lEl);
-                ((IMeshAvatar)mAv).FinalizeMesh();
-                RhinoOutput.BakeMesh(mAv.RenderMesh);
+                if (!lEl.IsDeleted)
+                {
+                    RhinoMeshAvatar mAv = new RhinoMeshAvatar();
+                    ((IMeshAvatar)mAv).Builder.AddSectionPreview(lEl);
+                    ((IMeshAvatar)mAv).FinalizeMesh();
+                    RhinoOutput.BakeMesh(mAv.RenderMesh);
+                }
             }
             Host.Instance.Refresh();
             return Result.Success;

@@ -45,6 +45,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AddSupportPointAction.cs" />
+    <Compile Include="AssignBuildUp.cs" />
+    <Compile Include="AssignSection.cs" />
+    <Compile Include="CleanModel.cs" />
     <Compile Include="ElementReleasesDisplayLayer.cs" />
     <Compile Include="ImportModelAction.cs" />
     <Compile Include="CalculateGeometricPropertiesAction.cs" />
@@ -72,6 +75,7 @@
     <Compile Include="NewDocumentAction.cs" />
     <Compile Include="OrientateElementToVector.cs" />
     <Compile Include="PanelThicknessDisplayLayer.cs" />
+    <Compile Include="SetReleases.cs" />
     <Compile Include="SplitNode.cs" />
     <Compile Include="TextToSectionAction.cs" />
     <Compile Include="ExampleAction.cs" />
@@ -106,6 +110,10 @@
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>Copy "$(TargetPath)" "$(TargetDir)$(ProjectName).s3a"
+Erase "$(TargetPath)"</PostBuildEvent>
+  </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

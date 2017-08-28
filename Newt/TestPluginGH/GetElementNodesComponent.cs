@@ -1,4 +1,5 @@
-﻿using Salamander.Grasshopper;
+﻿using Grasshopper.Kernel;
+using Salamander.Grasshopper;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,7 +19,7 @@ namespace Salamander.BasicToolsGH
         }
 
         public GetElementNodesComponent()
-            : base("GetElementNodes", "Get Nodes", "Nodes", SubCategories.Model)
+            : base("GetElementNodes", "Get Nodes", "Nodes", SubCategories.Model, GH_Exposure.secondary)
         { }
 
     }

@@ -77,6 +77,11 @@ namespace Salamander.Resources
         public const string CircularSection = Base + "CircularSection.png";
 
         /// <summary>
+        /// The URI of the standard 'clean' icon
+        /// </summary>
+        public const string Clean = Base + "Clean.png";
+
+        /// <summary>
         /// The URI of the 'covert' icon
         /// </summary>
         public const string Convert = Base + "Convert.png";
@@ -100,6 +105,21 @@ namespace Salamander.Resources
         /// The URI of the standard element orientation icon
         /// </summary>
         public const string ElementOrientation = Base + "ElementOrientation.png";
+
+        /// <summary>
+        /// The URI of the standard element releases icon
+        /// </summary>
+        public const string ElementReleases = Base + "ElementReleases.png";
+
+        /// <summary>
+        /// The URI of the standard elements icon
+        /// </summary>
+        public const string Elements = Base + "Elements.png";
+
+        /// <summary>
+        /// The URI of the small elements icon
+        /// </summary>
+        public const string ElementsSmall = Base + "Elements_Small.png";
 
         /// <summary>
         /// The URI of the standard 'get all' icon overlay

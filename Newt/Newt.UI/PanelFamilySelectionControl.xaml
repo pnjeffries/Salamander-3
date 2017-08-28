@@ -6,8 +6,12 @@
              xmlns:local="clr-namespace:Salamander.UI"
              xmlns:fb="clr-namespace:Nucleus.WPF;assembly=Nucleus.WPF"
              xmlns:geo="clr-namespace:Nucleus.Geometry;assembly=Nucleus"
+             xmlns:converters="clr-namespace:Nucleus.WPF.Converters;assembly=Nucleus.WPF"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
+    <UserControl.Resources>
+        <converters:MillimetersConverter x:Key="MillimetersConverter"/>
+    </UserControl.Resources>
     <Grid>
         <StackPanel>
 
@@ -36,9 +40,9 @@
 
             <fb:SliderFieldControl Label="Thickness:"
             		ToolTip="The panel thickness"
-            		Value="{Binding Thickness}"
-            		Maximum="1.0" TickFrequency="0.001"
-            		Units="m"/>
+            		Value="{Binding Thickness, Converter={StaticResource MillimetersConverter}}"
+            		Maximum="1000" TickFrequency="1"
+            		Units="mm"/>
 
         </StackPanel>
     </Grid>

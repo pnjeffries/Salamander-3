@@ -12,7 +12,7 @@ using Nucleus.UI;
 namespace Salamander.BasicTools
 {
     [Action("MakeElements",
-            "Convert 'dumb' geometry into Salamander elements.",
+            "Convert 'dumb' curve, surface and mesh geometry into Salamander elements.",
         IconBackground = Resources.URIs.Convert)]
     public class MakeElementsAction : ModelDocumentActionBase
     {

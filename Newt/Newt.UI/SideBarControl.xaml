@@ -25,7 +25,7 @@
     <Grid Name="LayoutBase">
         <Grid.RowDefinitions>
             
-            <RowDefinition Height="140"/>
+            <RowDefinition Height="100"/>
             <RowDefinition Height="5"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="Auto"/>
@@ -43,7 +43,7 @@
                     <Expander IsExpanded="True" DataContext="{Binding Path=Actions.CurrentAction}"
                     >
                         <Expander.Header>
-                            <TextBlock Grid.Column="1" Text="{Binding Path=CommandName}"
+                            <TextBlock Grid.Column="1" Text="{Binding Path=CommandName, StringFormat='Active Command: {0}'}"
                                 TextTrimming="CharacterEllipsis"
                                                ></TextBlock>
                         </Expander.Header>
@@ -69,7 +69,8 @@
 
                     <fb:PropertiesExpander DataContext="{Binding Path=Selected.Nodes}"
                                            Visibility="{Binding Path=Selection.Count, Converter={StaticResource CountVisibilityConverter}}"
-                                           HeaderIcon="{Binding Source={x:Static res:URIs.NodeSmall}}">
+                                           HeaderIcon="{Binding Source={x:Static res:URIs.NodeSmall}}"
+                                           IsExpanded="True">
                         <fb:PropertiesExpander.HeaderContent>
                             <TextBlock Grid.Column="1" Text="{Binding Path=Selection, StringFormat='NODES: {0}'}"
                                 TextTrimming="CharacterEllipsis"
@@ -80,7 +81,8 @@
 
                     <fb:PropertiesExpander DataContext="{Binding Path=Selected.Elements}"
                                        Visibility="{Binding Path=Selection.Count, Converter={StaticResource CountVisibilityConverter}}"
-                                           HeaderIcon="{Binding Source={x:Static res:URIs.LinearElementSmall}}">
+                                           HeaderIcon="{Binding Path=SelectionIcon}"
+                                           IsExpanded="True">
                         
                         <fb:PropertiesExpander.HeaderContent>
                             <TextBlock Grid.Column="1" Text="{Binding Path=Selection, StringFormat='ELEMENTS: {0}'}"
@@ -92,7 +94,8 @@
 
                     <fb:PropertiesExpander DataContext="{Binding Path=Selected.SectionFamilies}"
                                            Visibility="{Binding Path=Selection.Count, Converter={StaticResource CountVisibilityConverter}}"
-                                           HeaderIcon="{Binding Source={x:Static res:URIs.SectionFamilySmall}}">
+                                           HeaderIcon="{Binding Source={x:Static res:URIs.SectionFamilySmall}}"
+                                           IsExpanded="True">
                         <fb:PropertiesExpander.HeaderContent>
                             <!--<TextBlock Grid.Column="1" Text="{Binding Path=Section.Name, StringFormat='SECTION: {0}'}"
                                 TextTrimming="CharacterEllipsis"
@@ -112,7 +115,8 @@
 
                     <fb:PropertiesExpander DataContext="{Binding Path=Selected.BuildUpFamilies}"
                                            Visibility="{Binding Path=Selection.Count, Converter={StaticResource CountVisibilityConverter}}"
-                                           HeaderIcon="{Binding Source={x:Static res:URIs.BuildUpFamilySmall}}">
+                                           HeaderIcon="{Binding Source={x:Static res:URIs.BuildUpFamilySmall}}"
+                                           IsExpanded="True">
                         <fb:PropertiesExpander.HeaderContent>
                             <TextBlock Grid.Column="1" Text="{Binding Path=Family.Name, StringFormat='BUILD-UP: {0}'}"
                                 TextTrimming="CharacterEllipsis"

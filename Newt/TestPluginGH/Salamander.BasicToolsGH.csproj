@@ -64,6 +64,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AssignBuildUpComponent.cs" />
+    <Compile Include="AssignSectionComponent.cs" />
     <Compile Include="Bool6DParam.cs" />
     <Compile Include="Bool6DValueList.cs" />
     <Compile Include="CalculateGeometricPropertiesComponent.cs" />
@@ -83,14 +85,17 @@
     <Compile Include="GetAllLinearElementsComponent.cs" />
     <Compile Include="GetAllPanelElements.cs" />
     <Compile Include="GetBuildUpComponent.cs" />
+    <Compile Include="MakeElementsComponent.cs" />
     <Compile Include="MergeNodesComponent.cs" />
     <Compile Include="OrientateElementToVectorComponent.cs" />
     <Compile Include="PanelElementParam.cs" />
     <Compile Include="PanelFamilyParam.cs" />
     <Compile Include="RHSProfileCatalogueValueList.cs" />
     <Compile Include="RobotUpdateComponent.cs" />
+    <Compile Include="RobotUpdateOptionsComponent.cs" />
     <Compile Include="SalamanderAutoBakeComponent.cs" />
     <Compile Include="SaveAsComponent.cs" />
+    <Compile Include="SetReleasesComponent.cs" />
     <Compile Include="SplitNodeComponent.cs" />
     <Compile Include="TextToSectionComponent.cs" />
     <Compile Include="DirectionValueList.cs" />

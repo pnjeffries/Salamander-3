@@ -30,6 +30,7 @@ namespace Salamander.RobotIOPlugin
             Document = new ModelDocument(FilePath, model);
             robot.Close();
             robot.Release();
+            Document.IDMappings[FilePath] = idMap;
             return true;
         }
     }

@@ -27,6 +27,16 @@ namespace Salamander.Rhino
         /// </summary>
         public bool Dotted { get; set; }
 
+        /// <summary>
+        /// Should an arrow head be drawn at the start of the curve?
+        /// </summary>
+        public bool ArrowStart { get; set; } = false;
+
+        /// <summary>
+        /// Should an arrow head be drawn at the end of the curve?
+        /// </summary>
+        public bool ArrowEnd { get; set; } = false;
+
         Curve ICurveAvatar.Curve
         {
             set
@@ -42,7 +52,7 @@ namespace Salamander.Rhino
             if (parameters is RhinoRenderingParameters && RenderCurve != null)
             {
                 RhinoRenderingParameters rParams = (RhinoRenderingParameters)parameters;
-                if (RenderCurve is RC.LineCurve)
+                if (RenderCurve is RC.LineCurve && Dotted) //?
                 {
                     RC.Line line = ((RC.LineCurve)RenderCurve).Line;
                     if (Dotted) rParams.Display.DrawDottedLine(line, Material.Diffuse);
@@ -50,8 +60,11 @@ namespace Salamander.Rhino
                 }
                 else
                 {
-                    rParams.Display.DrawCurve(RenderCurve, Material.Diffuse);
+                    rParams.Display.DrawCurve(RenderCurve, Material.Diffuse, 3);
                 }
+                double arrS = FBtoRC.Convert(0.3);
+                if (ArrowStart) rParams.Display.DrawArrowHead(RenderCurve.PointAtStart - arrS*RenderCurve.TangentAtStart, -RenderCurve.TangentAtStart, Material.Diffuse, 0, arrS);
+                if (ArrowEnd) rParams.Display.DrawArrowHead(RenderCurve.PointAtEnd + arrS * RenderCurve.TangentAtEnd, RenderCurve.TangentAtEnd, Material.Diffuse, 0, arrS);
                 return true;
             }
             return false;

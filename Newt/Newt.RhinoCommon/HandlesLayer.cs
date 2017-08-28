@@ -199,15 +199,15 @@ namespace Salamander.Rhino
                                 if (mO is LinearElement)
                                 {
                                     LinearElement lElement = ((LinearElement)mO).Duplicate();//Core.Instance.ActiveDocument?.Model?.Create.CopyOf((Element)mO, geometry);
-                                    if (geometry is Curve) lElement.Geometry = (Curve)geometry;
+                                    if (geometry is Curve) lElement.ReplaceGeometry((Curve)geometry);
                                     lElement.GenerateNodes(new NodeGenerationParameters());
                                     element = lElement;
                                 }
                                 if (mO is PanelElement)
                                 {
-                                    /*PanelElement pElement = ((PanelElement)mO).Duplicate();//Core.Instance.ActiveDocument?.Model?.Create.CopyOf((Element)mO, geometry);
-                                    if (geometry is Surface) pElement.Geometry = (Surface)geometry;
-                                    element = pElement;*/
+                                    PanelElement pElement = ((PanelElement)mO).Duplicate();//Core.Instance.ActiveDocument?.Model?.Create.CopyOf((Element)mO, geometry);
+                                    if (geometry is Surface) pElement.ReplaceGeometry((Surface)geometry);
+                                    element = pElement;
                                 }
                                 RhinoOutput.SetOriginalIDUserString(e.ObjectId);
                                 if (element != null)
@@ -286,11 +286,17 @@ namespace Salamander.Rhino
                 if (mObj != null)
                 {
                     RC.GeometryBase geometry = e.NewRhinoObject.Geometry;
-                    
+
                     if (mObj is Element)
                     {
                         Element element = (Element)mObj;
                         VertexGeometry vG = RCtoN.Convert(geometry);
+                        if (vG == null && geometry is RC.Curve)
+                        {
+                            // If curve not convertable, reduce to straight line:
+                            RC.Curve rCrv = (RC.Curve)geometry;
+                            vG = new Line(RCtoN.Convert(rCrv.PointAtStart), RCtoN.Convert(rCrv.PointAtEnd));
+                        }
                         if (vG != null)
                         {
                             _Replacing = true;

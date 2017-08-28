@@ -19,5 +19,15 @@ namespace Salamander.Display
         /// Should the line be drawn dotted?
         /// </summary>
         bool Dotted { get; set; }
+
+        /// <summary>
+        /// Should an arrow head be drawn at the start of the curve?
+        /// </summary>
+        bool ArrowStart { get; set; }
+
+        /// <summary>
+        /// Should an arrow head be drawn at the end of the curve?
+        /// </summary>
+        bool ArrowEnd { get; set; }
     }
 }
