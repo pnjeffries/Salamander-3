@@ -20,7 +20,7 @@ namespace Salamander.BasicTools
         public VertexGeometryCollection Geometry { get; set; }
 
         [AutoUI(1, Label = "Assign Families by Layer")]
-        [ActionInput(Manual = false, Persistant = true)]
+        [ActionInput(Manual = false, Persistant = true, Parametric = false)]
         public bool FamiliesFromLayers { get; set; } = true;
 
         [ActionOutput(1, "the created elements")]

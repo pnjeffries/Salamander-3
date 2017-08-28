@@ -20,6 +20,12 @@ namespace Salamander.Actions
         public bool Manual { get; set; } = true;
 
         /// <summary>
+        /// If true, the input will be made available as an input when this action is used as a parametric component.
+        /// Default = true
+        /// </summary>
+        public bool Parametric { get; set; } = true;
+
+        /// <summary>
         /// If true, this input *must* be set to a non-null value or the command will not be executed.
         /// Default = true
         /// </summary>

@@ -200,7 +200,7 @@ namespace Salamander.Grasshopper
             {
                 Type pType = pInfo.PropertyType;
                 ActionInputAttribute inputAtt = ActionInputAttribute.ExtractFrom(pInfo);
-                if (inputAtt != null)
+                if (inputAtt != null && inputAtt.Parametric)
                 {
                     string name = pInfo.Name;
                     string nickname = string.IsNullOrEmpty(inputAtt.ShortName) ? nC.Convert(pInfo.Name) : inputAtt.ShortName;
@@ -457,12 +457,16 @@ namespace Salamander.Grasshopper
             IList<PropertyInfo> inputs = ActionBase.ExtractInputParameters(ActionType);
             foreach (PropertyInfo pInfo in inputs)
             {
-                Type inputType = pInfo.PropertyType;
-                object inputData = GetInputData(pInfo.Name, inputType, DA);
                 ActionInputAttribute inputAtt = ActionInputAttribute.ExtractFrom(pInfo);
-                if (!inputAtt.Required || inputData != null)
-                    pInfo.SetValue(action, inputData, null);
-                else return false;
+
+                if (inputAtt.Parametric) //Ignore non-parametric inputs
+                {
+                    Type inputType = pInfo.PropertyType;
+                    object inputData = GetInputData(pInfo.Name, inputType, DA);
+                    if (!inputAtt.Required || inputData != null)
+                        pInfo.SetValue(action, inputData, null);
+                    else return false;
+                }
             }
             return true;
         }
