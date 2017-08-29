@@ -153,6 +153,7 @@ namespace Salamander.Rhino
             {
                 RhinoOutput.DeleteObject(guid);
             }
+            RhinoOutput.DeleteEmptySubLayers(BaseLayerName);
         }
 
         /// <summary>

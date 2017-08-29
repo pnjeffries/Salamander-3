@@ -52,7 +52,13 @@ namespace Salamander.Rhino.RobotImport
         protected override bool ReadFile(string filename, int index, RhinoDoc doc, FileReadOptions options)
         {
             Host.EnsureInitialisation(true);
-            return Core.Instance.OpenDocument(filename) != null;
+            var mdoc = Core.Instance.OpenDocument(filename);
+            if (mdoc != null)
+            {
+                Core.Instance.ActiveDocument = mdoc;
+            }
+            return mdoc != null;
+            
         }
 
         // You can override methods here to change the plug-in behavior on

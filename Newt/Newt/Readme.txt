@@ -1,17 +1,17 @@
 ﻿Salamander 3: Next Engineering Workflow Tool
-Open Beta version 0.1.2
+Open Beta version 0.2.0
 © Paul Jeffries 2016-2017
 @pnjeffries
 
 Development supported by Ramboll Computational Design
 http://www.ramboll.co.uk/
 
-To report bugs and provide feedback, or to procure professional design services, contact paul.jeffries@ramboll.co.uk.
+To report bugs and provide feedback, contact paul.jeffries@ramboll.co.uk.
 
 
 +++SALAMANDER 3+++
 
-Salamander is a structural modelling plugin hich links the modelling environment of Rhino and Grasshopper to the analytical capabilities of Autodesk Robot Structual Analysis and Oayss GSA.
+Salamander is a structural modelling plugin which links the modelling environment of Rhino and Grasshopper to the analytical capabilities of Autodesk Robot Structual Analysis and Oayss GSA.
 
 The tool is still early in development and is currently in open Beta for community testing and feedback.  Be aware that serious bugs may still be present and that the tool may undergo major alterations in future - at this early stage save file compatibility with future versions is not guaranteed.
 
@@ -73,3 +73,8 @@ v0.2.0 (Open Beta)
 - Bugfix: GSA 2D elements were not being exported from meshes correctly.
 - Bugfix: Crash due to not-exactly-planar surfaces failing to convert correctly.
 - Bugfix: ID maps for imported Robot files not being correctly stored
+- Bugfix: CHS section geometry not being correctly exported to GSA.
+- Bugfix: Files opened via the Rhino open menu were being read but not made active.
+
+v0.2.1
+- Unused Salamander layers now automatically deleted during clean-up.
