@@ -30,9 +30,9 @@ namespace Salamander.Rhino
                 if (_CoordinateSystem is CartesianCoordinateSystem)
                 {
                     CartesianCoordinateSystem cSystem = (CartesianCoordinateSystem)_CoordinateSystem;
-                    rParams.Display.DrawDirectionArrow(FBtoRC.Convert(cSystem.Origin), FBtoRC.ConvertVector(cSystem.X), System.Drawing.Color.LightGray);
-                    rParams.Display.DrawDirectionArrow(FBtoRC.Convert(cSystem.Origin), FBtoRC.ConvertVector(cSystem.Y), System.Drawing.Color.Gray);
-                    rParams.Display.DrawDirectionArrow(FBtoRC.Convert(cSystem.Origin), FBtoRC.ConvertVector(cSystem.Z), System.Drawing.Color.Orange);
+                    rParams.Display.DrawDirectionArrow(NtoRC.Convert(cSystem.Origin), NtoRC.ConvertVector(cSystem.X), System.Drawing.Color.LightGray);
+                    rParams.Display.DrawDirectionArrow(NtoRC.Convert(cSystem.Origin), NtoRC.ConvertVector(cSystem.Y), System.Drawing.Color.Gray);
+                    rParams.Display.DrawDirectionArrow(NtoRC.Convert(cSystem.Origin), NtoRC.ConvertVector(cSystem.Z), System.Drawing.Color.Orange);
                 }
                 return true;
             }

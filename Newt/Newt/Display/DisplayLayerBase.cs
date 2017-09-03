@@ -100,5 +100,15 @@ namespace Salamander.Display
             return result;
         }
 
+        /// <summary>
+        /// Shortcut method to create a new Label type avatar suitable for use in the host application.
+        /// </summary>
+        /// <returns></returns>
+        public ILabelAvatar CreateLabelAvatar()
+        {
+            return Core.Instance.Host.AvatarFactory.CreateLabelAvatar();
+        }
+
+
     }
 }

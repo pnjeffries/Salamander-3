@@ -37,7 +37,7 @@ namespace Salamander.Grasshopper
         {
             get
             {
-                return FBtoRC.Convert(Value.Geometry.BoundingBox);
+                return NtoRC.Convert(Value.Geometry.BoundingBox);
             }
         }
 
@@ -190,13 +190,13 @@ namespace Salamander.Grasshopper
             }
             else if (typeof(Q).IsAssignableFrom(typeof(GH_Surface)))
             {
-                var surface = FBtoRC.Convert(Value.Geometry) as Surface;
+                var surface = NtoRC.Convert(Value.Geometry) as Surface;
                 target = (Q)(object)new GH_Surface(surface);
                 return surface != null;
             }
             else if (typeof(Q).IsAssignableFrom(typeof(GH_Brep)))
             {
-                var surface = FBtoRC.Convert(Value.Geometry) as Brep;
+                var surface = NtoRC.Convert(Value.Geometry) as Brep;
                 target = (Q)(object)new GH_Brep(surface);
                 return surface != null;
             }

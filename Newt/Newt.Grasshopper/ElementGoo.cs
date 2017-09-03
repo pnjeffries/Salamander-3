@@ -37,7 +37,7 @@ namespace Salamander.Grasshopper
         {
             get
             {
-                return FBtoRC.Convert(Value.GetGeometry().BoundingBox);
+                return NtoRC.Convert(Value.GetGeometry().BoundingBox);
             }
         }
 

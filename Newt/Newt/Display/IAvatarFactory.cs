@@ -30,6 +30,12 @@ namespace Salamander.Display
         ICoordinateSystemAvatar CreateCoordinateSystemAvatar();
 
         /// <summary>
+        /// Create and return a new LabelAvatar
+        /// </summary>
+        /// <returns></returns>
+        ILabelAvatar CreateLabelAvatar();
+
+        /// <summary>
         /// Create and return a new PointAvatar
         /// </summary>
         /// <returns></returns>

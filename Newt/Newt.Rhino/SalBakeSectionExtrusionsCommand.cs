@@ -37,13 +37,24 @@ namespace Salamander.Rhino
             {
                 if (!lEl.IsDeleted)
                 {
-                    Extrusion extrusion = FBtoRC.ConvertToExtrusion(lEl);
+                    Extrusion extrusion = NtoRC.ConvertToExtrusion(lEl);
+                    Guid guid = Guid.Empty;
                     if (extrusion != null)
-                        RhinoOutput.BakeExtrusion(extrusion);
+                        guid = RhinoOutput.BakeExtrusion(extrusion);
                     else
                     {
-                        Brep brep = FBtoRC.ConvertToBrep(lEl);
-                        if (brep != null) RhinoOutput.Bake(brep);
+                        Brep brep = NtoRC.ConvertToBrep(lEl);
+                        if (brep != null) guid = RhinoOutput.Bake(brep);
+                    }
+                    if (guid != null)
+                    {
+                        RhinoOutput.SetObjectName(guid, lEl.Name);
+                        if (lEl.Family != null)
+                        {
+                            RhinoOutput.SetObjectUserString(guid, "Family", lEl.Family.Name);
+                            if (lEl.Family.GetPrimaryMaterial() != null) RhinoOutput.SetObjectUserString(guid, "Material", lEl.Family.GetPrimaryMaterial().Name);
+                            if (lEl.Family.Profile != null) RhinoOutput.SetObjectUserString(guid, "Profile", lEl.Family.Profile.ToString());
+                        }
                     }
                 }
             }

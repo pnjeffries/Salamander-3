@@ -72,6 +72,7 @@
     <Compile Include="Core\GUIController.cs" />
     <Compile Include="Core\InputController.cs" />
     <Compile Include="Display\ICoordinateSystemAvatar.cs" />
+    <Compile Include="Display\ILabelAvatar.cs" />
     <Compile Include="Display\ManualDisplayLayer.cs" />
     <Compile Include="Resources\IconResourceHelper.cs" />
     <Compile Include="Resources\URIs.cs" />
@@ -87,7 +88,7 @@
     <Compile Include="Display\DisplayLayerManager.cs" />
     <Compile Include="Display\IAvatar.cs" />
     <Compile Include="Display\IAvatarFactory.cs" />
-    <Compile Include="Display\ILineAvatar.cs" />
+    <Compile Include="Display\ICurveAvatar.cs" />
     <Compile Include="Display\IMeshAvatar.cs" />
     <Compile Include="Events\DocumentOpenedEventArgs.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

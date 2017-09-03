@@ -70,6 +70,7 @@
     <Compile Include="RhinoGUIController.cs" />
     <Compile Include="RhinoIDMappingTable.cs" />
     <Compile Include="RhinoInput.cs" />
+    <Compile Include="RhinoLabelAvatar.cs" />
     <Compile Include="RhinoLineAvatar.cs" />
     <Compile Include="RhinoMeshAvatar.cs" />
     <Compile Include="RhinoRenderingParameters.cs" />

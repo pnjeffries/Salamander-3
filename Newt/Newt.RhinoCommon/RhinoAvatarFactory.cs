@@ -19,9 +19,16 @@ namespace Salamander.Rhino
             return new RhinoCurveAvatar();
         }
 
+        public ILabelAvatar CreateLabelAvatar()
+        {
+            return new RhinoLabelAvatar();
+        }
+
         public IMeshAvatar CreateMeshAvatar()
         {
             return new RhinoMeshAvatar();
         }
+
+
     }
 }

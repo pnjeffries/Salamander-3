@@ -551,10 +551,10 @@ namespace Salamander.Grasshopper
         /// <returns></returns>
         protected object FormatForOutput(object obj, ExecutionInfo exInfo)
         {
-            if (obj is Vector) return FBtoRC.Convert((Vector)obj);
-            else if (obj is Curve) return FBtoRC.Convert((Curve)obj);
-            else if (obj is VertexGeometry) return FBtoRC.Convert((VertexGeometry)obj);
-            else if (obj is VertexGeometryCollection) return FBtoRC.Convert((VertexGeometryCollection)obj);
+            if (obj is Vector) return NtoRC.Convert((Vector)obj);
+            else if (obj is Curve) return NtoRC.Convert((Curve)obj);
+            else if (obj is VertexGeometry) return NtoRC.Convert((VertexGeometry)obj);
+            else if (obj is VertexGeometryCollection) return NtoRC.Convert((VertexGeometryCollection)obj);
             else if (obj is LinearElement) return new LinearElementGoo((LinearElement)obj, exInfo);
             else if (obj is LinearElementCollection) return LinearElementGoo.Convert((LinearElementCollection)obj);
             else if (obj is PanelElement) return new PanelElementGoo((PanelElement)obj);

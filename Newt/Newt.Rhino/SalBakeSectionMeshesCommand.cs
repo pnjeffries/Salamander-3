@@ -40,7 +40,18 @@ namespace Salamander.Rhino
                     RhinoMeshAvatar mAv = new RhinoMeshAvatar();
                     ((IMeshAvatar)mAv).Builder.AddSectionPreview(lEl);
                     ((IMeshAvatar)mAv).FinalizeMesh();
-                    RhinoOutput.BakeMesh(mAv.RenderMesh);
+                    Guid guid = RhinoOutput.BakeMesh(mAv.RenderMesh);
+
+                    if (guid != Guid.Empty)
+                    {
+                        RhinoOutput.SetObjectName(guid, lEl.Name);
+                        if (lEl.Family != null)
+                        {
+                            RhinoOutput.SetObjectUserString(guid, "Family", lEl.Family.Name);
+                            if (lEl.Family.GetPrimaryMaterial() != null) RhinoOutput.SetObjectUserString(guid, "Material", lEl.Family.GetPrimaryMaterial().Name);
+                            if (lEl.Family.Profile != null) RhinoOutput.SetObjectUserString(guid, "Profile", lEl.Family.Profile.ToString());
+                        }
+                    }
                 }
             }
             Host.Instance.Refresh();

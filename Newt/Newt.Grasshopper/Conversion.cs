@@ -32,7 +32,7 @@ namespace Salamander.Grasshopper
         private Conversion()
         {
             //Load default converters
-            LoadConverters(typeof(FBtoRC));
+            LoadConverters(typeof(NtoRC));
             LoadConverters(typeof(RCtoN));
         }
 

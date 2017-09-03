@@ -78,3 +78,4 @@ v0.2.0 (Open Beta)
 
 v0.2.1
 - Unused Salamander layers now automatically deleted during clean-up.
+- Baked extrusions and meshes now contain information about the element they represent in user text.
