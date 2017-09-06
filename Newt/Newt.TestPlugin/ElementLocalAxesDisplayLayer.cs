@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.ComponentModel;
+using Nucleus.Geometry;
 
 namespace Salamander.BasicTools
 {

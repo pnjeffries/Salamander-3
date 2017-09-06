@@ -50,7 +50,7 @@
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="RhinoCommon">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>C:\Users\Paul\Documents\Work\FreeBuild\FreeBuild\References\RhinoCommon.dll</HintPath>
+      <HintPath>..\..\..\Nucleus\Nucleus\References\RhinoCommon.dll</HintPath>
       <Private>False</Private>
     </Reference>
   </ItemGroup>

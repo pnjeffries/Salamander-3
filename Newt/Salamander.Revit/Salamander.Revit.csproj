@@ -32,10 +32,10 @@
   <ItemGroup>
     <Reference Include="RevitAPI, Version=16.0.0.0, Culture=neutral, processorArchitecture=AMD64">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\Salamander 2\Salamander_2\References\Revit\RevitAPI.dll</HintPath>
+      <HintPath>..\..\..\Nucleus\Nucleus\References\RevitAPI.dll</HintPath>
     </Reference>
     <Reference Include="RevitAPIUI">
-      <HintPath>..\..\..\Salamander 2\Salamander_2\References\Revit\RevitAPIUI.dll</HintPath>
+      <HintPath>..\..\..\Nucleus\Nucleus\References\RevitAPIUI.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />

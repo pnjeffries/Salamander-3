@@ -28,7 +28,9 @@ namespace Salamander.Rhino
             {
                 RhinoRenderingParameters rParams = (RhinoRenderingParameters)parameters;
                 var scrPt = rParams.Display.Viewport.WorldToClient(NtoRC.Convert(_Label.Position));
-                rParams.Display.Draw2dText(_Label.Text, System.Drawing.Color.Orange, scrPt, !_Label.HorizontalSetOut.IsEdge());
+                scrPt.X += 2;
+                scrPt.Y -= 2;
+                rParams.Display.Draw2dText(_Label.Text, System.Drawing.Color.GhostWhite, scrPt, !_Label.HorizontalSetOut.IsEdge());
                 return true;
             }
             return false;

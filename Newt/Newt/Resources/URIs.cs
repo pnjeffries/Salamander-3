@@ -97,6 +97,11 @@ namespace Salamander.Resources
         public const string Direction = Base + "Direction.png";
 
         /// <summary>
+        /// The URI of the standard Element ID icon
+        /// </summary>
+        public const string ElementID = Base + "ElementID.png";
+
+        /// <summary>
         /// The URI of the standard element offsets icon
         /// </summary>
         public const string ElementOffsets = Base + "ElementOffsets.png";
@@ -170,6 +175,11 @@ namespace Salamander.Resources
         /// The URI of the small Node icon
         /// </summary>
         public const string NodeSmall = Base + "Node_Small.png";
+
+        /// <summary>
+        /// The URI of the Node ID icon
+        /// </summary>
+        public const string NodeID = Base + "NodeID.png";
 
         /// <summary>
         /// The URI of the standard Node Support icon

@@ -36,7 +36,7 @@
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
     <Reference Include="RhinoCommon">
-      <HintPath>..\References\RhinoCommon.dll</HintPath>
+      <HintPath>..\..\..\Nucleus\Nucleus\References\RhinoCommon.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="System" />
