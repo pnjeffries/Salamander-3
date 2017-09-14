@@ -50,6 +50,8 @@
     <Compile Include="CleanModel.cs" />
     <Compile Include="ElementNumberDisplayLayer.cs" />
     <Compile Include="ElementReleasesDisplayLayer.cs" />
+    <Compile Include="GetElementSelection.cs" />
+    <Compile Include="GetNodeSelection.cs" />
     <Compile Include="ImportModelAction.cs" />
     <Compile Include="CalculateGeometricPropertiesAction.cs" />
     <Compile Include="CommandListAction.cs" />
@@ -77,6 +79,8 @@
     <Compile Include="NodeNumberDisplayLayer.cs" />
     <Compile Include="OrientateElementToVector.cs" />
     <Compile Include="PanelThicknessDisplayLayer.cs" />
+    <Compile Include="SaveElementSelection.cs" />
+    <Compile Include="SaveNodeSelection.cs" />
     <Compile Include="SetReleases.cs" />
     <Compile Include="SplitNode.cs" />
     <Compile Include="TextToSectionAction.cs" />

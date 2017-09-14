@@ -1,4 +1,5 @@
 ﻿using Nucleus.Base;
+using Nucleus.Model;
 using Salamander.Selection;
 using System;
 using System.Collections;
@@ -172,14 +173,22 @@ namespace Salamander.UI
                 {
                     foreach (object item in e.AddedItems)
                     {
-                        LinkedSelection.Add(item);
+                        //LinkedSelection.Add(item);
+                        if (item is ModelObject)
+                        {
+                            Core.Instance?.Selected?.Select((ModelObject)item);
+                        }
                     }
                 }
                 if (e.RemovedItems != null)
                 {
                     foreach (object item in e.RemovedItems)
                     {
-                        LinkedSelection.Remove(item);
+                        //LinkedSelection.Remove(item);
+                        if (item is ModelObject)
+                        {
+                            Core.Instance?.Selected?.Deselect((ModelObject)item);
+                        }
                     }
                 }
             }

@@ -85,6 +85,8 @@
     <Compile Include="GetAllLinearElementsComponent.cs" />
     <Compile Include="GetAllPanelElements.cs" />
     <Compile Include="GetBuildUpComponent.cs" />
+    <Compile Include="GetElementSelectionComponent.cs" />
+    <Compile Include="GetNodeSelectionComponent.cs" />
     <Compile Include="MakeElementsComponent.cs" />
     <Compile Include="MergeNodesComponent.cs" />
     <Compile Include="OrientateElementToVectorComponent.cs" />
@@ -95,6 +97,8 @@
     <Compile Include="RobotUpdateOptionsComponent.cs" />
     <Compile Include="SalamanderAutoBakeComponent.cs" />
     <Compile Include="SaveAsComponent.cs" />
+    <Compile Include="SaveElementSelectionComponent.cs" />
+    <Compile Include="SaveNodeSelectionComponent.cs" />
     <Compile Include="SetReleasesComponent.cs" />
     <Compile Include="SplitNodeComponent.cs" />
     <Compile Include="TextToSectionComponent.cs" />

@@ -15,7 +15,7 @@ namespace Salamander.BasicTools
     {
 
         public ElementReleasesDisplayLayer()
-            : base("Element Releases", "Show Element end and vertex releases", 5000, Resources.URIs.ElementReleases)
+            : base("Element Releases", "Show Element end and vertex releases", 3000, Resources.URIs.ElementReleases)
         { }
 
         public override IList<IAvatar> GenerateRepresentations(Element source)

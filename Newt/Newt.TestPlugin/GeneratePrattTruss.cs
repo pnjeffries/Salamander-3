@@ -66,8 +66,6 @@ namespace Salamander.BasicTools
             BottomChordElements = new LinearElementCollection();
             PostElements = new LinearElementCollection();
             BracingElements = new LinearElementCollection();
-            TopChordNodes = new NodeCollection();
-            BottomChordNodes = new NodeCollection();
 
             if (TopChord != null && BottomChord != null)
             {
@@ -122,6 +120,12 @@ namespace Salamander.BasicTools
                     BottomChordElements.GenerateNodes(new NodeGenerationParameters());
                     PostElements.GenerateNodes(new NodeGenerationParameters());
                     BracingElements.GenerateNodes(new NodeGenerationParameters());
+
+                    TopChordNodes = TopChordElements.GetNodes();
+                    BottomChordNodes = BottomChordElements.GetNodes();
+
+                    TopChordNodes.ClearAttachedData();
+                    BottomChordNodes.ClearAttachedData();
                 }
             }
 

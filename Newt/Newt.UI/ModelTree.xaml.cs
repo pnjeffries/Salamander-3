@@ -57,7 +57,7 @@ namespace Salamander.UI
 
         private void Sets_DoubleClick(object sender, MouseButtonEventArgs e)
         {
-            Core.Instance.UI.ShowDataTable("Sets", Core.Instance.ActiveDocument.Model.Sets, null); //TODO!
+            Core.Instance.UI.ShowDataTable("Sets", Core.Instance.ActiveDocument.Model.Sets, Core.Instance.Selected.Sets);
         }
 
         private void Loads_DoubleClick(object sender, MouseButtonEventArgs e)

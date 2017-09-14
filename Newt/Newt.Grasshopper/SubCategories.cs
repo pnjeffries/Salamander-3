@@ -19,6 +19,8 @@ namespace Salamander.Grasshopper
 
         public static readonly string BuildUp = " Build-Up";
 
+        public static readonly string Sets = " Sets";
+
         public static readonly string Export = "Export";
         
     }

@@ -28,6 +28,8 @@ RHINO PLUGIN:
 - (Optional) Do the same for Salamander.Rhino.Import.rhp and Salamander.Rhino.Export if you want to be able to save and load Salamander files through the normal save/load interface.
 - Type in and run the Rhino command 'SalToolbar' to show the Salamander toolbar.
 
+NOTE: If a previous version of the plugin is already installed you may find that Rhino cannot install the new version as the 'ID is already in use'.  If this happens, simply close and re-open Rhino and drag the plugin file in again - Rhino will have remembered that you tried to load the new version and will defer loading the previous one to make installation possible.
+
 GRASSHOPPER PLUGIN:
 - Open Grasshopper, drag and drop Salamander.BasicTools_GH.gha into the window to install the Grasshopper components.  The Grasshopper components rely on the main Rhino plugin so you MUST install that first and keep all files as they come out of the .zip - *do not* move the .gha into the Grasshopper libraries folder on its own as this will break the link.
 
@@ -81,3 +83,15 @@ v0.2.1
 - Baked extrusions and meshes now contain information about the element they represent in user text.
 - Node Numeric ID display layer.
 - Element Numeric ID display layer.
+- Section profile set-out included in exported offsets.
+- Section Family selection combo-box disabled when viewing selected element(s) section.
+- Saved element sets implemented.
+- Saved node sets implemented.
+- Sets table added to model tree.
+- Get Element/Node Selection commands/components added.
+- Layering order changed to circumvent Rhino pipeline linetype bug
+- Rhino toolbar: Set command buttons added.
+- Rhino toolbar: Section Family creation commands grouped onto separate toolbar.
+- Bugfix: Rhino layer names were not being renamed when the bound family name was updated.
+- Bugfix: Multiple element selection for manual command inputs not working correctly.
+- Bugfix: Generate Pratt Truss component was not outputting the top and bottom node collections.

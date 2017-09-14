@@ -159,18 +159,22 @@ namespace Salamander.RhinoCommon
             //gO.GeometryFilter = ObjectType.Curve;
             gO.SetCommandPrompt(prompt);
             if (gO.GetMultiple(1,0) == GetResult.Cancel) throw new OperationCanceledException("Operation cancelled by user");
+            var result = new ElementCollection();
             foreach (ObjRef rObj in gO.Objects())
             {
-                var result = new ElementCollection();
                 if (Host.Instance.Handles.Links.ContainsSecond(rObj.ObjectId))
                 {
                     Guid guid = Host.Instance.Handles.Links.GetFirst(rObj.ObjectId);
-                    Element element = Core.Instance.ActiveDocument?.Model?.Elements[guid];
-                    if (element != null) result.Add(element);
-                }
-                return result;
+
+                    ElementTable elementTable = Core.Instance.ActiveDocument?.Model?.Elements;
+                    if (elementTable != null && elementTable.Contains(guid))
+                    {
+                        Element element = Core.Instance.ActiveDocument?.Model?.Elements[guid];
+                        if (element != null) result.Add(element);
+                    }
+                } 
             }
-            return null;
+            return result;
         }
 
         public override LinearElement EnterLinearElement(string prompt = "Enter linear element")

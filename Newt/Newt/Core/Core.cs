@@ -5,6 +5,7 @@ using Salamander.Display;
 using Salamander.Events;
 using Salamander.Selection;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -399,6 +400,31 @@ namespace Salamander
         public static bool PrintLine(string message)
         {
             return Instance.Host.Print(message + Environment.NewLine);
+        }
+
+        /// <summary>
+        /// Add the specified list of objects to the current selection
+        /// </summary>
+        /// <param name="items"></param>
+        /// <param name="clear"></param>
+        /// <param name="inHost"></param>
+        /// <returns></returns>
+        public bool Select(IList items, bool clear = false, bool inHost = true)
+        {
+            bool result = false;
+            if (clear) Selected.Clear();
+            foreach (object item in items)
+            {
+                if (item is ModelObject)
+                {
+                    if (Selected.Select((ModelObject)item)) result = true;
+                }
+            }
+            if (inHost)
+            {
+                if (Host.Select(items, clear)) result = true;
+            }
+            return result;
         }
 
         #endregion

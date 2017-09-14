@@ -1,6 +1,7 @@
 ﻿using Nucleus.Base;
 using Salamander.Display;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -58,6 +59,13 @@ namespace Salamander
         /// <param name="unique"></param>
         /// <returns></returns>
         bool IsHidden(Unique unique);
+
+        /// <summary>
+        /// Select the specified set of items in the host environment, if possible
+        /// </summary>
+        /// <param name="items">A list of items to select</param>
+        /// <returns></returns>
+        bool Select(IList items, bool clear = false );
 
         #endregion
     }

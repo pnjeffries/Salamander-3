@@ -30,7 +30,7 @@ namespace Salamander.UI
             InitializeComponent();
 
             manager.UIInitialisationCompleted += HandlesInitialisationCompleted;
-            _Timer = new DispatcherTimer();
+            _Timer = new DispatcherTimer(DispatcherPriority.Normal);
             _Timer.Interval = new TimeSpan(TimeSpan.TicksPerSecond/100);
             _Timer.Tick += _Timer_Tick;
             _Timer.Start();

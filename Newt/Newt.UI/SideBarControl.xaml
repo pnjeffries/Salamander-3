@@ -20,6 +20,7 @@
             <converters:NullOrEmptyVisibilityConverter x:Key="NullOrEmptyVisibilityConverter"/>
             <converters:VisibilityConverter x:Key="VisibilityConverter"/>
             <converters:AllZeroVisibilityConverter x:Key="AllZeroVisibilityConverter"/>
+            <converters:IsZeroConverter x:Key="IsZeroConverter"/>
         </ResourceDictionary>
     </UserControl.Resources>
     <Grid Name="LayoutBase">
@@ -102,7 +103,10 @@
                                                ></TextBlock>-->
                                 <fb:ComboFieldControl Grid.Column="1"
                                     Label="SECTION:" Value="{Binding Path=Section}"
-                                                   ItemsSource="{Binding Path=AvailableSections}">
+                                                   ItemsSource="{Binding Path=AvailableSections}"
+                                                      IsEnabled="{Binding Path=DataContext.Selected.Elements.Selection.Count,
+                                    Converter={StaticResource IsZeroConverter}, 
+                                    RelativeSource={RelativeSource AncestorType={x:Type StackPanel}}}">
                                     <fb:ComboFieldControl.ItemTemplate>
                                         <DataTemplate>
                                             <TextBlock Text="{Binding Name}"/>

@@ -45,6 +45,11 @@ namespace Salamander.Selection
         /// </summary>
         public MaterialSelection Materials { get; } = new MaterialSelection();
 
+        /// <summary>
+        /// The currently selected saved object sets
+        /// </summary>
+        public SetSelection Sets { get; } = new SetSelection();
+
         #endregion
 
         #region Constructors
@@ -77,6 +82,7 @@ namespace Salamander.Selection
             else if (mObject is SectionFamily) return SectionFamilies.Add((SectionFamily)mObject);
             else if (mObject is BuildUpFamily) return BuildUpFamilies.Add((BuildUpFamily)mObject);
             else if (mObject is Material) return Materials.Add((Material)mObject);
+            else if (mObject is ModelObjectSetBase) return Sets.Add((ModelObjectSetBase)mObject);
             else return false;
         }
 
@@ -94,6 +100,7 @@ namespace Salamander.Selection
             else if (mObject is SectionFamily) return SectionFamilies.Remove((SectionFamily)mObject);
             else if (mObject is BuildUpFamily) return BuildUpFamilies.Remove((BuildUpFamily)mObject);
             else if (mObject is Material) return Materials.Remove((Material)mObject);
+            else if (mObject is ModelObjectSetBase) return Sets.Remove((ModelObjectSetBase)mObject);
             else return false;
         }
 
@@ -108,6 +115,7 @@ namespace Salamander.Selection
             SectionFamilies.Clear();
             BuildUpFamilies.Clear();
             Materials.Clear();
+            Sets.Clear();
         }
 
         #endregion

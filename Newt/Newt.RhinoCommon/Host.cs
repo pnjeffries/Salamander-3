@@ -9,6 +9,9 @@ using Salamander.Rhino;
 using Salamander.Events;
 using Salamander.Display;
 using Nucleus.Base;
+using System.Collections;
+using Nucleus.Model;
+using Nucleus.Rhino;
 
 namespace Salamander.RhinoCommon
 {
@@ -208,6 +211,19 @@ namespace Salamander.RhinoCommon
         public bool IsHidden(Unique unique)
         {
             return Handles.IsHandleHidden(unique);
+        }
+
+        public bool Select(IList items, bool clear = false)
+        {
+            if (clear) RhinoOutput.UnselectAllObjects();
+            foreach (object item in items)
+            {
+                if (item is ModelObject)
+                {
+                    Handles.SelectHandle((ModelObject)item);
+                }
+            }
+            return true;
         }
 
         #endregion

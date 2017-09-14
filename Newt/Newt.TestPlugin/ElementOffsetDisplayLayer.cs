@@ -15,7 +15,7 @@ namespace Salamander.BasicTools
     {
         private DisplayBrush _Brush = ColourBrush.White;
 
-        public ElementOffsetDisplayLayer() : base("Element Offsets", "Display the links between nodes and element vertices", 3000, Resources.URIs.ElementOffsets) { Visible = true; }
+        public ElementOffsetDisplayLayer() : base("Element Offsets", "Display the links between nodes and element vertices", 5000, Resources.URIs.ElementOffsets) { Visible = true; }
 
         public override IList<IAvatar> GenerateRepresentations(Element source)
         {

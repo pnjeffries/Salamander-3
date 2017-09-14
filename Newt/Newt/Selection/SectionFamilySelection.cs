@@ -22,7 +22,6 @@ namespace Salamander.Selection
                 if (Selection.Count > 0)
                 {
                     SectionFamily result = Selection.Last();
-                    //if (result.StructuralModifiers == null) result.StructuralModifiers = new ProfileStructuralModifiers();
                     return result;
                 }
                 else return null;

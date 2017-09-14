@@ -131,6 +131,30 @@ namespace Salamander.Rhino
         }
 
         /// <summary>
+        /// Get the GUID of the handle (if any) linked to the specified model object
+        /// </summary>
+        /// <param name="mObj"></param>
+        /// <returns></returns>
+        protected Guid LinkedHandle(ModelObject mObj)
+        {
+            if (Links.ContainsFirst(mObj.GUID))
+            {
+                Guid handleID = Links.GetSecond(mObj.GUID);
+                return handleID;
+            }
+            return Guid.Empty;
+        }
+
+        public void SelectHandle(ModelObject mObj)
+        {
+            Guid hID = LinkedHandle(mObj);
+            if (hID != Guid.Empty)
+            {
+                RhinoOutput.SelectObject(hID);
+            }
+        }
+
+        /// <summary>
         /// Is the handle of this object (if it has one) currently hidden in Rhino?
         /// </summary>
         /// <param name="unique"></param>
@@ -412,7 +436,7 @@ namespace Salamander.Rhino
         {
             if (modified is Family && e.PropertyName == "Name" && e is PropertyChangedEventArgsExtended)
             {
-                var e2 = (PropertyChangedEventArgsExtended)e;
+               var e2 = (PropertyChangedEventArgsExtended)e;
                 string oldName = ((string)e2.OldValue).Trim();
                 if (string.IsNullOrWhiteSpace(oldName)) oldName = "_UNNAMED_";
                 string newName = ((string)e2.NewValue).Trim();

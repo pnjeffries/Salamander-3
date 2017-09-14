@@ -127,6 +127,11 @@ namespace Salamander.Resources
         public const string ElementsSmall = Base + "Elements_Small.png";
 
         /// <summary>
+        /// The URI of the element set icon
+        /// </summary>
+        public const string ElementSet = Base + "ElementSet.png";
+
+        /// <summary>
         /// The URI of the standard 'get all' icon overlay
         /// </summary>
         public const string GetAllIcon = Base + "GetAllIcon.png";
@@ -170,6 +175,11 @@ namespace Salamander.Resources
         /// The URI of the standard Node icon
         /// </summary>
         public const string Node = Base + "Node.png";
+
+        /// <summary>
+        /// The URI of the Node Set icon
+        /// </summary>
+        public const string NodeSet = Base + "NodeSet.png";
 
         /// <summary>
         /// The URI of the small Node icon
@@ -250,6 +260,16 @@ namespace Salamander.Resources
         /// The URI of the standard linear element 3D section preview icon
         /// </summary>
         public const string SectionPreview = Base + "SectionPreview.png";
+
+        /// <summary>
+        /// The URI of the standard background icon for sets
+        /// </summary>
+        public const string Set = Base + "Set.png";
+
+        /// <summary>
+        /// The URI of the small icon for sets
+        /// </summary>
+        public const string SetSmall = Base + "SetSmall.png";
 
         /// <summary>
         /// The URI of the Splash Screen background image

@@ -101,6 +101,7 @@
     <Compile Include="Selection\SectionFamilyDummy.cs" />
     <Compile Include="Selection\SectionFamilySelection.cs" />
     <Compile Include="Selection\SelectionViewModel.cs" />
+    <Compile Include="Selection\SetSelection.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Undo\" />
@@ -265,6 +266,14 @@
   <ItemGroup>
     <Resource Include="Resources\ElementID.png" />
     <Resource Include="Resources\NodeID.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Set.png" />
+    <Resource Include="Resources\SetSmall.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\ElementSet.png" />
+    <Resource Include="Resources\NodeSet.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

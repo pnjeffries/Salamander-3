@@ -206,9 +206,10 @@
                               MouseDoubleClick="Nodes_DoubleClick"
                               Tag="{x:Static res:URIs.NodeSmall}"/>
 
-                <!--<TreeViewItem Header="Sets"
+                <TreeViewItem Header="Sets"
                               DataContext="{Binding Path=Sets}"
-                              MouseDoubleClick="Sets_DoubleClick"/>-->
+                              MouseDoubleClick="Sets_DoubleClick"
+                              Tag="{x:Static res:URIs.SetSmall}"/>
 
                 <!--<TreeViewItem Header="Loads"
                               DataContext="{Binding Path=Loads}"
