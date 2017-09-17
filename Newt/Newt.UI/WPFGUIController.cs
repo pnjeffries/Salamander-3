@@ -125,5 +125,18 @@ namespace Salamander.UI
             var window = new AutoUIDialog(title, options);
             return window.ShowDialog();
         }
+
+        /// <summary>
+        /// Show a dialog that allows the user to enter text, optionally selecting a string
+        /// from a list of suggestions.
+        /// </summary>
+        /// <param name="title"></param>
+        /// <param name="text"></param>
+        /// <param name="suggestions"></param>
+        /// <returns></returns>
+        public override bool? ShowTextDialog(string title, ref string text, IList<string> suggestions = null)
+        {
+            return TextComboDialog.Show(title, ref text, suggestions);
+        }
     }
 }

@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Nucleus.Actions;
 using Nucleus.Model;
+using Nucleus.Base;
 
 namespace Salamander.BasicTools
 {
@@ -13,8 +14,14 @@ namespace Salamander.BasicTools
         IconBackground = Resources.URIs.ElementSet, IconForeground = Resources.URIs.GetIcon)]
     public class GetElementSelection : ModelDocumentActionBase
     {
-        [ActionInput(1, "the name of the element set to retrieve")]
+        [ActionInput(1, "the name of the element set to retrieve",
+            SuggestionsPath = "NameSuggestions")]
         public string Name { get; set; }
+
+        public IList<string> NameSuggestions
+        {
+            get { return Model?.Sets?.ElementSets.GetNamesList(); }
+        }
 
         [ActionOutput(1, "the elements in the set")]
         public ElementCollection Elements { get; set; }

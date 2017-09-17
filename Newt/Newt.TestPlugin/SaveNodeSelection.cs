@@ -1,4 +1,5 @@
-﻿using Nucleus.Model;
+﻿using Nucleus.Base;
+using Nucleus.Model;
 using Salamander.Actions;
 using System;
 using System.Collections.Generic;
@@ -15,8 +16,14 @@ namespace Salamander.BasicTools
         [ActionInput(1, "the node selection to be saved as a Set", OneByOne = false)]
         public NodeCollection Nodes { get; set; }
 
-        [ActionInput(2, "the name of the set to be saved under.  This will replace any existing node set with the same name.")]
+        [ActionInput(2, "the name of the set to be created/overwritten",
+            SuggestionsPath = "NameSuggestions")]
         public string Name { get; set; }
+
+        public IList<string> NameSuggestions
+        {
+            get { return Model?.Sets?.NodeSets.GetNamesList(); }
+        }
 
         public override bool Execute(Nucleus.Actions.ExecutionInfo exInfo = null)
         {

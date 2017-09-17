@@ -74,6 +74,20 @@ namespace Salamander
         public abstract string EnterString(string prompt = "Enter string", string defaultValue = null);
 
         /// <summary>
+        /// Prompt the user to enter a string with a selectable set of suggestions
+        /// </summary>
+        /// <param name="suggestions">A list of suggestions</param>
+        /// <param name="prompt">The prompt message to be displayed</param>
+        /// <param name="defaultValue">The default value which will be suggested to the user</param>
+        /// <returns></returns>
+        public virtual string EnterString(IList<string> suggestions, string prompt = "Enter string", string defaultValue = null)
+        {
+            string text = defaultValue;
+            if (Core.Instance.Host.GUI.ShowTextDialog(prompt, ref text, suggestions) != true) throw new OperationCanceledException("Operation cancelled by user");
+            return text;
+        }
+
+        /// <summary>
         /// Prompt the user to select a point in 3D space
         /// </summary>
         /// <param name="prompt">The prompt message to be displayed</param>
@@ -190,7 +204,21 @@ namespace Salamander
                 else if (inputType == typeof(int)) //Integer
                     value = EnterInteger("Enter " + description, (int)value);
                 else if (inputType == typeof(string)) //String
-                    value = EnterString("Enter " + description, (string)value);
+                {
+                    if (inputAttributes?.SuggestionsPath != null)
+                    {
+                        IList<string> suggestions = null;
+                        if (action != null)
+                        {
+                            var pI = action.GetType().GetProperty(inputAttributes.SuggestionsPath);
+                            if (pI != null)
+                                suggestions = pI.GetValue(action) as IList<string>;
+                        }
+                        value = EnterString(suggestions, "Enter " + description, (string)value);
+                    }
+                    else
+                        value = EnterString("Enter " + description, (string)value);
+                }
                 else if (inputType == typeof(FilePath)) //FilePath
                 {
                     string filter = "All Files  (*.*)|*.*";

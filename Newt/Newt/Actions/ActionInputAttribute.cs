@@ -58,6 +58,12 @@ namespace Salamander.Actions
         public bool OneByOne { get; set; } = true;
 
         /// <summary>
+        /// The path of the property on the action which will supply a list of suggested values for
+        /// the user to choose from.  Used to enable text input with selection from a set of options.
+        /// </summary>
+        public string SuggestionsPath { get; set; } = null;
+
+        /// <summary>
         /// Constructor
         /// </summary>
         public ActionInputAttribute()

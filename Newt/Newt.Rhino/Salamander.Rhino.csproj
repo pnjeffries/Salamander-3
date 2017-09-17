@@ -58,6 +58,7 @@
     <Compile Include="SalBakePanelsCommand.cs" />
     <Compile Include="SalBakeSectionExtrusionsCommand.cs" />
     <Compile Include="SalBakeSectionMeshesCommand.cs" />
+    <Compile Include="SalCommand2Command.cs" />
     <Compile Include="SalCommandCommand.cs" />
     <Compile Include="SalExportCommand.cs" />
     <Compile Include="SalOpenCommand.cs" />

@@ -71,7 +71,7 @@ namespace Salamander.Actions
                         if (dialogOptions == null) dialogOptions = new List<PropertyInfo>();
                         dialogOptions.Add(input);
                     }
-                    else if (!Core.Instance.Host.Input.EnterInput(input.PropertyType, ref value, input) && inputAtt.Required) return false;
+                    else if (!Core.Instance.Host.Input.EnterInput(input.PropertyType, ref value, input, this) && inputAtt.Required) return false;
                 }
                 input.SetValue(this, value, null);
             }

@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Nucleus.Actions;
 using Nucleus.Model;
+using Nucleus.Base;
 
 namespace Salamander.BasicTools
 {
@@ -16,8 +17,14 @@ namespace Salamander.BasicTools
         [ActionInput(1, "the element selection to be saved as a Set", OneByOne = false)]
         public ElementCollection Elements { get; set; }
 
-        [ActionInput(2, "the name of the set to be saved under.  This will replace any existing element set with the same name.")]
+        [ActionInput(2, "the name of the set to be created/overwritten",
+            SuggestionsPath = "NameSuggestions")]
         public string Name { get; set; }
+
+        public IList<string> NameSuggestions
+        {
+            get { return Model?.Sets?.ElementSets.GetNamesList(); }
+        }
 
         public override bool Execute(ExecutionInfo exInfo = null)
         {

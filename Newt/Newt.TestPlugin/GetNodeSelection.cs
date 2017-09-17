@@ -1,4 +1,5 @@
 ﻿using Nucleus.Actions;
+using Nucleus.Base;
 using Nucleus.Model;
 using Salamander.Actions;
 using System;
@@ -13,8 +14,14 @@ namespace Salamander.BasicTools
         IconBackground = Resources.URIs.NodeSet, IconForeground = Resources.URIs.GetIcon)]
     public class GetNodeSelection : ModelDocumentActionBase
     {
-        [ActionInput(1, "the name of the node set to retrieve")]
+        [ActionInput(1, "the name of the node set to retrieve",
+            SuggestionsPath = "NameSuggestions")]
         public string Name { get; set; }
+
+        public IList<string> NameSuggestions
+        {
+            get { return Model?.Sets?.NodeSets.GetNamesList(); }
+        }
 
         [ActionOutput(1, "the nodes in the set")]
         public NodeCollection Nodes { get; set; }

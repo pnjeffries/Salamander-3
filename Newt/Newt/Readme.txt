@@ -78,7 +78,7 @@ v0.2.0 (Open Beta)
 - Bugfix: CHS section geometry not being correctly exported to GSA.
 - Bugfix: Files opened via the Rhino open menu were being read but not made active.
 
-v0.2.1
+v0.3.0
 - Unused Salamander layers now automatically deleted during clean-up.
 - Baked extrusions and meshes now contain information about the element they represent in user text.
 - Node Numeric ID display layer.
@@ -89,7 +89,9 @@ v0.2.1
 - Saved node sets implemented.
 - Sets table added to model tree.
 - Get Element/Node Selection commands/components added.
-- Layering order changed to circumvent Rhino pipeline linetype bug
+- Sets export to Robot Groups and GSA Lists.
+- Layering order changed to circumvent Rhino pipeline linetype bug.
+- New text dialog enabling auto-complete and drop-down selection for command and set names.
 - Rhino toolbar: Set command buttons added.
 - Rhino toolbar: Section Family creation commands grouped onto separate toolbar.
 - Bugfix: Rhino layer names were not being renamed when the bound family name was updated.
