@@ -39,10 +39,13 @@ namespace Salamander.BasicTools
             Result = false;
             if (FilePath.IsValid && Write)
             {
+                Print("Writing GWA File... ");
                 Document.Model.GenerateNodes(new NodeGenerationParameters());
                 var serialiser = new ModelDocumentTextSerialiser(new GWAFormat(), new GWAContext());
                 serialiser.CustomHeader = "! This file was originally written by Salamander 3 on " + DateTime.Now;
                 Result = Document.SaveAs(FilePath, serialiser);
+                if (Result) PrintLine("File saved to '" + FilePath + "'.");
+                else PrintLine("Writing failed!");
             }
             return true;
         }

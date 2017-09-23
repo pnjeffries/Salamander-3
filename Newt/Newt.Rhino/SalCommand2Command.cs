@@ -36,9 +36,10 @@ namespace Salamander.Rhino
                     Core.Instance.Actions.GetCommandList(),
                     "Enter Salamander command", 
                     Core.Instance.Actions.LastCommand?.GetCommandName());
+                Core.Instance.Execute(command);
             }
             catch { }
-            Core.Instance.Execute(command);
+            
             return Result.Success;
         }
     }

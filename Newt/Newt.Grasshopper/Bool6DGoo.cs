@@ -61,5 +61,15 @@ namespace Salamander.Grasshopper
         public Bool6DGoo(Bool6D value) : base(value) { }
 
         #endregion
+
+        #region Methods
+
+        public override bool CastFrom(object source)
+        {
+            Value = new Bool6D(source.ToString());
+            return true;
+        }
+
+        #endregion
     }
 }

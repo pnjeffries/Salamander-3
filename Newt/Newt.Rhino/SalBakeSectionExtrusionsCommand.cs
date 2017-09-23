@@ -46,7 +46,7 @@ namespace Salamander.Rhino
                         Brep brep = NtoRC.ConvertToBrep(lEl);
                         if (brep != null) guid = RhinoOutput.Bake(brep);
                     }
-                    if (guid != null)
+                    if (guid != Guid.Empty)
                     {
                         RhinoOutput.SetObjectName(guid, lEl.Name);
                         if (lEl.Family != null)

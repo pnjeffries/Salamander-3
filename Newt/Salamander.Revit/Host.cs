@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -98,6 +99,11 @@ namespace Salamander.Revit
         }
 
         public bool IsHidden(Unique unique)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool Select(IList items, bool clear = false)
         {
             throw new NotImplementedException();
         }

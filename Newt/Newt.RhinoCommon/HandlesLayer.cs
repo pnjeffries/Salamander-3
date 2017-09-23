@@ -224,7 +224,27 @@ namespace Salamander.Rhino
                                 if (mO is LinearElement)
                                 {
                                     LinearElement lElement = ((LinearElement)mO).Duplicate();//Core.Instance.ActiveDocument?.Model?.Create.CopyOf((Element)mO, geometry);
-                                    if (geometry is Curve) lElement.ReplaceGeometry((Curve)geometry);
+                                    bool split = false;
+                                    if (geometry is Curve)
+                                    {
+                                        Curve newCrv = (Curve)geometry;
+                                        if (lElement.Geometry != null)
+                                        {
+                                            Curve oldCrv = lElement.Geometry;
+                                            if (newCrv.Length < oldCrv.Length)
+                                            {
+                                                //TODO: Check end point distance to curve
+                                                double maxDist = 0;
+                                                foreach (Vertex v in newCrv.Vertices)
+                                                {
+                                                    double dist = oldCrv.DistanceToSquared(v.Position);
+                                                    if (dist > maxDist) maxDist = dist;
+                                                }
+                                                if (maxDist < Tolerance.Distance) split = true;
+                                            }
+                                        }
+                                        lElement.ReplaceGeometry(newCrv, split);
+                                    }
                                     lElement.GenerateNodes(new NodeGenerationParameters());
                                     element = lElement;
                                 }

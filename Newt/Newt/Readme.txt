@@ -1,7 +1,9 @@
 ﻿Salamander 3: Next Engineering Workflow Tool
-Open Beta version 0.2.0
+Open Beta version 0.3.0
 © Paul Jeffries 2016-2017
 @pnjeffries
+
+Built using the .Nucleus framework also by Paul Jeffries.
 
 Development supported by Ramboll Computational Design
 http://www.ramboll.co.uk/
@@ -28,7 +30,7 @@ RHINO PLUGIN:
 - (Optional) Do the same for Salamander.Rhino.Import.rhp and Salamander.Rhino.Export if you want to be able to save and load Salamander files through the normal save/load interface.
 - Type in and run the Rhino command 'SalToolbar' to show the Salamander toolbar.
 
-NOTE: If a previous version of the plugin is already installed you may find that Rhino cannot install the new version as the 'ID is already in use'.  If this happens, simply close and re-open Rhino and drag the plugin file in again - Rhino will have remembered that you tried to load the new version and will defer loading the previous one to make installation possible.
+NOTE: If a previous version of the plugin is already installed from a different location you may find that Rhino cannot install the new version as the 'ID is already in use'.  If this happens, simply close and re-open Rhino and drag the plugin file in again - Rhino will have remembered that you tried to load the new version and will defer loading the previous one to make installation possible.  It may be worth deleting any previous versions of Salamander altogether to avoid the possibility of library clashes.
 
 GRASSHOPPER PLUGIN:
 - Open Grasshopper, drag and drop Salamander.BasicTools_GH.gha into the window to install the Grasshopper components.  The Grasshopper components rely on the main Rhino plugin so you MUST install that first and keep all files as they come out of the .zip - *do not* move the .gha into the Grasshopper libraries folder on its own as this will break the link.
@@ -78,7 +80,7 @@ v0.2.0 (Open Beta)
 - Bugfix: CHS section geometry not being correctly exported to GSA.
 - Bugfix: Files opened via the Rhino open menu were being read but not made active.
 
-v0.3.0
+v0.3.0 (Selection sets)
 - Unused Salamander layers now automatically deleted during clean-up.
 - Baked extrusions and meshes now contain information about the element they represent in user text.
 - Node Numeric ID display layer.
@@ -92,8 +94,21 @@ v0.3.0
 - Sets export to Robot Groups and GSA Lists.
 - Layering order changed to circumvent Rhino pipeline linetype bug.
 - New text dialog enabling auto-complete and drop-down selection for command and set names.
+- Grasshopper Bool6Ds can now be cast from directions and strings.
 - Rhino toolbar: Set command buttons added.
 - Rhino toolbar: Section Family creation commands grouped onto separate toolbar.
 - Bugfix: Rhino layer names were not being renamed when the bound family name was updated.
 - Bugfix: Multiple element selection for manual command inputs not working correctly.
 - Bugfix: Generate Pratt Truss component was not outputting the top and bottom node collections.
+
+v0.3.1 (Hotfix)
+- Element release interface now indicates when multiple element selections have differing values.
+- Distribution now contains a 'Samples' folder, containing truss example definition from 'Basic Grasshopper' tutorial.
+- Bugfix: Crash bug when multiple elements with different orientation angles are selected together.
+
+v0.3.2
+- Splitting elements will keep releases etc. only at the original ends.
+- Data tables initial sizing logic changed.
+- Set textual definition parsing implemented.  Set definitions made editable.
+- Bugfix: Baking elements to extrusions failed when any element without a valid profile existed in the model.
+- Bugfix: Crash when re-opening a data table previously closed in edit mode with an invalid entry.

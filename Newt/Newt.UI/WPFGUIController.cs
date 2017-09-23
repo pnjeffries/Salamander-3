@@ -75,7 +75,7 @@ namespace Salamander.UI
         /// <param name="data"></param>
         public override void ShowDataTable(string name, IEnumerable data, SelectionViewModel selection = null)
         {
-            CreateContainerWindow(name, new DataTable(data, selection));
+            CreateContainerWindow(name, new DataTable(data, selection), 640, 480);
         }
 
         /// <summary>
@@ -84,13 +84,32 @@ namespace Salamander.UI
         /// <param name="title"></param>
         /// <param name="contents"></param>
         /// <returns></returns>
-        private static Window CreateContainerWindow(string title, FrameworkElement contents)
+        protected static Window CreateContainerWindow(string title, FrameworkElement contents)
         {
             Window window = new Window();
             window.Content = contents;
             window.Title = title;
             window.Topmost = true;
             window.SizeToContent = SizeToContent.WidthAndHeight;
+            window.Show();
+            return window;
+        }
+
+        /// <summary>
+        /// Create a window as a container for another FrameworkElement
+        /// </summary>
+        /// <param name="title"></param>
+        /// <param name="contents"></param>
+        /// <returns></returns>
+        protected static Window CreateContainerWindow(string title, FrameworkElement contents, double width, double height)
+        {
+            Window window = new Window();
+            window.Content = contents;
+            window.Title = title;
+            window.Topmost = true;
+            window.SizeToContent = SizeToContent.Manual;
+            window.Width = width;
+            window.Height = height;
             window.Show();
             return window;
         }

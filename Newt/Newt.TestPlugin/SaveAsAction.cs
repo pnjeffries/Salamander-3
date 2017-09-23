@@ -36,7 +36,10 @@ namespace Salamander.BasicTools
         {
             if (Write)
             {
+                Print("Saving file... ");
                 Result = Document.SaveAs(FilePath);
+                if (Result) PrintLine("Saved to '" + FilePath + "'");
+                else PrintLine("Saving Failed!");
             }
             return true;
         }

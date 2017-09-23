@@ -9,11 +9,7 @@
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
     <UserControl.Resources>
-        <ResourceDictionary>
-            <!--<ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="pack://application:,,,/Salamander_UI;component/Resources.xaml"></ResourceDictionary>
-            </ResourceDictionary.MergedDictionaries>-->
-        </ResourceDictionary>
+        
     </UserControl.Resources>
     <Grid Name="LayoutRoot" Background="DarkGray">
         <fb:AutoUIDataGrid x:Name="DataGrid" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
@@ -26,7 +22,7 @@
                 <DataTemplate>
                     <TextBlock Text="{Binding RelativeSource={RelativeSource Mode=FindAncestor, 
                                       AncestorType={x:Type DataGridRow}}, 
-                                      Path=Item.NumericID}"/>
+                                      Path=Item.NumericID}" Padding="5,2,10,2"/>
                 </DataTemplate>
             </fb:AutoUIDataGrid.RowHeaderTemplate>
             <fb:AutoUIDataGrid.RowStyle>
@@ -38,6 +34,20 @@
                     </Style.Triggers>
                 </Style>
             </fb:AutoUIDataGrid.RowStyle>
+            <!--<fb:AutoUIDataGrid.CellStyle>
+                <Style TargetType="DataGridCell">
+                    <Setter Property="Padding" Value="4"/>
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="{x:Type DataGridCell}">
+                                <Border Padding="{TemplateBinding Padding}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" SnapsToDevicePixels="True">
+                                    <ContentPresenter SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
+                                </Border>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+            </fb:AutoUIDataGrid.CellStyle>-->
         </fb:AutoUIDataGrid>
     </Grid>
 </UserControl>
