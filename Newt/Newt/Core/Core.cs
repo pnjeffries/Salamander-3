@@ -263,9 +263,9 @@ namespace Salamander
             result.Model.Materials.Add(Material.Aluminium);
             result.Model.Materials.Add(Material.Glass);
             result.Model.Materials.Add(Material.Wood);
-            result.Model.LoadCases.Add(new LoadCase("Dead"));
-            result.Model.LoadCases.Add(new LoadCase("Superimposed Dead"));
-            result.Model.LoadCases.Add(new LoadCase("Live"));
+            result.Model.LoadCases.Add(new LoadCase("Dead", LoadCaseType.Dead));
+            result.Model.LoadCases.Add(new LoadCase("Superimposed Dead", LoadCaseType.Dead));
+            result.Model.LoadCases.Add(new LoadCase("Live", LoadCaseType.Live));
 
             return result;
         }

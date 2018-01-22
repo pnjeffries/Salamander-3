@@ -58,5 +58,10 @@ namespace Salamander.BasicToolsGH
         {
 
         }
+
+        public override void CreateAttributes()
+        {
+            base.m_attributes = new CatalogueValueListAttributes(this);
+        }
     }
 }

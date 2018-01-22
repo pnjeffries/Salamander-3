@@ -151,12 +151,11 @@ namespace Salamander.Actions
         }
 
         /// <summary>
-        /// Execute a loaded action with the given command name
+        /// Get an action by its command name, without executing it
         /// </summary>
-        /// <param name="commandName">The name of the command to be executed.
-        /// If left blank, the last executed command will be run again.</param>
+        /// <param name="commandName"></param>
         /// <returns></returns>
-        public IAction ExecuteAction(string commandName, object context = null)
+        public IAction GetAction(string commandName)
         {
             IAction action = null;
             if (LoadedActions.ContainsKey(commandName))
@@ -169,7 +168,41 @@ namespace Salamander.Actions
             {
                 Core.PrintLine("Newt command '" + commandName + "' is not loaded or is not available within this host environment.");
             }
+            return action;
+        }
+
+        /// <summary>
+        /// Execute a loaded action with the given command name
+        /// </summary>
+        /// <param name="commandName">The name of the command to be executed.
+        /// If left blank, the last executed command will be run again.</param>
+        /// <returns></returns>
+        public IAction ExecuteAction(string commandName, object context = null)
+        {
+            IAction action = GetAction(commandName);   
             return ExecuteAction(action, context);
+        }
+
+        /// <summary>
+        /// Execute a loaded action with the given command name, passing in the specified
+        /// arguments as input parameters
+        /// </summary>
+        /// <param name="commandName"></param>
+        /// <param name="inputs"></param>
+        /// <returns></returns>
+        public IAction ExecuteActionWithInputs(string commandName, params object[] inputs)
+        {
+            IAction action = GetAction(commandName);
+            if (action != null)
+            {
+                var parameters = action.InputParameters();
+                for (int i = 0; i < Math.Min(parameters.Count, inputs.Length); i++)
+                {
+                    var pInfo = parameters[i];
+                    pInfo.SetValue(action, inputs[i]);
+                }
+            }
+            return ExecuteAction(action, null, false, false);
         }
 
         /// <summary>

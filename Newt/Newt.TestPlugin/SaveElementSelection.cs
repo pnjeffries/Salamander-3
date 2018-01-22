@@ -12,7 +12,7 @@ namespace Salamander.BasicTools
 {
     [Action("SaveElementSelection", "Save a selection of elements as a named element set",
         IconBackground = Resources.URIs.ElementSet, IconForeground = Resources.URIs.AddIcon)]
-    public class SaveElementSelection : ModelDocumentActionBase
+    public class SaveElementSelection : ModelActionBase
     {
         [ActionInput(1, "the element selection to be saved as a Set", OneByOne = false)]
         public ElementCollection Elements { get; set; }

@@ -13,7 +13,7 @@ namespace Salamander.BasicTools
 {
     [Action("MergeCoincidentNodes", Description = "Merge together any nodes which are within tolerance of each other.",
         IconBackground = Resources.URIs.MergeNodes)]
-    public class MergeCoincidentNodes : ModelDocumentActionBase
+    public class MergeCoincidentNodes : ModelActionBase
     {
         [ActionInput(1, "the nodes to tested for coincidence and (potentially) to be merged together")]
         public NodeCollection Nodes { get; set; }

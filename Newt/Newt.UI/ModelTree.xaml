@@ -211,13 +211,20 @@
                               MouseDoubleClick="Sets_DoubleClick"
                               Tag="{x:Static res:URIs.SetSmall}"/>
 
-                <!--<TreeViewItem Header="Loads"
-                              DataContext="{Binding Path=Loads}"
-                              MouseDoubleClick="Loads_DoubleClick"/>
+                <TreeViewItem Header="Loading"
+                              Tag="{x:Static res:URIs.LoadSmall}">
 
-                <TreeViewItem Header="Load Cases"
+                    <TreeViewItem Header="Load Cases"
                               DataContext="{Binding Path=LoadCases}"
-                              MouseDoubleClick="LoadCases_DoubleClick"/>-->
+                              MouseDoubleClick="LoadCases_DoubleClick"
+                              Tag="{x:Static res:URIs.CaseSmall}"/>
+
+                    <TreeViewItem Header="Loads"
+                              DataContext="{Binding Path=Loads}"
+                              MouseDoubleClick="Loads_DoubleClick"
+                              Tag="{x:Static res:URIs.LoadSmall}"/>
+
+                </TreeViewItem>
 
             </TreeViewItem>
             

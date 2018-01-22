@@ -1,5 +1,5 @@
 ﻿Salamander 3: Next Engineering Workflow Tool
-Open Beta version 0.3.0
+Open Beta version 0.3.2
 © Paul Jeffries 2016-2017
 @pnjeffries
 
@@ -110,5 +110,30 @@ v0.3.2
 - Splitting elements will keep releases etc. only at the original ends.
 - Data tables initial sizing logic changed.
 - Set textual definition parsing implemented.  Set definitions made editable.
+- Set definitions may now include references (by name) to other sets of a compatible type.
+- New 'Generate Simple Frame' command/component.
+- 'Generate Pratt Truss' icon redone.
+- Reading basic data from GSA GWA format text files added.
+- Basic ETABS exporter implemented.
+- Node support display now semi-transparent.
+- Node regeneration will now merge coincident unattached nodes.
+- Subwindows now owned by main Rhino window.
 - Bugfix: Baking elements to extrusions failed when any element without a valid profile existed in the model.
 - Bugfix: Crash when re-opening a data table previously closed in edit mode with an invalid entry.
+- Bugfix: Pre-export cleanup was deleting unconnected nodes erroneously.
+
+v0.4.0
+- Loading interface framework added.
+- Creation commands/components added for node loads, gravity loads, linear and panel element UDLs and thermal loads.
+- Export of above load types to GWA added.
+- Reading and writing of loads from/to Robot implemented.
+- Loading display layer added.
+- New 'Create Column' command/component.
+- New 'Generate Beam Framing' command/component.
+- Section catalogue drop-down organised into sub-groups.
+- European I and H sections added to the default profile catalogue.
+- Angle and channel catalogue Grasshopper components added.
+- Grasshopper section profile catalogue components now auto-categorise profiles by prefix (where necessary).
+- Text to Section component now outputs the interior void curve of the created profile geometry.
+- CreatePanelElement command/component now allows manual drawing of panel edges via points.
+- Original panel creation by filling a curve is available via new CreatePanelElementInCurve command/component.

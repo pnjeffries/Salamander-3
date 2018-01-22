@@ -8,18 +8,19 @@ using Nucleus.Actions;
 using Nucleus.Geometry;
 using Nucleus.Model;
 using Nucleus.UI;
+using Salamander.Display;
 
 namespace Salamander.BasicTools
 {
     [Action("CreatePanelElement",
-        Description = "Create a new Panel Element from a border curve",
+        Description = "Create a new Panel Element from a set of edge vertices.",
         IconBackground = Resources.URIs.PanelElement,
         IconForeground = Resources.URIs.AddIcon
         )]
-    public class CreatePanelElement : ModelDocumentActionBase
+    public class CreatePanelElement : ModelActionBase
     {
-        [ActionInput(1, "the planar curve that describes the outer perimeter of the panel")]
-        public Curve Perimeter { get; set; }
+        [ActionInput(1, "the polyline points that describe the outside edge of the panel")]
+        public IList<Vector> Points { get; set; }
 
         [AutoUIComboBox("AvailableBuildUps")]
         [ActionInput(2, "the build-up of the new element", Manual = false, Persistant = true)]
@@ -32,17 +33,37 @@ namespace Salamander.BasicTools
 
         public override bool Execute(ExecutionInfo exInfo = null)
         {
-            if (Perimeter != null && Perimeter.Plane() != null)
+            if (Points != null && Points.Count > 2)
             {
-                PlanarRegion pRegion = new PlanarRegion(Perimeter);
+                if (!Points.ArePlanar()) throw new Exception("Points do not lie on the same plane!");
+                // TODO: Check for re-entrancy!
+                PlanarRegion pRegion = new PlanarRegion(new PolyLine(Points, true));
                 Element = Model.Create.PanelElement(pRegion, exInfo);
                 Element.Family = BuildUp;
                 return true;
             }
             else
             { 
-                throw new Exception("Input curve is not planar!");
+                throw new Exception("Insufficient points to define a panel!");
             }
+        }
+
+        public override DisplayLayer PreviewLayer(PreviewParameters parameters)
+        {
+            if (parameters.IsDynamic &&
+                parameters.SelectionPoints != null &&
+                parameters.SelectionPoints.Count > 2 &&
+                parameters.SelectionPoints.ArePlanar())
+            {
+                ManualDisplayLayer layer = new ManualDisplayLayer();
+                IMeshAvatar mesh = layer.CreateMeshAvatar();
+                PlanarRegion pRegion = new PlanarRegion(new PolyLine(parameters.SelectionPoints, true));
+                mesh.Builder.AddPanelPreview(pRegion, BuildUp);
+                mesh.FinalizeMesh();
+                layer.Add(mesh);
+                return layer;
+            }
+            return null;
         }
     }
 }

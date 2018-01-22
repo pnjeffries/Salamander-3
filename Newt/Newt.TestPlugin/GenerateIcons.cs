@@ -50,6 +50,7 @@ namespace Salamander.BasicToolsGH
         public Bitmap GenerateIcon(Type actionType)
         {
             var actionAtt = ActionAttribute.ExtractFrom(actionType);
+            if (actionAtt == null) return null;
             if (!string.IsNullOrWhiteSpace(actionAtt.IconForeground))
             {
                 if (!string.IsNullOrWhiteSpace(actionAtt.IconBackground))

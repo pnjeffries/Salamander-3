@@ -12,7 +12,7 @@ namespace Salamander.BasicTools
 {
     [Action("GetElementSelection", "Get the selection of elements in a saved set",
         IconBackground = Resources.URIs.ElementSet, IconForeground = Resources.URIs.GetIcon)]
-    public class GetElementSelection : ModelDocumentActionBase
+    public class GetElementSelection : ModelActionBase
     {
         [ActionInput(1, "the name of the element set to retrieve",
             SuggestionsPath = "NameSuggestions")]

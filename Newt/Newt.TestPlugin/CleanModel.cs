@@ -11,7 +11,7 @@ namespace Salamander.BasicTools
     [Action("CleanModel", 
         Description = "Clean the model by removing references to deleted objects.  Those objects will then no longer be available for undeletion.",
         IconBackground = Resources.URIs.Clean)]
-    public class CleanModel : ModelDocumentActionBase
+    public class CleanModel : ModelActionBase
     {
         [ActionInput(1, "trigger.  Set to true to clean deleted records from the active model.", Manual = false)]
         public bool Trigger { get; set; } = true;

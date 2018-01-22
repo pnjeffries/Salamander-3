@@ -1,4 +1,5 @@
-﻿using Nucleus.UI;
+﻿using Nucleus.Extensions;
+using Nucleus.UI;
 using Salamander.Selection;
 using System;
 using System.Collections;
@@ -26,7 +27,7 @@ namespace Salamander
         /// </summary>
         public void NotifyInitialisationCompleted()
         {
-            UIInitialisationCompleted(this, null);
+            UIInitialisationCompleted.Raise(this, null);
         }
 
         /// <summary>

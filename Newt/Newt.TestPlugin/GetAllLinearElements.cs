@@ -14,7 +14,7 @@ namespace Salamander.BasicTools
         "Retrieve all linear elements in the current model",
         IconBackground = Resources.URIs.LinearElement,
         IconForeground = Resources.URIs.GetAllIcon)]
-    public class GetAllLinearElements : ModelDocumentActionBase
+    public class GetAllLinearElements : ModelActionBase
     {
         [ActionInput(1,
            "trigger input.  This input stream will not be used directly, but exists to allow element retrieval to be automatically triggered on update of this data stream.",

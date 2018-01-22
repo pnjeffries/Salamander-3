@@ -15,7 +15,7 @@ namespace Salamander.BasicTools
         Description = "Export the Salamander model to a text GWA format for import to Oasys GSA",
         IconBackground = Resources.URIs.GSA)]
     [ExportAction(Extensions = new string[] { ".gwa" }, Filter = "GSA Text File (*.gwa) | *.gwa")]
-    public class GWAExportAction : ModelDocumentActionBase, IExportAction
+    public class GWAExportAction : ModelActionBase, IExportAction
     {
         [ActionInput(1, "write toggle.  Set to true to write out a GWA file", Manual = false)]
         public bool Write { get; set; } = true;
@@ -40,7 +40,7 @@ namespace Salamander.BasicTools
             if (FilePath.IsValid && Write)
             {
                 Print("Writing GWA File... ");
-                Document.Model.GenerateNodes(new NodeGenerationParameters());
+                Document.Model.GenerateNodes(new NodeGenerationParameters(false));
                 var serialiser = new ModelDocumentTextSerialiser(new GWAFormat(), new GWAContext());
                 serialiser.CustomHeader = "! This file was originally written by Salamander 3 on " + DateTime.Now;
                 Result = Document.SaveAs(FilePath, serialiser);

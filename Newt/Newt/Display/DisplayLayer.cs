@@ -137,6 +137,14 @@ namespace Salamander.Display
         /// Clear all registered key objects geometry on this layer
         /// </summary>
         public abstract void Clear();
+
+        /// <summary>
+        /// Force a viewport refresh
+        /// </summary>
+        protected void Refresh()
+        {
+            Core.Instance.Host.Refresh();
+        }
     }
 
     /// <summary>
@@ -155,7 +163,7 @@ namespace Salamander.Display
         /// <summary>
         /// Internal ornament records
         /// </summary>
-        private Dictionary<T, IList<IAvatar>> _Avatars { get; } = new Dictionary<T, IList<IAvatar>>();
+        protected Dictionary<T, IList<IAvatar>> _Avatars { get; } = new Dictionary<T, IList<IAvatar>>();
 
         /// <summary>
         /// Constructor.  Should be called from within the default constructor of any non-abstract sub-types
@@ -186,6 +194,19 @@ namespace Salamander.Display
         public void InvalidateRepresentation(T key)
         {
             _Avatars[key] = InitialRepresentation(key);
+        }
+
+        /// <summary>
+        /// Invalidate all display representations.
+        /// This will force the relevant display geometry to be regenerated the next time the
+        /// layer is drawn.
+        /// </summary>
+        public void InvalidateAll()
+        {
+            foreach (var key in _Avatars.Keys.ToList())
+            {
+                _Avatars[key] = InitialRepresentation(key);
+            }
         }
 
         /// <summary>

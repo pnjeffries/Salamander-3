@@ -16,7 +16,7 @@ namespace Salamander.BasicTools
         "Generate a 2D Pratt Truss between two curves",
         IconBackground = Resources.URIs.PrattTruss,
         IconForeground = Resources.URIs.AddIcon)]
-    public class GeneratePrattTruss : ModelDocumentActionBase
+    public class GeneratePrattTruss : ModelActionBase
     {
         [ActionInput(1, "the curve describing the set-out of the top chord of the truss")]
         public Curve TopChord { get; set; }

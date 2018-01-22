@@ -131,5 +131,21 @@ namespace Salamander.Actions
                 }
             }
         }
+
+        /// <summary>
+        /// Generate a dictionary of the current output property values, keyed by their names
+        /// </summary>
+        /// <param name="action"></param>
+        /// <returns></returns>
+        public static Dictionary<string, object> GetOutputsDictionary(this IAction action)
+        {
+            var result = new Dictionary<string, object>();
+            var outputs = action.OutputParameters();
+            foreach (PropertyInfo pInfo in outputs)
+            {
+                result.Add(pInfo.Name, pInfo.GetValue(result));
+            }
+            return result;
+        }
     }
 }

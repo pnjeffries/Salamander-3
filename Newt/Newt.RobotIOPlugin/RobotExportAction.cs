@@ -15,7 +15,7 @@ namespace Salamander.RobotIOPlugin
         Description = "Export the Salamander model to Autodesk Robot via the COM interface.  Requires Robot to be installed.",
         IconBackground = Resources.URIs.Robot)]
     [ExportAction(Extensions = new string[] { ".rtd" }, Filter = "Robot File (*.rtd) | *.rtd")]
-    public class RobotExportAction : ModelDocumentActionBase, IExportAction
+    public class RobotExportAction : ModelActionBase, IExportAction
     {
         [ActionInput(1, "write toggle.  Set to true to write out a Robot file", Manual = false)]
         public bool Write { get; set; } = true;

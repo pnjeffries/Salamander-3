@@ -15,7 +15,7 @@ namespace Salamander.BasicTools
         "Create a new section property with a L-shaped profile",
         IconBackground = Resources.URIs.AngleSection,
         IconForeground = Resources.URIs.AddIcon)]
-    public class CreateAngleSection : ModelDocumentActionBase
+    public class CreateAngleSection : ModelActionBase
     {
 
         [ActionInput(1, "the name of the new section")]

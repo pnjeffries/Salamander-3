@@ -209,6 +209,10 @@ namespace Salamander.Grasshopper
                     {
                         pManager.AddNumberParameter(name, nickname, description, GH_ParamAccess.item, (double)pInfo.GetValue(action, null));
                     }
+                    else if (pType == typeof(int))
+                    {
+                        pManager.AddIntegerParameter(name, nickname, description, GH_ParamAccess.item, (int)pInfo.GetValue(action, null));
+                    } 
                     else if (pType == typeof(string))
                     {
                         pManager.AddTextParameter(name, nickname, description, GH_ParamAccess.item, (string)pInfo.GetValue(action, null));
@@ -222,6 +226,14 @@ namespace Salamander.Grasshopper
                     {
                         pManager.AddPointParameter(name, nickname, description, GH_ParamAccess.item);
                     }
+                    else if (typeof(IList<Vector>).IsAssignableFrom(pType)) //Vector list
+                    {
+                        pManager.AddPointParameter(name, nickname, description, GH_ParamAccess.list);
+                    }
+                    else if (pType.IsAssignableFrom(typeof(Plane)))
+                    {
+                        pManager.AddPlaneParameter(name, nickname, description, GH_ParamAccess.item, NtoRC.Convert((Plane)pInfo.GetValue(action, null)));
+                    }
                     else if (pType == typeof(Line))
                     {
                         pManager.AddLineParameter(name, nickname, description, GH_ParamAccess.item);
@@ -233,6 +245,10 @@ namespace Salamander.Grasshopper
                     else if (typeof(Curve).IsAssignableFrom(pType))
                     {
                         pManager.AddCurveParameter(name, nickname, description, GH_ParamAccess.item);
+                    }
+                    else if (typeof(CurveCollection).IsAssignableFrom(pType))
+                    {
+                        pManager.AddCurveParameter(name, nickname, description, GH_ParamAccess.list);
                     }
                     else if (typeof(LinearElement).IsAssignableFrom(pType))
                     {
@@ -290,6 +306,14 @@ namespace Salamander.Grasshopper
                     {
                         pManager.AddGenericParameter(name, nickname, description, GH_ParamAccess.tree);
                     }
+                    else if (pType == typeof(Direction))
+                    {
+                        pManager.AddTextParameter(name, nickname, description, GH_ParamAccess.item, pInfo.GetValue(action, null)?.ToString());
+                    }
+                    else if (pType == typeof(CoordinateSystemReference))
+                    {
+                        pManager.AddTextParameter(name, nickname, description, GH_ParamAccess.item, pInfo.GetValue(action, null)?.ToString());
+                    }
                     else
                     {
                         pManager.AddGenericParameter(pInfo.Name, nickname, description, GH_ParamAccess.item);
@@ -323,6 +347,10 @@ namespace Salamander.Grasshopper
                     {
                         pManager.AddNumberParameter(name, nickname, description, GH_ParamAccess.item);
                     }
+                    else if (pType == typeof(int))
+                    {
+                        pManager.AddIntegerParameter(name, nickname, description, GH_ParamAccess.item);
+                    }
                     else if (pType == typeof(string))
                     {
                         pManager.AddTextParameter(name, nickname, description, GH_ParamAccess.item);
@@ -335,9 +363,17 @@ namespace Salamander.Grasshopper
                     {
                         pManager.AddPointParameter(name, nickname, description, GH_ParamAccess.item);
                     }
+                    else if (pType.IsAssignableFrom(typeof(Plane)))
+                    {
+                        pManager.AddPlaneParameter(name, nickname, description, GH_ParamAccess.item);
+                    }
                     else if (typeof(Curve).IsAssignableFrom(pType))
                     {
                         pManager.AddCurveParameter(name, nickname, description, GH_ParamAccess.item);
+                    }
+                    else if (typeof(CurveCollection).IsAssignableFrom(pType))
+                    {
+                        pManager.AddCurveParameter(name, nickname, description, GH_ParamAccess.list);
                     }
                     else if (pType == typeof(LinearElement))
                     {
@@ -462,7 +498,7 @@ namespace Salamander.Grasshopper
                 if (inputAtt.Parametric) //Ignore non-parametric inputs
                 {
                     Type inputType = pInfo.PropertyType;
-                    object inputData = GetInputData(pInfo.Name, inputType, DA);
+                    object inputData = GetInputData(pInfo.Name, inputType, DA, inputAtt);
                     if (!inputAtt.Required || inputData != null)
                         pInfo.SetValue(action, inputData, null);
                     else return false;
@@ -506,15 +542,27 @@ namespace Salamander.Grasshopper
         /// <param name="type"></param>
         /// <param name="DA"></param>
         /// <returns></returns>
-        protected object GetInputData(string name, Type type, IGH_DataAccess DA)
+        protected object GetInputData(string name, Type type, IGH_DataAccess DA, ActionInputAttribute inputAtt)
         {
             object result = null;
             if (type != typeof(ActionTriggerInput))
             {
                 try
                 {
+                    // TODO: equivalent for GetDataList
                     Type equivalentType = GetEquivalentType(type);
-                    MemberInfo[] mInfos = typeof(IGH_DataAccess).GetMember("GetData");
+                    MemberInfo[] mInfos;
+                    var pAccess = ParamAccess(inputAtt);
+                    if (pAccess == GH_ParamAccess.item)
+                        mInfos = typeof(IGH_DataAccess).GetMember("GetData");
+                    else
+                    {
+                        var listType = typeof(List<>);
+                        var constructedListType = listType.MakeGenericType(equivalentType);
+                        result = Activator.CreateInstance(constructedListType);
+                        mInfos = typeof(IGH_DataAccess).GetMember("GetDataList");
+                    }
+                    //TODO: Trees?
                     MethodInfo getDataMethod = null;
                     foreach (MethodInfo mInfo in mInfos)
                     {
@@ -534,6 +582,7 @@ namespace Salamander.Grasshopper
                                 result = Convert(result, type);
                             }
                         }
+                        else result = null;
                     }
                 }
                 catch (Exception e)
@@ -553,6 +602,7 @@ namespace Salamander.Grasshopper
         {
             if (obj is Vector) return NtoRC.Convert((Vector)obj);
             else if (obj is Curve) return NtoRC.Convert((Curve)obj);
+            else if (obj is CurveCollection) return NtoRC.Convert((CurveCollection)obj);
             else if (obj is VertexGeometry) return NtoRC.Convert((VertexGeometry)obj);
             else if (obj is VertexGeometryCollection) return NtoRC.Convert((VertexGeometryCollection)obj);
             else if (obj is LinearElement) return new LinearElementGoo((LinearElement)obj, exInfo);
@@ -586,10 +636,33 @@ namespace Salamander.Grasshopper
             //if (toType == typeof(LinearElementGoo)) return new LinearElementGoo(obj as LinearElement);
             //else if (toType == typeof(SectionFamily)) return new SectionFamilyGoo(obj as SectionFamily);
 
-            if (obj is ISalamander_Goo) return ((ISalamander_Goo)obj).GetValue(toType);
+            if (obj is ISalamander_Goo) return ((ISalamander_Goo)obj).GetValue(toType); //Single items
+            else if (obj is IList && typeof(IList).IsAssignableFrom(toType)
+                && typeof(ISalamander_Goo).IsAssignableFrom(obj.GetType().GetItemType()))
+            {
+                // Collections:
+                IList list = (IList)obj;
+                IList result = Activator.CreateInstance(toType) as IList;
+                Type itemType = obj.GetType().GetItemType();
+                foreach (ISalamander_Goo item in list)
+                {
+                    result.Add(item.GetValue(itemType));
+                }
+                return result;
+            }
             else if (toType == typeof(Angle)) return new Angle((double)obj);
             else if (toType == typeof(FilePath)) return new FilePath(obj.ToString());
             else if (toType == typeof(ActionTriggerInput)) return new ActionTriggerInput();
+            else if (toType == typeof(Direction)) return Enum.Parse(typeof(Direction), obj?.ToString());
+            else if (toType == typeof(CoordinateSystemReference) && !(obj is CoordinateSystemReference))
+            {
+                GH_Document doc = OnPingDocument();
+                if (doc != null)
+                {
+                    ModelDocument modelDoc = GrasshopperManager.Instance.BackgroundDocument(doc);
+                    return modelDoc?.Model?.CoordinateSystems.GetByKeyword(obj.ToString());
+                }
+            }
 
             return Conversion.Instance.Convert(obj, toType);
             /*
@@ -611,8 +684,10 @@ namespace Salamander.Grasshopper
         {
             if (typeof(Line).IsAssignableFrom(type)) return typeof(RC.Line);
             else if (type == typeof(Vector)) return typeof(RC.Point3d);
+            else if (typeof(IList<Vector>).IsAssignableFrom(type)) return typeof(RC.Point3d);
             else if (type == typeof(Angle)) return typeof(double);
             else if (typeof(Curve).IsAssignableFrom(type)) return typeof(RC.Curve);
+            else if (typeof(CurveCollection).IsAssignableFrom(type)) return typeof(RC.Curve);
             else if (typeof(VertexGeometry).IsAssignableFrom(type)) return typeof(RC.GeometryBase);
             else if (typeof(VertexGeometryCollection).IsAssignableFrom(type)) return typeof(RC.GeometryBase);
             else if (typeof(LinearElement).IsAssignableFrom(type)) return typeof(LinearElementGoo);
@@ -626,8 +701,10 @@ namespace Salamander.Grasshopper
             else if (typeof(Node).IsAssignableFrom(type)) return typeof(NodeGoo);
             else if (typeof(NodeCollection).IsAssignableFrom(type)) return typeof(NodeGoo);
             else if (typeof(Bool6D).IsAssignableFrom(type)) return typeof(Bool6DGoo);
+            else if (typeof(Direction).IsAssignableFrom(type)) return typeof(string);
             else if (typeof(FilePath) == type) return typeof(string);
             else if (typeof(ActionTriggerInput) == type) return typeof(object);
+            else if (typeof(CartesianCoordinateSystem).IsAssignableFrom(type)) return typeof(RC.Plane);
             return type;
         }
 

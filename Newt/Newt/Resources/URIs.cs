@@ -37,6 +37,11 @@ namespace Salamander.Resources
         public const string BakeIcon = Base + "BakeIcon.png";
 
         /// <summary>
+        /// The URI of the standard 'Beam Framing' icon
+        /// </summary>
+        public const string BeamFraming = Base + "BeamFraming.png";
+
+        /// <summary>
         /// The URI of the standard 'Blue book' icon
         /// </summary>
         public const string BlueBook = Base + "BlueBook.png";
@@ -55,6 +60,16 @@ namespace Salamander.Resources
         /// The URI of the standard BuildUp icon
         /// </summary>
         public const string BuildUpFamilySmall = Base + "BuildUpFamily_Small.png";
+
+        /// <summary>
+        /// The URI of the standard load case icon
+        /// </summary>
+        public const string Case = Base + "Case.png";
+
+        /// <summary>
+        /// The URI of the small load case icon
+        /// </summary>
+        public const string CaseSmall = Base + "CaseSmall.png";
 
         /// <summary>
         /// The URI of the standard Channel Section icon
@@ -80,6 +95,11 @@ namespace Salamander.Resources
         /// The URI of the standard 'clean' icon
         /// </summary>
         public const string Clean = Base + "Clean.png";
+
+        /// <summary>
+        /// The URI of the standard Column icon
+        /// </summary>
+        public const string Column = Base + "Column.png";
 
         /// <summary>
         /// The URI of the 'covert' icon
@@ -132,6 +152,16 @@ namespace Salamander.Resources
         public const string ElementSet = Base + "ElementSet.png";
 
         /// <summary>
+        /// The URI of the ETABS icon
+        /// </summary>
+        public const string ETABS = Base + "ETABS.png";
+
+        /// <summary>
+        /// The URI of the standard structural frame icon
+        /// </summary>
+        public const string Frame = Base + "Frame.png";
+
+        /// <summary>
         /// The URI of the standard 'get all' icon overlay
         /// </summary>
         public const string GetAllIcon = Base + "GetAllIcon.png";
@@ -147,6 +177,11 @@ namespace Salamander.Resources
         public const string GetIcon = Base + "GetIcon.png";
 
         /// <summary>
+        /// The URI of the standard gravity load icon
+        /// </summary>
+        public const string GravityLoad = Base + "GravityLoad.png";
+
+        /// <summary>
         /// The URI of the GSA logo icon
         /// </summary>
         public const string GSA = Base + "GSA.png";
@@ -160,6 +195,21 @@ namespace Salamander.Resources
         /// The URI of the small Linear Element icon
         /// </summary>
         public const string LinearElementSmall = Base + "LinearElement_Small.png";
+
+        /// <summary>
+        /// The URI of the standard Linear Element Uniformly Distributed Load icon
+        /// </summary>
+        public const string LinearElementUDL = Base + "LinearElementUDL.png";
+
+        /// <summary>
+        /// The URI of the standard Load icon
+        /// </summary>
+        public const string Load = Base + "Load.png";
+
+        /// <summary>
+        /// The URI of the small Load icon
+        /// </summary>
+        public const string LoadSmall = Base + "LoadSmall.png";
 
         /// <summary>
         /// The URI of the 'Merge nodes' action icon
@@ -192,6 +242,16 @@ namespace Salamander.Resources
         public const string NodeID = Base + "NodeID.png";
 
         /// <summary>
+        /// The URI of the standard Node Load icon
+        /// </summary>
+        public const string NodeLoad = Base + "NodeLoad.png";
+
+        /// <summary>
+        /// The URI of the Node Load set by vector icon
+        /// </summary>
+        public const string NodeLoadVector = Base + "NodeLoadVector.png";
+
+        /// <summary>
         /// The URI of the standard Node Support icon
         /// </summary>
         public const string NodeSupport = Base + "NodeRestraint.png";
@@ -202,9 +262,19 @@ namespace Salamander.Resources
         public const string PanelElement = Base + "PanelElement.png";
 
         /// <summary>
+        /// The URI of the Panel Element border icon
+        /// </summary>
+        public const string PanelElementBorder = Base + "PanelElementBorder.png";
+
+        /// <summary>
         /// The URI of the small Panel Element icon
         /// </summary>
         public const string PanelElementSmall = Base + "PanelElement_Small.png";
+
+        /// <summary>
+        /// The URI of the standard Panel Element Load icon
+        /// </summary>
+        public const string PanelElementLoad = Base + "PanelElementLoad.png";
 
         /// <summary>
         /// The URI of the Panel Element 3D preview icon
@@ -235,6 +305,11 @@ namespace Salamander.Resources
         /// The URI of the standard regeneration icon
         /// </summary>
         public const string RegenerateIcon = Base + "RegenerateIcon.png";
+
+        /// <summary>
+        /// The URI of the standard Dynamic Relaxation icon
+        /// </summary>
+        public const string Relax = Base + "Relax.png";
 
         /// <summary>
         /// The URI of the standard Robot logo icon
@@ -282,6 +357,11 @@ namespace Salamander.Resources
         public const string SplitNode = Base + "SplitNode.png";
 
         /// <summary>
+        /// The URI of the standard temperature icon
+        /// </summary>
+        public const string Temperature = Base + "Temperature.png";
+
+        /// <summary>
         /// The URI of the text overlay icon
         /// </summary>
         public const string TextIcon = Base + "TextIcon.png";
@@ -300,5 +380,10 @@ namespace Salamander.Resources
         /// The URI of the standard Value List icon
         /// </summary>
         public const string ValueListIcon = Base + "ValueListIcon.png";
+
+        /// <summary>
+        /// The URI of the standard Wall icon
+        /// </summary>
+        public const string Wall = Base + "Wall.png";
     }
 }

@@ -13,7 +13,7 @@ namespace Salamander.RobotIOPlugin
 {
     [Action("OpenRobot")]
     [ImportAction(Extensions = new string[] { ".rtd" }, Filter = "Robot File (*.rtd) | *.rtd")]
-    public class RobotImportAction : ModelDocumentActionBase, IImportDocumentAction
+    public class RobotImportAction : ModelActionBase, IImportDocumentAction
     {
         [ActionFilePathInput(Order = 0,
             Description = "the Robot file to import",

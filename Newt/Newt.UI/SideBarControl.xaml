@@ -135,30 +135,7 @@
         </ScrollViewer>
 
         <!--Display Layer ToolBar-->
-        <ToolBarTray Grid.Row="3">
-            <ToolBar ItemsSource="{Binding Path=Layers.Layers}">
-                <ToolBar.ItemTemplate>
-                    <DataTemplate DataType="display:DisplayLayer">
-                        <ToggleButton IsChecked="{Binding Path=Visible}"
-                                      Checked="RefreshViewport"
-                                      Unchecked="RefreshViewport"
-                                      BorderThickness="0"
-                                      Background="Transparent"
-                                      Visibility="{Binding Path=Toggleable, Converter={StaticResource VisibilityConverter}}">
-                            <ToggleButton.ToolTip>
-                                <ToolTip>
-                                    <StackPanel>
-                                        <TextBlock Text="{Binding Path=Name}" FontWeight="Bold"/>
-                                        <TextBlock Text="{Binding Path=Description}"/>
-                                    </StackPanel>
-                                </ToolTip>
-                            </ToggleButton.ToolTip>
-                            <Image Width="24" Height="24" Source="{Binding Path=IconURI}"></Image>
-                        </ToggleButton>
-                    </DataTemplate>
-                </ToolBar.ItemTemplate>
-            </ToolBar>
-        </ToolBarTray>
+        <local:LayerToggleBar Grid.Row="3"/>
 
     </Grid>
 </UserControl>

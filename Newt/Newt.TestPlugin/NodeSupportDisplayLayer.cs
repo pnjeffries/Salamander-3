@@ -31,7 +31,7 @@ namespace Salamander.BasicTools
                     double scale = 0.75;
                     IMeshAvatar mAv = CreateMeshAvatar();
                     mAv.Builder.AddNodeSupport(source, support, scale);
-                    mAv.Brush = new ColourBrush(new Colour(0.5f, 0.8f, 0.2f, 0f)); //TODO: Make customisable
+                    mAv.Brush = new ColourBrush(new Colour(0.8f, 0.8f, 0.2f, 0f)); //TODO: Make customisable
                     mAv.FinalizeMesh();
                     result.Add(mAv);
                 }

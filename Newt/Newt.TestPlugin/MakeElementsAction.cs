@@ -14,7 +14,7 @@ namespace Salamander.BasicTools
     [Action("MakeElements",
             "Convert 'dumb' curve, surface and mesh geometry into Salamander elements.",
         IconBackground = Resources.URIs.Convert)]
-    public class MakeElementsAction : ModelDocumentActionBase
+    public class MakeElementsAction : ModelActionBase
     {
         [ActionInput(1, "the geometry to be converted")]
         public VertexGeometryCollection Geometry { get; set; }

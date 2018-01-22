@@ -9,7 +9,7 @@ using Nucleus.Actions;
 namespace Salamander.BasicTools
 {
     [Action("ImportModel")]
-    public class ImportModelAction : ModelDocumentActionBase
+    public class ImportModelAction : ModelActionBase
     {
         public override bool Execute(ExecutionInfo exInfo = null)
         {

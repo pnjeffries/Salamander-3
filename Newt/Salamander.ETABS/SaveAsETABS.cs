@@ -13,9 +13,9 @@ namespace Salamander.RobotIOPlugin
 {
     [Action("SaveAsETABS",
         Description = "Export the Salamander model to CSI ETABS via the COM interface.  Requires ETABS to be installed.",
-        IconBackground = Resources.URIs.Robot)]
+        IconBackground = Resources.URIs.ETABS)]
     [ExportAction(Extensions = new string[] { ".edb" }, Filter = "ETABS File (*.edb) | *.edb")]
-    public class SaveAsETABS : ModelDocumentActionBase, IExportAction
+    public class SaveAsETABS : ModelActionBase, IExportAction
     {
         [ActionInput(1, "write toggle.  Set to true to write out a Robot file", Manual = false)]
         public bool Write { get; set; } = true;

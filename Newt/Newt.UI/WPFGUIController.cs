@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using Nucleus.UI;
 using Nucleus.WPF;
+using System.Windows.Interop;
 
 namespace Salamander.UI
 {
@@ -17,6 +18,11 @@ namespace Salamander.UI
     /// </summary>
     public class WPFGUIController : GUIController
     {
+        /// <summary>
+        /// The HWND handle of the parent host window
+        /// </summary>
+        public IntPtr HostWindowHandle { get; set; } = IntPtr.Zero;
+
         /// <summary>
         /// Show an OpenFileDialog and use it to obtain a filepath
         /// </summary>
@@ -84,13 +90,21 @@ namespace Salamander.UI
         /// <param name="title"></param>
         /// <param name="contents"></param>
         /// <returns></returns>
-        protected static Window CreateContainerWindow(string title, FrameworkElement contents)
+        protected Window CreateContainerWindow(string title, FrameworkElement contents)
         {
             Window window = new Window();
             window.Content = contents;
             window.Title = title;
-            window.Topmost = true;
             window.SizeToContent = SizeToContent.WidthAndHeight;
+            if (HostWindowHandle != IntPtr.Zero)
+            {
+                WindowInteropHelper wIH = new WindowInteropHelper(window);
+                wIH.Owner = HostWindowHandle;
+            }
+            else
+            {
+                window.Topmost = true;
+            }
             window.Show();
             return window;
         }
@@ -101,12 +115,20 @@ namespace Salamander.UI
         /// <param name="title"></param>
         /// <param name="contents"></param>
         /// <returns></returns>
-        protected static Window CreateContainerWindow(string title, FrameworkElement contents, double width, double height)
+        protected Window CreateContainerWindow(string title, FrameworkElement contents, double width, double height)
         {
             Window window = new Window();
             window.Content = contents;
             window.Title = title;
-            window.Topmost = true;
+            if (HostWindowHandle != IntPtr.Zero)
+            {
+                WindowInteropHelper wIH = new WindowInteropHelper(window);
+                wIH.Owner = HostWindowHandle;
+            }
+            else
+            {
+                window.Topmost = true;
+            }
             window.SizeToContent = SizeToContent.Manual;
             window.Width = width;
             window.Height = height;

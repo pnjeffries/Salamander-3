@@ -10,7 +10,7 @@ namespace Salamander.BasicTools
 {
     [Action("RegenerateNodes", Description = "Regenerate Element Nodes",
         IconBackground = Resources.URIs.Node, IconForeground = Resources.URIs.RegenerateIcon)]
-    public class RegenerateNodes : ModelDocumentActionBase
+    public class RegenerateNodes : ModelActionBase
     {
         public override bool Execute(ExecutionInfo exInfo = null)
         {

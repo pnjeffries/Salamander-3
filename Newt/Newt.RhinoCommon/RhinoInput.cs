@@ -63,10 +63,35 @@ namespace Salamander.RhinoCommon
 
         public override Vector EnterPoint(string prompt = "Enter Point")
         {
-            GetPoint gP = new GetPoint();
+            GetPoint gP = new GetPointDynamic();
             gP.SetCommandPrompt(prompt);
             if (gP.Get() == GetResult.Cancel) throw new OperationCanceledException("Operation cancelled by user");
             return RCtoN.Convert(gP.Point());
+        }
+
+        public override Vector[] EnterPoints(string prompt = "Enter points")
+        {
+            var result = new List<Vector>();
+            
+            while (true)
+            {
+                GetPointDynamic gP = new GetPointDynamic();
+                gP.SelectionPoints = result;
+                gP.SetCommandPrompt(prompt);
+                gP.AcceptNothing(true);
+                GetResult gR = gP.Get();
+                if (gR == GetResult.Cancel) throw new OperationCanceledException("Operation cancelled by user");
+                else if (gR == GetResult.Nothing) break;
+                result.Add(RCtoN.Convert(gP.Point()));
+            }
+            
+            return result.ToArray();
+        }
+
+        public override Plane EnterPlane(string prompt = "Enter Plane")
+        {
+            var origin = EnterPoint(prompt);
+            return new Plane(origin);
         }
 
         public override Vector EnterVector(string prompt = "Enter vector")
@@ -208,6 +233,43 @@ namespace Salamander.RhinoCommon
                     Guid guid = Host.Instance.Handles.Links.GetFirst(rObj.ObjectId);
                     Element element = Core.Instance.ActiveDocument?.Model?.Elements[guid];
                     if (element != null && element is LinearElement) result.Add((LinearElement)element);
+                }
+                return result;
+            }
+            return null;
+        }
+
+        public override PanelElement EnterPanelElement(string prompt = "Enter panel element")
+        {
+            GetObject gO = new GetObject();
+            gO.SetCustomGeometryFilter(new GetObjectGeometryFilter(FilterHandles));
+            gO.GeometryFilter = ObjectType.Surface | ObjectType.Mesh;
+            gO.SetCommandPrompt(prompt);
+            if (gO.Get() == GetResult.Cancel) throw new OperationCanceledException("Operation cancelled by user");
+            ObjRef rObj = gO.Object(0);
+            if (Host.Instance.Handles.Links.ContainsSecond(rObj.ObjectId))
+            {
+                Guid guid = Host.Instance.Handles.Links.GetFirst(rObj.ObjectId);
+                return Core.Instance.ActiveDocument?.Model?.Elements[guid] as PanelElement;
+            }
+            return null;
+        }
+
+        public override PanelElementCollection EnterPanelElements(string prompt = "Enter panel elements")
+        {
+            GetObject gO = new GetObject();
+            gO.SetCustomGeometryFilter(new GetObjectGeometryFilter(FilterHandles));
+            gO.GeometryFilter = ObjectType.Surface | ObjectType.Mesh;
+            gO.SetCommandPrompt(prompt);
+            if (gO.GetMultiple(1, 0) == GetResult.Cancel) throw new OperationCanceledException("Operation cancelled by user");
+            foreach (ObjRef rObj in gO.Objects())
+            {
+                var result = new PanelElementCollection();
+                if (Host.Instance.Handles.Links.ContainsSecond(rObj.ObjectId))
+                {
+                    Guid guid = Host.Instance.Handles.Links.GetFirst(rObj.ObjectId);
+                    Element element = Core.Instance.ActiveDocument?.Model?.Elements[guid];
+                    if (element != null && element is PanelElement) result.Add((PanelElement)element);
                 }
                 return result;
             }

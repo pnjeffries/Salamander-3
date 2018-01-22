@@ -62,7 +62,7 @@ namespace Salamander.UI
 
         private void Loads_DoubleClick(object sender, MouseButtonEventArgs e)
         {
-            Core.Instance.UI.ShowDataTable("Loads", Core.Instance.ActiveDocument.Model.Loads, null); //TODO!
+            Core.Instance.UI.ShowDataTable("Loads", Core.Instance.ActiveDocument.Model.Loads, Core.Instance.Selected.Loads);
         }
 
         private void LoadCases_DoubleClick(object sender, MouseButtonEventArgs e)

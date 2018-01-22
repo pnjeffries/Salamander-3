@@ -91,8 +91,22 @@ namespace Salamander
         /// Prompt the user to select a point in 3D space
         /// </summary>
         /// <param name="prompt">The prompt message to be displayed</param>
-        /// <returns>A point, or null if the user cancels</returns>
+        /// <returns>A point</returns>
         public abstract Vector EnterPoint(string prompt = "Enter point");
+
+        /// <summary>
+        /// Prompt the user to select multiple points
+        /// </summary>
+        /// <param name="prompt"></param>
+        /// <returns></returns>
+        public abstract Vector[] EnterPoints(string prompt = "Enter points");
+
+        /// <summary>
+        /// Prompt the user to enter a plane
+        /// </summary>
+        /// <param name="prompt">The prompt message to be displayed</param>
+        /// <returns></returns>
+        public abstract Plane EnterPlane(string prompt = "Enter Plane");
 
         /// <summary>
         /// Prompt the user to enter a vector
@@ -161,6 +175,21 @@ namespace Salamander
         /// <param name="prompt"></param>
         /// <returns></returns>
         public abstract LinearElementCollection EnterLinearElements(string prompt = "Enter linear elements");
+
+        /// <summary>
+        /// Prompt the user to select a Panel Element
+        /// </summary>
+        /// <param name="prompt"></param>
+        /// <returns></returns>
+        public abstract PanelElement EnterPanelElement(string prompt = "Enter panel element");
+
+        /// <summary>
+        /// Prompt the user to select multiple Panel Element
+        /// </summary>
+        /// <param name="prompt"></param>
+        /// <returns></returns>
+        public abstract PanelElementCollection EnterPanelElements(string prompt = "Enter panel elements");
+
 
         /// <summary>
         /// Prompt the user to select a node
@@ -234,6 +263,10 @@ namespace Salamander
                 }
                 else if (inputType == typeof(Vector)) //Nucleus Vector
                     value = EnterPoint("Enter " + description);
+                else if (inputType.IsAssignableFrom(typeof(Vector[])))
+                    value = EnterPoints("Enter " + description);
+                else if (inputType.IsAssignableFrom(typeof(Plane))) // Nucleus Plane
+                    value = EnterPlane("Enter " + description);
                 else if (inputType == typeof(Line)) //Nucleus Line
                     value = EnterLine("Enter start point of " + description,
                         "Enter end point of " + description);
@@ -249,6 +282,10 @@ namespace Salamander
                     value = EnterLinearElement("Enter " + description);
                 else if (inputType == typeof(LinearElementCollection))
                     value = EnterLinearElements("Enter " + description);
+                else if (inputType == typeof(PanelElement))
+                    value = EnterPanelElement("Enter " + description);
+                else if (inputType == typeof(PanelElementCollection))
+                    value = EnterPanelElements("Enter " + description);
                 else if (inputType == typeof(Node))
                     value = EnterNode("Enter " + description);
                 else if (inputType == typeof(NodeCollection))

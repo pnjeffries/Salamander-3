@@ -133,6 +133,7 @@ namespace Salamander.RhinoCommon
         private void PreInitialise(bool quiet)
         {
             GUI = new RhinoGUIController();
+            GUI.HostWindowHandle = RhinoApp.MainWindowHandle();
             if (!quiet)
             {
                 GUI.ShowSplashScreen();

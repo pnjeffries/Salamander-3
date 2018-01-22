@@ -15,7 +15,7 @@ namespace Salamander.BasicTools
        "TextToSection",
        "Create a new section property from a catalogue name or textual section description",
        IconBackground = Resources.URIs.TextToSection)]
-    public class TextToSectionAction : ModelDocumentActionBase
+    public class TextToSectionAction : ModelActionBase
     {
         [ActionInput(1, "the name of the section")]
         public string Name { get; set; } = "Section";
@@ -30,6 +30,12 @@ namespace Salamander.BasicTools
         public Curve Perimeter
         {
             get { return Section?.Profile?.Perimeter; }
+        }
+
+        [ActionOutput(3, "the output section internal void perimeter (if any)")]
+        public Curve Void
+        {
+            get { return Section?.Profile?.Voids?.FirstOrDefault(); }
         }
 
         public override bool Execute(ExecutionInfo exInfo = null)

@@ -27,6 +27,12 @@ namespace Salamander.Actions
         public PropertyInfo Input { get; set; } = null;
 
         /// <summary>
+        /// The current set of selection points
+        /// </summary>
+        public IList<Vector> SelectionPoints { get; set; } = null;
+
+        /*
+        /// <summary>
         /// The current cursor position
         /// </summary>
         public Vector CursorPoint { get; set; } = Vector.Unset;
@@ -35,6 +41,7 @@ namespace Salamander.Actions
         /// The current selection base point (if any)
         /// </summary>
         public Vector BasePoint { get; set; } = Vector.Unset;
+        */
 
         #endregion
 
@@ -56,8 +63,24 @@ namespace Salamander.Actions
         {
             IsDynamic = isDynamic;
             Input = input;
-            CursorPoint = cursorPoint;
-            BasePoint = basePoint;
+            SelectionPoints = new List<Vector>();
+            if (basePoint.IsValid()) SelectionPoints.Add(basePoint);
+            if (cursorPoint.IsValid()) SelectionPoints.Add(cursorPoint);
+            // CursorPoint = cursorPoint;
+            // BasePoint = basePoint;
+        }
+
+        /// <summary>
+        /// Initialises a new set of Preview Parameters
+        /// </summary>
+        /// <param name="isDynamic"></param>
+        /// <param name="input"></param>
+        /// <param name="selectionPoints"></param>
+        public PreviewParameters(bool isDynamic, PropertyInfo input, IList<Vector> selectionPoints)
+        {
+            IsDynamic = isDynamic;
+            Input = input;
+            SelectionPoints = selectionPoints;
         }
 
         #endregion

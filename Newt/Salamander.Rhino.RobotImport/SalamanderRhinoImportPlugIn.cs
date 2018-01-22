@@ -37,6 +37,7 @@ namespace Salamander.Rhino.RobotImport
             var result = new FileTypeList();
             result.AddFileType("Salamander: Robot File (*.rtd)", "rtd");
             result.AddFileType("Salamander File (*.s3b)", "s3b");
+            result.AddFileType("Salamander: GSA Text File (*.gwa)", "gwa");
             return result;
         }
 

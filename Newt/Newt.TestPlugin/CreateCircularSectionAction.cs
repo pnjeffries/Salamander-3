@@ -15,7 +15,7 @@ namespace Salamander.BasicTools
         "Create a new section property with a circular profile",
         IconBackground = Resources.URIs.CircularSection,
         IconForeground = Resources.URIs.AddIcon)]
-    public class CreateCircularSectionAction : ModelDocumentActionBase
+    public class CreateCircularSectionAction : ModelActionBase
     {
         [ActionInput(1, "the name of the new section")]
         public string Name { get; set; } = "Circular Section";
@@ -35,6 +35,7 @@ namespace Salamander.BasicTools
         public override bool Execute(ExecutionInfo exInfo = null)
         {
             var profile = new CircularProfile(Diameter);
+            profile.Material = Model.Materials.FirstOrDefault();
             Section = Model.Create.SectionFamily(Name, exInfo);
             Section.Profile = profile;
             return true;

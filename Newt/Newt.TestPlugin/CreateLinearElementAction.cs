@@ -11,7 +11,7 @@ namespace Salamander.BasicTools
             "Create a new linear element along a straight line.",
         IconBackground = Resources.URIs.LinearElement,
         IconForeground = Resources.URIs.AddIcon)]
-    public class CreateLinearElementAction : ModelDocumentActionBase
+    public class CreateLinearElementAction : ModelActionBase
     {
         [ActionInput(1, "the set-out geometry of the new element")]
         public Line Line { get; set; }
@@ -44,11 +44,16 @@ namespace Salamander.BasicTools
 
         public override DisplayLayer PreviewLayer(PreviewParameters parameters)
         {
-            if (parameters.IsDynamic && parameters.CursorPoint.IsValid() && parameters.BasePoint.IsValid() && Section != null)
+            if (parameters.IsDynamic && 
+                parameters.SelectionPoints != null && 
+                parameters.SelectionPoints.Count >= 2 && 
+                Section != null)
             {
                 ManualDisplayLayer layer = new ManualDisplayLayer();
                 IMeshAvatar mesh = layer.CreateMeshAvatar();
-                mesh.Builder.AddSectionPreview(new Line(parameters.BasePoint, parameters.CursorPoint), Section, Orientation);
+                mesh.Builder.AddSectionPreview(
+                    new Line(parameters.SelectionPoints[0], parameters.SelectionPoints[1])
+                    , Section, Orientation);
                 mesh.FinalizeMesh();
                 layer.Add(mesh);
                 return layer;

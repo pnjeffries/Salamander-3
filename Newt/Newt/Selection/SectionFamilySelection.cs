@@ -7,6 +7,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Data;
 
 namespace Salamander.Selection
 {
@@ -77,16 +78,18 @@ namespace Salamander.Selection
             {
                 if (Section != null && Section.Profile != null)
                 {
-                    if (value == null) Section.Profile.CatalogueName = null;
+                    if (value == null || value is SectionProfileDummy) Section.Profile.CatalogueName = null;
                     else
                     {
+                        Material m = Section.Profile.Material;
                         Section.Profile.CopyPropertiesFrom(value);
+                        Section.Profile.Material = m; //Keep original material
                     }
                 }
             }
         }
 
-        public SectionProfileCollection AvailableCatalogue
+        public ListCollectionView AvailableCatalogue
         {
             get
             {
@@ -94,7 +97,10 @@ namespace Salamander.Selection
                 {
                     SectionProfileCollection result = new SectionProfileCollection();
                     Core.Instance.SectionLibrary.ExtractAllOfType(Section.ProfileType, result);
-                    return result;
+                    result.Insert(0, new SectionProfileDummy());
+                    ListCollectionView lCV = new ListCollectionView(result);
+                    lCV.GroupDescriptions.Add(new PropertyGroupDescription("CatalogueTypeDesignation"));
+                    return lCV;
                 }
                 return null;
             }

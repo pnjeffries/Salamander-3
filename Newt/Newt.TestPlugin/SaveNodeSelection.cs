@@ -11,7 +11,7 @@ namespace Salamander.BasicTools
 {
     [Action("SaveNodeSelection", "Save a selection of nodes as a named node set",
         IconBackground = Resources.URIs.NodeSet, IconForeground = Resources.URIs.AddIcon)]
-    public class SaveNodeSelection : ModelDocumentActionBase
+    public class SaveNodeSelection : ModelActionBase
     {
         [ActionInput(1, "the node selection to be saved as a Set", OneByOne = false)]
         public NodeCollection Nodes { get; set; }

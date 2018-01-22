@@ -18,7 +18,7 @@ namespace Newt.RobotIOPlugin
         IconBackground = Salamander.Resources.URIs.Robot,
         IconForeground = Salamander.Resources.URIs.UpdateIcon)]
     //[ExportAction(Extensions = new string[] { ".rtd" }, Filter = "Robot File (*.rtd) | *.rtd")]
-    public class RobotExportAction : ModelDocumentActionBase//, IExportAction
+    public class RobotExportAction : ModelActionBase//, IExportAction
     {
         [ActionInput(1, "write toggle.  Set to true to write out a Robot file", Manual = false)]
         public bool Write { get; set; } = true;

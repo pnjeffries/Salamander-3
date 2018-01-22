@@ -30,8 +30,8 @@ namespace Salamander.BasicToolsGH
         {
             get
             {
-                string uri1 = IconResourceHelper.ResourceLocation + "BlueBook.png";
-                string uri2 = IconResourceHelper.ResourceLocation + "RectangularHollowSection.png";
+                string uri1 = Resources.URIs.BlueBook;
+                string uri2 = Resources.URIs.RectangularHollowSection;
                 Bitmap bmp = IconResourceHelper.CombinedBitmapFromURIs(uri1, uri2, 0, 2);
                 return bmp;
             }
@@ -50,6 +50,7 @@ namespace Salamander.BasicToolsGH
             Core.Instance.SectionLibrary.ExtractAllOfType(typeof(RectangularHollowProfile), result);
             foreach (SectionProfile profile in result)
             {
+                if (!string.IsNullOrWhiteSpace(profile.CatalogueName))
                 ListItems.Add(new GH_ValueListItem(profile.CatalogueName, "\"" + profile.CatalogueName + "\""));
             }
         }
@@ -57,6 +58,11 @@ namespace Salamander.BasicToolsGH
         public override void AppendAdditionalMenuItems(ToolStripDropDown menu)
         {
 
+        }
+
+        public override void CreateAttributes()
+        {
+            base.m_attributes = new CatalogueValueListAttributes(this);
         }
     }
 }

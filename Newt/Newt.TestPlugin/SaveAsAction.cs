@@ -13,7 +13,7 @@ namespace Salamander.BasicTools
         Description = "Save the model as a Salamander .s3b file",
         IconBackground = Resources.URIs.Salamander)]
     [ExportAction(Extensions = new string[] { ".s3b" }, Filter = "Salamander 3 File (*.s3b) | *.s3b")]
-    public class SaveAsAction : ModelDocumentActionBase, IExportAction
+    public class SaveAsAction : ModelActionBase, IExportAction
     {
         [ActionInput(1, "write toggle.  Set to true to write out a Salamander file", Manual = false)]
         public bool Write { get; set; } = true;

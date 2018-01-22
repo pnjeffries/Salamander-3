@@ -9,32 +9,41 @@ using System.Threading.Tasks;
 
 namespace Salamander.Actions
 {
-    /*
     /// <summary>
-    /// A base class for actions which act on a Model.
+    /// A base class for actions which perform operations on a ModelDocument
     /// </summary>
-    public abstract class ModelDocumentActionBase : ActionBase
+    public abstract class ModelActionBase : ActionBase, IModelDocumentAction
     {
         /// <summary>
-        /// Private member variable for Model
+        /// Private member variable for the Document property
         /// </summary>
-        private Model _Model = null;
+        private ModelDocument _Document = null;
 
         /// <summary>
-        /// The model to be operated upon.  This can be specifically set, but by default will
-        /// automatically return the currently active document's model.
+        /// The model document to be operated upon.  This can be specifically set, but by default will
+        /// automatically return the currently active document.
         /// </summary>
-        //[ActionInput(Description = "the document to be operated upon.", Manual = false, Required = false, Order =-10)]
+        public ModelDocument Document
+        {
+            get
+            {
+                if (_Document == null) return Core.Instance.ActiveDocument;
+                else return _Document;
+            }
+            set
+            {
+                _Document = value;
+            }
+        }
+
+        /// <summary>
+        /// The model to be operated upon.
+        /// </summary>
         public Model Model
         {
             get
             {
-                if (_Model == null) return Core.Instance.ActiveDocument.Model;
-                else return _Model;
-            }
-            set
-            {
-                _Model = value;
+                return Document.Model;
             }
         }
 
@@ -46,14 +55,14 @@ namespace Salamander.Actions
 
         public override bool PostExecutionOperations(ExecutionInfo exInfo = null)
         {
-            if (exInfo != null) Model.History.CleanIteration(exInfo);
+            if (exInfo != null) Document.Model.History.CleanIteration(exInfo);
             return true;
         }
 
         public override bool FinalOperations(ExecutionInfo exInfo = null)
         {
-            if (exInfo != null) Model.History.CleanSubsequentIterations(exInfo);
+            if (exInfo != null) Document.Model.History.CleanSubsequentIterations(exInfo);
             return true;
         }
-    }*/
+    }
 }

@@ -13,7 +13,7 @@ namespace Salamander.BasicTools
     [Action("SetReleases", Description = "Set the end releases of a linear element",
         IconBackground = Resources.URIs.ElementReleases,
         PreviewLayerType = typeof(ElementReleasesDisplayLayer))]
-    public class SetReleases : ModelDocumentActionBase
+    public class SetReleases : ModelActionBase
     {
         [ActionInput(1, "the element(s) to release")]
         [ActionOutput(1, "the released elements")]

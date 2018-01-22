@@ -68,6 +68,7 @@
   <ItemGroup>
     <Compile Include="Bool6DGoo.cs" />
     <Compile Include="Bool6DParam.cs" />
+    <Compile Include="CatalogueValueListAttributes.cs" />
     <Compile Include="Conversion.cs" />
     <Compile Include="ElementGoo.cs" />
     <Compile Include="ElementParam.cs" />

@@ -15,7 +15,7 @@ namespace Salamander.BasicTools
         "Create a new section property with a channel profile",
         IconBackground = Resources.URIs.ChannelSection,
         IconForeground = Resources.URIs.AddIcon)]
-    public class CreateChannelSection : ModelDocumentActionBase
+    public class CreateChannelSection : ModelActionBase
     {
 
         [ActionInput(1, "the name of the new section")]

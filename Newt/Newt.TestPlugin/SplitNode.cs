@@ -12,7 +12,7 @@ namespace Salamander.BasicTools
 {
     [Action("SplitNode", "Split a node into several nodes, one for each connected element.",
         IconBackground = Resources.URIs.SplitNode)]
-    public class SplitNode : ModelDocumentActionBase
+    public class SplitNode : ModelActionBase
     {
         [ActionInput(1, "the node to be split")]
         public Node Node { get; set; }
