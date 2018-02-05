@@ -225,18 +225,17 @@ namespace Salamander.RhinoCommon
             gO.GeometryFilter = ObjectType.Curve;
             gO.SetCommandPrompt(prompt);
             if (gO.GetMultiple(1, 0) == GetResult.Cancel) throw new OperationCanceledException("Operation cancelled by user");
+            var result = new LinearElementCollection();
             foreach (ObjRef rObj in gO.Objects())
             {
-                var result = new LinearElementCollection();
                 if (Host.Instance.Handles.Links.ContainsSecond(rObj.ObjectId))
                 {
                     Guid guid = Host.Instance.Handles.Links.GetFirst(rObj.ObjectId);
                     Element element = Core.Instance.ActiveDocument?.Model?.Elements[guid];
                     if (element != null && element is LinearElement) result.Add((LinearElement)element);
                 }
-                return result;
             }
-            return null;
+            return result;
         }
 
         public override PanelElement EnterPanelElement(string prompt = "Enter panel element")
