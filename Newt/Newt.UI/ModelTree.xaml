@@ -175,11 +175,12 @@
 
                 <!--<TreeViewItem Header="Coordinate Systems" 
                               DataContext="{Binding Path=CoordinateSystems}"
-                              MouseDoubleClick="CoordinateSystems_DoubleClick"/>
+                              MouseDoubleClick="CoordinateSystems_DoubleClick"/>-->
 
                 <TreeViewItem Header="Levels"
                               DataContext="{Binding Path=Levels}"
-                              MouseDoubleClick="Levels_DoubleClick"/>-->
+                              MouseDoubleClick="Levels_DoubleClick"
+                              Tag="{x:Static res:URIs.Level}"/>
 
                 <!--<TreeViewItem Header="Materials"
                               DataContext="{Binding Path=Materials}"

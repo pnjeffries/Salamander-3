@@ -232,7 +232,7 @@ namespace Salamander.Grasshopper
                     }
                     else if (pType.IsAssignableFrom(typeof(Plane)))
                     {
-                        pManager.AddPlaneParameter(name, nickname, description, GH_ParamAccess.item, NtoRC.Convert((Plane)pInfo.GetValue(action, null)));
+                        pManager.AddPlaneParameter(name, nickname, description, GH_ParamAccess.item, ToRC.Convert((Plane)pInfo.GetValue(action, null)));
                     }
                     else if (pType == typeof(Line))
                     {
@@ -600,11 +600,11 @@ namespace Salamander.Grasshopper
         /// <returns></returns>
         protected object FormatForOutput(object obj, ExecutionInfo exInfo)
         {
-            if (obj is Vector) return NtoRC.Convert((Vector)obj);
-            else if (obj is Curve) return NtoRC.Convert((Curve)obj);
-            else if (obj is CurveCollection) return NtoRC.Convert((CurveCollection)obj);
-            else if (obj is VertexGeometry) return NtoRC.Convert((VertexGeometry)obj);
-            else if (obj is VertexGeometryCollection) return NtoRC.Convert((VertexGeometryCollection)obj);
+            if (obj is Vector) return ToRC.Convert((Vector)obj);
+            else if (obj is Curve) return ToRC.Convert((Curve)obj);
+            else if (obj is CurveCollection) return ToRC.Convert((CurveCollection)obj);
+            else if (obj is VertexGeometry) return ToRC.Convert((VertexGeometry)obj);
+            else if (obj is VertexGeometryCollection) return ToRC.Convert((VertexGeometryCollection)obj);
             else if (obj is LinearElement) return new LinearElementGoo((LinearElement)obj, exInfo);
             else if (obj is LinearElementCollection) return LinearElementGoo.Convert((LinearElementCollection)obj);
             else if (obj is PanelElement) return new PanelElementGoo((PanelElement)obj);
@@ -705,6 +705,7 @@ namespace Salamander.Grasshopper
             else if (typeof(FilePath) == type) return typeof(string);
             else if (typeof(ActionTriggerInput) == type) return typeof(object);
             else if (typeof(CartesianCoordinateSystem).IsAssignableFrom(type)) return typeof(RC.Plane);
+            else if (typeof(CoordinateSystemReference).IsAssignableFrom(type)) return typeof(string);
             return type;
         }
 

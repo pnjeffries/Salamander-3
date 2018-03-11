@@ -9,6 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.ComponentModel;
 using Nucleus.UI;
+using Salamander.Selection;
 
 namespace Salamander.BasicTools
 {
@@ -17,7 +18,9 @@ namespace Salamander.BasicTools
     {
         #region Properties
 
-        private ResultsCase _Case = null;
+        private static readonly ResultsCase _AllCasesDummy = new ResultsCaseDummy("All");
+
+        private ResultsCase _Case = _AllCasesDummy;
 
         [AutoUIComboBox("AvailableCases", Order=1, Label = "Case")]
         public ResultsCase Case
@@ -38,16 +41,17 @@ namespace Salamander.BasicTools
             {
                 var result = new ResultsCaseCollection();
                 result.AddRange(Core.Instance.ActiveDocument.Model.LoadCases);
+                result.Add(_AllCasesDummy);
                 return result;
             }
         }
 
-        private double _ScalingFactor = 0.001;
+        private double _ScalingFactor = 1000;
 
         /// <summary>
         /// The factor by which load values are scaled to determine their display length
         /// </summary>
-        [AutoUISlider(2, Label = "Scaling Factor", Max = 0.01)]
+        [AutoUISlider(2, Label = "N/Unit Scale", Max = 10000, Min = 1)]
         public double ScalingFactor
         {
             get { return _ScalingFactor; }
@@ -79,7 +83,7 @@ namespace Salamander.BasicTools
                 if (Case == null || Case.Contains(source))
                 {
                     var mAv = CreateMeshAvatar();
-                    mAv.Builder.AddLoad(source, ScalingFactor);
+                    mAv.Builder.AddLoad(source, 1/ScalingFactor);
                     mAv.Brush = new ColourBrush(new Colour(0.3f, 0.8f, 0.2f, 0f)); //TODO: Make customisable
                     mAv.FinalizeMesh();
                     result.Add(mAv);

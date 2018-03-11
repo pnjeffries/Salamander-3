@@ -43,7 +43,7 @@ namespace Salamander.Grasshopper
         {
             get
             {
-                return NtoRC.Convert(Value.Geometry.BoundingBox);
+                return ToRC.Convert(Value.Geometry.BoundingBox);
             }
         }
 
@@ -165,10 +165,10 @@ namespace Salamander.Grasshopper
             {
                 if (Value.Geometry is FB.Line)
                     args.Pipeline.DrawLine(
-                        new Line(NtoRC.Convert(Value.Geometry.StartPoint), NtoRC.Convert(Value.Geometry.EndPoint)), args.Color);
+                        new Line(ToRC.Convert(Value.Geometry.StartPoint), ToRC.Convert(Value.Geometry.EndPoint)), args.Color);
                 else if (Value.Geometry is FB.Arc)
                     args.Pipeline.DrawArc(
-                        new Arc(NtoRC.Convert(Value.Geometry.StartPoint), NtoRC.Convert(Value.Geometry.PointAt(0.5)), NtoRC.Convert(Value.Geometry.EndPoint)),
+                        new Arc(ToRC.Convert(Value.Geometry.StartPoint), ToRC.Convert(Value.Geometry.PointAt(0.5)), ToRC.Convert(Value.Geometry.EndPoint)),
                         args.Color);
 
                 args.Pipeline.DrawMeshWires(SectionMesh, args.Color);
@@ -198,14 +198,14 @@ namespace Salamander.Grasshopper
             }
             else if (typeof(Q).IsAssignableFrom(typeof(GH_Curve)))
             {
-                target = (Q)((object)new GH_Curve(NtoRC.Convert(Value.Geometry)));
+                target = (Q)((object)new GH_Curve(ToRC.Convert(Value.Geometry)));
                 return true;
             }
             else if (typeof(Q).IsAssignableFrom(typeof(GH_Line)))
             {
                 if (Value.Geometry is FB.Line)
                 {
-                    target = (Q)((object)new GH_Line(NtoRC.ConvertToLine((FB.Line)Value.Geometry)));
+                    target = (Q)((object)new GH_Line(ToRC.ConvertToLine((FB.Line)Value.Geometry)));
                     return true;
                 } 
             }
@@ -219,13 +219,13 @@ namespace Salamander.Grasshopper
             }
             else if (typeof(Q).IsAssignableFrom(typeof(GH_Surface)))
             {
-                var surface = NtoRC.ConvertToExtrusion(Value);
+                var surface = ToRC.ConvertToExtrusion(Value);
                 target = (Q)(object)new GH_Surface(surface);
                 return surface != null;
             }
             else if (typeof(Q).IsAssignableFrom(typeof(GH_Brep)))
             {
-                target = (Q)(object)new GH_Brep(NtoRC.ConvertToBrep(Value));
+                target = (Q)(object)new GH_Brep(ToRC.ConvertToBrep(Value));
                 return true;
             }
             return base.CastTo<Q>(ref target);

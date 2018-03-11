@@ -15,7 +15,7 @@ namespace Salamander.Rhino
         protected override void CalculateBoundingBox(CalculateBoundingBoxEventArgs e)
         {
             base.CalculateBoundingBox(e);
-            RC.BoundingBox bBox = NtoRC.Convert(Core.Instance.ActiveDocument.Model.BoundingBox);
+            RC.BoundingBox bBox = ToRC.Convert(Core.Instance.ActiveDocument.Model.BoundingBox);
             e.IncludeBoundingBox(bBox);
         }
 

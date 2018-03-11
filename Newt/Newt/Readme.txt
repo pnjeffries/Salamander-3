@@ -1,12 +1,12 @@
 ﻿Salamander 3: Next Engineering Workflow Tool
-Open Beta version 0.3.2
-© Paul Jeffries 2016-2017
+Open Beta version 0.4.1
+© Paul Jeffries 2016-2018
 @pnjeffries
 
 Built using the .Nucleus framework also by Paul Jeffries.
 
 Development supported by Ramboll Computational Design
-http://www.ramboll.co.uk/
+http://blog.ramboll.com/rcd/
 
 To report bugs and provide feedback, contact paul.jeffries@ramboll.co.uk.
 
@@ -16,6 +16,8 @@ To report bugs and provide feedback, contact paul.jeffries@ramboll.co.uk.
 Salamander is a structural modelling plugin which links the modelling environment of Rhino and Grasshopper to the analytical capabilities of Autodesk Robot Structual Analysis and Oayss GSA.
 
 The tool is still early in development and is currently in open Beta for community testing and feedback.  Be aware that serious bugs may still be present and that the tool may undergo major alterations in future - at this early stage save file compatibility with future versions is not guaranteed.
+
+Note that interoperability links to different software packages are in different states of development and not all data will import/export successfully.  See 'Current Interoperability Links.pdf' for details of the current development status for each supported application.
 
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
@@ -122,12 +124,13 @@ v0.3.2
 - Bugfix: Crash when re-opening a data table previously closed in edit mode with an invalid entry.
 - Bugfix: Pre-export cleanup was deleting unconnected nodes erroneously.
 
-v0.4.0
+v0.4.0 (Basic Loading)
 - Loading interface framework added.
 - Creation commands/components added for node loads, gravity loads, linear and panel element UDLs and thermal loads.
 - Export of above load types to GWA added.
 - Reading and writing of loads from/to Robot implemented.
 - Loading display layer added.
+- Display layer options interface generation added.
 - New 'Create Column' command/component.
 - New 'Generate Beam Framing' command/component.
 - Section catalogue drop-down organised into sub-groups.
@@ -137,3 +140,25 @@ v0.4.0
 - Text to Section component now outputs the interior void curve of the created profile geometry.
 - CreatePanelElement command/component now allows manual drawing of panel edges via points.
 - Original panel creation by filling a curve is available via new CreatePanelElementInCurve command/component.
+- 'Preview Linear Element' component added.
+- Any manually-run command will now show the sidebar if it is not already visible.
+- Command sidebar options now shows the current command's icon.
+- Data tables no longer display ID numbers for unindexed data.
+- 'Current Interop Links' documentation added.
+- Robot exporter will now only close Robot if the file has been written successfully.  Otherwise it will remain open to allow for manual saving.
+
+v0.4.1 (Bugfixapalooza)
+ - Bugfix: Panel element parameter component was incorrectly using linear element goo.
+ - Bugfix: Panel loads were being incorrectly written to Robot.
+ - Bugfix: Crash when reading Robot files with more load cases than loads.
+ - Bugfix: Crash when serializing gravity loads.
+ - Bugfix: Custom load cases were not being undeleted when regenerated.
+
+ v0.4.2
+ - Levels table added to the model tree.
+ - New CreateLevel command/component.
+ - CPlaneToSalLevel Rhino command added.
+ - New DuplicateElementLoading tool to copy load conditions from one element to others.
+ - Level export added to Robot, GSA and ETABS exporters.
+ - Sets export added to ETABS exporter.
+ - Bugfix: Error in object creation history access when null inputs are stored.

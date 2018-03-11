@@ -41,7 +41,7 @@ namespace Salamander.Rhino
         {
             set
             {
-                RenderCurve = NtoRC.Convert(value);
+                RenderCurve = ToRC.Convert(value);
             }
         }
 
@@ -62,7 +62,7 @@ namespace Salamander.Rhino
                 {
                     rParams.Display.DrawCurve(RenderCurve, Material.Diffuse, 3);
                 }
-                double arrS = NtoRC.Convert(0.3);
+                double arrS = ToRC.Convert(0.3);
                 if (ArrowStart) rParams.Display.DrawArrowHead(RenderCurve.PointAtStart - arrS*RenderCurve.TangentAtStart, -RenderCurve.TangentAtStart, Material.Diffuse, 0, arrS);
                 if (ArrowEnd) rParams.Display.DrawArrowHead(RenderCurve.PointAtEnd + arrS * RenderCurve.TangentAtEnd, RenderCurve.TangentAtEnd, Material.Diffuse, 0, arrS);
                 return true;

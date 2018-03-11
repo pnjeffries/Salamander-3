@@ -9,7 +9,7 @@
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
     <UserControl.Resources>
-        
+        <converters:CountVisibilityConverter x:Key="CountVisiblityConverter"/>
     </UserControl.Resources>
     <Grid Name="LayoutRoot" Background="DarkGray">
         <fb:AutoUIDataGrid x:Name="DataGrid" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
@@ -22,7 +22,11 @@
                 <DataTemplate>
                     <TextBlock Text="{Binding RelativeSource={RelativeSource Mode=FindAncestor, 
                                       AncestorType={x:Type DataGridRow}}, 
-                                      Path=Item.NumericID}" Padding="5,2,10,2"/>
+                                      Path=Item.NumericID, StringFormat={}{0:##;;}}" 
+                               Padding="5,2,10,2"/>
+                    <!--Visibility="{Binding RelativeSource={RelativeSource Mode=FindAncestor, 
+                                      AncestorType={x:Type DataGridRow}}, 
+                                      Path=Item.NumericID, Converter={StaticResource CountVisiblityConverter}}"/>-->
                 </DataTemplate>
             </fb:AutoUIDataGrid.RowHeaderTemplate>
             <fb:AutoUIDataGrid.RowStyle>

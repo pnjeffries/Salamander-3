@@ -219,7 +219,7 @@ namespace Salamander.Rhino
                             //Create copy of object:
                             if (mO is Element)
                             {
-                                VertexGeometry geometry = RCtoN.Convert(e.TheObject.Geometry);
+                                VertexGeometry geometry = FromRC.Convert(e.TheObject.Geometry);
                                 Element element = null;
                                 if (mO is LinearElement)
                                 {
@@ -267,7 +267,7 @@ namespace Salamander.Rhino
                                 {
                                     Node node = ((Node)mO).Duplicate();
                                     RC.Point pt = (RC.Point)e.TheObject.Geometry;
-                                    node.Position = RCtoN.Convert(pt).Position;
+                                    node.Position = FromRC.Convert(pt).Position;
                                     RhinoOutput.SetOriginalIDUserString(e.ObjectId);
                                     Links.Set(node.GUID, e.ObjectId);
                                     Core.Instance.ActiveDocument.Model.Add(node);
@@ -307,7 +307,7 @@ namespace Salamander.Rhino
                     if (geometry is RC.Point)
                     {
                         RC.Point rPt = (RC.Point)geometry;
-                        Vector pos = RCtoN.Convert(rPt.Location);
+                        Vector pos = FromRC.Convert(rPt.Location);
                         node.MoveTo(pos, true, _ReplacedElements);
                     }
                 }
@@ -335,12 +335,12 @@ namespace Salamander.Rhino
                     if (mObj is Element)
                     {
                         Element element = (Element)mObj;
-                        VertexGeometry vG = RCtoN.Convert(geometry);
+                        VertexGeometry vG = FromRC.Convert(geometry);
                         if (vG == null && geometry is RC.Curve)
                         {
                             // If curve not convertable, reduce to straight line:
                             RC.Curve rCrv = (RC.Curve)geometry;
-                            vG = new Line(RCtoN.Convert(rCrv.PointAtStart), RCtoN.Convert(rCrv.PointAtEnd));
+                            vG = new Line(FromRC.Convert(rCrv.PointAtStart), FromRC.Convert(rCrv.PointAtEnd));
                         }
                         if (vG != null)
                         {

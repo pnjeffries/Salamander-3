@@ -32,8 +32,8 @@ namespace Salamander.Grasshopper
         private Conversion()
         {
             //Load default converters
-            LoadConverters(typeof(NtoRC));
-            LoadConverters(typeof(RCtoN));
+            LoadConverters(typeof(ToRC));
+            LoadConverters(typeof(FromRC));
         }
 
         #endregion

@@ -47,6 +47,8 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ActionIconBackgroundConverter.cs" />
+    <Compile Include="ActionIconForegroundConverter.cs" />
     <Compile Include="DataTable.xaml.cs">
       <DependentUpon>DataTable.xaml</DependentUpon>
     </Compile>

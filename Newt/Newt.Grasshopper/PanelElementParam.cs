@@ -11,7 +11,7 @@ using Rhino.DocObjects;
 
 namespace Salamander.Grasshopper
 {
-    public class PanelElementParam : SalamanderPreviewParamBase<LinearElementGoo>, IGH_BakeAwareObject
+    public class PanelElementParam : SalamanderPreviewParamBase<PanelElementGoo>, IGH_BakeAwareObject
     {
         #region Properties
 

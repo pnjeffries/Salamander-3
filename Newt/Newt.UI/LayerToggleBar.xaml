@@ -9,6 +9,7 @@
              d:DesignHeight="300" d:DesignWidth="300">
     <UserControl.Resources>
         <converters:VisibilityConverter x:Key="VisibilityConverter"/>
+        <converters:IAutoUIHostableVisibilityConverter x:Key="IAutoUIHostableVisibilityConverter"/>
     </UserControl.Resources>
     <Grid>
         <ToolBarTray Grid.Row="3">
@@ -27,6 +28,8 @@
                                     <StackPanel>
                                         <TextBlock Text="{Binding Path=Name}" FontWeight="Bold"/>
                                         <TextBlock Text="{Binding Path=Description}"/>
+                                        <TextBlock Text="Right-click for options" Opacity="0.5"
+                                                   Visibility="{Binding Converter={StaticResource IAutoUIHostableVisibilityConverter}}"/>
                                     </StackPanel>
                                 </ToolTip>
                             </ToggleButton.ToolTip>

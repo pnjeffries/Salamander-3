@@ -50,6 +50,7 @@
     <Compile Include="CleanModel.cs" />
     <Compile Include="CreateColumn.cs" />
     <Compile Include="CreateGravityLoad.cs" />
+    <Compile Include="CreateLevel.cs" />
     <Compile Include="CreateLinearElementLoad.cs" />
     <Compile Include="CreateNodeLoad.cs" />
     <Compile Include="CreatePanelElementInCurve.cs" />
@@ -58,6 +59,7 @@
     <Compile Include="CreateVectorNodeLoad.cs" />
     <Compile Include="CreateWall.cs" />
     <Compile Include="DeformationDisplayLayer.cs" />
+    <Compile Include="DuplicateElementLoading.cs" />
     <Compile Include="ElementNumberDisplayLayer.cs" />
     <Compile Include="ElementReleasesDisplayLayer.cs" />
     <Compile Include="GenerateBeamFraming.cs" />
@@ -91,6 +93,7 @@
     <Compile Include="NodeNumberDisplayLayer.cs" />
     <Compile Include="OrientateElementToVector.cs" />
     <Compile Include="PanelThicknessDisplayLayer.cs" />
+    <Compile Include="PreviewLinearElement.cs" />
     <Compile Include="Relax.cs" />
     <Compile Include="SaveElementSelection.cs" />
     <Compile Include="SaveNodeSelection.cs" />

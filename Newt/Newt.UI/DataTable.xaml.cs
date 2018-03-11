@@ -197,9 +197,10 @@ namespace Salamander.UI
         private void DataGrid_Unloaded(object sender, RoutedEventArgs e)
         {
             var grid = (DataGrid)sender;
-            grid.CommitEdit(DataGridEditingUnit.Cell, true);
-            grid.CommitEdit(DataGridEditingUnit.Row, true);
-            grid.CancelEdit();
+            bool b1 = grid.CommitEdit(DataGridEditingUnit.Cell, true);
+            bool b2 = grid.CommitEdit(DataGridEditingUnit.Row, true);
+            bool b3 = grid.CancelEdit(DataGridEditingUnit.Cell);
+            bool b4 = grid.CancelEdit(DataGridEditingUnit.Row);
         }
     }
 }

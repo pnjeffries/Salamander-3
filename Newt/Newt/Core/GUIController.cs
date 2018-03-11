@@ -99,5 +99,10 @@ namespace Salamander
         /// <returns></returns>
         public abstract bool? ShowTextDialog(string title, ref string text, IList<string> suggestions = null);
 
+        /// <summary>
+        /// Show the UI which allows manual interaction with action inputs
+        /// </summary>
+        public abstract void ShowActionInputUI();
+
     }
 }

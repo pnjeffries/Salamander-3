@@ -34,7 +34,7 @@ namespace Salamander.Rhino
                 {
                     Point3d basePt;
                     TryGetBasePoint(out basePt);
-                    pParam = new PreviewParameters(true, null, RCtoN.Convert(e.CurrentPoint), RCtoN.Convert(basePt));
+                    pParam = new PreviewParameters(true, null, FromRC.Convert(e.CurrentPoint), FromRC.Convert(basePt));
                 }
                 else
                 {
@@ -43,9 +43,9 @@ namespace Salamander.Rhino
                     {
                         sPts.Add(pt);
                         // Draw points:
-                        e.Display.DrawPoint(NtoRC.Convert(pt), PointStyle.X, 3, System.Drawing.Color.Orange);
+                        e.Display.DrawPoint(ToRC.Convert(pt), PointStyle.X, 3, System.Drawing.Color.Orange);
                     }
-                    sPts.Add(RCtoN.Convert(e.CurrentPoint));
+                    sPts.Add(FromRC.Convert(e.CurrentPoint));
                     pParam = new PreviewParameters(true, null, sPts);
 
                     

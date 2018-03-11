@@ -27,7 +27,7 @@ namespace Salamander.Rhino
             if (parameters is RhinoRenderingParameters && _Label != null)
             {
                 RhinoRenderingParameters rParams = (RhinoRenderingParameters)parameters;
-                var scrPt = rParams.Display.Viewport.WorldToClient(NtoRC.Convert(_Label.Position));
+                var scrPt = rParams.Display.Viewport.WorldToClient(ToRC.Convert(_Label.Position));
                 scrPt.X += 2;
                 scrPt.Y -= 2;
                 rParams.Display.Draw2dText(_Label.Text, System.Drawing.Color.GhostWhite, scrPt, !_Label.HorizontalSetOut.IsEdge());

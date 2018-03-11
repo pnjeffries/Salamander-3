@@ -112,6 +112,11 @@ namespace Salamander.Resources
         public const string CoordinateSystem = Base + "CoordinateSystem.png";
 
         /// <summary>
+        /// The URI of the standard Duplicate Loads icon
+        /// </summary>
+        public const string CopyLoads = Base + "CopyLoads.png";
+
+        /// <summary>
         /// The URI of the standard Direction icon
         /// </summary>
         public const string Direction = Base + "Direction.png";
@@ -185,6 +190,16 @@ namespace Salamander.Resources
         /// The URI of the GSA logo icon
         /// </summary>
         public const string GSA = Base + "GSA.png";
+
+        /// <summary>
+        /// The URI of the standard Level icon
+        /// </summary>
+        public const string Level = Base + "Level.png";
+
+        /// <summary>
+        /// The URI of the small Level icon
+        /// </summary>
+        public const string LevelSmall = Base + "LevelSmall.png";
 
         /// <summary>
         /// The URI of the standard Linear Element icon
@@ -290,6 +305,11 @@ namespace Salamander.Resources
         /// The URI of the Pratt truss image
         /// </summary>
         public const string PrattTruss = Base + "PrattTruss.png";
+
+        /// <summary>
+        /// The URI of the standard preview overlay icon
+        /// </summary>
+        public const string PreviewIcon = Base + "PreviewIcon.png";
 
         /// <summary>
         /// The URI of the standard rectangular section icon

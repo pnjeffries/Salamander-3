@@ -43,9 +43,10 @@ namespace Salamander.RobotIOPlugin
                 var robot = new RobotController();
                 robot.Message += HandleMessage;
                 RobotIDMappingTable idMap = new RobotIDMappingTable();
-                robot.WriteModelToRobot(FilePath, Document.Model, ref idMap);
-                robot.Close();
-                robot.Release();
+                bool result = robot.WriteModelToRobot(FilePath, Document.Model, ref idMap);
+                if (result)
+                    robot.Close();
+                robot.Release(result);
                 Document.IDMappings[FilePath] = idMap;
                 Result = true;
             }

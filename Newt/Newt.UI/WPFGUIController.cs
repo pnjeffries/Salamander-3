@@ -179,5 +179,10 @@ namespace Salamander.UI
         {
             return TextComboDialog.Show(title, ref text, suggestions);
         }
+
+        public override void ShowActionInputUI()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

@@ -19,7 +19,7 @@ namespace Salamander.BasicTools
         )]
     public class CreatePanelElement : ModelActionBase
     {
-        [ActionInput(1, "the polyline points that describe the outside edge of the panel")]
+        [ActionInput(1, "the polyline points that describe the outside edge of the panel", OneByOne = false)]
         public IList<Vector> Points { get; set; }
 
         [AutoUIComboBox("AvailableBuildUps")]

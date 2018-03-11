@@ -37,13 +37,13 @@ namespace Salamander.Rhino
             {
                 if (!lEl.IsDeleted)
                 {
-                    Extrusion extrusion = NtoRC.ConvertToExtrusion(lEl);
+                    Extrusion extrusion = ToRC.ConvertToExtrusion(lEl);
                     Guid guid = Guid.Empty;
                     if (extrusion != null)
                         guid = RhinoOutput.BakeExtrusion(extrusion);
                     else
                     {
-                        Brep brep = NtoRC.ConvertToBrep(lEl);
+                        Brep brep = ToRC.ConvertToBrep(lEl);
                         if (brep != null) guid = RhinoOutput.Bake(brep);
                     }
                     if (guid != Guid.Empty)

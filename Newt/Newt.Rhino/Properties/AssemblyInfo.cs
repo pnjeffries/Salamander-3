@@ -24,7 +24,7 @@ using Rhino.PlugIns;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
 [assembly: AssemblyProduct("Salamander 3 Rhino Plugin")]
-[assembly: AssemblyCopyright("Copyright © Paul Jeffries 2016-2017")]
+[assembly: AssemblyCopyright("Copyright © Paul Jeffries 2016-2018")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -46,5 +46,5 @@ using Rhino.PlugIns;
 // You can specify all the values or you can default the Build and Revision Numbers 
 // by using the '*' as shown below:
 // [assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyVersion("0.3.2.38")]
-[assembly: AssemblyFileVersion("0.3.2.38")]
+[assembly: AssemblyVersion("0.4.1.0")]
+[assembly: AssemblyFileVersion("0.4.1.0")]

@@ -44,7 +44,17 @@ namespace Salamander.BasicToolsGH
                 }
                 else PrintLine("No icon.");
             }
+            SaveCombination(Resources.URIs.Level, Resources.URIs.GetIcon, "CPlaneToLevel.png");
             return true;
+        }
+
+        public void SaveCombination(string iconBackground, string iconForeground, string filename)
+        {
+            Bitmap icon = IconResourceHelper.CombinedBitmapFromURIs(iconBackground, iconForeground);
+            if (icon != null)
+            {
+                icon.Save("C:/TEMP/" + filename);
+            }
         }
 
         public Bitmap GenerateIcon(Type actionType)

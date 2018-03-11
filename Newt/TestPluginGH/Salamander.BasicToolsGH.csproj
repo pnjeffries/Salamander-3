@@ -80,6 +80,7 @@
     <Compile Include="CreateGravityLoadComponent.cs" />
     <Compile Include="CreateISectionComponent.cs" />
     <Compile Include="CreateColumnComponent.cs" />
+    <Compile Include="CreateLevelComponent.cs" />
     <Compile Include="CreateLinearElementLoadComponent.cs" />
     <Compile Include="CreateNodeComponent.cs" />
     <Compile Include="CreateNodeLoadComponent.cs" />
@@ -104,6 +105,7 @@
     <Compile Include="OrientateElementToVectorComponent.cs" />
     <Compile Include="PanelElementParam.cs" />
     <Compile Include="PanelFamilyParam.cs" />
+    <Compile Include="PreviewLinearElementComponent.cs" />
     <Compile Include="RelaxComponent.cs" />
     <Compile Include="ChannelProfileCatalogueValueList.cs" />
     <Compile Include="RHSProfileCatalogueValueList.cs" />

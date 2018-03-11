@@ -54,6 +54,7 @@
     <Reference Include="Microsoft.CSharp" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CPlaneToSalLevel.cs" />
     <Compile Include="SalamanderCommand.cs" />
     <Compile Include="SalBakePanelsCommand.cs" />
     <Compile Include="SalBakeSectionExtrusionsCommand.cs" />

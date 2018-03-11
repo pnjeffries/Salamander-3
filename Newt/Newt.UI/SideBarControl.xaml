@@ -21,12 +21,14 @@
             <converters:VisibilityConverter x:Key="VisibilityConverter"/>
             <converters:AllZeroVisibilityConverter x:Key="AllZeroVisibilityConverter"/>
             <converters:IsZeroConverter x:Key="IsZeroConverter"/>
+            <local:ActionIconBackgroundConverter x:Key="ActionIconBackgroundConverter"/>
+            <local:ActionIconForegroundConverter x:Key="ActionIconForegroundConverter"/>
         </ResourceDictionary>
     </UserControl.Resources>
     <Grid Name="LayoutBase">
         <Grid.RowDefinitions>
             
-            <RowDefinition Height="100"/>
+            <RowDefinition Height="130"/>
             <RowDefinition Height="5"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="Auto"/>
@@ -44,10 +46,22 @@
                     <Expander IsExpanded="True" DataContext="{Binding Path=Actions.CurrentAction}"
                     >
                         <Expander.Header>
-                            <TextBlock Grid.Column="1" Text="{Binding Path=CommandName, StringFormat='Active Command: {0}'}"
+                                <StackPanel Orientation="Horizontal">
+
+                                    <Grid>
+                                        <!--Composite Icon-->
+                                        <Image Source="{Binding Converter={StaticResource ActionIconBackgroundConverter}}"
+                                               MaxWidth="16" MaxHeight="16">
+                                        </Image>
+                                        <Image Source="{Binding Converter={StaticResource ActionIconForegroundConverter}}" 
+                                               MaxWidth="16" MaxHeight="16"/>
+                                    </Grid>
+
+                                    <TextBlock Text="{Binding Path=CommandName, StringFormat='Active Command: {0}'}"
                                 TextTrimming="CharacterEllipsis"
                                                ></TextBlock>
-                        </Expander.Header>
+                                </StackPanel>
+                            </Expander.Header>
                         <!--<Border DataContext="{Binding Path=Actions.CurrentAction}">-->
                         <fb:AutoUIStackPanel></fb:AutoUIStackPanel>
                         <!--</Border>-->

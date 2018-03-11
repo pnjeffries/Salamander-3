@@ -13,7 +13,7 @@ using Rhino.DocObjects;
 
 namespace Salamander.Grasshopper
 {
-    class PanelElementGoo : GH_Goo<PanelElement>, ISalamander_Goo, IGH_PreviewData, IGH_BakeAwareData
+    public class PanelElementGoo : GH_Goo<PanelElement>, ISalamander_Goo, IGH_PreviewData, IGH_BakeAwareData
     {
         #region Properties
 
@@ -37,7 +37,7 @@ namespace Salamander.Grasshopper
         {
             get
             {
-                return NtoRC.Convert(Value.Geometry.BoundingBox);
+                return ToRC.Convert(Value.Geometry.BoundingBox);
             }
         }
 
@@ -190,13 +190,13 @@ namespace Salamander.Grasshopper
             }
             else if (typeof(Q).IsAssignableFrom(typeof(GH_Surface)))
             {
-                var surface = NtoRC.Convert(Value.Geometry) as Surface;
+                var surface = ToRC.Convert(Value.Geometry) as Surface;
                 target = (Q)(object)new GH_Surface(surface);
                 return surface != null;
             }
             else if (typeof(Q).IsAssignableFrom(typeof(GH_Brep)))
             {
-                var surface = NtoRC.Convert(Value.Geometry) as Brep;
+                var surface = ToRC.Convert(Value.Geometry) as Brep;
                 target = (Q)(object)new GH_Brep(surface);
                 return surface != null;
             }

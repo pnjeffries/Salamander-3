@@ -55,7 +55,7 @@ namespace Salamander.BasicTools
         public override bool Execute(ExecutionInfo exInfo = null)
         {
             LoadCase lCase = Model.LoadCases.FindByName(Case);
-            if (lCase == null) lCase = Model.Create.LoadCase(Case, exInfo);
+            if (lCase == null || lCase.IsDeleted) lCase = Model.Create.LoadCase(Case, exInfo);
             LinearElementLoad nLoad = Model.Create.LinearElementLoad(lCase, exInfo);
             nLoad.Name = Name;
             nLoad.Axes = Axes;

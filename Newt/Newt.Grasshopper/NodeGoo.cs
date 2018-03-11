@@ -50,7 +50,7 @@ namespace Salamander.Grasshopper
         {
             get
             {
-                Point3d pt = NtoRC.Convert(Value.Position);
+                Point3d pt = ToRC.Convert(Value.Position);
                 return new BoundingBox(pt, pt);
             }
         }
@@ -136,7 +136,7 @@ namespace Salamander.Grasshopper
         {
             if (Value != null)
             {
-                args.Pipeline.DrawPoint(NtoRC.Convert(Value.Position), RD.PointStyle.X, 8, args.Color);
+                args.Pipeline.DrawPoint(ToRC.Convert(Value.Position), RD.PointStyle.X, 8, args.Color);
                 /*Mesh mesh = SupportMesh;
                 if (mesh != null) args.Pipeline.DrawMeshWires(mesh, args.Color);*/
             }
@@ -156,7 +156,7 @@ namespace Salamander.Grasshopper
         {
             if (typeof(Q).IsAssignableFrom(typeof(GH_Point)))
             {
-                target = (Q)((object)new GH_Point(NtoRC.Convert(Value.Position)));
+                target = (Q)((object)new GH_Point(ToRC.Convert(Value.Position)));
                 return true;
             }
             return base.CastTo<Q>(ref target);

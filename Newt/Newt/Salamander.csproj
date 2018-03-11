@@ -80,6 +80,7 @@
     <Compile Include="Selection\NodeSelection.cs" />
     <Compile Include="Selection\PanelFamilyDummy.cs" />
     <Compile Include="Selection\BuildUpFamilySelection.cs" />
+    <Compile Include="Selection\ResultsCaseDummy.cs" />
     <Compile Include="Selection\SectionProfileDummy.cs" />
     <Compile Include="Selection\SelectionSet.cs" />
     <Compile Include="Display\Avatar.cs" />
@@ -114,6 +115,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\Salamander3_64x64.png" />
+    <None Include="Current Interop Links.pdf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="Resources\SectLib.csv">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
@@ -319,6 +323,16 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\Wall.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\PreviewIcon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Level.png" />
+    <Resource Include="Resources\Level_Small.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\CopyLoads.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

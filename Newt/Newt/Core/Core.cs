@@ -379,6 +379,7 @@ namespace Salamander
         /// successfully, else null.</returns>
         public IAction Execute(string commandName)
         {
+            Host.GUI.ShowActionInputUI();
             return Actions.ExecuteAction(commandName);
         }
 

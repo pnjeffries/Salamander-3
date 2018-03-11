@@ -56,6 +56,9 @@ namespace Salamander.Rhino
 
         }
 
-        
+        public override void ShowActionInputUI()
+        {
+            CreateHostDockPanel();
+        }
     }
 }

@@ -56,7 +56,7 @@ namespace Salamander.Rhino
 
             set
             {
-                Material = NtoRC.Convert(value);
+                Material = ToRC.Convert(value);
             }
         }
 
