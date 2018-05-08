@@ -210,7 +210,9 @@ namespace Salamander.Actions
         /// </summary>
         /// <param name="action"></param>
         /// <returns></returns>
-        public IAction ExecuteAction(IAction action, object context = null, bool performPostExecutionOperations = true, bool promptForInputs = true)
+        public IAction ExecuteAction(IAction action, object context = null, 
+            bool performPostExecutionOperations = true, bool promptForInputs = true,
+            bool chain = false)
         {
             if (action != null)
             {
@@ -226,7 +228,7 @@ namespace Salamander.Actions
                     {
                         action.CopyPersistentValuesFrom(PreviousActions[commandName]);
                     }
-                    if (!promptForInputs || action.PromptUserForInputs())
+                    if (!promptForInputs || action.PromptUserForInputs(chain))
                     {
                         if (action.PreExecutionOperations())
                         {

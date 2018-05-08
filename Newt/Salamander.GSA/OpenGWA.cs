@@ -25,7 +25,7 @@ namespace Salamander.GSA
         {
             var parser = new GWAParser();
             GSAIDMappingTable idMap = new GSAIDMappingTable();
-            Model model = parser.ReadGWAFile(FilePath, ref idMap);
+            Model model = parser.ReadGWAFile(FilePath, ref idMap, null, Core.Instance.SectionLibrary);
             Document = new ModelDocument(FilePath, model);
             Document.IDMappings[FilePath] = idMap;
 

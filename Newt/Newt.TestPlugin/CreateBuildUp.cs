@@ -21,6 +21,9 @@ namespace Salamander.BasicTools
         [ActionInput(2, "the thickness of the build-up", Manual = false)]
         public double Thickness { get; set; } = 0.1;
 
+        [ActionInput(3, "the material of the build-up", Required = false, Manual = false)]
+        public Material Material { get; set; }
+
         [ActionOutput(2, "The output panel build-up")]
         public BuildUpFamily BuildUp { get; set; }
 
@@ -28,7 +31,7 @@ namespace Salamander.BasicTools
         {
             BuildUp = Model.Create.BuildUpFamily(Name, exInfo);
             BuildUp.Layers.Clear();
-            BuildUp.Layers.Add(new BuildUpLayer(Thickness, null));
+            BuildUp.Layers.Add(new BuildUpLayer(Thickness, Material));
             return true;
         }
 

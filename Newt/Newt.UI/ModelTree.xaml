@@ -112,10 +112,11 @@
                                     <ContentPresenter x:Name="PART_Header" ContentSource="Header" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" MinWidth="20" VerticalAlignment="Center"/>
                                     <TextBlock Margin="3,0,0,0"  VerticalAlignment="Center">
                                         <TextBlock.Text>
-                                            <MultiBinding Converter="{StaticResource UndeletedCountConverter}" StringFormat="({0})">
+                                            <Binding Path="Count" UpdateSourceTrigger="PropertyChanged" StringFormat="({0})"></Binding>
+                                            <!--<MultiBinding Converter="{StaticResource UndeletedCountConverter}" StringFormat="({0})">
                                                 <Binding UpdateSourceTrigger="PropertyChanged"></Binding>
-                                                <Binding Path="Count" UpdateSourceTrigger="PropertyChanged"></Binding>
-                                            </MultiBinding>
+                                                
+                                            </MultiBinding>-->
                                         </TextBlock.Text>
                                     </TextBlock>
                                 </StackPanel>
@@ -182,9 +183,10 @@
                               MouseDoubleClick="Levels_DoubleClick"
                               Tag="{x:Static res:URIs.Level}"/>
 
-                <!--<TreeViewItem Header="Materials"
+                <TreeViewItem Header="Materials"
                               DataContext="{Binding Path=Materials}"
-                              MouseDoubleClick="Materials_DoubleClick"/>-->
+                              MouseDoubleClick="Materials_DoubleClick"
+                              Tag="{x:Static res:URIs.MaterialSmall}"/>
 
                 <TreeViewItem Header="Families" 
                               DataContext="{Binding Path=Families}"
@@ -213,7 +215,8 @@
                               Tag="{x:Static res:URIs.SetSmall}"/>
 
                 <TreeViewItem Header="Loading"
-                              Tag="{x:Static res:URIs.LoadSmall}">
+                              Tag="{x:Static res:URIs.LoadSmall}"
+                              IsExpanded="True">
 
                     <TreeViewItem Header="Load Cases"
                               DataContext="{Binding Path=LoadCases}"

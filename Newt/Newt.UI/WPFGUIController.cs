@@ -10,6 +10,7 @@ using System.Windows;
 using Nucleus.UI;
 using Nucleus.WPF;
 using System.Windows.Interop;
+using Nucleus.Alerts;
 
 namespace Salamander.UI
 {
@@ -183,6 +184,16 @@ namespace Salamander.UI
         public override void ShowActionInputUI()
         {
             throw new NotImplementedException();
+        }
+
+        public override AlertLog ShowAlertLog(string title = "Log")
+        {
+            var log = new AsyncAlertLog();
+            var window = new AlertsLogDialog(log);
+            log.Window = window;
+            window.Title = title;
+            window.Show();
+            return log;
         }
     }
 }

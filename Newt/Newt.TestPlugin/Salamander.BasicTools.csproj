@@ -52,6 +52,9 @@
     <Compile Include="CreateGravityLoad.cs" />
     <Compile Include="CreateLevel.cs" />
     <Compile Include="CreateLinearElementLoad.cs" />
+    <Compile Include="CreateLinearElementPointLoad.cs" />
+    <Compile Include="CreateLoadCase.cs" />
+    <Compile Include="CreateMaterial.cs" />
     <Compile Include="CreateNodeLoad.cs" />
     <Compile Include="CreatePanelElementInCurve.cs" />
     <Compile Include="CreatePanelElementLoad.cs" />
@@ -64,6 +67,7 @@
     <Compile Include="ElementReleasesDisplayLayer.cs" />
     <Compile Include="GenerateBeamFraming.cs" />
     <Compile Include="GenerateSimpleFrame.cs" />
+    <Compile Include="GetAllMaterials.cs" />
     <Compile Include="GetElementSelection.cs" />
     <Compile Include="GetNodeSelection.cs" />
     <Compile Include="ImportModelAction.cs" />
@@ -106,7 +110,7 @@
     <Compile Include="GWAExportAction.cs" />
     <Compile Include="MakeElementsAction.cs" />
     <Compile Include="CreateRectangularSectionAction.cs" />
-    <Compile Include="CreateLinearElementAction.cs" />
+    <Compile Include="CreateLinearElement.cs" />
     <Compile Include="ElementSectionDisplayLayer.cs" />
     <Compile Include="NodeSupportDisplayLayer.cs" />
     <Compile Include="OpenAction.cs" />

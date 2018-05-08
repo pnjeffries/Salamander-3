@@ -8,6 +8,8 @@ using Nucleus.Actions;
 using Nucleus.Base;
 using Nucleus.Robot;
 using Nucleus.Model;
+using System.Threading;
+using Nucleus.Alerts;
 
 namespace Salamander.RobotIOPlugin
 {
@@ -39,18 +41,41 @@ namespace Salamander.RobotIOPlugin
             Result = false;
             if (FilePath.IsValid && Write)
             {
+                
                 Document.Model.GenerateNodes(new NodeGenerationParameters());
                 var robot = new RobotController();
                 robot.Message += HandleMessage;
-                RobotIDMappingTable idMap = new RobotIDMappingTable();
-                bool result = robot.WriteModelToRobot(FilePath, Document.Model, ref idMap);
-                if (result)
-                    robot.Close();
-                robot.Release(result);
-                Document.IDMappings[FilePath] = idMap;
-                Result = true;
+
+                if (exInfo == null)
+                {
+                    var log = Core.Instance.Host.GUI.ShowAlertLog("Robot Export");
+                    new Thread(() =>
+                    {
+                        WriteModel(robot, log);
+                    }).Start();
+                }
+                else WriteModel(robot, null);
             }
             return true;
         }
+
+        private void WriteModel(RobotController robot, AlertLog log)
+        {
+            log?.RaiseAlert("Writing Salamander model to Robot...");
+            RobotIDMappingTable idMap = new RobotIDMappingTable();
+            bool result = robot.WriteModelToRobot(FilePath, Document.Model, ref idMap, null, log);
+            if (result)
+            {
+                robot.Close();
+                log?.RaiseAlert("Robot file written successfully.");
+            }
+            else log?.RaiseAlert("Writing Robot file failed!", Nucleus.Alerts.AlertLevel.Error);
+            robot.Release(result);
+            idMap.LinkToFile(FilePath);
+            Document.IDMappings[FilePath] = idMap;
+            idMap.SaveAsCSV(FilePath.AddNameSuffix("_Mapping", ".csv"));
+            Result = result;
+        }
+
     }
 }

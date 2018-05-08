@@ -67,7 +67,7 @@ namespace Salamander.Actions
         /// Use the current input manager to prompt the user for all necessary inputs to this action
         /// </summary>
         /// <returns>True if all inputs successful, false if user cancels</returns>
-        bool PromptUserForInputs();
+        bool PromptUserForInputs(bool chain = false);
 
         /// <summary>
         /// Get the renderable preview layer which may be displayed to provide dynamic feedback

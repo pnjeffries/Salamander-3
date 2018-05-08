@@ -18,12 +18,12 @@ namespace Salamander.BasicTools
     {
         #region Properties
 
-        private static readonly ResultsCase _AllCasesDummy = new ResultsCaseDummy("All");
+        private static readonly ResultsCaseDummy _AllCasesDummy = new ResultsCaseDummy("All");
 
-        private ResultsCase _Case = _AllCasesDummy;
+        private DesignCase _Case = _AllCasesDummy;
 
         [AutoUIComboBox("AvailableCases", Order=1, Label = "Case")]
-        public ResultsCase Case
+        public DesignCase Case
         {
             get { return _Case; }
             set
@@ -35,11 +35,11 @@ namespace Salamander.BasicTools
             }
         }
 
-        public ResultsCaseCollection AvailableCases
+        public DesignCaseCollection AvailableCases
         {
             get
             {
-                var result = new ResultsCaseCollection();
+                var result = new DesignCaseCollection();
                 result.AddRange(Core.Instance.ActiveDocument.Model.LoadCases);
                 result.Add(_AllCasesDummy);
                 return result;
@@ -80,7 +80,9 @@ namespace Salamander.BasicTools
             List<IAvatar> result = new List<IAvatar>();
             if (source != null)
             {
-                if (Case == null || Case.Contains(source))
+                if (Case == null || 
+                    Case is ILoadCase && 
+                    ((ILoadCase)Case).Contains(source))
                 {
                     var mAv = CreateMeshAvatar();
                     mAv.Builder.AddLoad(source, 1/ScalingFactor);

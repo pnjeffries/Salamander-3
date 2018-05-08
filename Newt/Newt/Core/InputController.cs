@@ -216,7 +216,7 @@ namespace Salamander
         /// <param name="action">Optional.  The action the input parameters of which are currently 
         /// being populated.</param>
         public virtual bool EnterInput(Type inputType, ref object value, PropertyInfo property = null, 
-            IAction action = null)
+            IAction action = null, bool chain = false)
         {
             string description = null;
             ActionInputAttribute inputAttributes = ActionInputAttribute.ExtractFrom(property);
@@ -268,8 +268,19 @@ namespace Salamander
                 else if (inputType.IsAssignableFrom(typeof(Plane))) // Nucleus Plane
                     value = EnterPlane("Enter " + description);
                 else if (inputType == typeof(Line)) //Nucleus Line
-                    value = EnterLine("Enter start point of " + description,
-                        "Enter end point of " + description);
+                {
+                    if (chain && value != null && value is Line)
+                    {
+                        Line line = (Line)value;
+                        value = EnterLine("", "Enter next end point of " + description,
+                            line.StartPoint);
+                    }
+                    else
+                    {
+                        value = EnterLine("Enter start point of " + description,
+                            "Enter end point of " + description);
+                    }
+                }
                 else if (inputType == typeof(Curve)) //Nucleus Curve
                     value = EnterCurve("Enter " + description);
                 else if (inputType == typeof(VertexGeometryCollection)) //Nucleus Shapes

@@ -23,6 +23,9 @@ namespace Salamander.BasicTools
         [ActionInput(2, "the catalogue description of the section")]
         public string Description { get; set; } 
 
+        [ActionInput(3, "the material of the section", Required = false, Manual = false)]
+        public Material Material { get; set; }
+
         [ActionOutput(1, "the output section property")]
         public SectionFamily Section { get; set; }
 
@@ -41,6 +44,7 @@ namespace Salamander.BasicTools
         public override bool Execute(ExecutionInfo exInfo = null)
         {
             SectionProfile profile = SectionProfile.FromDescription(Description, Core.Instance.SectionLibrary);
+            profile.Material = Material;
             Section = Model.Create.SectionFamily(Name, exInfo);
             Section.Profile = profile;
             return true;

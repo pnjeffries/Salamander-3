@@ -54,7 +54,7 @@ namespace Salamander.Actions
         /// Use the current input manager to prompt the user for all necessary inputs to this action
         /// </summary>
         /// <returns>True if all inputs successful, false if user cancels</returns>
-        public virtual bool PromptUserForInputs()
+        public virtual bool PromptUserForInputs(bool chain = false)
         {
             IList<PropertyInfo> inputs = InputParameters();
             IList<PropertyInfo> dialogOptions = null;
@@ -71,7 +71,7 @@ namespace Salamander.Actions
                         if (dialogOptions == null) dialogOptions = new List<PropertyInfo>();
                         dialogOptions.Add(input);
                     }
-                    else if (!Core.Instance.Host.Input.EnterInput(input.PropertyType, ref value, input, this) && inputAtt.Required) return false;
+                    else if (!Core.Instance.Host.Input.EnterInput(input.PropertyType, ref value, input, this, chain) && inputAtt.Required) return false;
                 }
                 input.SetValue(this, value, null);
             }

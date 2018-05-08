@@ -11,6 +11,8 @@ namespace Salamander.Grasshopper
     /// </summary>
     public static class SubCategories
     {
+        public static readonly string Category = "Salamander 3";
+
         public static readonly string Params = "    Params";
 
         public static readonly string Model = "   Model";
@@ -18,6 +20,8 @@ namespace Salamander.Grasshopper
         public static readonly string Sections = "   Sections";
 
         public static readonly string BuildUp = "  Build-Up";
+
+        public static readonly string Materials = "  Materials";
 
         public static readonly string Sets = "  Sets";
 

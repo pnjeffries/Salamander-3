@@ -161,4 +161,25 @@ v0.4.1 (Bugfixapalooza)
  - New DuplicateElementLoading tool to copy load conditions from one element to others.
  - Level export added to Robot, GSA and ETABS exporters.
  - Sets export added to ETABS exporter.
+ - GWA import populates data from matching catalogue section names.
+ - Create linear element command now allows end releases to be pre-set.
+ - Element Section selection combo now allows current section to be duplicated.
+ - Load table now allows selection of standard coordinate system references.
+ - Panel load component now produces one load for multiple elements.
+ - Panel load preview now correctly shows local load orientation.
+ - Linear element point loads added.
+ - New command/component to create point loads.
+ - Robot export of linear element point loads.
+ - Create Material Command/Component added.
+ - Get All Materials Grasshopper component added.
+ - All section and build-up creation components now allow material to be specified.
+ - New Generic Elements and Material parameter components added.
+ - New Create Load Case component to generate load cases and specify types.
+ - Bugfix: Crash when reading load data from Robot.
+ - Bugfix: Crash when loading data from GWA when orientation angle not included.
+ - Bugfix: Section assignments not being loaded from GWA when element records preceed sections.
+ - Bugfix: XX releases not being written to GWA correctly.
  - Bugfix: Error in object creation history access when null inputs are stored.
+ - Bugfix: Robot non-standard sections not having their properties calculated
+ - Bugfix: Imported beam loads from Robot having their distribution misread
+ - Bugfix: Section profile offsets not being translated if the element has no local offset

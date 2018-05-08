@@ -1,4 +1,5 @@
-﻿using Nucleus.Extensions;
+﻿using Nucleus.Alerts;
+using Nucleus.Extensions;
 using Nucleus.UI;
 using Salamander.Selection;
 using System;
@@ -103,6 +104,15 @@ namespace Salamander
         /// Show the UI which allows manual interaction with action inputs
         /// </summary>
         public abstract void ShowActionInputUI();
+
+        /// <summary>
+        /// Create and display a new AlertLog suitable for reporting on processes
+        /// </summary>
+        /// <returns></returns>
+        public virtual AlertLog ShowAlertLog(string title = "Log")
+        {
+            return null;
+        }
 
     }
 }

@@ -78,6 +78,8 @@
     <Compile Include="ISalamander_Goo.cs" />
     <Compile Include="LinearElementGoo.cs" />
     <Compile Include="LinearElementParam.cs" />
+    <Compile Include="MaterialGoo.cs" />
+    <Compile Include="MaterialParam.cs" />
     <Compile Include="NodeGoo.cs" />
     <Compile Include="NodeParam.cs" />
     <Compile Include="PanelElementGoo.cs" />

@@ -26,8 +26,9 @@ namespace Salamander.BasicToolsGH
             get
             {
                 //string uri1 = IconResourceHelper.ResourceLocation + "ParamBackground.png";
-                string uri2 = IconResourceHelper.ResourceLocation + "Direction.png";
-                Bitmap bmp = IconResourceHelper.BitmapFromURI(uri2);
+                string uri1 = IconResourceHelper.ResourceLocation + "Direction.png";
+                string uri2 = URIs.DropDown;
+                Bitmap bmp = IconResourceHelper.CombinedBitmapFromURIs(uri1, uri2);
                 return bmp;
             }
         }

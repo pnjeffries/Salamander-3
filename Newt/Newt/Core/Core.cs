@@ -254,10 +254,21 @@ namespace Salamander
         /// <returns></returns>
         public ModelDocument NewDocument(bool silent = false)
         {
-            ModelDocument result = new ModelDocument();
+            ModelDocument result = PopulateDefaultData(new ModelDocument());
             ActiveDocument = result;
 
             //TEMP:
+            return result;
+        }
+
+        /// <summary>
+        /// Populate a ModelDocument with default data.
+        /// Returns the same ModelDocument that was input.
+        /// </summary>
+        /// <param name="result"></param>
+        /// <returns></returns>
+        public ModelDocument PopulateDefaultData(ModelDocument result)
+        {
             result.Model.Materials.Add(Material.Steel);
             result.Model.Materials.Add(Material.Concrete);
             result.Model.Materials.Add(Material.Aluminium);

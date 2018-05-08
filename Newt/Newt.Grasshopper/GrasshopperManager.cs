@@ -93,7 +93,7 @@ namespace Salamander.Grasshopper
                 Guid id = document.DocumentID;
                 if (!BackgroundDocuments.ContainsKey(id))
                 {
-                    ModelDocument doc = new ModelDocument();
+                    ModelDocument doc = Core.Instance.PopulateDefaultData(new ModelDocument());
                     BackgroundDocuments.Add(id, doc);
                     return doc;
                 }

@@ -66,11 +66,13 @@
   <ItemGroup>
     <Compile Include="AssignBuildUpComponent.cs" />
     <Compile Include="AssignSectionComponent.cs" />
+    <Compile Include="AxesReferenceValueList.cs" />
     <Compile Include="Bool6DParam.cs" />
     <Compile Include="Bool6DValueList.cs" />
     <Compile Include="CalculateGeometricPropertiesComponent.cs" />
     <Compile Include="AngleProfileCatalogueValueList.cs" />
     <Compile Include="CHSProfileCatalogueValueList.cs" />
+    <Compile Include="CleanModelComponent.cs" />
     <Compile Include="CreateAngleSectionComponent.cs" />
     <Compile Include="CreateBool6DComponent.cs" />
     <Compile Include="CreateBuildUpComponent.cs" />
@@ -82,6 +84,9 @@
     <Compile Include="CreateColumnComponent.cs" />
     <Compile Include="CreateLevelComponent.cs" />
     <Compile Include="CreateLinearElementLoadComponent.cs" />
+    <Compile Include="CreateLinearElementPointLoadComponent.cs" />
+    <Compile Include="CreateLoadCaseComponent.cs" />
+    <Compile Include="CreateMaterialComponent.cs" />
     <Compile Include="CreateNodeComponent.cs" />
     <Compile Include="CreateNodeLoadComponent.cs" />
     <Compile Include="CreatePanelElementInCurveComponent.cs" />
@@ -92,15 +97,19 @@
     <Compile Include="CreateThermalLoadComponent.cs" />
     <Compile Include="CreateVectorNodeLoadComponent.cs" />
     <Compile Include="CreateWallComponent.cs" />
+    <Compile Include="ElementParam.cs" />
     <Compile Include="GenerateBeamFramingComponent.cs" />
     <Compile Include="GeneratePrattTrussComponent.cs" />
     <Compile Include="GenerateSimpleFrameComponent.cs" />
     <Compile Include="GetAllLinearElementsComponent.cs" />
+    <Compile Include="GetAllMaterialsComponent.cs" />
     <Compile Include="GetAllPanelElements.cs" />
     <Compile Include="GetBuildUpComponent.cs" />
     <Compile Include="GetElementSelectionComponent.cs" />
     <Compile Include="GetNodeSelectionComponent.cs" />
+    <Compile Include="LoadCaseTypeValueList.cs" />
     <Compile Include="MakeElementsComponent.cs" />
+    <Compile Include="MaterialParam.cs" />
     <Compile Include="MergeNodesComponent.cs" />
     <Compile Include="OrientateElementToVectorComponent.cs" />
     <Compile Include="PanelElementParam.cs" />

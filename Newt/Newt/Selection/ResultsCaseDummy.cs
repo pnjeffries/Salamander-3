@@ -8,11 +8,11 @@ using System.Threading.Tasks;
 
 namespace Salamander.Selection
 {
-    public class ResultsCaseDummy : ResultsCase
+    public class ResultsCaseDummy : ResultsCase, ILoadCase
     {
         public ResultsCaseDummy(string name) : base(name) { }
 
-        public override bool Contains(Load load)
+        public bool Contains(Load load)
         {
             return true;
         }

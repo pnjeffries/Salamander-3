@@ -33,6 +33,9 @@ namespace Salamander.BasicTools
         [ActionInput(5, "the thickness of the section web", Manual = false)]
         public double WebThickness { get; set; } = 0.01;
 
+        [ActionInput(7, "the material of the section", Required = false, Manual = false)]
+        public Material Material { get; set; }
+
         [ActionOutput(1, "the output section property")]
         public SectionFamily Section { get; set; }
 
@@ -51,6 +54,8 @@ namespace Salamander.BasicTools
         public override bool Execute(ExecutionInfo exInfo = null)
         {
             var rProfile = new RectangularHollowProfile(Depth, Width, FlangeThickness, WebThickness);
+            rProfile.Material = Material;
+
             Section = Model.Create.SectionFamily(Name, exInfo);
             Section.Profile = rProfile;
             return true;

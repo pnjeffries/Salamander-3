@@ -87,6 +87,17 @@ namespace Salamander.Selection
                         value = newSection;
                         NotifyPropertyChanged("AvailableSections");
                     }
+                    else if (dummy.Name.Equals("Copy..."))
+                    {
+                        var current = SectionFamily;
+                        if (current != null)
+                        {
+                            // TODO: Fix!
+                            SectionFamily newSection = Selection[0].Model?.Create.CopyOf(current);
+                            value = newSection;
+                        }
+                        NotifyPropertyChanged("AvailableSections");
+                    }
                 }
                 foreach (LinearElement lEl in Selection) lEl.Family = value;
                
@@ -106,6 +117,7 @@ namespace Salamander.Selection
                 {
                     SectionFamilyCollection result = new SectionFamilyCollection(Selection[0].Model?.Families.Sections);
                     result.Add(new SectionFamilyDummy("New..."));
+                    result.Add(new SectionFamilyDummy("Copy..."));
                     return result;
                 }
                 else return null;

@@ -1,4 +1,5 @@
 ﻿using Nucleus.Actions;
+using Nucleus.Base;
 using Nucleus.Geometry;
 using Nucleus.Model;
 using Nucleus.UI;
@@ -11,7 +12,7 @@ namespace Salamander.BasicTools
             "Create a new linear element along a straight line.",
         IconBackground = Resources.URIs.LinearElement,
         IconForeground = Resources.URIs.AddIcon)]
-    public class CreateLinearElementAction : ModelActionBase
+    public class CreateLinearElement : ModelActionBase
     {
         [ActionInput(1, "the set-out geometry of the new element")]
         public Line Line { get; set; }
@@ -26,6 +27,14 @@ namespace Salamander.BasicTools
         [ActionInput(3, "the orientation angle of the new element", Manual = false, Persistant = true)]
         public Angle Orientation { get; set; } = 0;
 
+        [AutoUI(4, Label="Start Releases")]
+        [ActionInput(4, "the releases at the start of the element", Manual = false, Parametric = false, Persistant = true)]
+        public Bool6D StartReleases { get; set; } = Bool6D.False;
+
+        [AutoUI(5, Label = "End Releases")]
+        [ActionInput(4, "the releases at the end of the element", Manual = false, Parametric = false, Persistant = true)]
+        public Bool6D EndReleases { get; set; } = Bool6D.False;
+
         [ActionOutput(1, "the created element")]
         public LinearElement Element { get; set; }
 
@@ -37,6 +46,8 @@ namespace Salamander.BasicTools
                 Element.Family = Section;
                 Element.Orientation = Orientation;
                 Element.GenerateNodes(new NodeGenerationParameters());
+                if (!StartReleases.AllFalse) Element.Start.Releases = StartReleases;
+                if (!EndReleases.AllFalse) Element.End.Releases = EndReleases;
                 return true;
             }
             return false;

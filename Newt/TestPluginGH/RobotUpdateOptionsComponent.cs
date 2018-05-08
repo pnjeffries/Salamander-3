@@ -19,7 +19,7 @@ namespace Salamander.BasicToolsGH
         }
 
         public RobotUpdateOptionsComponent()
-            : base("RobotUpdateOptions", "Robot Update Options", "Options", SubCategories.Params, GH_Exposure.tertiary)
+            : base("RobotUpdateOptions", "Robot Update Options", "Options", SubCategories.Export)
         { }
     }
 }

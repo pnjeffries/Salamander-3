@@ -9,7 +9,9 @@ using Nucleus.Actions;
 namespace Salamander.BasicTools
 {
     [Action("CleanModel", 
-        Description = "Clean the model by removing references to deleted objects.  Those objects will then no longer be available for undeletion.",
+        Description = "Clean the model by removing references to deleted objects." + 
+        "  Those objects will then no longer be available for undeletion." + 
+        "  Can improve performance when many objects have been created and deleted.",
         IconBackground = Resources.URIs.Clean)]
     public class CleanModel : ModelActionBase
     {

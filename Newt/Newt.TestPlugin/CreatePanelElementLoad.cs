@@ -33,7 +33,7 @@ namespace Salamander.BasicTools
             get { return Model?.LoadCases?.GetNamesList(); }
         }
 
-        [ActionInput(3, "the set of panel elements that the load is to be applied to")]
+        [ActionInput(3, "the set of panel elements that the load is to be applied to", OneByOne = false)]
         public PanelElementCollection ApplyTo { get; set; }
 
         [ActionInput(4, "the value of the load, in N/m²", Persistant = true)]

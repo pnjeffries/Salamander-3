@@ -255,6 +255,11 @@ namespace Salamander.Grasshopper
                         IGH_Param param = new LinearElementParam();
                         pManager.AddParameter(param, name, nickname, description, GH_ParamAccess.item);
                     }
+                    else if (typeof(PanelElement).IsAssignableFrom(pType))
+                    {
+                        IGH_Param param = new PanelElementParam();
+                        pManager.AddParameter(param, name, nickname, description, GH_ParamAccess.item);
+                    }
                     else if (typeof(Element).IsAssignableFrom(pType))
                     {
                         IGH_Param param = new ElementParam();
@@ -263,6 +268,11 @@ namespace Salamander.Grasshopper
                     else if (typeof(LinearElementCollection).IsAssignableFrom(pType))
                     {
                         IGH_Param param = new LinearElementParam();
+                        pManager.AddParameter(param, name, nickname, description, ParamAccess(inputAtt));
+                    }
+                    else if (typeof(PanelElementCollection).IsAssignableFrom(pType))
+                    {
+                        IGH_Param param = new PanelElementParam();
                         pManager.AddParameter(param, name, nickname, description, ParamAccess(inputAtt));
                     }
                     else if (typeof(ElementCollection).IsAssignableFrom(pType))
@@ -278,6 +288,16 @@ namespace Salamander.Grasshopper
                     else if (pType == typeof(NodeCollection))
                     {
                         IGH_Param param = new NodeParam();
+                        pManager.AddParameter(param, name, nickname, description, ParamAccess(inputAtt));
+                    }
+                    else if (typeof(Nucleus.Model.Material).IsAssignableFrom(pType))
+                    {
+                        IGH_Param param = new MaterialParam();
+                        pManager.AddParameter(param, name, nickname, description, GH_ParamAccess.item);
+                    }
+                    else if (typeof(MaterialCollection).IsAssignableFrom(pType))
+                    {
+                        IGH_Param param = new MaterialParam();
                         pManager.AddParameter(param, name, nickname, description, ParamAccess(inputAtt));
                     }
                     else if (typeof(SectionFamily).IsAssignableFrom(pType))
@@ -311,6 +331,10 @@ namespace Salamander.Grasshopper
                         pManager.AddTextParameter(name, nickname, description, GH_ParamAccess.item, pInfo.GetValue(action, null)?.ToString());
                     }
                     else if (pType == typeof(CoordinateSystemReference))
+                    {
+                        pManager.AddTextParameter(name, nickname, description, GH_ParamAccess.item, pInfo.GetValue(action, null)?.ToString());
+                    }
+                    else if (pType.IsEnum)
                     {
                         pManager.AddTextParameter(name, nickname, description, GH_ParamAccess.item, pInfo.GetValue(action, null)?.ToString());
                     }
@@ -403,6 +427,16 @@ namespace Salamander.Grasshopper
                     else if (pType == typeof(NodeCollection))
                     {
                         IGH_Param param = new NodeParam();
+                        pManager.AddParameter(param, name, nickname, description, GH_ParamAccess.list);
+                    }
+                    else if (typeof(Nucleus.Model.Material).IsAssignableFrom(pType))
+                    {
+                        IGH_Param param = new MaterialParam();
+                        pManager.AddParameter(param, name, nickname, description, GH_ParamAccess.item);
+                    }
+                    else if (typeof(MaterialCollection).IsAssignableFrom(pType))
+                    {
+                        IGH_Param param = new MaterialParam();
                         pManager.AddParameter(param, name, nickname, description, GH_ParamAccess.list);
                     }
                     else if (typeof(SectionFamily).IsAssignableFrom(pType))
@@ -612,9 +646,13 @@ namespace Salamander.Grasshopper
             else if (obj is Element) return new ElementGoo((Element)obj);
             else if (obj is ElementCollection) return ElementGoo.Convert((ElementCollection)obj);
             else if (obj is SectionFamily) return new SectionFamilyGoo((SectionFamily)obj);
+            else if (obj is SectionFamilyCollection) return SectionFamilyGoo.Convert((SectionFamilyCollection)obj);
             else if (obj is BuildUpFamily) return new BuildUpFamilyGoo((BuildUpFamily)obj);
+            else if (obj is BuildUpFamilyCollection) return BuildUpFamilyGoo.Convert((BuildUpFamilyCollection)obj);
             else if (obj is Node) return new NodeGoo((Node)obj, exInfo);
             else if (obj is NodeCollection) return NodeGoo.Convert((NodeCollection)obj, exInfo);
+            else if (obj is Nucleus.Model.Material) return new MaterialGoo((Nucleus.Model.Material)obj);
+            else if (obj is MaterialCollection) return MaterialGoo.Convert((MaterialCollection)obj);
             else if (obj is Bool6D) return new Bool6DGoo((Bool6D)obj);
             else if (obj is FilePath) return obj.ToString();
             //Add more types here
@@ -663,6 +701,7 @@ namespace Salamander.Grasshopper
                     return modelDoc?.Model?.CoordinateSystems.GetByKeyword(obj.ToString());
                 }
             }
+            else if (toType.IsEnum) return Enum.Parse(toType, obj?.ToString());
 
             return Conversion.Instance.Convert(obj, toType);
             /*
@@ -700,35 +739,42 @@ namespace Salamander.Grasshopper
             else if (typeof(BuildUpFamily).IsAssignableFrom(type)) return typeof(BuildUpFamilyGoo);
             else if (typeof(Node).IsAssignableFrom(type)) return typeof(NodeGoo);
             else if (typeof(NodeCollection).IsAssignableFrom(type)) return typeof(NodeGoo);
+            else if (typeof(Nucleus.Model.Material).IsAssignableFrom(type)) return typeof(MaterialGoo);
+            else if (typeof(MaterialCollection).IsAssignableFrom(type)) return typeof(MaterialGoo);
             else if (typeof(Bool6D).IsAssignableFrom(type)) return typeof(Bool6DGoo);
             else if (typeof(Direction).IsAssignableFrom(type)) return typeof(string);
             else if (typeof(FilePath) == type) return typeof(string);
             else if (typeof(ActionTriggerInput) == type) return typeof(object);
             else if (typeof(CartesianCoordinateSystem).IsAssignableFrom(type)) return typeof(RC.Plane);
             else if (typeof(CoordinateSystemReference).IsAssignableFrom(type)) return typeof(string);
+            else if (type.IsEnum) return typeof(string);
             return type;
         }
 
         public override void RemovedFromDocument(GH_Document document)
         {
-           
-            // Clean up generated objects in both the active and background models:
-            Core.Instance?.ActiveDocument?.Model?.History?.DeleteAllFromSource(InstanceGuid.ToString());
+            try
+            {
+                // Clean up generated objects in both the active and background models:
+                Core.Instance?.ActiveDocument?.Model?.History?.DeleteAllFromSource(InstanceGuid.ToString());
 
-            GH_Document doc = OnPingDocument();
-            if (doc != null)
-            {
-                ModelDocument modelDoc = GrasshopperManager.Instance.BackgroundDocument(doc);
-                modelDoc?.Model?.History?.DeleteAllFromSource(InstanceGuid.ToString());
-            }
-            else
-            {
-                //If we can't lookup the document, we'll have to clear it from all of them!
-                foreach (var kvp in GrasshopperManager.Instance.BackgroundDocuments)
+                GH_Document doc = OnPingDocument();
+                if (doc != null)
                 {
-                    kvp.Value?.Model?.History?.DeleteAllFromSource(InstanceGuid.ToString());
+                    ModelDocument modelDoc = GrasshopperManager.Instance.BackgroundDocument(doc);
+                    modelDoc?.Model?.History?.DeleteAllFromSource(InstanceGuid.ToString());
+                }
+                else
+                {
+                    //If we can't lookup the document, we'll have to clear it from all of them!
+                    foreach (var kvp in GrasshopperManager.Instance.BackgroundDocuments)
+                    {
+                        kvp.Value?.Model?.History?.DeleteAllFromSource(InstanceGuid.ToString());
+                    }
                 }
             }
+            catch
+            { }
 
             base.RemovedFromDocument(document);
         }

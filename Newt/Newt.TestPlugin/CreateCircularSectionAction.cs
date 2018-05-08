@@ -23,6 +23,9 @@ namespace Salamander.BasicTools
         [ActionInput(2, "the diameter of the section", Manual = false)]
         public double Diameter { get; set; } = 0.3;
 
+        [ActionInput(3, "the material of the section", Required = false, Manual = false)]
+        public Material Material { get; set; }
+
         [ActionOutput(1, "the output section property")]
         public SectionFamily Section { get; set; }
 
@@ -35,7 +38,7 @@ namespace Salamander.BasicTools
         public override bool Execute(ExecutionInfo exInfo = null)
         {
             var profile = new CircularProfile(Diameter);
-            profile.Material = Model.Materials.FirstOrDefault();
+            profile.Material = Material;
             Section = Model.Create.SectionFamily(Name, exInfo);
             Section.Profile = profile;
             return true;

@@ -49,7 +49,7 @@ namespace Salamander.BasicTools
 
         //TODO: Distribution
 
-        [ActionOutput(1, "the created node load")]
+        [ActionOutput(1, "the created load")]
         public LinearElementLoad Load { get; set; }
 
         public override bool Execute(ExecutionInfo exInfo = null)

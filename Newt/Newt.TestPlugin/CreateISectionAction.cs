@@ -36,6 +36,9 @@ namespace Salamander.BasicTools
         [ActionInput(6, "the radius of the root fillet", Manual = false)]
         public double RootRadius { get; set; } = 0;
 
+        [ActionInput(7, "the material of the section", Required = false, Manual = false)]
+        public Material Material { get; set; }
+
         [ActionOutput(1, "the output section property")]
         public SectionFamily Section { get; set; }
 
@@ -48,6 +51,7 @@ namespace Salamander.BasicTools
         public override bool Execute(ExecutionInfo exInfo = null)
         { 
             SymmetricIProfile iProfile = new SymmetricIProfile(Depth, Width, FlangeThickness, WebThickness, RootRadius);
+            iProfile.Material = Material;
             Section = Model.Create.SectionFamily(Name, exInfo);
             Section.Profile = iProfile;
             return true;

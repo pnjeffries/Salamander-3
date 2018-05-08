@@ -72,6 +72,11 @@ namespace Salamander.Resources
         public const string CaseSmall = Base + "CaseSmall.png";
 
         /// <summary>
+        /// The URI of the Case Type icon
+        /// </summary>
+        public const string CaseType = Base + "CaseType.png";
+
+        /// <summary>
         /// The URI of the standard Channel Section icon
         /// </summary>
         public const string ChannelSection = Base + "ChannelSection.png";
@@ -120,6 +125,11 @@ namespace Salamander.Resources
         /// The URI of the standard Direction icon
         /// </summary>
         public const string Direction = Base + "Direction.png";
+
+        /// <summary>
+        /// The URI of the standard 'dropdown' icon overlay
+        /// </summary>
+        public const string DropDown = Base + "DropDown.png";
 
         /// <summary>
         /// The URI of the standard Element ID icon
@@ -206,10 +216,15 @@ namespace Salamander.Resources
         /// </summary>
         public const string LinearElement = Base + "LinearElement.png";
 
-        // <summary>
+        /// <summary>
         /// The URI of the small Linear Element icon
         /// </summary>
         public const string LinearElementSmall = Base + "LinearElement_Small.png";
+
+        /// <summary>
+        /// The URI of the standard Linear Element Point Load icon
+        /// </summary>
+        public const string LinearElementPointLoad = Base + "LinearElementPointLoad.png";
 
         /// <summary>
         /// The URI of the standard Linear Element Uniformly Distributed Load icon
@@ -230,6 +245,16 @@ namespace Salamander.Resources
         /// The URI of the 'Merge nodes' action icon
         /// </summary>
         public const string MergeNodes = Base + "MergeNodes.png";
+
+        /// <summary>
+        /// The URI of the standard Material icon
+        /// </summary>
+        public const string Material = Base + "Material.png";
+
+        /// <summary>
+        /// The URI of the small Material icon
+        /// </summary>
+        public const string MaterialSmall = Base + "Material_Small.png";
 
         /// <summary>
         /// The URI of the standard 'New' icon

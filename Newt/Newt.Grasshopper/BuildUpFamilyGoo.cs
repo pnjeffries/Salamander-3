@@ -64,5 +64,13 @@ namespace Salamander.Grasshopper
                 return new BuildUpFamilyCollection(Value);
             else return Value;
         }
-}
+
+        public static List<BuildUpFamilyGoo> Convert(BuildUpFamilyCollection collection)
+        {
+            var result = new List<BuildUpFamilyGoo>();
+            if (collection != null)
+                foreach (BuildUpFamily obj in collection) result.Add(new BuildUpFamilyGoo(obj));
+            return result;
+        }
+    }
 }
